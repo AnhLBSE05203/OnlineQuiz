@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
@@ -14,11 +14,12 @@
 </head>
 
 <body>
-
-    <nav>
-        <a href="/">Home</a>
-    </nav>
-    Access Denied
-
+    <nav><a href="/home">Home</a></nav>
+    Home Page
+    <div th:if="${principal != null}">
+        <span th:text="${principal.name}"></span><br>
+        <a href="/logout">Logout</a>
+    </div>
+    <div th:unless="${principal != null}"><a href="/login">Login</a></div>
 </body>
 </html>
