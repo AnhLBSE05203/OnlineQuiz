@@ -25,4 +25,6 @@ public class Role {
     private boolean deleted;
     @ManyToMany(mappedBy = "roles")
     private List<Account> accounts;
+    @ManyToMany(mappedBy = "roles")
+    private List<Screen> screens;
 }
