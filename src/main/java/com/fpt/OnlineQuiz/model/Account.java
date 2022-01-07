@@ -34,6 +34,9 @@ public class Account implements UserDetails {
     @Column(name = "password", length = 128, nullable = false)
     private String password;
 
+    @Column(name = "resetPasswordToken", length = 30)
+    private String resetPasswordToken;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "AccountRole", joinColumns = @JoinColumn(name = "accountId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
     private List<Role> roles;

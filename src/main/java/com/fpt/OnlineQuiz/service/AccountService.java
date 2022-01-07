@@ -7,4 +7,10 @@ public interface AccountService extends UserDetailsService {
     void addAccount(Account account);
 
     Account findAccountByEmail(String email);
+
+    Account findByResetPasswordToken(String token);
+
+    void updateResetPasswordToken(String token, String email);
+
+    void updatePassword(Account account, String newPassword);
 }

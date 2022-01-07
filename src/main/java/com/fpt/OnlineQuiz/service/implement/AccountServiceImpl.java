@@ -41,4 +41,31 @@ public class AccountServiceImpl implements AccountService {
 
 		return accountRepository.findAccountByEmail(email);
 	}
+
+	@Override
+	public Account findByResetPasswordToken(String token) {
+		Account account = accountRepository.findByResetPasswordToken(token);
+		System.out.println("Found User: " + account);
+
+		return account;
+	}
+
+	@Override
+	public void updateResetPasswordToken(String token, String email) {
+		Account account = accountRepository.findAccountByEmail(email);
+		if (account != null) {
+			account.setResetPasswordToken(token);
+			accountRepository.updateAccount(account);
+		}
+	}
+
+	@Override
+	public void updatePassword(Account account, String newPassword) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(newPassword);
+		account.setPassword(encodedPassword);
+
+		account.setResetPasswordToken(null);
+		accountRepository.updateAccount(account);
+	}
 }
