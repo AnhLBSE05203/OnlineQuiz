@@ -10,13 +10,14 @@ import com.fpt.OnlineQuiz.dao.AccountRepository;
 import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.service.AccountService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Service
 public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private AccountRepository accountRepository;
-
-	private BCryptPasswordEncoder encoder;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -32,6 +33,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	public void addAccount(Account account) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword = encoder.encode(account.getPassword());
 		account.setPassword(encodedPassword);
 		accountRepository.addAccount(account);
@@ -55,16 +57,20 @@ public class AccountServiceImpl implements AccountService {
 		Account account = accountRepository.findAccountByEmail(email);
 		if (account != null) {
 			account.setResetPasswordToken(token);
+			Date date = new Date();
+			account.setTokenCreatedTime(date);
 			accountRepository.updateAccount(account);
 		}
 	}
 
 	@Override
 	public void updatePassword(Account account, String newPassword) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword = encoder.encode(newPassword);
 		account.setPassword(encodedPassword);
 
 		account.setResetPasswordToken(null);
+		account.setTokenCreatedTime(null);
 		accountRepository.updateAccount(account);
 	}
 }

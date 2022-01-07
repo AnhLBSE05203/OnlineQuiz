@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -36,6 +37,9 @@ public class Account implements UserDetails {
 
     @Column(name = "resetPasswordToken", length = 30)
     private String resetPasswordToken;
+
+    @Column(name = "tokenCreatedTime")
+    private Date tokenCreatedTime;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "AccountRole", joinColumns = @JoinColumn(name = "accountId"), inverseJoinColumns = @JoinColumn(name = "roleId"))

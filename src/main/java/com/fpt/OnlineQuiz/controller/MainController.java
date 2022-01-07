@@ -6,6 +6,7 @@ import com.fpt.OnlineQuiz.service.MailService;
 import com.fpt.OnlineQuiz.utils.Utils;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,8 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/")
@@ -26,7 +29,8 @@ public class MainController {
     private AccountService accountService;
     @Autowired
     private MailService mailService;
-
+    @Autowired
+    private Environment env;
     /**
      * Display Login Page
      * @param model spring's model class
@@ -106,13 +110,13 @@ public class MainController {
      * @return Reset Password Page html
      */
     @GetMapping("/resetPassword")
-    public String showResetPasswordForm(@Param(value = "token") String token, Model model) {
+    public String showResetPasswordPage(@Param(value = "token") String token, Model model) {
         Account account = accountService.findByResetPasswordToken(token);
         model.addAttribute("token", token);
 
         if (account == null) {
             model.addAttribute("message", "Invalid Token");
-            return "message";
+            return "forgot_password_page";
         }
         return "reset_password_page";
     }
@@ -131,7 +135,15 @@ public class MainController {
         Account account = accountService.findByResetPasswordToken(token);
         model.addAttribute("title", "Reset your password");
 
-        if (account == null) {
+        //calculate time diff between current time & token creation
+        Date now = new Date();
+        long diff = now.getTime() - account.getTokenCreatedTime().getTime();
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
+
+        //get token duration setting from application.properties
+        String StrTokenDuration = env.getProperty("tokenDuration");
+        int tokenDuration = Integer.parseInt(StrTokenDuration);
+        if (account == null || seconds > tokenDuration) {
             model.addAttribute("message", "Invalid Token");
             return "reset_password_page";
         } else {
