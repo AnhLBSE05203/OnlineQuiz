@@ -32,4 +32,20 @@ public class AccountRepository {
 
         this.em.persist(account);
     }
+
+    public void updateAccount(Account account) {
+        this.em.merge(account);
+    }
+    public Account findByResetPasswordToken(String token) {
+        try {
+            String sql = "SELECT a from Account a "
+                    + " WHERE a.resetPasswordToken = :token";
+            Query query = em.createQuery(sql, Account.class);
+            query.setParameter("email", token);
+
+            return (Account) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }

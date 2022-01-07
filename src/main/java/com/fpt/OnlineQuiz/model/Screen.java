@@ -8,8 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,18 +22,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Role")
-public class Role {
+public class Screen {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "roleId")
+	@Column(name = "screenId")
 	private int id;
-	@Column(name = "name")
+	@Column(name = "screenName")
 	private String name;
-	@Column(name = "deleted")
-	private boolean deleted;
-	@ManyToMany(mappedBy = "roles")
-	private List<Account> accounts;
-	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-	private List<Screen> screens;
+	@Column(name = "screenLink")
+	private String link;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "ScreenRole", joinColumns = @JoinColumn(name = "screenId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
+	private List<Role> roles;
 }

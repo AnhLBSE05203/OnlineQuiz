@@ -15,17 +15,16 @@
 
 <body>
     <nav>
-    <a href="/">Home</a>
+    <a href="@{/}">Home</a>
     </nav>
 
     <main role="main" class="container">
-        <form th:action="@{/login}" method="post" id="loginForm">
+        <form th:action="@{/loginProcess}" method="post" id="loginForm">
             <div><label> Email: <input type="text" name="username" value=""/> </label></div>
             <div><label> Password: <input type="password" name="password" value=""/> </label></div>
             <div><label> Remember Me?: <input type="checkbox" name="remember-me" ></label></div>
             <div><input type="submit" value="Sign In"/></div>
         </form>
-        <a href="/forgotPassword">Reset Password</a>
     </main>
 <!-- /.container -->
 
