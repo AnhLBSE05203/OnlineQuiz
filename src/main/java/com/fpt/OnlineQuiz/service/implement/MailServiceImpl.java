@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 public class MailServiceImpl implements MailService {
     @Autowired
     private JavaMailSender mailSender;
-    public void sendEmail(String recipientEmail, String link)
+    public void sendResetPasswordEmail(String recipientEmail, String link)
             throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);

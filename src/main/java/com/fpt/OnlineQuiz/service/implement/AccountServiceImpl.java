@@ -61,8 +61,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void updatePassword(Account account, String newPassword) {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(newPassword);
+		String encodedPassword = encoder.encode(newPassword);
 		account.setPassword(encodedPassword);
 
 		account.setResetPasswordToken(null);

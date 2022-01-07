@@ -18,6 +18,10 @@ public class RoleRepository {
 	@PersistenceContext
 	private EntityManager em;
 
+	/**
+	 * Find All Roles from DB
+	 * @return
+	 */
 	public List<Role> findAll() {
 		try {
 			String sql = "SELECT r from Role r";

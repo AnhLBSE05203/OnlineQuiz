@@ -27,32 +27,57 @@ public class MainController {
     @Autowired
     private MailService mailService;
 
+    /**
+     * Display Login Page
+     * @param model spring's model class
+     * @return Login Page html
+     */
     @GetMapping("/login")
     String loginPage(Model model) {
         return "login_page";
     }
 
+    /**
+     * Display Home Page
+     * @param model spring's model class
+     * @param principal User's authenticate/authorization principal
+     * @return Home Page html
+     */
     @GetMapping(value = {"", "/home"})
     String homePage(Model model, Principal principal) {
         model.addAttribute("principal", principal);
         return "home_page";
     }
 
+    /**
+     * Display Access Denied Page when User's not authorized
+     * @param model spring's model class
+     * @param principal User's authenticate/authorization principal
+     * @return Access Denied Page html
+     */
     @GetMapping("/access_denied")
     public String accessDeniedPage(Model model, Principal principal) {
 
         return "access_denied_page";
     }
-    @GetMapping("/manage")
-    public String ManagePage(Model model, Principal principal) {
 
-        return "manage_page";
-    }
-
+    /**
+     * Display Forgot Password Page
+     * @param model spring's model class
+     * @return Forgot Page html
+     */
     @GetMapping("/forgotPassword")
     public String forgotPasswordPage(Model model) {
         return "forgot_password_page";
     }
+
+    /**
+     * Process Forgot Password Function by sending User the Password Reset Token
+     * @param model spring's model class
+     * @param request user's request
+     * @param email user's email
+     * @return return the user to Forgot Password page
+     */
     @PostMapping("/forgotPassword")
     public String processForgotPassword(Model model, HttpServletRequest request,
                                 @RequestParam("email") String email) {
@@ -66,7 +91,7 @@ public class MainController {
         try {
             accountService.updateResetPasswordToken(token, email);
             String resetPasswordLink = Utils.getSiteURL(request) + "/resetPassword?token=" + token;
-            mailService.sendEmail(email, resetPasswordLink);
+            mailService.sendResetPasswordEmail(email, resetPasswordLink);
         } catch (UnsupportedEncodingException | MessagingException e) {
             model.addAttribute("error", "Error while sending email");
         }
@@ -74,6 +99,12 @@ public class MainController {
         return "forgot_password_page";
     }
 
+    /**
+     * Display Reset Password Page
+     * @param token user's reset password token
+     * @param model spring's model class
+     * @return Reset Password Page html
+     */
     @GetMapping("/resetPassword")
     public String showResetPasswordForm(@Param(value = "token") String token, Model model) {
         Account account = accountService.findByResetPasswordToken(token);
@@ -86,6 +117,12 @@ public class MainController {
         return "reset_password_page";
     }
 
+    /**
+     * Process Reset Password Function
+     * @param request user's request
+     * @param model spring's model class
+     * @return return to Reset Password Page
+     */
     @PostMapping("/resetPassword")
     public String processResetPassword(HttpServletRequest request, Model model) {
         String token = request.getParameter("token");
