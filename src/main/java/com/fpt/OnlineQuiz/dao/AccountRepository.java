@@ -8,6 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.io.*;
 
 @Repository
 @Transactional
@@ -22,13 +23,19 @@ public class AccountRepository {
      */
     public Account findAccountByEmail(String email) {
         try {
-            String sql = "SELECT a from Account a "
-                    + " WHERE a.email = :email";
+            BufferedReader buffer  = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream("/static/sql/findAccountByEmail.sql")));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while((line = buffer.readLine()) !=null){
+                sb.append(" ").append(line);
+            }
+            String sql = sb.toString();
             Query query = em.createQuery(sql, Account.class);
             query.setParameter("email", email);
 
             return (Account) query.getSingleResult();
-        } catch (NoResultException e) {
+        } catch (NoResultException | IOException e) {
             return null;
         }
     };
@@ -57,13 +64,19 @@ public class AccountRepository {
      */
     public Account findByResetPasswordToken(String token) {
         try {
-            String sql = "SELECT a from Account a "
-                    + " WHERE a.resetPasswordToken = :token";
+            BufferedReader buffer  = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream("/static/sql/findByResetPasswordToken.sql")));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while((line = buffer.readLine()) !=null){
+                sb.append(" ").append(line);
+            }
+            String sql = sb.toString();
             Query query = em.createQuery(sql, Account.class);
             query.setParameter("token", token);
 
             return (Account) query.getSingleResult();
-        } catch (NoResultException e) {
+        } catch (NoResultException | IOException e) {
             return null;
         }
     }
