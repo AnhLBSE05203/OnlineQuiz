@@ -47,8 +47,24 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public Account findByResetPasswordToken(String token) {
 		Account account = accountRepository.findByResetPasswordToken(token);
-		System.out.println("Found User: " + account);
 
+		return account;
+	}
+
+	@Override
+	public void updateConfirmToken(String token, String email) {
+		Account account = accountRepository.findAccountByEmail(email);
+		if (account != null) {
+			account.setConfirmToken(token);
+			Date date = new Date();
+			account.setTokenCreatedTime(date);
+			accountRepository.updateAccount(account);
+		}
+	}
+
+	@Override
+	public Account findByConfirmToken(String token) {
+		Account account = accountRepository.findByConfirmToken(token);
 		return account;
 	}
 

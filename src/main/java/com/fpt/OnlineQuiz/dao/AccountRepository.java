@@ -38,7 +38,7 @@ public class AccountRepository {
         } catch (NoResultException | IOException e) {
             return null;
         }
-    };
+    }
 
     /**
      * add new Account to DB
@@ -66,6 +66,29 @@ public class AccountRepository {
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
                     this.getClass().getResourceAsStream("/static/sql/findByResetPasswordToken.sql")));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while((line = buffer.readLine()) !=null){
+                sb.append(" ").append(line);
+            }
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Account.class);
+            query.setParameter("token", token);
+
+            return (Account) query.getSingleResult();
+        } catch (NoResultException | IOException e) {
+            return null;
+        }
+    }
+    /**
+     * Find Account By Generated ConfirmToken which is sent to the User
+     * @param token confirm token sent to the User
+     * @return User's account
+     */
+    public Account findByConfirmToken(String token) {
+        try {
+            BufferedReader buffer  = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream("/static/sql/findByConfirmToken.sql")));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while((line = buffer.readLine()) !=null){

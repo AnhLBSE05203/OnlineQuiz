@@ -8,25 +8,38 @@ public interface AccountService extends UserDetailsService {
 
     /**
      * Find Account By Email
-     * @param email
+     * @param email User's email
      * @return
      */
     Account findAccountByEmail(String email);
 
     /**
      * Find Account By Reset Password Token sent via Email
-     * @param token
+     * @param token reset password token
      * @return
      */
     Account findByResetPasswordToken(String token);
 
     /**
-     * Update Reset Password Token to Account in DB
+     * Update Confirm Token to Account in DB
+     * @param token confirm token
+     * @param email user's email
+     */
+    void updateConfirmToken(String token, String email);
+
+    /**
+     * Find Account By Confirm Token sent via Email
      * @param token
-     * @param email
+     * @return
+     */
+    Account findByConfirmToken(String token);
+
+    /**
+     * Update Reset Password Token to Account in DB
+     * @param token reset password token
+     * @param email user's email
      */
     void updateResetPasswordToken(String token, String email);
-
     /**
      * Update Account Password
      * @param account User's Account
