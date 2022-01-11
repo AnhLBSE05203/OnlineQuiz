@@ -28,7 +28,7 @@ public class RoleRepository {
 	public List<Role> findAll() {
 		try {
 			BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-					this.getClass().getResourceAsStream("/static/sql/findByResetPasswordToken.sql")));
+					this.getClass().getResourceAsStream("/static/sql/findAllRoles.sql")));
 			StringBuilder sb = new StringBuilder();
 			String line = "";
 			while((line = buffer.readLine()) !=null){

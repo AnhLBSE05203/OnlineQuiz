@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.service;
 
 import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.model.Token;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface AccountService extends UserDetailsService {
@@ -45,5 +46,5 @@ public interface AccountService extends UserDetailsService {
      * @param account User's Account
      * @param newPassword User's new Encoded Password
      */
-    void updatePassword(Account account, String newPassword);
+    void updatePassword(Account account, String newPassword, Token token);
 }

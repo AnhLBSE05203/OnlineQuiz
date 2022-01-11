@@ -1,5 +1,7 @@
 package com.fpt.OnlineQuiz.service.implement;
 
+import com.fpt.OnlineQuiz.dao.TokenRepository;
+import com.fpt.OnlineQuiz.model.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,7 +20,8 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private AccountRepository accountRepository;
-
+	@Autowired
+	private TokenRepository tokenRepository;
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Account account = accountRepository.findAccountByEmail(username);
@@ -52,13 +55,16 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void updateConfirmToken(String token, String email) {
+	public void updateConfirmToken(String tokenString, String email) {
 		Account account = accountRepository.findAccountByEmail(email);
 		if (account != null) {
-			account.setConfirmToken(token);
+			Token token = new Token();
+			token.setTokenString(tokenString);
+			token.setAccount(account);
 			Date date = new Date();
-			account.setTokenCreatedTime(date);
-			accountRepository.updateAccount(account);
+			token.setCreatedDate(date);
+			token.setTokenType("TOKEN_CONFIRM");
+			tokenRepository.addToken(token);
 		}
 	}
 
@@ -69,24 +75,25 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void updateResetPasswordToken(String token, String email) {
+	public void updateResetPasswordToken(String tokenString, String email) {
 		Account account = accountRepository.findAccountByEmail(email);
 		if (account != null) {
-			account.setResetPasswordToken(token);
+			Token token = new Token();
+			token.setTokenString(tokenString);
+			token.setAccount(account);
 			Date date = new Date();
-			account.setTokenCreatedTime(date);
-			accountRepository.updateAccount(account);
+			token.setCreatedDate(date);
+			token.setTokenType("TOKEN_RESET_PASSWORD");
+			tokenRepository.addToken(token);
 		}
 	}
 
 	@Override
-	public void updatePassword(Account account, String newPassword) {
+	public void updatePassword(Account account, String newPassword, Token token) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword = encoder.encode(newPassword);
 		account.setPassword(encodedPassword);
-
-		account.setResetPasswordToken(null);
-		account.setTokenCreatedTime(null);
 		accountRepository.updateAccount(account);
+		tokenRepository.deleteToken(token);
 	}
 }

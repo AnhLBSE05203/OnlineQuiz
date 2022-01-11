@@ -1,8 +1,11 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dao.TokenRepository;
 import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.model.Token;
 import com.fpt.OnlineQuiz.service.AccountService;
 import com.fpt.OnlineQuiz.service.MailService;
+import com.fpt.OnlineQuiz.service.TokenService;
 import com.fpt.OnlineQuiz.utils.Utils;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Controller
@@ -31,6 +35,8 @@ public class MainController {
     private MailService mailService;
     @Autowired
     private Environment env;
+    @Autowired
+    private TokenService tokenService;
     /**
      * Display Login Page
      * @param model spring's model class
@@ -91,13 +97,16 @@ public class MainController {
             model.addAttribute("message", message);
             return "forgot_password_page";
         }
-        String token = RandomString.make(30);
+        String tokenString = RandomString.make(30);
         try {
-            accountService.updateResetPasswordToken(token, email);
-            String resetPasswordLink = Utils.getSiteURL(request) + "/resetPassword?token=" + token;
+            String resetPasswordLink = Utils.getSiteURL(request) + "/resetPassword?token=" + tokenString;
             mailService.sendResetPasswordEmail(email, resetPasswordLink);
+            accountService.updateResetPasswordToken(tokenString, email);
         } catch (UnsupportedEncodingException | MessagingException e) {
             model.addAttribute("error", "Error while sending email");
+            //if fail to send mail, delete generated token
+            Token token = tokenService.findByTokenString(tokenString);
+            tokenService.deleteToken(token);
         }
         model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
         return "forgot_password_page";
@@ -129,15 +138,21 @@ public class MainController {
      */
     @PostMapping("/resetPassword")
     public String processResetPassword(HttpServletRequest request, Model model) {
-        String token = request.getParameter("token");
+        String tokenString = request.getParameter("token");
         String password = request.getParameter("password");
 
-        Account account = accountService.findByResetPasswordToken(token);
+        Account account = accountService.findByResetPasswordToken(tokenString);
         model.addAttribute("title", "Reset your password");
-
+        List<Token> tokens = account.getTokens();
+        Token resetToken = new Token();
+        for(Token t : tokens){
+            if(t.getTokenType().equals("TOKEN_RESET_PASSWORD")){
+                resetToken = t;
+            }
+        }
         //calculate time diff between current time & token creation
         Date now = new Date();
-        long diff = now.getTime() - account.getTokenCreatedTime().getTime();
+        long diff = now.getTime() - resetToken.getCreatedDate().getTime();
         long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
 
         //get token duration setting from application.properties
@@ -147,7 +162,7 @@ public class MainController {
             model.addAttribute("message", "Invalid Token");
             return "reset_password_page";
         } else {
-            accountService.updatePassword(account, password);
+            accountService.updatePassword(account, password, resetToken);
 
             model.addAttribute("message", "You have successfully changed your password.");
         }

@@ -44,21 +44,15 @@ public class Account implements UserDetails {
     @Column(name = "phone", length = 20, nullable = false)
     private String phone;
 
-    @Column(name = "resetPasswordToken", length = 30)
-    private String resetPasswordToken;
-
-    @Column(name = "confirmToken", length = 30)
-    private String confirmToken;
-
-    @Column(name = "tokenCreatedTime")
-    private Date tokenCreatedTime;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "AccountRole", joinColumns = @JoinColumn(name = "accountId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
     private List<Role> roles;
 
+    @OneToMany(mappedBy = "account")
+    private List<Token> tokens;
+
     @Column(name = "status")
-    private boolean status;
+    private int status;
 
     @Column(name = "createdTime")
     private Date createdTime;

@@ -59,13 +59,13 @@ public class AccountRepository {
 
     /**
      * Find Account By Generated ResetPasswordToken which is sent to the User
-     * @param token reset password token sent to the User
+     * @param tokenString reset password token sent to the User
      * @return User's account
      */
-    public Account findByResetPasswordToken(String token) {
+    public Account findByResetPasswordToken(String tokenString) {
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("/static/sql/findByResetPasswordToken.sql")));
+                    this.getClass().getResourceAsStream("/static/sql/findAccountByResetPasswordToken.sql")));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while((line = buffer.readLine()) !=null){
@@ -73,7 +73,7 @@ public class AccountRepository {
             }
             String sql = sb.toString();
             Query query = em.createQuery(sql, Account.class);
-            query.setParameter("token", token);
+            query.setParameter("token", tokenString);
 
             return (Account) query.getSingleResult();
         } catch (NoResultException | IOException e) {
@@ -82,13 +82,13 @@ public class AccountRepository {
     }
     /**
      * Find Account By Generated ConfirmToken which is sent to the User
-     * @param token confirm token sent to the User
+     * @param tokenString confirm token sent to the User
      * @return User's account
      */
-    public Account findByConfirmToken(String token) {
+    public Account findByConfirmToken(String tokenString) {
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("/static/sql/findByConfirmToken.sql")));
+                    this.getClass().getResourceAsStream("/static/sql/findAccountByConfirmToken.sql")));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while((line = buffer.readLine()) !=null){
@@ -96,7 +96,7 @@ public class AccountRepository {
             }
             String sql = sb.toString();
             Query query = em.createQuery(sql, Account.class);
-            query.setParameter("token", token);
+            query.setParameter("token", tokenString);
 
             return (Account) query.getSingleResult();
         } catch (NoResultException | IOException e) {

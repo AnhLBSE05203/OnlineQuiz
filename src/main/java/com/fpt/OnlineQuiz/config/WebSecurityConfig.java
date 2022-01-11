@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	/**
 	 * Configuration for Authentication & Authorization
-	 * @param http
+	 * @param http http
 	 * @throws Exception
 	 */
 	@Override
