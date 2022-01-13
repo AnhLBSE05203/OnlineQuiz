@@ -139,6 +139,7 @@ public class MainController {
     public String showRegisterPage(Model model){
         //to do - create register page
         model.addAttribute("registerDTO", new RegisterDTO());
+        model.addAttribute("message", Constants.STRING_EMPTY);
         return "register_page";
     }
 
@@ -151,8 +152,14 @@ public class MainController {
      */
     @PostMapping("/register")
     public String processRegistration(@ModelAttribute RegisterDTO registerDTO, Model model, HttpServletRequest request) {
+        Account account = accountService.findAccountByEmail(registerDTO.getEmail());
         //add new account
-        Account account = new Account();
+        if(account != null){
+            String message = "Email is already used!";
+            model.addAttribute("message", message);
+            return "register_page";
+        }
+        account = new Account();
         account.setEmail(registerDTO.getEmail());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(registerDTO.getPassword());
@@ -235,7 +242,7 @@ public class MainController {
         List<Token> tokens = account.getTokens();
         Token resetToken = new Token();
         for(Token t : tokens){
-            if(t.getTokenType().equals("TOKEN_RESET_PASSWORD")){
+            if(t.getTokenType().equals(Constants.TOKEN_TYPE_RESET_PASSWORD)){
                 resetToken = t;
             }
         }

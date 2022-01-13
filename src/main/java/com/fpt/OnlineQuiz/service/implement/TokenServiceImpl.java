@@ -18,6 +18,6 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public Token findByTokenString(String tokenString) {
-        return null;
+        return tokenRepository.findByTokenString(tokenString);
     }
 }
