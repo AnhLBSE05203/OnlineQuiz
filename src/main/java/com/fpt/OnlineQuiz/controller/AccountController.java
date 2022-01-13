@@ -1,6 +1,5 @@
 package com.fpt.OnlineQuiz.controller;
 
-import com.fpt.OnlineQuiz.dao.TokenRepository;
 import com.fpt.OnlineQuiz.dto.RegisterDTO;
 import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Token;
@@ -10,7 +9,6 @@ import com.fpt.OnlineQuiz.service.TokenService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import com.fpt.OnlineQuiz.utils.Utils;
 import net.bytebuddy.utility.RandomString;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.repository.query.Param;
@@ -29,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping(Constants.LINK_MAIN_CONTROLLER)
-public class MainController {
+public class AccountController {
     @Autowired
     private AccountService accountService;
     @Autowired
