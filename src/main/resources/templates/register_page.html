@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Register Page</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+
+<body>
+<nav>
+    <a href="/">Home</a>
+</nav>
+
+<main role="main" class="container">
+    <div th:text = "${message}"></div>
+    <form th:action="@{/register}" method="post" id="registerForm" th:object="${registerDTO}">
+        <div><label> Email: <input type="text" th:field="*{email}" value=""/> </label></div>
+        <div><label>Password: <input type="password" th:field="*{password}" id="password" class="form-control"
+               placeholder="Enter your new password" required autofocus /></label></div>
+        <div><label>Re-Enter Password: <input type="password" class="form-control" placeholder="Confirm password"
+               required oninput="checkPasswordMatch(this);" /></label></div>
+        <div><label>Phone: <input type = "text" th:field="*{phone}"></label></div>
+        <div><label>Full Name: <input type = "text" th:field="*{fullName}"></label></div>
+        Gender:
+        <div><label>Male <input type="radio" th:field="*{gender}" value="0"></label></div>
+        <div><label>Female <input type="radio" th:field="*{gender}" value="1"></label></div>
+        <div><input type="submit" value="Register"/></div>
+    </form>
+</main>
+<!-- /.container -->
+
+<script>
+  function checkPasswordMatch(fieldConfirmPassword) {
+    if (fieldConfirmPassword.value != $("#password").val()) {
+        fieldConfirmPassword.setCustomValidity("Passwords do not match!");
+    } else {
+        fieldConfirmPassword.setCustomValidity("");
+    }
+}
+</script>
+</body>
+</html>

@@ -30,12 +30,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 
+	/**
+	 * BCryptPasswordEncoder Bean
+	 * @return
+	 */
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 
 		return new BCryptPasswordEncoder();
 	}
 
+	/**
+	 * PersistentTokenRepository for Remember-me function
+	 * @return
+	 */
 	@Bean
 	public PersistentTokenRepository persistentTokenRepository() {
 		JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
@@ -43,6 +51,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return db;
 	}
 
+	/**
+	 * Configuration for Authentication & Authorization
+	 * @param http http
+	 * @throws Exception
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
