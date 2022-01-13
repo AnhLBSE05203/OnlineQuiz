@@ -52,7 +52,7 @@ public class TokenRepository {
                 sb.append(" ").append(line);
             }
             String sql = sb.toString();
-            Query query = em.createQuery(sql, Account.class);
+            Query query = em.createQuery(sql, Token.class);
             query.setParameter("tokenString", tokenString);
 
             return (Token) query.getSingleResult();
