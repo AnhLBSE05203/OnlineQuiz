@@ -47,4 +47,6 @@ public interface AccountService extends UserDetailsService {
      * @param newPassword User's new Encoded Password
      */
     void updatePassword(Account account, String newPassword, Token token);
+
+    void updateAccount(Account account);
 }

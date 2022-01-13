@@ -38,4 +38,28 @@ public class MailServiceImpl implements MailService {
 
         mailSender.send(message);
     }
+
+    @Override
+    public void sendConfirmRegistrationEmail(String recipientEmail, String link) throws MessagingException, UnsupportedEncodingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom("banhl.off@gmail.com", "BANHL.OFF");
+        helper.setTo(recipientEmail);
+
+        String subject = "Here's the link to confirm your registration";
+
+        String content = "<p>Hello,</p>"
+                + "<p>An account was registered with this email</p>"
+                + "<p>Click the link below to confirm registration</p>"
+                + "<p><a href=\"" + link + "\">Confirm my registration</a></p>"
+                + "<br>"
+                + "<p>Ignore this email if it was not you </p>";
+
+        helper.setSubject(subject);
+
+        helper.setText(content, true);
+
+        mailSender.send(message);
+    }
 }

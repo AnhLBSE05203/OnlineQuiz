@@ -96,4 +96,9 @@ public class AccountServiceImpl implements AccountService {
 		accountRepository.updateAccount(account);
 		tokenRepository.deleteToken(token);
 	}
+
+	@Override
+	public void updateAccount(Account account) {
+		accountRepository.updateAccount(account);
+	}
 }
