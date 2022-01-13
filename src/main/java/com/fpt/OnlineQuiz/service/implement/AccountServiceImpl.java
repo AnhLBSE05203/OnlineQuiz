@@ -2,6 +2,7 @@ package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.TokenRepository;
 import com.fpt.OnlineQuiz.model.Token;
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,8 +30,6 @@ public class AccountServiceImpl implements AccountService {
 		if (account == null) {
 			throw new UsernameNotFoundException("User " + username + " was not found in the database");
 		}
-
-		System.out.println("Found User: " + account);
 
 		return account;
 	}
@@ -63,7 +62,7 @@ public class AccountServiceImpl implements AccountService {
 			token.setAccount(account);
 			Date date = new Date();
 			token.setCreatedDate(date);
-			token.setTokenType("TOKEN_CONFIRM");
+			token.setTokenType(Constants.TOKEN_TYPE_CONFIRM_REGISTRATION);
 			tokenRepository.addToken(token);
 		}
 	}
@@ -83,7 +82,7 @@ public class AccountServiceImpl implements AccountService {
 			token.setAccount(account);
 			Date date = new Date();
 			token.setCreatedDate(date);
-			token.setTokenType("TOKEN_RESET_PASSWORD");
+			token.setTokenType(Constants.TOKEN_TYPE_RESET_PASSWORD);
 			tokenRepository.addToken(token);
 		}
 	}

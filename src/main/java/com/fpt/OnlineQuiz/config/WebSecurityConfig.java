@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -73,18 +74,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.anyRequest().permitAll()
 				.and().formLogin()
-				.loginProcessingUrl("/login")
-				.failureUrl("/login")
-				.defaultSuccessUrl("/home")
-				.loginPage("/login")
+				.loginProcessingUrl(Constants.LINK_LOGIN)
+				.failureUrl(Constants.LINK_LOGIN)
+				.defaultSuccessUrl(Constants.LINK_HOME)
+				.loginPage(Constants.LINK_LOGIN)
 				.and()
-				.exceptionHandling().accessDeniedPage("/access_denied")
+				.exceptionHandling().accessDeniedPage(Constants.LINK_ACCESS_DENIED)
 				.and()
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logout().logoutRequestMatcher(new AntPathRequestMatcher(Constants.LINK_LOGOUT))
 				.deleteCookies("remember-me", "JSESSIONID")
 				.invalidateHttpSession(true)
 				.clearAuthentication(true)
-				.logoutSuccessUrl("/home")
+				.logoutSuccessUrl(Constants.LINK_LOGOUT)
 				.and()
 				.rememberMe().tokenRepository(this.persistentTokenRepository()) //
 				.tokenValiditySeconds(24 * 60 * 60); // 24h
