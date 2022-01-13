@@ -10,6 +10,7 @@ import com.fpt.OnlineQuiz.service.TokenService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import com.fpt.OnlineQuiz.utils.Utils;
 import net.bytebuddy.utility.RandomString;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.repository.query.Param;
@@ -27,7 +28,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping(Constants.LINK_MAIN_CONTROLLER)
 public class MainController {
     @Autowired
     private AccountService accountService;
@@ -42,9 +43,9 @@ public class MainController {
      * @param model spring's model class
      * @return Login Page html
      */
-    @GetMapping("/login")
+    @GetMapping(Constants.LINK_LOGIN)
     String loginPage(Model model) {
-        return "login_page";
+        return Constants.PAGE_LOGIN;
     }
 
     /**
@@ -53,10 +54,10 @@ public class MainController {
      * @param principal User's authenticate/authorization principal
      * @return Home Page html
      */
-    @GetMapping(value = {"", "/home"})
+    @GetMapping(value = {Constants.STRING_EMPTY, Constants.LINK_HOME})
     String homePage(Model model, Principal principal) {
         model.addAttribute("principal", principal);
-        return "home_page";
+        return Constants.PAGE_HOME;
     }
 
     /**
@@ -65,10 +66,10 @@ public class MainController {
      * @param principal User's authenticate/authorization principal
      * @return Access Denied Page html
      */
-    @GetMapping("/access_denied")
+    @GetMapping(Constants.LINK_ACCESS_DENIED)
     public String accessDeniedPage(Model model, Principal principal) {
 
-        return "access_denied_page";
+        return Constants.PAGE_ACCESS_DENIED;
     }
 
     /**
@@ -76,9 +77,9 @@ public class MainController {
      * @param model spring's model class
      * @return Forgot Page html
      */
-    @GetMapping("/forgotPassword")
+    @GetMapping(Constants.LINK_FORGOT_PASSWORD)
     public String forgotPasswordPage(Model model) {
-        return "forgot_password_page";
+        return Constants.PAGE_FORGOT_PASSWORD;
     }
 
     /**
@@ -88,16 +89,16 @@ public class MainController {
      * @param email user's email
      * @return return the user to Forgot Password page
      */
-    @PostMapping("/forgotPassword")
+    @PostMapping(Constants.LINK_FORGOT_PASSWORD)
     public String processForgotPassword(Model model, HttpServletRequest request,
                                 @RequestParam("email") String email) {
         Account account = accountService.findAccountByEmail(email);
         if (account == null) {
             String message = "Account not found";
             model.addAttribute("message", message);
-            return "forgot_password_page";
+            return Constants.PAGE_FORGOT_PASSWORD;
         }
-        String tokenString = RandomString.make(30);
+        String tokenString = RandomString.make(Constants.TOKEN_LENGTH);
         try {
             String resetPasswordLink = Utils.getSiteURL(request) + "/resetPassword?token=" + tokenString;
             mailService.sendResetPasswordEmail(email, resetPasswordLink);
@@ -109,7 +110,7 @@ public class MainController {
             tokenService.deleteToken(token);
         }
         model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
-        return "forgot_password_page";
+        return Constants.PAGE_FORGOT_PASSWORD;
     }
 
     /**
@@ -118,16 +119,16 @@ public class MainController {
      * @param model spring's model class
      * @return Reset Password Page html
      */
-    @GetMapping("/resetPassword")
+    @GetMapping(Constants.LINK_RESET_PASSWORD)
     public String showResetPasswordPage(@Param(value = "token") String token, Model model) {
         Account account = accountService.findByResetPasswordToken(token);
         model.addAttribute("token", token);
 
         if (account == null) {
             model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
-            return "forgot_password_page";
+            return Constants.PAGE_FORGOT_PASSWORD;
         }
-        return "reset_password_page";
+        return Constants.PAGE_RESET_PASSWORD;
     }
 
     /**
@@ -135,12 +136,12 @@ public class MainController {
      * @param model spring's model class
      * @return
      */
-    @GetMapping("/register")
+    @GetMapping(Constants.LINK_REGISTER)
     public String showRegisterPage(Model model){
         //to do - create register page
         model.addAttribute("registerDTO", new RegisterDTO());
         model.addAttribute("message", Constants.STRING_EMPTY);
-        return "register_page";
+        return Constants.PAGE_REGISTER;
     }
 
     /**
@@ -150,14 +151,14 @@ public class MainController {
      * @param request user's request
      * @return
      */
-    @PostMapping("/register")
+    @PostMapping(Constants.LINK_REGISTER)
     public String processRegistration(@ModelAttribute RegisterDTO registerDTO, Model model, HttpServletRequest request) {
         Account account = accountService.findAccountByEmail(registerDTO.getEmail());
         //add new account
         if(account != null){
             String message = "Email is already used!";
             model.addAttribute("message", message);
-            return "register_page";
+            return Constants.PAGE_REGISTER;
         }
         account = new Account();
         account.setEmail(registerDTO.getEmail());
@@ -186,7 +187,7 @@ public class MainController {
             Token token = tokenService.findByTokenString(tokenString);
             tokenService.deleteToken(token);
         }
-        return "home_page";
+        return Constants.PAGE_HOME;
     }
 
     /**
@@ -195,7 +196,7 @@ public class MainController {
      * @param model spring's model class
      * @return
      */
-    @GetMapping("/confirmRegistration")
+    @GetMapping(Constants.LINK_CONFIRM_REGISTRATION)
     public String processConfirmRegistration(HttpServletRequest request, Model model) {
         String tokenString = request.getParameter("token");
         Account account = accountService.findByConfirmToken(tokenString);
@@ -203,12 +204,12 @@ public class MainController {
         if (account == null) {
             message = "Account not found";
             model.addAttribute("message", message);
-            return "error_page";
+            return Constants.PAGE_ERROR;
         }
         Token token = tokenService.findByTokenString(tokenString);
         if(token == null) {
             model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
-            return "error_page";
+            return Constants.PAGE_ERROR;
         }
         Date now = new Date();
         long diff = now.getTime() - token.getCreatedDate().getTime();
@@ -219,12 +220,12 @@ public class MainController {
         int tokenDuration = Integer.parseInt(StrTokenDuration);
         if (seconds > tokenDuration) {
             model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
-            return "error_page";
+            return Constants.PAGE_ERROR;
         }
         account.setStatus(Constants.STATUS_CONFIRMED);
         accountService.updateAccount(account);
         tokenService.deleteToken(token);
-        return "home_page";
+        return Constants.PAGE_HOME;
     }
     /**
      * Process Reset Password Function
@@ -232,7 +233,7 @@ public class MainController {
      * @param model spring's model class
      * @return return to Reset Password Page
      */
-    @PostMapping("/resetPassword")
+    @PostMapping(Constants.LINK_RESET_PASSWORD)
     public String processResetPassword(HttpServletRequest request, Model model) {
         String tokenString = request.getParameter("token");
         String password = request.getParameter("password");
@@ -256,13 +257,13 @@ public class MainController {
         int tokenDuration = Integer.parseInt(StrTokenDuration);
         if (account == null || seconds > tokenDuration) {
             model.addAttribute("message", "Invalid Token");
-            return "reset_password_page";
+            return Constants.PAGE_RESET_PASSWORD;
         } else {
             accountService.updatePassword(account, password, resetToken);
 
             model.addAttribute("message", "You have successfully changed your password.");
         }
 
-        return "reset_password_page";
+        return Constants.PAGE_RESET_PASSWORD;
     }
 }
