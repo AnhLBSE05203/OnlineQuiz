@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.service.MailService;
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -14,23 +15,36 @@ import java.io.UnsupportedEncodingException;
 public class MailServiceImpl implements MailService {
     @Autowired
     private JavaMailSender mailSender;
-    public void sendEmail(String recipientEmail, String link)
+    public void sendResetPasswordEmail(String recipientEmail, String link)
             throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setFrom("banhl.off@gmail.com", "BANHL.OFF");
+        helper.setFrom(Constants.MAIL_FROM, Constants.MAIL_FROM_NAME);
         helper.setTo(recipientEmail);
 
-        String subject = "Here's the link to reset your password";
+        String subject = Constants.MAIL_SUBJECT_RESET_PASSWORD;
 
-        String content = "<p>Hello,</p>"
-                + "<p>You have requested to reset your password.</p>"
-                + "<p>Click the link below to change your password:</p>"
-                + "<p><a href=\"" + link + "\">Change my password</a></p>"
-                + "<br>"
-                + "<p>Ignore this email if you do remember your password, "
-                + "or you have not made the request.</p>";
+        String content = Constants.getResetPasswordMailTemplate(link);
+
+        helper.setSubject(subject);
+
+        helper.setText(content, true);
+
+        mailSender.send(message);
+    }
+
+    @Override
+    public void sendConfirmRegistrationEmail(String recipientEmail, String link) throws MessagingException, UnsupportedEncodingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom(Constants.MAIL_FROM, Constants.MAIL_FROM_NAME);
+        helper.setTo(recipientEmail);
+
+        String subject = Constants.MAIL_SUBJECT_CONFIRM_REGISTRATION;
+
+        String content = Constants.getConfirmRegistrationMailTemplate(link);
 
         helper.setSubject(subject);
 

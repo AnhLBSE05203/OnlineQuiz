@@ -20,10 +20,21 @@
 
     <main role="main" class="container">
         <form th:action="@{/login}" method="post" id="loginForm">
-            <div><label> Email: <input type="text" name="username" value=""/> </label></div>
-            <div><label> Password: <input type="password" name="password" value=""/> </label></div>
-            <div><label> Remember Me?: <input type="checkbox" name="remember-me" ></label></div>
-            <div><input type="submit" value="Sign In"/></div>
+            <table>
+            <tr>
+                <td> Email: </td>
+                <td><input type="text" name="username" value=""/> </td>
+            </tr>
+            <tr>
+                <td> Password: </td>
+                <td><input type="password" name="password" value=""/> </td>
+            </tr>
+            <tr>
+                <td> Remember Me?: </td>
+                <td><input type="checkbox" name="remember-me" ></td>
+            </tr>
+            <tr><input type="submit" value="Sign In"/></tr>
+            </table>
         </form>
         <a href="/forgotPassword">Reset Password</a>
     </main>
