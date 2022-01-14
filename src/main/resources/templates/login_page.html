@@ -1,44 +1,124 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> App landing</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
 
-    <title>Login Page</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
-
+	<!-- CSS here -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+	<link rel="stylesheet" th:href="@{/css/slicknav.css}">
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/progressbar_barfiller.css}">
+    <link rel="stylesheet" th:href="@{/css/gijgo.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animated-headline.css}">
+	<link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+	<link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
+	<link rel="stylesheet" th:href="@{/css/themify-icons.css}">
+	<link rel="stylesheet" th:href="@{/css/slick.css}">
+	<link rel="stylesheet" th:href="@{/css/nice-select.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-
 <body>
-    <nav>
-    <a href="/">Home</a>
-    </nav>
+    <!-- ? Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img th:src="@{/img/logo/loder.png}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start-->
 
-    <main role="main" class="container">
-        <form th:action="@{/login}" method="post" id="loginForm">
-            <table>
-            <tr>
-                <td> Email: </td>
-                <td><input type="text" name="username" value=""/> </td>
-            </tr>
-            <tr>
-                <td> Password: </td>
-                <td><input type="password" name="password" value=""/> </td>
-            </tr>
-            <tr>
-                <td> Remember Me?: </td>
-                <td><input type="checkbox" name="remember-me" ></td>
-            </tr>
-            <tr><input type="submit" value="Sign In"/></tr>
-            </table>
+
+    <main class="login-body">
+        <!-- Login Admin -->
+        <form class="form-default" th:action="@{/login}" method="POST">
+            
+            <div class="login-form">
+                <!-- logo-login -->
+
+                <h2>Login Here</h2>
+                <span style = "font-size: 15px; color:red" th:if="${param.error}">Invalid Email/Password!</span>
+                <div class="form-input">
+                    <label>Email</label>
+                    <input  type="email" name="username" placeholder="Email">
+                </div>
+                <div class="form-input">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+                <div class="form-input pt-30">
+                    <input type="submit" name="submit" value="login">
+                </div>
+		<div class="pt-30">
+		<label>Remember Me?</label>
+                <input type="checkbox" name="remember-me">
+        </div>
+		<div>
+                <!-- Forget Password -->
+                <a href="/forgotPassword" class="forget">Forget Password</a>
+                <!-- Forget Password -->
+                <a href="/register" class="registration">Registration</a>
+            </div>
+            </div>
         </form>
-        <a href="/forgotPassword">Reset Password</a>
+        <!-- /end login form -->
     </main>
-<!-- /.container -->
 
-</body>
+
+    <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script th:src="@{/js/jquery.slicknav.min.js}"></script>
+
+    <!-- Video bg -->
+    <script th:src="@{/js/jquery.vide.js}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/slick.min.js}"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script th:src="@{/js/wow.min.js}"></script>
+    <script th:src="@{/js/animated.headline.js}"></script>
+    <script th:src="@{/js/jquery.magnific-popup.js}"></script>
+
+    <!-- Date Picker -->
+    <script th:src="@{/js/gijgo.min.js}"></script>
+    <!-- Nice-select, sticky -->
+    <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/js/jquery.sticky.js}"></script>
+    <!-- Progress -->
+    <script th:src="@{/js/jquery.barfiller.js}"></script>
+    
+    <!-- counter , waypoint,Hover Direction -->
+    <script th:src="@{/js/jquery.counterup.min.js}"></script>
+    <script th:src="@{/js/waypoints.min.js}"></script>
+    <script th:src="@{/js/jquery.countdown.min.js}"></script>
+    <script th:src="@{/js/hover-direction-snake.min.js}"></script>
+
+    <!-- contact js -->
+    <script th:src="@{/js/contact.js}"></script>
+    <script th:src="@{/js/jquery.form.js}"></script>
+    <script th:src="@{/js/jquery.validate.min.js}"></script>
+    <script th:src="@{/js/mail-script.js}"></script>
+    <script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+    
+    <!-- Jquery Plugins, main Jquery -->	
+    <script th:src="@{/js/plugins.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+
+    </body>
 </html>
