@@ -46,17 +46,7 @@ public class AccountController {
         return Constants.PAGE_LOGIN;
     }
 
-    /**
-     * Display Home Page
-     * @param model spring's model class
-     * @param principal User's authenticate/authorization principal
-     * @return Home Page html
-     */
-    @GetMapping(value = {Constants.STRING_EMPTY, Constants.LINK_HOME})
-    String homePage(Model model, Principal principal) {
-        model.addAttribute("principal", principal);
-        return Constants.PAGE_HOME;
-    }
+
 
     /**
      * Display Access Denied Page when User's not authorized
