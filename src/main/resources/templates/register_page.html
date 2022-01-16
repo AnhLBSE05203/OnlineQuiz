@@ -133,15 +133,7 @@
     <!-- Jquery Plugins, main Jquery -->
     <script th:src="@{/js/plugins.js}"></script>
     <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/register_page.js}"></script>
 
-    <script>
-        function checkPasswordMatch(fieldConfirmPassword) {
-            if (fieldConfirmPassword.value != $("#password").val()) {
-            fieldConfirmPassword.setCustomValidity("Passwords do not match!");
-            } else {
-            fieldConfirmPassword.setCustomValidity("");
-            }
-        }
-    </script>
     </body>
 </html>
