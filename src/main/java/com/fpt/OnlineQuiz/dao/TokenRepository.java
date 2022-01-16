@@ -34,7 +34,6 @@ public class TokenRepository {
     public void deleteToken(Token token){
         this.em.remove(token);
         this.em.flush();
-        this.em.clear();
     }
 
     /**
