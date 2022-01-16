@@ -23,7 +23,7 @@ public class Constants {
     public static final String MAIL_SUBJECT_CONFIRM_REGISTRATION = "Here's the link to confirm your registration";
 
     //links
-    public static final String LINK_MAIN_CONTROLLER = "/";
+    public static final String LINK_ACCOUNT_CONTROLLER = "/account";
     public static final String LINK_LOGIN = "/login";
     public static final String LINK_LOGIN_FAILURE = "/login?error=true";
     public static final String LINK_LOGOUT = "/logout";

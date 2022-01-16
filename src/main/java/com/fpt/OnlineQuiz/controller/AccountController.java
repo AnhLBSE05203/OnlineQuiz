@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Controller
-@RequestMapping(Constants.LINK_MAIN_CONTROLLER)
+@RequestMapping(Constants.LINK_ACCOUNT_CONTROLLER)
 public class AccountController {
     @Autowired
     private AccountService accountService;
