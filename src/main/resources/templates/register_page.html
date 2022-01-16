@@ -45,7 +45,7 @@
 
 <main class="login-body">
     <!-- Login Admin -->
-    <form class="form-default" th:action="@{/register}" method="POST" th:object="${registerDTO}">
+    <form class="form-default" th:action="@{/account/register}" method="POST" th:object="${registerDTO}">
         
         <div class="login-form" style="padding: 180px 45px 60px 45px;">
             <!-- logo-login -->
@@ -83,7 +83,7 @@
             <div class="form-input pt-30">
                 <input type="submit" name="submit" value="Registration">
             </div>
-            <a href="/login" class="formLink">Login</a>
+            <a href="/account/login" class="formLink">Login</a>
         </div>
     </form>
     <!-- /end login form -->

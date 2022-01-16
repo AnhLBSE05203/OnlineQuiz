@@ -45,7 +45,6 @@ public class AccountRepository {
      * @param account user's account
      */
     public void addAccount(Account account) {
-
         this.em.persist(account);
     }
 

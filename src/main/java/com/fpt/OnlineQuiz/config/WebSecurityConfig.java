@@ -74,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.anyRequest().permitAll()
 				.and().formLogin()
-				.loginProcessingUrl(Constants.LINK_LOGIN)
+				.loginProcessingUrl(Constants.LINK_LOGIN_PROCESS)
 				.failureUrl(Constants.LINK_LOGIN_FAILURE)
 				.defaultSuccessUrl(Constants.LINK_HOME)
 				.loginPage(Constants.LINK_LOGIN)
@@ -85,7 +85,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.deleteCookies("remember-me", "JSESSIONID")
 				.invalidateHttpSession(true)
 				.clearAuthentication(true)
-				.logoutSuccessUrl(Constants.LINK_LOGOUT)
+				.logoutSuccessUrl(Constants.LINK_HOME)
 				.and()
 				.rememberMe().tokenRepository(this.persistentTokenRepository()) //
 				.tokenValiditySeconds(24 * 60 * 60); // 24h

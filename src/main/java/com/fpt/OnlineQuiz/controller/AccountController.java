@@ -46,20 +46,6 @@ public class AccountController {
         return Constants.PAGE_LOGIN;
     }
 
-
-
-    /**
-     * Display Access Denied Page when User's not authorized
-     * @param model spring's model class
-     * @param principal User's authenticate/authorization principal
-     * @return Access Denied Page html
-     */
-    @GetMapping(Constants.LINK_ACCESS_DENIED)
-    public String accessDeniedPage(Model model, Principal principal) {
-
-        return Constants.PAGE_ACCESS_DENIED;
-    }
-
     /**
      * Display Forgot Password Page
      * @param model spring's model class
@@ -149,7 +135,7 @@ public class AccountController {
             return Constants.PAGE_REGISTER;
         }
         account = new Account();
-        account.setEmail(registerDTO.getEmail());
+        account.setEmail(registerDTO.getEmail().toLowerCase());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(registerDTO.getPassword());
         account.setPassword(encodedPassword);

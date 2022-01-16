@@ -25,7 +25,8 @@ public class Constants {
     //links
     public static final String LINK_ACCOUNT_CONTROLLER = "/account";
     public static final String LINK_LOGIN = "/login";
-    public static final String LINK_LOGIN_FAILURE = "/login?error=true";
+    public static final String LINK_LOGIN_PROCESS = "/account/login";
+    public static final String LINK_LOGIN_FAILURE = "/account/login?error=true";
     public static final String LINK_LOGOUT = "/logout";
     public static final String LINK_REGISTER = "/register";
     public static final String LINK_HOME = "/home";
@@ -41,7 +42,7 @@ public class Constants {
     public static final String PAGE_ACCESS_DENIED = "access_denied_page";
     public static final String PAGE_FORGOT_PASSWORD = "forgot_password_page";
     public static final String PAGE_RESET_PASSWORD = "reset_password_page";
-    public static final String PAGE_ERROR = "error_page";
+    public static final String PAGE_ERROR = "error";
 
     public static final int TOKEN_LENGTH = 30;
 
