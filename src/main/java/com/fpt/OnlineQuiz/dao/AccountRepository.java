@@ -54,7 +54,8 @@ public class AccountRepository {
      * @param account User's account
      */
     public void updateAccount(Account account) {
-        this.em.merge(account);
+        //this.em.merge(account);
+        em.flush();
     }
 
     /**
