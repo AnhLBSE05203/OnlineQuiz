@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,12 +31,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 
+	/**
+	 * BCryptPasswordEncoder Bean
+	 * @return
+	 */
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 
 		return new BCryptPasswordEncoder();
 	}
 
+	/**
+	 * PersistentTokenRepository for Remember-me function
+	 * @return
+	 */
 	@Bean
 	public PersistentTokenRepository persistentTokenRepository() {
 		JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
@@ -43,6 +52,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return db;
 	}
 
+	/**
+	 * Configuration for Authentication & Authorization
+	 * @param http http
+	 * @throws Exception
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
@@ -57,23 +71,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				}
 			}
 		}
+		http.authorizeRequests().antMatchers(
+						"/js/**", "/assets/**","/fonts/**","/scss/**", "/syntax-highlighter/**",
+						"/css/**",
+						"/img/**",
+						"/sql/**").permitAll();
 		http.authorizeRequests()
 				.anyRequest().permitAll()
 				.and().formLogin()
-				.loginProcessingUrl("/login")
-				.failureUrl("/login")
-				.defaultSuccessUrl("/home")
-				.loginPage("/login")
+				.loginProcessingUrl(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN_PROCESS)
+				.failureUrl(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN_FAILURE)
+				.defaultSuccessUrl(Constants.LINK_HOME)
+				.loginPage(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN)
 				.and()
-				.exceptionHandling().accessDeniedPage("/access_denied")
+				.exceptionHandling().accessDeniedPage(Constants.LINK_ACCESS_DENIED)
 				.and()
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logout().logoutRequestMatcher(new AntPathRequestMatcher(Constants.LINK_LOGOUT))
 				.deleteCookies("remember-me", "JSESSIONID")
 				.invalidateHttpSession(true)
 				.clearAuthentication(true)
-				.logoutSuccessUrl("/home")
+				.logoutSuccessUrl(Constants.LINK_HOME)
 				.and()
-				.rememberMe().tokenRepository(this.persistentTokenRepository()) //
-				.tokenValiditySeconds(24 * 60 * 60); // 24h
+				.rememberMe().userDetailsService(accountService).tokenRepository(this.persistentTokenRepository()) //
+				.tokenValiditySeconds(24 * 60 * 60)
+				.key("uniqueAndSecret"); // 24h
 	}
 }
