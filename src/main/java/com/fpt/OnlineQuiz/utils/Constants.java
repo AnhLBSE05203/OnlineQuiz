@@ -46,6 +46,19 @@ public class Constants {
 
     public static final int TOKEN_LENGTH = 30;
 
+
+    //links admin
+    public static final String LINK_ADMIN_CONTROLLER = "/admin";
+    public static final String LINK_ADMIN_LOGIN = "/admin/login";
+    public static final String LINK_ADMIN_LOGIN_PROCESS = "/admin/login";
+    public static final String LINK_ADMIN_LOGIN_FAILURE = "/admin/login?error=true";
+    public static final String LINK_ADMIN_DASHBOARD = "/admin/dashboard";
+
+    //pages admin
+    public static final String PAGE_DASHBOARD = "admin_dashboard";
+    public static final String PAGE_ADMIN_LOGIN = "admin_login_page";
+    public static final String PAGE_ADMIN_FORGET_PASSWORD = "admin_forget_password";
+
     public static String getResetPasswordMailTemplate(String link) {
         String content = "<p>Hello,</p>"
                 + "<p>You have requested to reset your password.</p>"
