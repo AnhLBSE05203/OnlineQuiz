@@ -25,8 +25,8 @@ public class Constants {
     //links
     public static final String LINK_ACCOUNT_CONTROLLER = "/account";
     public static final String LINK_LOGIN = "/login";
-    public static final String LINK_LOGIN_PROCESS = "/account/login";
-    public static final String LINK_LOGIN_FAILURE = "/account/login?error=true";
+    public static final String LINK_LOGIN_PROCESS = "/login";
+    public static final String LINK_LOGIN_FAILURE = "/login?error=true";
     public static final String LINK_LOGOUT = "/logout";
     public static final String LINK_REGISTER = "/register";
     public static final String LINK_HOME = "/home";
