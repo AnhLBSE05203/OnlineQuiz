@@ -5,6 +5,7 @@ import com.fpt.OnlineQuiz.service.MailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -28,6 +29,16 @@ public class AdminController {
     String forgetPass() {
         return "admin_forget_password";
     }
+
+    @GetMapping("/dashboard")
+    String dashboardPage() {
+        return "admin_dashboard";
+    }
+
+//    @PostMapping("/login-process-admin") {
+//        return
+//    }
+
 
 
 }
