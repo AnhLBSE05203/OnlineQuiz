@@ -74,7 +74,7 @@ public class AccountController {
         }
         String tokenString = RandomString.make(Constants.TOKEN_LENGTH);
         try {
-            String resetPasswordLink = Utils.getSiteURL(request) + "/resetPassword?token=" + tokenString;
+            String resetPasswordLink = Utils.getSiteURL(request) + "/account/resetPassword?token=" + tokenString;
             mailService.sendResetPasswordEmail(email, resetPasswordLink);
             accountService.updateResetPasswordToken(tokenString, email);
         } catch (UnsupportedEncodingException | MessagingException e) {
@@ -152,7 +152,7 @@ public class AccountController {
         String tokenString = RandomString.make(30);
         try {
             //send confirmation email
-            String confirmLink = Utils.getSiteURL(request) + "/confirmRegistration?token=" + tokenString;
+            String confirmLink = Utils.getSiteURL(request) + "/account/confirmRegistration?token=" + tokenString;
             mailService.sendConfirmRegistrationEmail(registerDTO.getEmail(), confirmLink);
             accountService.updateConfirmToken(tokenString, registerDTO.getEmail());
         } catch (UnsupportedEncodingException | MessagingException e) {
