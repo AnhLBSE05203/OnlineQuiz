@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "Account")
 public class Account implements UserDetails {
-
+//test
     private static final long serialVersionUID = -3164082858501464263L;
 
     @Id
