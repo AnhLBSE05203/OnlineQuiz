@@ -41,7 +41,7 @@
         </div>
         <!-- Preloader Start -->
         <!-- Header Start -->
-        <jsp:include page="header.jsp"></jsp:include>
+        <jsp:include page="header.html"></jsp:include>
 
             <!-- Header End -->
 

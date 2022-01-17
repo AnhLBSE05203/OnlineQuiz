@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : RealProfile
     Created on : Jan 16, 2022, 1:11:21 AM
     Author     : nguye
@@ -63,7 +63,7 @@
                                 <!-- Main-menu -->
                                 <div class="main-menu d-none d-lg-block">
                                     <nav>
-                                        <ul id="navigation">                                                                                          
+                                        <ul id="navigation">
                                             <li class="active" ><a href="index.html">Home</a></li>
                                             <li><a href="courses.html">Courses</a></li>
                                             <li><a href="about.html">About</a></li>
@@ -82,7 +82,7 @@
                                     </nav>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <!-- Mobile Menu -->
                         <div class="col-12">
                             <div class="mobile_menu d-block d-lg-none"></div>
@@ -109,15 +109,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>          
+                    </div>
                 </div>
             </div>
         </section>
         <!-- Courses area start -->
 
-        <jsp:include page="profile.jsp"></jsp:include>
+        <jsp:include page="profile.html"></jsp:include>
 
-        <!-- top subjects End -->  
+        <!-- top subjects End -->
         <!-- ? services-area -->
         <div class="services-area services-area2 section-padding40">
             <div class="container">
@@ -249,7 +249,7 @@
               </div>
               <!-- Footer End-->
           </div>
-      </footer> 
+      </footer>
       <!-- Scroll Up -->
       <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
@@ -279,7 +279,7 @@
     <script src="./assets/js/jquery.sticky.js"></script>
     <!-- Progress -->
     <script src="./assets/js/jquery.barfiller.js"></script>
-    
+
     <!-- counter , waypoint,Hover Direction -->
     <script src="./assets/js/jquery.counterup.min.js"></script>
     <script src="./assets/js/waypoints.min.js"></script>
@@ -292,10 +292,10 @@
     <script src="./assets/js/jquery.validate.min.js"></script>
     <script src="./assets/js/mail-script.js"></script>
     <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-    
-    <!-- Jquery Plugins, main Jquery -->	
+
+    <!-- Jquery Plugins, main Jquery -->
     <script src="./assets/js/plugins.js"></script>
     <script src="./assets/js/main.js"></script>
-    
+
 </body>
 </html>
