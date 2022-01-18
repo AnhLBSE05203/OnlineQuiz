@@ -149,12 +149,16 @@ public class AccountController {
         account.setCreatedUserId(1);
 
         //create confirmation token
-        String tokenString = RandomString.make(30);
+        String tokenString = RandomString.make(Constants.TOKEN_LENGTH);
+        //add account
+        accountService.addAccount(account);
+        //add token
+        accountService.updateConfirmToken(tokenString, account.getEmail());
         try {
             //send confirmation email
             String confirmLink = Utils.getSiteURL(request) + "/account/confirmRegistration?token=" + tokenString;
             mailService.sendConfirmRegistrationEmail(registerDTO.getEmail(), confirmLink);
-            accountService.updateConfirmToken(tokenString, registerDTO.getEmail());
+
         } catch (UnsupportedEncodingException | MessagingException e) {
             model.addAttribute("message", "Error while sending email");
             //if fail to send mail, delete generated token
@@ -162,8 +166,8 @@ public class AccountController {
             tokenService.deleteToken(token);
             return Constants.PAGE_REGISTER;
         }
-        accountService.addAccount(account);
-        return Constants.PAGE_HOME;
+        model.addAttribute("message", "Register successful! Check email for confirmation link!");
+        return Constants.PAGE_REGISTER;
     }
 
     /**
