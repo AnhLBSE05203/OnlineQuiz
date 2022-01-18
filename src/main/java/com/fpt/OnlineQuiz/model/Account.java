@@ -48,6 +48,10 @@ public class Account implements UserDetails {
     @JoinTable(name = "AccountRole", joinColumns = @JoinColumn(name = "accountId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
     private List<Role> roles;
 
+    @ManyToOne
+    @JoinColumn(name = "imageId")
+    private Image profileImage;
+
     @OneToMany(mappedBy = "account")
     private List<Token> tokens;
 
