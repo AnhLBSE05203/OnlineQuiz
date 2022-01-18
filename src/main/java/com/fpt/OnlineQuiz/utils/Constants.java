@@ -60,6 +60,12 @@ public class Constants {
     public static final String PAGE_ADMIN_LOGIN = "admin_login_page";
     public static final String PAGE_ADMIN_FORGET_PASSWORD = "admin_forget_password";
 
+    //sql path
+    public static final String SQL_PATH_FIND_ACCOUNT_BY_TOKEN = "/static/sql/findAccountByToken.sql";
+    public static final String SQL_PATH_FIND_ACCOUNT_BY_EMAIL = "/static/sql/findAccountByEmail.sql";
+    public static final String SQL_PATH_FIND_ALL_ROLES = "/static/sql/findAllRoles.sql";
+    public static final String SQL_PATH_FIND_TOKEN_BY_TOKEN_STRING = "/static/sql/findTokenByTokenString.sql";
+    //mail templates
     public static String getResetPasswordMailTemplate(String link) {
         String content = "<p>Hello,</p>"
                 + "<p>You have requested to reset your password.</p>"

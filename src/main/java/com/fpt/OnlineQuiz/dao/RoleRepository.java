@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
 
 import com.fpt.OnlineQuiz.model.Role;
@@ -28,7 +29,7 @@ public class RoleRepository {
 	public List<Role> findAll() {
 		try {
 			BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-					this.getClass().getResourceAsStream("/static/sql/findAllRoles.sql")));
+					this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_ALL_ROLES)));
 			StringBuilder sb = new StringBuilder();
 			String line = "";
 			while((line = buffer.readLine()) !=null){

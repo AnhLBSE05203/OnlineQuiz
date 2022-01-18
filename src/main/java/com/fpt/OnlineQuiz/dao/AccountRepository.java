@@ -4,7 +4,6 @@ import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
 
-import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -26,7 +25,7 @@ public class AccountRepository {
     public Account findAccountByEmail(String email) {
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("/static/sql/findAccountByEmail.sql")));
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_ACCOUNT_BY_EMAIL)));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while((line = buffer.readLine()) !=null){
@@ -67,7 +66,7 @@ public class AccountRepository {
     public Account findByResetPasswordToken(String tokenString) {
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("/static/sql/findAccountByToken.sql")));
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_ACCOUNT_BY_TOKEN)));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while((line = buffer.readLine()) !=null){
@@ -90,7 +89,7 @@ public class AccountRepository {
     public Account findByConfirmToken(String tokenString) {
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("/static/sql/findAccountByToken.sql")));
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_ACCOUNT_BY_TOKEN)));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while((line = buffer.readLine()) !=null){
