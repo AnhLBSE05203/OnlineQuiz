@@ -88,7 +88,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void updatePassword(Account account, String newPassword, Token token) {
+	public void resetPassword(Account account, String newPassword, Token token) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword = encoder.encode(newPassword);
 		account.setPassword(encodedPassword);

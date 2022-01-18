@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
-import java.security.Principal;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Controller
@@ -184,12 +182,12 @@ public class AccountController {
         if (account == null) {
             message = "Account not found";
             model.addAttribute("message", message);
-            return Constants.PAGE_ERROR;
+            return Constants.PAGE_RESET_PASSWORD;
         }
         Token token = tokenService.findByTokenString(tokenString);
         if(token == null) {
             model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
-            return Constants.PAGE_ERROR;
+            return Constants.PAGE_RESET_PASSWORD;
         }
         Date now = new Date();
         long diff = now.getTime() - token.getCreatedDate().getTime();
@@ -200,7 +198,7 @@ public class AccountController {
         int tokenDuration = Integer.parseInt(StrTokenDuration);
         if (seconds > tokenDuration) {
             model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
-            return Constants.PAGE_ERROR;
+            return Constants.PAGE_RESET_PASSWORD;
         }
         account.setStatus(Constants.STATUS_CONFIRMED);
         accountService.updateAccount(account);
@@ -219,31 +217,32 @@ public class AccountController {
         String password = request.getParameter("password");
 
         Account account = accountService.findByResetPasswordToken(tokenString);
-        model.addAttribute("title", "Reset your password");
-        List<Token> tokens = account.getTokens();
-        Token resetToken = new Token();
-        for(Token t : tokens){
-            if(t.getTokenType().equals(Constants.TOKEN_TYPE_RESET_PASSWORD)){
-                resetToken = t;
-            }
+        String message = "";
+        if (account == null) {
+            message = "Account not found";
+            model.addAttribute("message", message);
+            return Constants.PAGE_RESET_PASSWORD;
         }
+        Token token = tokenService.findByTokenString(tokenString);
+        if(token == null) {
+            model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
+            return Constants.PAGE_RESET_PASSWORD;
+        }
+
         //calculate time diff between current time & token creation
         Date now = new Date();
-        long diff = now.getTime() - resetToken.getCreatedDate().getTime();
+        long diff = now.getTime() - token.getCreatedDate().getTime();
         long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
 
         //get token duration setting from application.properties
         String StrTokenDuration = env.getProperty("tokenDuration");
         int tokenDuration = Integer.parseInt(StrTokenDuration);
-        if (account == null || seconds > tokenDuration) {
+        if (seconds > tokenDuration) {
             model.addAttribute("message", "Invalid Token");
             return Constants.PAGE_RESET_PASSWORD;
-        } else {
-            accountService.updatePassword(account, password, resetToken);
-
-            model.addAttribute("message", "You have successfully changed your password.");
         }
-
+        accountService.resetPassword(account, password, token);
+        model.addAttribute("message", "You have successfully changed your password.");
         return Constants.PAGE_RESET_PASSWORD;
     }
 }
