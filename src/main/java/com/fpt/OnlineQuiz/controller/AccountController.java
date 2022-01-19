@@ -2,9 +2,11 @@ package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dto.RegisterDTO;
 import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.model.Role;
 import com.fpt.OnlineQuiz.model.Token;
 import com.fpt.OnlineQuiz.service.AccountService;
 import com.fpt.OnlineQuiz.service.MailService;
+import com.fpt.OnlineQuiz.service.RoleService;
 import com.fpt.OnlineQuiz.service.TokenService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import com.fpt.OnlineQuiz.utils.Utils;
@@ -20,7 +22,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Controller
@@ -34,6 +38,8 @@ public class AccountController {
     private Environment env;
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private RoleService roleService;
     /**
      * Display Login Page
      * @param model spring's model class
@@ -145,7 +151,10 @@ public class AccountController {
         account.setPhone(registerDTO.getPhone());
         account.setFullName(registerDTO.getFullName());
         account.setCreatedUserId(1);
-
+        Role role = roleService.findRoleByName(Constants.ROLE_USER);
+        List<Role> roles= new ArrayList<>();
+        roles.add(role);
+        account.setRoles(roles);
         //create confirmation token
         String tokenString = RandomString.make(Constants.TOKEN_LENGTH);
         //add account
