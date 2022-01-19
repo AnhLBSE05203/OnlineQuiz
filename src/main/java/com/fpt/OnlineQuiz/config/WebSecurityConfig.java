@@ -57,9 +57,9 @@ public class WebSecurityConfig {
 	@Configuration
 	@Order(1)
 	public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
-
 		/**
 		 * Configuration for Authentication & Authorization
+		 *
 		 * @param http http
 		 * @throws Exception
 		 */
@@ -77,13 +77,18 @@ public class WebSecurityConfig {
 					}
 				}
 			}
+			http.authorizeRequests().antMatchers(
+					"/js/**", "/assets/**", "/fonts/**", "/scss/**", "/syntax-highlighter/**",
+					"/css/**",
+					"/img/**",
+					"/sql/**").permitAll();
 			http.authorizeRequests()
 					.anyRequest().permitAll()
 					.and().formLogin()
-					.loginProcessingUrl(Constants.LINK_LOGIN_PROCESS)
-					.failureUrl(Constants.LINK_LOGIN_FAILURE)
+					.loginProcessingUrl(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN_PROCESS)
+					.failureUrl(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN_FAILURE)
 					.defaultSuccessUrl(Constants.LINK_HOME)
-					.loginPage(Constants.LINK_LOGIN)
+					.loginPage(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN)
 					.and()
 					.exceptionHandling().accessDeniedPage(Constants.LINK_ACCESS_DENIED)
 					.and()
@@ -93,8 +98,9 @@ public class WebSecurityConfig {
 					.clearAuthentication(true)
 					.logoutSuccessUrl(Constants.LINK_HOME)
 					.and()
-					.rememberMe().tokenRepository(persistentTokenRepository()) //
-					.tokenValiditySeconds(24 * 60 * 60); // 24h
+					.rememberMe().userDetailsService(accountService).tokenRepository(persistentTokenRepository()) //
+					.tokenValiditySeconds(24 * 60 * 60)
+					.key("uniqueAndSecret"); // 24h
 		}
 	}
 
@@ -141,5 +147,6 @@ public class WebSecurityConfig {
 		}
 
 	}
+
 
 }

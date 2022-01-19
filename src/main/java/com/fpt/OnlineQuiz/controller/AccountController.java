@@ -74,14 +74,15 @@ public class AccountController {
         }
         String tokenString = RandomString.make(Constants.TOKEN_LENGTH);
         try {
-            String resetPasswordLink = Utils.getSiteURL(request) + "/resetPassword?token=" + tokenString;
+            String resetPasswordLink = Utils.getSiteURL(request) + "/account/resetPassword?token=" + tokenString;
             mailService.sendResetPasswordEmail(email, resetPasswordLink);
             accountService.updateResetPasswordToken(tokenString, email);
         } catch (UnsupportedEncodingException | MessagingException e) {
-            model.addAttribute("error", "Error while sending email");
+            model.addAttribute("message", "Error while sending email");
             //if fail to send mail, delete generated token
             Token token = tokenService.findByTokenString(tokenString);
             tokenService.deleteToken(token);
+            return Constants.PAGE_FORGOT_PASSWORD;
         }
         model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
         return Constants.PAGE_FORGOT_PASSWORD;
@@ -146,22 +147,27 @@ public class AccountController {
         account.setPhone(registerDTO.getPhone());
         account.setFullName(registerDTO.getFullName());
         account.setCreatedUserId(1);
-        accountService.addAccount(account);
 
         //create confirmation token
-        String tokenString = RandomString.make(30);
+        String tokenString = RandomString.make(Constants.TOKEN_LENGTH);
+        //add account
+        accountService.addAccount(account);
+        //add token
+        accountService.updateConfirmToken(tokenString, account.getEmail());
         try {
             //send confirmation email
-            String confirmLink = Utils.getSiteURL(request) + "/confirmRegistration?token=" + tokenString;
+            String confirmLink = Utils.getSiteURL(request) + "/account/confirmRegistration?token=" + tokenString;
             mailService.sendConfirmRegistrationEmail(registerDTO.getEmail(), confirmLink);
-            accountService.updateConfirmToken(tokenString, registerDTO.getEmail());
+
         } catch (UnsupportedEncodingException | MessagingException e) {
-            model.addAttribute("error", "Error while sending email");
+            model.addAttribute("message", "Error while sending email");
             //if fail to send mail, delete generated token
             Token token = tokenService.findByTokenString(tokenString);
             tokenService.deleteToken(token);
+            return Constants.PAGE_REGISTER;
         }
-        return Constants.PAGE_HOME;
+        model.addAttribute("message", "Register successful! Check email for confirmation link!");
+        return Constants.PAGE_REGISTER;
     }
 
     /**

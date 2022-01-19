@@ -30,41 +30,11 @@ public class MailServiceImpl implements MailService {
 
     public void sendResetPasswordEmail(String recipientEmail, String link)
             throws MessagingException, UnsupportedEncodingException {
-//        MimeMessage message = mailSender.createMimeMessage();
-//        MimeMessageHelper helper = new MimeMessageHelper(message);
-//
-//        helper.setFrom(Constants.MAIL_FROM, Constants.MAIL_FROM_NAME);
-//        helper.setTo(recipientEmail);
-//
-//        String subject = Constants.MAIL_SUBJECT_RESET_PASSWORD;
-//
-//        String content = Constants.getResetPasswordMailTemplate(link);
-//
-//        helper.setSubject(subject);
-//
-//        helper.setText(content, true);
-//
-//        mailSender.send(message);
         sendEmail(recipientEmail, Constants.MAIL_SUBJECT_RESET_PASSWORD, Constants.getResetPasswordMailTemplate(link), true);
     }
 
     @Override
     public void sendConfirmRegistrationEmail(String recipientEmail, String link) throws MessagingException, UnsupportedEncodingException {
-//        MimeMessage message = mailSender.createMimeMessage();
-//        MimeMessageHelper helper = new MimeMessageHelper(message);
-//
-//        helper.setFrom(Constants.MAIL_FROM, Constants.MAIL_FROM_NAME);
-//        helper.setTo(recipientEmail);
-//
-//        String subject = Constants.MAIL_SUBJECT_CONFIRM_REGISTRATION;
-//
-//        String content = Constants.getConfirmRegistrationMailTemplate(link);
-//
-//        helper.setSubject(subject);
-//
-//        helper.setText(content, true);
-//
-//        mailSender.send(message);
         sendEmail(recipientEmail, Constants.MAIL_SUBJECT_CONFIRM_REGISTRATION, Constants.getConfirmRegistrationMailTemplate(link), true);
     }
 
@@ -114,19 +84,18 @@ public class MailServiceImpl implements MailService {
         // Enable SSL
         props.put("mail.smtp.ssl.enable", "true");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-//        props.put("mail.transport.protocol", "smtps");
+//      props.put("mail.transport.protocol", "smtps");
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("daugiafpt@gmail.com", "Anh12345.");
+                return new PasswordAuthentication(Constants.MAIL_FROM, Constants.MAIL_PASSWORD);
             }
         });
 
         MimeMessage message = new MimeMessage(session);
         String contentType = isHtml ? "text/html" : "text/plain";
         message.setHeader("Content-Type", contentType + "; charset=UTF-8");
-        message.setFrom(new InternetAddress("daugiafpt@gmail.com", "FPT AUCTION", StandardCharsets.UTF_8.name()));
+        message.setFrom(new InternetAddress(Constants.MAIL_FROM, Constants.MAIL_FROM_NAME, StandardCharsets.UTF_8.name()));
         message.setSubject(title, "UTF-8");
         message.setContent(content, contentType + "; charset=utf-8");
         return message;

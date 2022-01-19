@@ -10,7 +10,6 @@
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
 
 	<!-- CSS here -->
-    <link rel="stylesheet" th:href="@{/css/forgot_password_page.css}">
 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
 	<link rel="stylesheet" th:href="@{/css/slicknav.css}">
@@ -25,6 +24,7 @@
 	<link rel="stylesheet" th:href="@{/css/slick.css}">
 	<link rel="stylesheet" th:href="@{/css/nice-select.css}">
 	<link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/forgot_password_page.css}">
 </head>
 <body>
     <!-- ? Preloader Start -->
@@ -73,18 +73,19 @@
             <div class="form-input">
                 <label>Confirm Password</label>
                 <input type="password" name="password" placeholder="Confirm Password" required oninput="checkPasswordMatch(this);">
-		<div>
-		<label>Gender</label></div>
-                <label>Male</label>
-                <input type="radio" th:field="*{gender}" value="0" style = "height: 20px;">
-		        <label>Female </label>
-                <input type="radio" th:field="*{gender}" value="1" style = "height: 20px;">
-		</div>
+            </div>
+            <div>
+		    <label style="color:white">Gender</label>
+            </div>
+                <label style = "color:white">Male</label>
+                <input type="radio" th:field="*{gender}" value="0" >
+		        <label style = "color:white">Female </label>
+                <input type="radio" th:field="*{gender}" value="1">
             <div class="form-input pt-30">
                 <input type="submit" name="submit" value="Registration">
             </div>
             <a href="/account/login" class="formLink">Login</a>
-            <a href="/home" class="formLink">Home</a>
+            <a th:fragment="home" href="/home" class="formLink">Home</a>
         </div>
     </form>
     <!-- /end login form -->
