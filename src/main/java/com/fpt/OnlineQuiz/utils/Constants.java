@@ -8,9 +8,15 @@ public class Constants {
     public static final int STATUS_UNCONFIRMED = 0;
     public static final int GENDER_MALE = 0;
     public static final int GENDER_FEMALE = 1;
+    public static final String ROLE_USER = "ROLE_USER";
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_EXPERT = "ROLE_EXPERT";
+    public static final String ROLE_SALES = "ROLE_SALES";
 
-    //error messages
+    //messages
     public static final String MESSAGE_INVALID_TOKEN = "Invalid Token!";
+    public static final String MESSAGE_REGISTER_SUCCESS = "Register successful! Check email for confirmation link!";
+    public static final String MESSAGE_CONFIRM_SUCCESS = "Registration Confirm Success!";
 
     //token types
     public static final String TOKEN_TYPE_RESET_PASSWORD = "TOKEN_RESET_PASSWORD";
@@ -35,7 +41,6 @@ public class Constants {
     public static final String LINK_FORGOT_PASSWORD = "/forgotPassword";
     public static final String LINK_RESET_PASSWORD = "/resetPassword";
     public static final String LINK_CONFIRM_REGISTRATION = "/confirmRegistration";
-
     //pages
     public static final String PAGE_LOGIN = "login_page";
     public static final String PAGE_REGISTER = "register_page";
@@ -65,6 +70,7 @@ public class Constants {
     public static final String SQL_PATH_FIND_ACCOUNT_BY_EMAIL = "/static/sql/findAccountByEmail.sql";
     public static final String SQL_PATH_FIND_ALL_ROLES = "/static/sql/findAllRoles.sql";
     public static final String SQL_PATH_FIND_TOKEN_BY_TOKEN_STRING = "/static/sql/findTokenByTokenString.sql";
+    public static final String SQL_PATH_FIND_ROLE_BY_NAME = "/static/sql/findRoleByName.sql";
     //mail templates
     public static String getResetPasswordMailTemplate(String link) {
         String content = "<p>Hello,</p>"

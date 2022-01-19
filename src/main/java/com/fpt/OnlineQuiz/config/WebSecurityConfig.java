@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -24,7 +25,6 @@ import com.fpt.OnlineQuiz.service.RoleService;
 
 @Configuration
 @EnableWebSecurity
-@Order(2)
 public class WebSecurityConfig {
 	@Autowired
 	private AccountService accountService;
@@ -55,7 +55,7 @@ public class WebSecurityConfig {
 	}
 
 	@Configuration
-	@Order(1)
+	@Order(2)
 	public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 		/**
 		 * Configuration for Authentication & Authorization
@@ -65,32 +65,14 @@ public class WebSecurityConfig {
 		 */
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.csrf().disable();
-			List<Role> roles = roleService.findAll();
-			if (roles != null) {
-				for (Role role : roles) {
-					List<Screen> screens = role.getScreens();
-					String roleName = role.getName();
-					for (Screen screen : screens) {
-						String link = screen.getLink();
-						http.authorizeRequests().antMatchers(link).hasAuthority(roleName);
-					}
-				}
-			}
-			http.authorizeRequests().antMatchers(
-					"/js/**", "/assets/**", "/fonts/**", "/scss/**", "/syntax-highlighter/**",
-					"/css/**",
-					"/img/**",
-					"/sql/**").permitAll();
-			http.authorizeRequests()
-					.anyRequest().permitAll()
-					.and().formLogin()
+			sharedConfigure(http);
+			http.formLogin()
 					.loginProcessingUrl(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN_PROCESS)
 					.failureUrl(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN_FAILURE)
 					.defaultSuccessUrl(Constants.LINK_HOME)
 					.loginPage(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN)
 					.and()
-					.exceptionHandling().accessDeniedPage(Constants.LINK_ACCESS_DENIED)
+					.exceptionHandling().accessDeniedPage(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN)
 					.and()
 					.logout().logoutRequestMatcher(new AntPathRequestMatcher(Constants.LINK_LOGOUT))
 					.deleteCookies("remember-me", "JSESSIONID")
@@ -98,13 +80,14 @@ public class WebSecurityConfig {
 					.clearAuthentication(true)
 					.logoutSuccessUrl(Constants.LINK_HOME)
 					.and()
-					.rememberMe().userDetailsService(accountService).tokenRepository(persistentTokenRepository()) //
+					.rememberMe().tokenRepository(persistentTokenRepository()) //
 					.tokenValiditySeconds(24 * 60 * 60)
 					.key("uniqueAndSecret"); // 24h
 		}
 	}
 
 	@Configuration
+	@Order(1)
 	public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		/**
@@ -114,27 +97,14 @@ public class WebSecurityConfig {
 		 */
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.csrf().disable();
-			List<Role> roles = roleService.findAll();
-			if (roles != null) {
-				for (Role role : roles) {
-					List<Screen> screens = role.getScreens();
-					String roleName = role.getName();
-					for (Screen screen : screens) {
-						String link = screen.getLink();
-						http.authorizeRequests().antMatchers(link).hasAuthority(roleName);
-					}
-				}
-			}
-			http.authorizeRequests()
-					.anyRequest().permitAll()
-					.and().formLogin()
+			sharedConfigure(http);
+			http.formLogin()
 					.loginProcessingUrl(Constants.LINK_ADMIN_LOGIN_PROCESS)
-					.failureUrl(Constants.LINK_LOGIN_FAILURE)
+					.failureUrl(Constants.LINK_ADMIN_LOGIN_FAILURE)
 					.defaultSuccessUrl(Constants.LINK_ADMIN_DASHBOARD)
 					.loginPage(Constants.LINK_ADMIN_LOGIN)
 					.and()
-					.exceptionHandling().accessDeniedPage(Constants.LINK_ACCESS_DENIED)
+					.exceptionHandling().accessDeniedPage(Constants.LINK_ADMIN_LOGIN)
 					.and()
 					.logout().logoutRequestMatcher(new AntPathRequestMatcher(Constants.LINK_LOGOUT))
 					.deleteCookies("remember-me", "JSESSIONID")
@@ -147,6 +117,26 @@ public class WebSecurityConfig {
 		}
 
 	}
+	protected void sharedConfigure(HttpSecurity http) throws Exception {
+		http.csrf().disable();
+		List<Role> roles = roleService.findAll();
 
+		if (roles != null) {
+			for (Role role : roles) {
+				List<Screen> screens = role.getScreens();
+				String roleName = role.getName();
+				for (Screen screen : screens) {
+					String link = screen.getLink();
+					http.authorizeRequests().antMatchers(link).hasAuthority(roleName);
+				}
+			}
+		}
+
+		//avoid CookieTheftException
+		http.authorizeRequests().antMatchers(
+				"/js/**", "/assets/**", "/fonts/**",
+				"/css/**", "/scss/**", "/syntax-highlighter/**",
+				"/img/**", "/sql/**").permitAll();
+	}
 
 }

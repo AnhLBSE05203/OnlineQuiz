@@ -2,9 +2,11 @@ package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dto.RegisterDTO;
 import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.model.Role;
 import com.fpt.OnlineQuiz.model.Token;
 import com.fpt.OnlineQuiz.service.AccountService;
 import com.fpt.OnlineQuiz.service.MailService;
+import com.fpt.OnlineQuiz.service.RoleService;
 import com.fpt.OnlineQuiz.service.TokenService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import com.fpt.OnlineQuiz.utils.Utils;
@@ -20,7 +22,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Controller
@@ -34,6 +38,8 @@ public class AccountController {
     private Environment env;
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private RoleService roleService;
     /**
      * Display Login Page
      * @param model spring's model class
@@ -145,7 +151,10 @@ public class AccountController {
         account.setPhone(registerDTO.getPhone());
         account.setFullName(registerDTO.getFullName());
         account.setCreatedUserId(1);
-
+        Role role = roleService.findRoleByName(Constants.ROLE_USER);
+        List<Role> roles= new ArrayList<>();
+        roles.add(role);
+        account.setRoles(roles);
         //create confirmation token
         String tokenString = RandomString.make(Constants.TOKEN_LENGTH);
         //add account
@@ -164,7 +173,7 @@ public class AccountController {
             tokenService.deleteToken(token);
             return Constants.PAGE_REGISTER;
         }
-        model.addAttribute("message", "Register successful! Check email for confirmation link!");
+        model.addAttribute("message", Constants.MESSAGE_REGISTER_SUCCESS);
         return Constants.PAGE_REGISTER;
     }
 
@@ -182,12 +191,12 @@ public class AccountController {
         if (account == null) {
             message = "Account not found";
             model.addAttribute("message", message);
-            return Constants.PAGE_RESET_PASSWORD;
+            return Constants.PAGE_REGISTER;
         }
         Token token = tokenService.findByTokenString(tokenString);
         if(token == null) {
             model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
-            return Constants.PAGE_RESET_PASSWORD;
+            return Constants.PAGE_REGISTER;
         }
         Date now = new Date();
         long diff = now.getTime() - token.getCreatedDate().getTime();
@@ -198,12 +207,13 @@ public class AccountController {
         int tokenDuration = Integer.parseInt(StrTokenDuration);
         if (seconds > tokenDuration) {
             model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
-            return Constants.PAGE_RESET_PASSWORD;
+            return Constants.PAGE_REGISTER;
         }
         account.setStatus(Constants.STATUS_CONFIRMED);
         accountService.updateAccount(account);
         tokenService.deleteToken(token);
-        return Constants.PAGE_HOME;
+        model.addAttribute("message", Constants.MESSAGE_CONFIRM_SUCCESS);
+        return Constants.PAGE_REGISTER;
     }
     /**
      * Process Reset Password Function

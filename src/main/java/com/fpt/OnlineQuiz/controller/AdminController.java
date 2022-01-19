@@ -35,10 +35,4 @@ public class AdminController {
         return "admin_dashboard";
     }
 
-//    @PostMapping("/login-process-admin") {
-//        return
-//    }
-
-
-
 }
