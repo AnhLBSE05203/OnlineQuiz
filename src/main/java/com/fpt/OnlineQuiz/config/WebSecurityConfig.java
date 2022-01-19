@@ -120,7 +120,7 @@ public class WebSecurityConfig {
 	protected void sharedConfigure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		List<Role> roles = roleService.findAll();
-		//not work somehow -_-
+
 		if (roles != null) {
 			for (Role role : roles) {
 				List<Screen> screens = role.getScreens();
