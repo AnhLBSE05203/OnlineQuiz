@@ -24,7 +24,6 @@ import com.fpt.OnlineQuiz.service.RoleService;
 
 @Configuration
 @EnableWebSecurity
-@Order(2)
 public class WebSecurityConfig {
 	@Autowired
 	private AccountService accountService;
@@ -105,6 +104,7 @@ public class WebSecurityConfig {
 	}
 
 	@Configuration
+	@Order(2)
 	public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		/**
