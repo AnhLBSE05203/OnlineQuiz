@@ -65,25 +65,13 @@ public class WebSecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.csrf().disable();
-			List<Role> roles = roleService.findAll();
-			if (roles != null) {
-				for (Role role : roles) {
-					List<Screen> screens = role.getScreens();
-					String roleName = role.getName();
-					for (Screen screen : screens) {
-						String link = screen.getLink();
-						http.authorizeRequests().antMatchers(link).hasAuthority(roleName);
-					}
-				}
-			}
+
 			http.authorizeRequests().antMatchers(
 					"/js/**", "/assets/**", "/fonts/**", "/scss/**", "/syntax-highlighter/**",
 					"/css/**",
 					"/img/**",
 					"/sql/**").permitAll();
-			http.authorizeRequests()
-					.anyRequest().permitAll()
-					.and().formLogin()
+			http.formLogin()
 					.loginProcessingUrl(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN_PROCESS)
 					.failureUrl(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN_FAILURE)
 					.defaultSuccessUrl(Constants.LINK_HOME)
@@ -91,7 +79,7 @@ public class WebSecurityConfig {
 					.and()
 					.exceptionHandling().accessDeniedPage(Constants.LINK_ACCESS_DENIED)
 					.and()
-					.logout().logoutRequestMatcher(new AntPathRequestMatcher(Constants.LINK_LOGOUT))
+					.logout().logoutRequestMatcher(new AntPathRequestMatcher(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGOUT))
 					.deleteCookies("remember-me", "JSESSIONID")
 					.invalidateHttpSession(true)
 					.clearAuthentication(true)
@@ -126,9 +114,8 @@ public class WebSecurityConfig {
 					}
 				}
 			}
-			http.authorizeRequests()
-					.anyRequest().permitAll()
-					.and().formLogin()
+			http.authorizeRequests().antMatchers("/admin/dashboard").hasAuthority("ROLE_ADMIN");
+			http.formLogin()
 					.loginProcessingUrl(Constants.LINK_ADMIN_LOGIN_PROCESS)
 					.failureUrl(Constants.LINK_ADMIN_LOGIN_FAILURE)
 					.defaultSuccessUrl(Constants.LINK_ADMIN_DASHBOARD)
