@@ -66,7 +66,7 @@ public class WebSecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			sharedConfigure(http);
-			http.formLogin()
+			http.formLogin().permitAll()
 					.loginProcessingUrl(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN_PROCESS)
 					.failureUrl(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN_FAILURE)
 					.defaultSuccessUrl(Constants.LINK_HOME)
@@ -98,7 +98,7 @@ public class WebSecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			sharedConfigure(http);
-			http.formLogin()
+			http.formLogin().permitAll()
 					.loginProcessingUrl(Constants.LINK_ADMIN_LOGIN_PROCESS)
 					.failureUrl(Constants.LINK_ADMIN_LOGIN_FAILURE)
 					.defaultSuccessUrl(Constants.LINK_ADMIN_DASHBOARD)
