@@ -54,7 +54,7 @@ public class WebSecurityConfig {
 	}
 
 	@Configuration
-	@Order(1)
+	@Order(2)
 	public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 		/**
 		 * Configuration for Authentication & Authorization
@@ -92,7 +92,7 @@ public class WebSecurityConfig {
 	}
 
 	@Configuration
-	@Order(2)
+	@Order(1)
 	public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		/**
