@@ -12,8 +12,11 @@ public class Constants {
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     public static final String ROLE_EXPERT = "ROLE_EXPERT";
     public static final String ROLE_SALES = "ROLE_SALES";
-    //error messages
+
+    //messages
     public static final String MESSAGE_INVALID_TOKEN = "Invalid Token!";
+    public static final String MESSAGE_REGISTER_SUCCESS = "Register successful! Check email for confirmation link!";
+    public static final String MESSAGE_CONFIRM_SUCCESS = "Registration Confirm Success!";
 
     //token types
     public static final String TOKEN_TYPE_RESET_PASSWORD = "TOKEN_RESET_PASSWORD";

@@ -173,7 +173,7 @@ public class AccountController {
             tokenService.deleteToken(token);
             return Constants.PAGE_REGISTER;
         }
-        model.addAttribute("message", "Register successful! Check email for confirmation link!");
+        model.addAttribute("message", Constants.MESSAGE_REGISTER_SUCCESS);
         return Constants.PAGE_REGISTER;
     }
 
@@ -191,12 +191,12 @@ public class AccountController {
         if (account == null) {
             message = "Account not found";
             model.addAttribute("message", message);
-            return Constants.PAGE_RESET_PASSWORD;
+            return Constants.PAGE_REGISTER;
         }
         Token token = tokenService.findByTokenString(tokenString);
         if(token == null) {
             model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
-            return Constants.PAGE_RESET_PASSWORD;
+            return Constants.PAGE_REGISTER;
         }
         Date now = new Date();
         long diff = now.getTime() - token.getCreatedDate().getTime();
@@ -207,12 +207,13 @@ public class AccountController {
         int tokenDuration = Integer.parseInt(StrTokenDuration);
         if (seconds > tokenDuration) {
             model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
-            return Constants.PAGE_RESET_PASSWORD;
+            return Constants.PAGE_REGISTER;
         }
         account.setStatus(Constants.STATUS_CONFIRMED);
         accountService.updateAccount(account);
         tokenService.deleteToken(token);
-        return Constants.PAGE_HOME;
+        model.addAttribute("message", Constants.MESSAGE_CONFIRM_SUCCESS);
+        return Constants.PAGE_REGISTER;
     }
     /**
      * Process Reset Password Function
