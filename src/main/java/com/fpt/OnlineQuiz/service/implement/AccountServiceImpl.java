@@ -92,6 +92,8 @@ public class AccountServiceImpl implements AccountService {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword = encoder.encode(newPassword);
 		account.setPassword(encodedPassword);
+		Date now = new Date();
+		account.setUpdatedTime(now);
 		accountRepository.updateAccount(account);
 		tokenRepository.deleteToken(token);
 	}
