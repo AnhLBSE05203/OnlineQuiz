@@ -66,7 +66,8 @@ public class Account implements UserDetails {
 
     @Column(name = "createdUserId")
     private int createdUserId;
-
+    @Column(name = "updatedUserId")
+    private int updatedUserId;
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
 

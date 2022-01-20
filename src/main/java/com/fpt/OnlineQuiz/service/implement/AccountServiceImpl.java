@@ -94,6 +94,7 @@ public class AccountServiceImpl implements AccountService {
 		account.setPassword(encodedPassword);
 		Date now = new Date();
 		account.setUpdatedTime(now);
+		account.setUpdatedUserId(1);
 		accountRepository.updateAccount(account);
 		tokenRepository.deleteToken(token);
 	}

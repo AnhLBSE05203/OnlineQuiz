@@ -147,6 +147,8 @@ public class AccountController {
         Date now = new Date();
         account.setCreatedTime(now);
         account.setUpdatedTime(now);
+        account.setCreatedUserId(1);
+        account.setUpdatedUserId(1);
         account.setGender(registerDTO.getGender());
         account.setPhone(registerDTO.getPhone());
         account.setFullName(registerDTO.getFullName());
