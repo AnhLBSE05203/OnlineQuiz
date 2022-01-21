@@ -44,7 +44,7 @@ public class Account implements UserDetails {
     @Column(name = "phone", length = 20, nullable = false)
     private String phone;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "AccountRole", joinColumns = @JoinColumn(name = "accountId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
     private List<Role> roles;
 
