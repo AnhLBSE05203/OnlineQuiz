@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -29,8 +30,20 @@ public class Role {
 	private int id;
 	@Column(name = "name", nullable = false)
 	private String name;
+
+	@Column(name = "createdTime")
+	private Date createdTime;
+
+	@Column(name = "updatedTime")
+	Date updatedTime;
+
+	@Column(name = "createdUserId")
+	private int createdUserId;
+	@Column(name = "updatedUserId")
+	private int updatedUserId;
 	@Column(name = "status", nullable = false)
 	private int status;
+
 	@ManyToMany(mappedBy = "roles")
 	private List<Account> accounts;
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
