@@ -153,6 +153,7 @@ public class AccountController {
         account.setPhone(registerDTO.getPhone());
         account.setFullName(registerDTO.getFullName());
         account.setCreatedUserId(1);
+        account.setStatus(Constants.STATUS_UNCONFIRMED);
         Role role = roleService.findRoleByName(Constants.ROLE_USER);
         List<Role> roles= new ArrayList<>();
         roles.add(role);

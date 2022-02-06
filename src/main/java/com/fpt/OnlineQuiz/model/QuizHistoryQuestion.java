@@ -22,6 +22,7 @@ public class QuizHistoryQuestion {
     @ManyToOne
     @JoinColumn(name = "questionId")
     private Question question;
-    @Column(name = "userAnswer")
-    private String userAnswer;
+    @ManyToOne
+    @JoinColumn(name = "userAnswer")
+    private Answer userAnswer;
 }

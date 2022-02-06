@@ -29,8 +29,8 @@ public class Role {
 	private int id;
 	@Column(name = "name", nullable = false)
 	private String name;
-	@Column(name = "deleted", nullable = false)
-	private boolean deleted;
+	@Column(name = "status", nullable = false)
+	private int status;
 	@ManyToMany(mappedBy = "roles")
 	private List<Account> accounts;
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
