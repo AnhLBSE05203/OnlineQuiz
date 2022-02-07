@@ -100,7 +100,7 @@ public class AccountController {
      */
     @GetMapping(Constants.LINK_RESET_PASSWORD)
     public String showResetPasswordPage(@Param(value = "token") String token, Model model) {
-        Account account = accountService.findByResetPasswordToken(token);
+        Account account = accountService.findByToken(token, Constants.TOKEN_TYPE_RESET_PASSWORD);
         model.addAttribute("token", token);
 
         if (account == null) {
@@ -189,7 +189,7 @@ public class AccountController {
     @GetMapping(Constants.LINK_CONFIRM_REGISTRATION)
     public String processConfirmRegistration(HttpServletRequest request, Model model) {
         String tokenString = request.getParameter("token");
-        Account account = accountService.findByConfirmToken(tokenString);
+        Account account = accountService.findByToken(tokenString, Constants.TOKEN_TYPE_CONFIRM_REGISTRATION);
         String message = "";
         if (account == null) {
             message = "Account not found";
@@ -229,7 +229,7 @@ public class AccountController {
         String tokenString = request.getParameter("token");
         String password = request.getParameter("password");
 
-        Account account = accountService.findByResetPasswordToken(tokenString);
+        Account account = accountService.findByToken(tokenString, Constants.TOKEN_TYPE_RESET_PASSWORD);
         String message = "";
         if (account == null) {
             message = "Account not found";

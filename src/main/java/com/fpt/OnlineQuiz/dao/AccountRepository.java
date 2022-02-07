@@ -59,11 +59,11 @@ public class AccountRepository {
     }
 
     /**
-     * Find Account By Generated ResetPasswordToken which is sent to the User
-     * @param tokenString reset password token sent to the User
+     * Find Account By Token which is sent to the User
+     * @param tokenString token sent to the User
      * @return User's account
      */
-    public Account findByResetPasswordToken(String tokenString) {
+    public Account findByToken(String tokenString, String tokenType) {
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
                     this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_ACCOUNT_BY_TOKEN)));
@@ -75,30 +75,7 @@ public class AccountRepository {
             String sql = sb.toString();
             Query query = em.createQuery(sql, Account.class);
             query.setParameter("token", tokenString);
-            query.setParameter("tokenType", Constants.TOKEN_TYPE_RESET_PASSWORD);
-            return (Account) query.getSingleResult();
-        } catch (NoResultException | IOException e) {
-            return null;
-        }
-    }
-    /**
-     * Find Account By Generated ConfirmToken which is sent to the User
-     * @param tokenString confirm token sent to the User
-     * @return User's account
-     */
-    public Account findByConfirmToken(String tokenString) {
-        try {
-            BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_ACCOUNT_BY_TOKEN)));
-            StringBuilder sb = new StringBuilder();
-            String line = "";
-            while((line = buffer.readLine()) !=null){
-                sb.append(" ").append(line);
-            }
-            String sql = sb.toString();
-            Query query = em.createQuery(sql, Account.class);
-            query.setParameter("token", tokenString);
-            query.setParameter("tokenType", Constants.TOKEN_TYPE_CONFIRM_REGISTRATION);
+            query.setParameter("tokenType", tokenType);
             return (Account) query.getSingleResult();
         } catch (NoResultException | IOException e) {
             return null;

@@ -47,8 +47,8 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Account findByResetPasswordToken(String token) {
-		Account account = accountRepository.findByResetPasswordToken(token);
+	public Account findByToken(String token, String tokenType) {
+		Account account = accountRepository.findByToken(token, tokenType);
 
 		return account;
 	}
@@ -65,12 +65,6 @@ public class AccountServiceImpl implements AccountService {
 			token.setTokenType(Constants.TOKEN_TYPE_CONFIRM_REGISTRATION);
 			tokenRepository.addToken(token);
 		}
-	}
-
-	@Override
-	public Account findByConfirmToken(String token) {
-		Account account = accountRepository.findByConfirmToken(token);
-		return account;
 	}
 
 	@Override
