@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.dao;
 
 import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -24,7 +25,7 @@ public class AccountRepository {
     public Account findAccountByEmail(String email) {
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("/static/sql/findAccountByEmail.sql")));
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_ACCOUNT_BY_EMAIL)));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while((line = buffer.readLine()) !=null){
@@ -53,7 +54,7 @@ public class AccountRepository {
      * @param account User's account
      */
     public void updateAccount(Account account) {
-        //this.em.merge(account);
+        this.em.merge(account);
         em.flush();
     }
 
@@ -65,7 +66,7 @@ public class AccountRepository {
     public Account findByResetPasswordToken(String tokenString) {
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("/static/sql/findAccountByResetPasswordToken.sql")));
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_ACCOUNT_BY_TOKEN)));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while((line = buffer.readLine()) !=null){
@@ -74,7 +75,7 @@ public class AccountRepository {
             String sql = sb.toString();
             Query query = em.createQuery(sql, Account.class);
             query.setParameter("token", tokenString);
-
+            query.setParameter("tokenType", Constants.TOKEN_TYPE_RESET_PASSWORD);
             return (Account) query.getSingleResult();
         } catch (NoResultException | IOException e) {
             return null;
@@ -88,7 +89,7 @@ public class AccountRepository {
     public Account findByConfirmToken(String tokenString) {
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("/static/sql/findAccountByConfirmToken.sql")));
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_ACCOUNT_BY_TOKEN)));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while((line = buffer.readLine()) !=null){
@@ -97,7 +98,7 @@ public class AccountRepository {
             String sql = sb.toString();
             Query query = em.createQuery(sql, Account.class);
             query.setParameter("token", tokenString);
-
+            query.setParameter("tokenType", Constants.TOKEN_TYPE_CONFIRM_REGISTRATION);
             return (Account) query.getSingleResult();
         } catch (NoResultException | IOException e) {
             return null;

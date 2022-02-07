@@ -10,4 +10,6 @@ public interface RoleService {
      * @return
      */
     List<Role> findAll();
+
+    Role findRoleByName(String name);
 }

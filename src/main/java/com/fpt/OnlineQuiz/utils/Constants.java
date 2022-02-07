@@ -8,25 +8,32 @@ public class Constants {
     public static final int STATUS_UNCONFIRMED = 0;
     public static final int GENDER_MALE = 0;
     public static final int GENDER_FEMALE = 1;
+    public static final String ROLE_USER = "ROLE_USER";
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_EXPERT = "ROLE_EXPERT";
+    public static final String ROLE_SALES = "ROLE_SALES";
 
-    //error messages
+    //messages
     public static final String MESSAGE_INVALID_TOKEN = "Invalid Token!";
+    public static final String MESSAGE_REGISTER_SUCCESS = "Register successful! Check email for confirmation link!";
+    public static final String MESSAGE_CONFIRM_SUCCESS = "Registration Confirm Success!";
 
     //token types
     public static final String TOKEN_TYPE_RESET_PASSWORD = "TOKEN_RESET_PASSWORD";
     public static final String TOKEN_TYPE_CONFIRM_REGISTRATION = "TOKEN_CONFIRM";
 
     //mail settings
-    public static final String MAIL_FROM = "daugiafpt@gmail.com";
-    public static final String MAIL_FROM_NAME = "daugiafpt";
+    public static final String MAIL_FROM = "banhl.off@gmail.com";
+    public static final String MAIL_FROM_NAME = "banhl.off";
+    public static final String MAIL_PASSWORD = "Alo123!@#";
     public static final String MAIL_SUBJECT_RESET_PASSWORD = "Here's the link to reset your password";
     public static final String MAIL_SUBJECT_CONFIRM_REGISTRATION = "Here's the link to confirm your registration";
 
     //links
     public static final String LINK_ACCOUNT_CONTROLLER = "/account";
     public static final String LINK_LOGIN = "/login";
-    public static final String LINK_LOGIN_PROCESS = "/account/login";
-    public static final String LINK_LOGIN_FAILURE = "/account/login?error=true";
+    public static final String LINK_LOGIN_PROCESS = "/login";
+    public static final String LINK_LOGIN_FAILURE = "/login?error=true";
     public static final String LINK_LOGOUT = "/logout";
     public static final String LINK_REGISTER = "/register";
     public static final String LINK_HOME = "/home";
@@ -34,7 +41,6 @@ public class Constants {
     public static final String LINK_FORGOT_PASSWORD = "/forgotPassword";
     public static final String LINK_RESET_PASSWORD = "/resetPassword";
     public static final String LINK_CONFIRM_REGISTRATION = "/confirmRegistration";
-
     //pages
     public static final String PAGE_LOGIN = "login_page";
     public static final String PAGE_REGISTER = "register_page";
@@ -59,6 +65,13 @@ public class Constants {
     public static final String PAGE_ADMIN_LOGIN = "admin_login_page";
     public static final String PAGE_ADMIN_FORGET_PASSWORD = "admin_forget_password";
 
+    //sql path
+    public static final String SQL_PATH_FIND_ACCOUNT_BY_TOKEN = "/static/sql/findAccountByToken.sql";
+    public static final String SQL_PATH_FIND_ACCOUNT_BY_EMAIL = "/static/sql/findAccountByEmail.sql";
+    public static final String SQL_PATH_FIND_ALL_ROLES = "/static/sql/findAllRoles.sql";
+    public static final String SQL_PATH_FIND_TOKEN_BY_TOKEN_STRING = "/static/sql/findTokenByTokenString.sql";
+    public static final String SQL_PATH_FIND_ROLE_BY_NAME = "/static/sql/findRoleByName.sql";
+    //mail templates
     public static String getResetPasswordMailTemplate(String link) {
         String content = "<p>Hello,</p>"
                 + "<p>You have requested to reset your password.</p>"

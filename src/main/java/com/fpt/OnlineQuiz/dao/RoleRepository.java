@@ -11,6 +11,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
 
 import com.fpt.OnlineQuiz.model.Role;
@@ -28,7 +30,7 @@ public class RoleRepository {
 	public List<Role> findAll() {
 		try {
 			BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-					this.getClass().getResourceAsStream("/static/sql/findAllRoles.sql")));
+					this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_ALL_ROLES)));
 			StringBuilder sb = new StringBuilder();
 			String line = "";
 			while((line = buffer.readLine()) !=null){
@@ -38,6 +40,24 @@ public class RoleRepository {
 			Query query = em.createQuery(sql, Role.class);
 
 			return (List<Role>) query.getResultList();
+		} catch (NoResultException | IOException e) {
+			return null;
+		}
+	}
+	public Role findRoleByName(String name) {
+		try {
+			BufferedReader buffer  = new BufferedReader(new InputStreamReader(
+					this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_ROLE_BY_NAME)));
+			StringBuilder sb = new StringBuilder();
+			String line = "";
+			while((line = buffer.readLine()) !=null){
+				sb.append(" ").append(line);
+			}
+			String sql = sb.toString();
+			Query query = em.createQuery(sql, Role.class);
+			query.setParameter("name", name);
+
+			return (Role) query.getSingleResult();
 		} catch (NoResultException | IOException e) {
 			return null;
 		}
