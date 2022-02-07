@@ -7,23 +7,23 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico">
 
         <!-- CSS here -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="assets/css/slicknav.css">
-        <link rel="stylesheet" href="assets/css/flaticon.css">
-        <link rel="stylesheet" href="assets/css/progressbar_barfiller.css">
-        <link rel="stylesheet" href="assets/css/gijgo.css">
-        <link rel="stylesheet" href="assets/css/animate.min.css">
-        <link rel="stylesheet" href="assets/css/animated-headline.css">
-        <link rel="stylesheet" href="assets/css/magnific-popup.css">
-        <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="assets/css/themify-icons.css">
-        <link rel="stylesheet" href="assets/css/slick.css">
-        <link rel="stylesheet" href="assets/css/nice-select.css">
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="../assets/css/slicknav.css">
+        <link rel="stylesheet" href="../assets/css/flaticon.css">
+        <link rel="stylesheet" href="../assets/css/progressbar_barfiller.css">
+        <link rel="stylesheet" href="../assets/css/gijgo.css">
+        <link rel="stylesheet" href="../assets/css/animate.min.css">
+        <link rel="stylesheet" href="../assets/css/animated-headline.css">
+        <link rel="stylesheet" href="../assets/css/magnific-popup.css">
+        <link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="../assets/css/themify-icons.css">
+        <link rel="stylesheet" href="../assets/css/slick.css">
+        <link rel="stylesheet" href="../assets/css/nice-select.css">
+        <link rel="stylesheet" href="../assets/css/style.css">
 
     </head>
 
@@ -34,14 +34,14 @@
                 <div class="preloader-inner position-relative">
                     <div class="preloader-circle"></div>
                     <div class="preloader-img pere-text">
-                        <img src="assets/img/logo/loder.png" alt="">
+                        <img src="../assets/img/logo/loder.png" alt="">
                     </div>
                 </div>
             </div>
         </div>
         <!-- Preloader Start -->
         <!-- Header Start -->
-        <jsp:include page="header.html"></jsp:include>
+        <jsp:include page="../header.html"></jsp:include>
 
             <!-- Header End -->
 
@@ -72,7 +72,7 @@
                             <div class="col-lg-4 col-md-6 col-sm-8">
                                 <div class="single-services mb-30">
                                     <div class="features-icon">
-                                        <img src="assets/img/icon/icon1.svg" alt="">
+                                        <img src="../assets/img/icon/icon1.svg" alt="">
                                     </div>
                                     <div class="features-caption">
                                         <h3>60+ UX courses</h3>
@@ -83,7 +83,7 @@
                             <div class="col-lg-4 col-md-6 col-sm-8">
                                 <div class="single-services mb-30">
                                     <div class="features-icon">
-                                        <img src="assets/img/icon/icon2.svg" alt="">
+                                        <img src="../assets/img/icon/icon2.svg" alt="">
                                     </div>
                                     <div class="features-caption">
                                         <h3>Expert instructors</h3>
@@ -94,7 +94,7 @@
                             <div class="col-lg-4 col-md-6 col-sm-8">
                                 <div class="single-services mb-30">
                                     <div class="features-icon">
-                                        <img src="assets/img/icon/icon3.svg" alt="">
+                                        <img src="../assets/img/icon/icon3.svg" alt="">
                                     </div>
                                     <div class="features-caption">
                                         <h3>Life time access</h3>
@@ -120,7 +120,7 @@
                             <div class="properties pb-20">
                                 <div class="properties__card">
                                     <div class="properties__img overlay1">
-                                        <a href="#"><img src="assets/img/gallery/featured1.png" alt=""></a>
+                                        <a href="#"><img src="../assets/img/gallery/featured1.png" alt=""></a>
                                     </div>
                                     <div class="properties__caption">
                                         <p>User Experience</p>
@@ -153,7 +153,7 @@
                             <div class="properties pb-20">
                                 <div class="properties__card">
                                     <div class="properties__img overlay1">
-                                        <a href="#"><img src="assets/img/gallery/featured2.png" alt=""></a>
+                                        <a href="#"><img src="../assets/img/gallery/featured2.png" alt=""></a>
                                     </div>
                                     <div class="properties__caption">
                                         <p>User Experience</p>
@@ -184,7 +184,7 @@
                             <div class="properties pb-20">
                                 <div class="properties__card">
                                     <div class="properties__img overlay1">
-                                        <a href="#"><img src="assets/img/gallery/featured3.png" alt=""></a>
+                                        <a href="#"><img src="../assets/img/gallery/featured3.png" alt=""></a>
                                     </div>
                                     <div class="properties__caption">
                                         <p>User Experience</p>
@@ -217,7 +217,7 @@
                             <div class="properties pb-20">
                                 <div class="properties__card">
                                     <div class="properties__img overlay1">
-                                        <a href="#"><img src="assets/img/gallery/featured2.png" alt=""></a>
+                                        <a href="#"><img src="../assets/img/gallery/featured2.png" alt=""></a>
                                     </div>
                                     <div class="properties__caption">
                                         <p>User Experience</p>
@@ -255,7 +255,7 @@
                     <div class="support-wrapper align-items-center">
                         <div class="left-content1">
                             <div class="about-icon">
-                                <img src="assets/img/icon/about.svg" alt="">
+                                <img src="../assets/img/icon/about.svg" alt="">
                             </div>
                             <!-- section tittle -->
                             <div class="section-tittle section-tittle2 mb-55">
@@ -268,7 +268,7 @@
                             </div>
                             <div class="single-features">
                                 <div class="features-icon">
-                                    <img src="assets/img/icon/right-icon.svg" alt="">
+                                    <img src="../assets/img/icon/right-icon.svg" alt="">
                                 </div>
                                 <div class="features-caption">
                                     <p>Techniques to engage effectively with vulnerable children and young people.</p>
@@ -276,7 +276,7 @@
                             </div>
                             <div class="single-features">
                                 <div class="features-icon">
-                                    <img src="assets/img/icon/right-icon.svg" alt="">
+                                    <img src="../assets/img/icon/right-icon.svg" alt="">
                                 </div>
                                 <div class="features-caption">
                                     <p>Join millions of people from around the world  learning together.</p>
@@ -285,7 +285,7 @@
 
                             <div class="single-features">
                                 <div class="features-icon">
-                                    <img src="assets/img/icon/right-icon.svg" alt="">
+                                    <img src="../assets/img/icon/right-icon.svg" alt="">
                                 </div>
                                 <div class="features-caption">
                                     <p>Join millions of people from around the world learning together. Online learning is as easy and natural.</p>
@@ -319,7 +319,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="single-topic text-center mb-30">
                                     <div class="topic-img">
-                                        <img src="assets/img/gallery/topic1.png" alt="">
+                                        <img src="../assets/img/gallery/topic1.png" alt="">
                                         <div class="topic-content-box">
                                             <div class="topic-content">
                                                 <h3><a href="#">Programing</a></h3>
@@ -331,7 +331,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="single-topic text-center mb-30">
                                     <div class="topic-img">
-                                        <img src="assets/img/gallery/topic2.png" alt="">
+                                        <img src="../assets/img/gallery/topic2.png" alt="">
                                         <div class="topic-content-box">
                                             <div class="topic-content">
                                                 <h3><a href="#">Programing</a></h3>
@@ -343,7 +343,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="single-topic text-center mb-30">
                                     <div class="topic-img">
-                                        <img src="assets/img/gallery/topic3.png" alt="">
+                                        <img src="../assets/img/gallery/topic3.png" alt="">
                                         <div class="topic-content-box">
                                             <div class="topic-content">
                                                 <h3><a href="#">Programing</a></h3>
@@ -355,7 +355,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="single-topic text-center mb-30">
                                     <div class="topic-img">
-                                        <img src="assets/img/gallery/topic4.png" alt="">
+                                        <img src="../assets/img/gallery/topic4.png" alt="">
                                         <div class="topic-content-box">
                                             <div class="topic-content">
                                                 <h3><a href="#">Programing</a></h3>
@@ -367,7 +367,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="single-topic text-center mb-30">
                                     <div class="topic-img">
-                                        <img src="assets/img/gallery/topic5.png" alt="">
+                                        <img src="../assets/img/gallery/topic5.png" alt="">
                                         <div class="topic-content-box">
                                             <div class="topic-content">
                                                 <h3><a href="#">Programing</a></h3>
@@ -379,7 +379,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="single-topic text-center mb-30">
                                     <div class="topic-img">
-                                        <img src="assets/img/gallery/topic6.png" alt="">
+                                        <img src="../assets/img/gallery/topic6.png" alt="">
                                         <div class="topic-content-box">
                                             <div class="topic-content">
                                                 <h3><a href="#">Programing</a></h3>
@@ -391,7 +391,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="single-topic text-center mb-30">
                                     <div class="topic-img">
-                                        <img src="assets/img/gallery/topic7.png" alt="">
+                                        <img src="../assets/img/gallery/topic7.png" alt="">
                                         <div class="topic-content-box">
                                             <div class="topic-content">
                                                 <h3><a href="#">Programing</a></h3>
@@ -403,7 +403,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="single-topic text-center mb-30">
                                     <div class="topic-img">
-                                        <img src="assets/img/gallery/topic8.png" alt="">
+                                        <img src="../assets/img/gallery/topic8.png" alt="">
                                         <div class="topic-content-box">
                                             <div class="topic-content">
                                                 <h3><a href="#">Programing</a></h3>
@@ -416,7 +416,7 @@
                         <div class="row justify-content-center">
                             <div class="col-xl-12">
                                 <div class="section-tittle text-center mt-20">
-                                    <a href="courses.html" class="border-btn">View More Subjects</a>
+                                    <a href="../courses.html" class="border-btn">View More Subjects</a>
                                 </div>
                             </div>
                         </div>
@@ -429,7 +429,7 @@
                         <div class="right-content3">
                             <!-- img -->
                             <div class="right-img">
-                                <img src="assets/img/gallery/about3.png" alt="">
+                                <img src="../assets/img/gallery/about3.png" alt="">
                             </div>
                         </div>
                         <div class="left-content3">
@@ -441,7 +441,7 @@
                             </div>
                             <div class="single-features">
                                 <div class="features-icon">
-                                    <img src="assets/img/icon/right-icon.svg" alt="">
+                                    <img src="../assets/img/icon/right-icon.svg" alt="">
                                 </div>
                                 <div class="features-caption">
                                     <p>Techniques to engage effectively with vulnerable children and young people.</p>
@@ -449,7 +449,7 @@
                             </div>
                             <div class="single-features">
                                 <div class="features-icon">
-                                    <img src="assets/img/icon/right-icon.svg" alt="">
+                                    <img src="../assets/img/icon/right-icon.svg" alt="">
                                 </div>
                                 <div class="features-caption">
                                     <p>Join millions of people from around the world
@@ -458,7 +458,7 @@
                             </div>
                             <div class="single-features">
                                 <div class="features-icon">
-                                    <img src="assets/img/icon/right-icon.svg" alt="">
+                                    <img src="../assets/img/icon/right-icon.svg" alt="">
                                 </div>
                                 <div class="features-caption">
                                     <p>Join millions of people from around the world learning together.
@@ -482,7 +482,7 @@
                         <div class="team-active">
                             <div class="single-cat text-center">
                                 <div class="cat-icon">
-                                    <img src="assets/img/gallery/team1.png" alt="">
+                                    <img src="../assets/img/gallery/team1.png" alt="">
                                 </div>
                                 <div class="cat-cap">
                                     <h5><a href="services.html">Mr. Urela</a></h5>
@@ -491,7 +491,7 @@
                             </div>
                             <div class="single-cat text-center">
                                 <div class="cat-icon">
-                                    <img src="assets/img/gallery/team2.png" alt="">
+                                    <img src="../assets/img/gallery/team2.png" alt="">
                                 </div>
                                 <div class="cat-cap">
                                     <h5><a href="services.html">Mr. Uttom</a></h5>
@@ -500,7 +500,7 @@
                             </div>
                             <div class="single-cat text-center">
                                 <div class="cat-icon">
-                                    <img src="assets/img/gallery/team3.png" alt="">
+                                    <img src="../assets/img/gallery/team3.png" alt="">
                                 </div>
                                 <div class="cat-cap">
                                     <h5><a href="services.html">Mr. Shakil</a></h5>
@@ -509,7 +509,7 @@
                             </div>
                             <div class="single-cat text-center">
                                 <div class="cat-icon">
-                                    <img src="assets/img/gallery/team4.png" alt="">
+                                    <img src="../assets/img/gallery/team4.png" alt="">
                                 </div>
                                 <div class="cat-cap">
                                     <h5><a href="services.html">Mr. Arafat</a></h5>
@@ -518,7 +518,7 @@
                             </div>
                             <div class="single-cat text-center">
                                 <div class="cat-icon">
-                                    <img src="assets/img/gallery/team3.png" alt="">
+                                    <img src="../assets/img/gallery/team3.png" alt="">
                                 </div>
                                 <div class="cat-cap">
                                     <h5><a href="services.html">Mr. saiful</a></h5>
@@ -535,7 +535,7 @@
                         <div class="right-content2">
                             <!-- img -->
                             <div class="right-img">
-                                <img src="assets/img/gallery/about2.png" alt="">
+                                <img src="../assets/img/gallery/about2.png" alt="">
                             </div>
                         </div>
                         <div class="left-content2">
@@ -566,46 +566,46 @@
         </div>
 
         <!-- JS here -->
-        <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="../assets/js/vendor/modernizr-3.5.0.min.js"></script>
         <!-- Jquery, Popper, Bootstrap -->
-        <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="./assets/js/popper.min.js"></script>
-        <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="../assets/js/popper.min.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
         <!-- Jquery Mobile Menu -->
-        <script src="./assets/js/jquery.slicknav.min.js"></script>
+        <script src="../assets/js/jquery.slicknav.min.js"></script>
 
         <!-- Jquery Slick , Owl-Carousel Plugins -->
-        <script src="./assets/js/owl.carousel.min.js"></script>
-        <script src="./assets/js/slick.min.js"></script>
+        <script src="../assets/js/owl.carousel.min.js"></script>
+        <script src="../assets/js/slick.min.js"></script>
         <!-- One Page, Animated-HeadLin -->
-        <script src="./assets/js/wow.min.js"></script>
-        <script src="./assets/js/animated.headline.js"></script>
-        <script src="./assets/js/jquery.magnific-popup.js"></script>
+        <script src="../assets/js/wow.min.js"></script>
+        <script src="../assets/js/animated.headline.js"></script>
+        <script src="../assets/js/jquery.magnific-popup.js"></script>
 
         <!-- Date Picker -->
-        <script src="./assets/js/gijgo.min.js"></script>
+        <script src="../assets/js/gijgo.min.js"></script>
         <!-- Nice-select, sticky -->
-        <script src="./assets/js/jquery.nice-select.min.js"></script>
-        <script src="./assets/js/jquery.sticky.js"></script>
+        <script src="../assets/js/jquery.nice-select.min.js"></script>
+        <script src="../assets/js/jquery.sticky.js"></script>
         <!-- Progress -->
-        <script src="./assets/js/jquery.barfiller.js"></script>
+        <script src="../assets/js/jquery.barfiller.js"></script>
 
         <!-- counter , waypoint,Hover Direction -->
-        <script src="./assets/js/jquery.counterup.min.js"></script>
-        <script src="./assets/js/waypoints.min.js"></script>
-        <script src="./assets/js/jquery.countdown.min.js"></script>
-        <script src="./assets/js/hover-direction-snake.min.js"></script>
+        <script src="../assets/js/jquery.counterup.min.js"></script>
+        <script src="../assets/js/waypoints.min.js"></script>
+        <script src="../assets/js/jquery.countdown.min.js"></script>
+        <script src="../assets/js/hover-direction-snake.min.js"></script>
 
         <!-- contact js -->
-        <script src="./assets/js/contact.js"></script>
-        <script src="./assets/js/jquery.form.js"></script>
-        <script src="./assets/js/jquery.validate.min.js"></script>
-        <script src="./assets/js/mail-script.js"></script>
-        <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+        <script src="../assets/js/contact.js"></script>
+        <script src="../assets/js/jquery.form.js"></script>
+        <script src="../assets/js/jquery.validate.min.js"></script>
+        <script src="../assets/js/mail-script.js"></script>
+        <script src="../assets/js/jquery.ajaxchimp.min.js"></script>
 
         <!-- Jquery Plugins, main Jquery -->	
-        <script src="./assets/js/plugins.js"></script>
-        <script src="./assets/js/main.js"></script>
+        <script src="../assets/js/plugins.js"></script>
+        <script src="../assets/js/main.js"></script>
 
     </body>
 </html>
