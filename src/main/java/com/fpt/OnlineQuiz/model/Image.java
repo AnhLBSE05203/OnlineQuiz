@@ -7,21 +7,23 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Blog")
-public class Blog {
+@Table(name = "Image")
+public class Image {
     @Id
-    @Column(name = "blogId")
+    @Column(name = "imageId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "title")
-    private String title;
-    @Column(name = "content")
-    private String content;
+
+    @Column(name = "src")
+    private String src;
+
     @Column(name = "status")
     private int status;
 
@@ -33,10 +35,10 @@ public class Blog {
 
     @Column(name = "createdUserId")
     private int createdUserId;
-    @Column(name = "updatedUserId")
-    private int updatedUserId;
 
-    @ManyToOne
-    @JoinColumn(name = "imageId")
-    private Image thumbnail;
+    @OneToMany(mappedBy = "profileImage")
+    List<Account> accounts;
+
+    @OneToMany(mappedBy = "thumbnail")
+    List<Blog> blogs;
 }

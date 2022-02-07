@@ -88,10 +88,13 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void updatePassword(Account account, String newPassword, Token token) {
+	public void resetPassword(Account account, String newPassword, Token token) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword = encoder.encode(newPassword);
 		account.setPassword(encodedPassword);
+		Date now = new Date();
+		account.setUpdatedTime(now);
+		account.setUpdatedUserId(1);
 		accountRepository.updateAccount(account);
 		tokenRepository.deleteToken(token);
 	}
