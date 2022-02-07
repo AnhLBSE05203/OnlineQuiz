@@ -49,7 +49,18 @@ public class Account implements UserDetails {
     private List<Role> roles;
 
     @OneToMany(mappedBy = "account")
+    private List<PurchaseHistory> purchaseHistories;
+    @ManyToOne
+    @JoinColumn(name = "imageId")
+    private Image profileImage;
+    @ManyToMany(mappedBy = "accounts")
+    private List<Package> packages;
+    @OneToMany(mappedBy = "account")
     private List<Token> tokens;
+    @OneToMany(mappedBy = "account")
+    private List<Review> reviews;
+    @OneToMany(mappedBy = "account")
+    private List<QuizHistory> quizHistories;
 
     @Column(name = "status")
     private int status;
@@ -62,6 +73,8 @@ public class Account implements UserDetails {
 
     @Column(name = "createdUserId")
     private int createdUserId;
+    @Column(name = "updatedUserId")
+    private int updatedUserId;
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();

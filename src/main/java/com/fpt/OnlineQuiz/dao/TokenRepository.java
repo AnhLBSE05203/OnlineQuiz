@@ -2,6 +2,7 @@ package com.fpt.OnlineQuiz.dao;
 
 import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Token;
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -44,7 +45,7 @@ public class TokenRepository {
     public Token findByTokenString(String tokenString) {
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("/static/sql/findTokenByTokenString.sql")));
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_TOKEN_BY_TOKEN_STRING)));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while((line = buffer.readLine()) !=null){
