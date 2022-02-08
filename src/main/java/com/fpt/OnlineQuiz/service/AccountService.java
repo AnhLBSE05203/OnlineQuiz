@@ -19,7 +19,7 @@ public interface AccountService extends UserDetailsService {
      * @param token reset password token
      * @return
      */
-    Account findByResetPasswordToken(String token);
+    Account findByToken(String token, String tokenType);
 
     /**
      * Update Confirm Token to Account in DB
@@ -27,13 +27,6 @@ public interface AccountService extends UserDetailsService {
      * @param email user's email
      */
     void updateConfirmToken(String token, String email);
-
-    /**
-     * Find Account By Confirm Token sent via Email
-     * @param token
-     * @return
-     */
-    Account findByConfirmToken(String token);
 
     /**
      * Update Reset Password Token to Account in DB

@@ -12,7 +12,9 @@ public class Constants {
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     public static final String ROLE_EXPERT = "ROLE_EXPERT";
     public static final String ROLE_SALES = "ROLE_SALES";
-
+    //record common constants
+    public static final int STATUS_DELETED = 2;
+    public static final int STATUS_DEFAULT = 1;
     //messages
     public static final String MESSAGE_INVALID_TOKEN = "Invalid Token!";
     public static final String MESSAGE_REGISTER_SUCCESS = "Register successful! Check email for confirmation link!";

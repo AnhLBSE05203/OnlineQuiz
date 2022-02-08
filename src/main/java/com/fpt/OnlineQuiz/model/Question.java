@@ -20,13 +20,12 @@ public class Question {
     private int id;
     @Column(name = "question")
     private String question;
-    @Column(name = "answer")
-    private String answer;
-    @Column(name = "explanation")
-    private String explanation;
+
     @ManyToOne
     @JoinColumn(name = "subjectId")
     private Subject subject;
     @OneToMany(mappedBy = "question")
     private List<QuizHistoryQuestion> quizHistoryQuestions;
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answers;
 }
