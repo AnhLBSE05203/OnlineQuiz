@@ -27,7 +27,7 @@ public interface AccountService extends UserDetailsService {
      * @param email user's email
      * @param tokenType token type
      */
-    void updateToken(String token, String email, String tokenType);
+    void addToken(String token, String email, String tokenType);
 
     /**
      * Update Account Password

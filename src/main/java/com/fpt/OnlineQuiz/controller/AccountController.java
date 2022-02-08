@@ -80,7 +80,7 @@ public class AccountController {
         try {
             String resetPasswordLink = Utils.getSiteURL(request) + "/account/resetPassword?token=" + tokenString;
             mailService.sendResetPasswordEmail(email, resetPasswordLink);
-            accountService.updateToken(tokenString, email, Constants.TOKEN_TYPE_RESET_PASSWORD);
+            accountService.addToken(tokenString, email, Constants.TOKEN_TYPE_RESET_PASSWORD);
         } catch (UnsupportedEncodingException | MessagingException e) {
             model.addAttribute("message", "Error while sending email");
             //if fail to send mail, delete generated token
@@ -169,7 +169,7 @@ public class AccountController {
         //add account
         accountService.addAccount(account);
         //add token
-        accountService.updateToken(tokenString, account.getEmail(), Constants.TOKEN_TYPE_CONFIRM_REGISTRATION);
+        accountService.addToken(tokenString, account.getEmail(), Constants.TOKEN_TYPE_CONFIRM_REGISTRATION);
         try {
             //send confirmation email
             String confirmLink = Utils.getSiteURL(request) + "/account/confirmRegistration?token=" + tokenString;

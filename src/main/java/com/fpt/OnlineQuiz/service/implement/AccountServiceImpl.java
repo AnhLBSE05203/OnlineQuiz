@@ -54,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void updateToken(String tokenString, String email, String tokenType) {
+	public void addToken(String tokenString, String email, String tokenType) {
 		Account account = accountRepository.findAccountByEmail(email);
 		if (account != null) {
 			Token token = new Token();
