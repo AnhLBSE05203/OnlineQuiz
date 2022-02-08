@@ -29,4 +29,8 @@ public class Subject {
 
     @OneToMany(mappedBy = "subject")
     private List<Review> reviews;
+
+    @ManyToOne
+    @JoinColumn(name = "imageId")
+    private Image image;
 }
