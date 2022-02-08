@@ -123,6 +123,11 @@ public class AccountController {
         return Constants.PAGE_REGISTER;
     }
 
+    @GetMapping(Constants.LINK_CHANGE_PASSWORD)
+    public String showChangePasswordPage(Model model){
+        //to do - create register page
+        return Constants.PAGE_CHANGE_PASSWORD;
+    }
     /**
      * Process Registration Submission
      * @param registerDTO register DTO
