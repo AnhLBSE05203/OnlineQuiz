@@ -216,6 +216,7 @@ public class AccountController {
         int tokenDuration = Integer.parseInt(StrTokenDuration);
         if (seconds > tokenDuration) {
             model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
+            tokenService.deleteToken(token);
             return Constants.PAGE_REGISTER;
         }
         account.setStatus(Constants.STATUS_CONFIRMED);
@@ -258,6 +259,7 @@ public class AccountController {
         int tokenDuration = Integer.parseInt(StrTokenDuration);
         if (seconds > tokenDuration) {
             model.addAttribute("message", "Invalid Token");
+            tokenService.deleteToken(token);
             return Constants.PAGE_RESET_PASSWORD;
         }
         accountService.resetPassword(account, password, token);
