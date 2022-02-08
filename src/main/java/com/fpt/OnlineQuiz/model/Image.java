@@ -41,4 +41,8 @@ public class Image {
 
     @OneToMany(mappedBy = "thumbnail")
     List<Blog> blogs;
+
+    @OneToMany(mappedBy = "image")
+    List<Subject> subjects;
+
 }

@@ -22,18 +22,13 @@ public interface AccountService extends UserDetailsService {
     Account findByToken(String token, String tokenType);
 
     /**
-     * Update Confirm Token to Account in DB
+     * Update Token to Account in DB
      * @param token confirm token
      * @param email user's email
+     * @param tokenType token type
      */
-    void updateConfirmToken(String token, String email);
+    void addToken(String token, String email, String tokenType);
 
-    /**
-     * Update Reset Password Token to Account in DB
-     * @param token reset password token
-     * @param email user's email
-     */
-    void updateResetPasswordToken(String token, String email);
     /**
      * Update Account Password
      * @param account User's Account

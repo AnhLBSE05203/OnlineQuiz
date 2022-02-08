@@ -80,7 +80,7 @@ public class AccountController {
         try {
             String resetPasswordLink = Utils.getSiteURL(request) + "/account/resetPassword?token=" + tokenString;
             mailService.sendResetPasswordEmail(email, resetPasswordLink);
-            accountService.updateResetPasswordToken(tokenString, email);
+            accountService.addToken(tokenString, email, Constants.TOKEN_TYPE_RESET_PASSWORD);
         } catch (UnsupportedEncodingException | MessagingException e) {
             model.addAttribute("message", "Error while sending email");
             //if fail to send mail, delete generated token
@@ -94,19 +94,20 @@ public class AccountController {
 
     /**
      * Display Reset Password Page
-     * @param token user's reset password token
+     * @param tokenString user's reset password token
      * @param model spring's model class
      * @return Reset Password Page html
      */
     @GetMapping(Constants.LINK_RESET_PASSWORD)
-    public String showResetPasswordPage(@Param(value = "token") String token, Model model) {
-        Account account = accountService.findByToken(token, Constants.TOKEN_TYPE_RESET_PASSWORD);
-        model.addAttribute("token", token);
+    public String showResetPasswordPage(@Param(value = "token") String tokenString, Model model) {
+        Account account = accountService.findByToken(tokenString, Constants.TOKEN_TYPE_RESET_PASSWORD);
+        model.addAttribute("token", tokenString);
 
         if (account == null) {
             model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
             return Constants.PAGE_FORGOT_PASSWORD;
         }
+
         return Constants.PAGE_RESET_PASSWORD;
     }
 
@@ -168,7 +169,7 @@ public class AccountController {
         //add account
         accountService.addAccount(account);
         //add token
-        accountService.updateConfirmToken(tokenString, account.getEmail());
+        accountService.addToken(tokenString, account.getEmail(), Constants.TOKEN_TYPE_CONFIRM_REGISTRATION);
         try {
             //send confirmation email
             String confirmLink = Utils.getSiteURL(request) + "/account/confirmRegistration?token=" + tokenString;

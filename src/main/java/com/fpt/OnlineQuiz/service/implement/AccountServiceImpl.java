@@ -54,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void updateConfirmToken(String tokenString, String email) {
+	public void addToken(String tokenString, String email, String tokenType) {
 		Account account = accountRepository.findAccountByEmail(email);
 		if (account != null) {
 			Token token = new Token();
@@ -62,21 +62,7 @@ public class AccountServiceImpl implements AccountService {
 			token.setAccount(account);
 			Date date = new Date();
 			token.setCreatedDate(date);
-			token.setTokenType(Constants.TOKEN_TYPE_CONFIRM_REGISTRATION);
-			tokenRepository.addToken(token);
-		}
-	}
-
-	@Override
-	public void updateResetPasswordToken(String tokenString, String email) {
-		Account account = accountRepository.findAccountByEmail(email);
-		if (account != null) {
-			Token token = new Token();
-			token.setTokenString(tokenString);
-			token.setAccount(account);
-			Date date = new Date();
-			token.setCreatedDate(date);
-			token.setTokenType(Constants.TOKEN_TYPE_RESET_PASSWORD);
+			token.setTokenType(tokenType);
 			tokenRepository.addToken(token);
 		}
 	}
