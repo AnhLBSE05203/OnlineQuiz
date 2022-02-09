@@ -129,6 +129,17 @@ public class AccountController {
         //to do - create register page
         return Constants.PAGE_CHANGE_PASSWORD;
     }
+
+    @GetMapping(Constants.LINK_PROFILE)
+    public String showProfile(Model model){
+        //to do - create register page
+        return Constants.PAGE_PROFILE;
+    }
+    @GetMapping(Constants.LINK_EDIT_PROFILE)
+    public String editProfile(Model model){
+        //to do - create register page
+        return Constants.PAGE_EDIT_PROFILE;
+    }
     /**
      * Process Registration Submission
      * @param registerDTO register DTO
