@@ -22,5 +22,5 @@ public class PurchaseHistory {
     private Account account;
     @ManyToOne
     @JoinColumn(name = "packageId")
-    private Package subjectPackage;
+    private Course course;
 }

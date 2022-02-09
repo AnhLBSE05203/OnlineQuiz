@@ -22,7 +22,7 @@ public class Subject {
     private String name;
 
     @OneToMany(mappedBy = "subject")
-    private List<Package> packages;
+    private List<Course> courses;
 
     @OneToMany(mappedBy = "subject")
     private List<Question> questions;
@@ -30,7 +30,7 @@ public class Subject {
     @OneToMany(mappedBy = "subject")
     private List<Review> reviews;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "imageId")
     private Image image;
 }

@@ -75,6 +75,11 @@ public class Constants {
     public static final String SQL_PATH_FIND_ALL_ROLES = "/static/sql/findAllRoles.sql";
     public static final String SQL_PATH_FIND_TOKEN_BY_TOKEN_STRING = "/static/sql/findTokenByTokenString.sql";
     public static final String SQL_PATH_FIND_ROLE_BY_NAME = "/static/sql/findRoleByName.sql";
+    public static final String SQL_PATH_GET_TOP_PACKAGES = "/static/sql/getTopCourses.sql";
+
+    //home page constants
+    public static final int HOME_PAGE_COURSE_NUMBER = 4;
+    public static final String HOME_PAGE_ATTRIBUTE_COURSE_FEATURED = "courseFeatured";
     //mail templates
     public static String getResetPasswordMailTemplate(String link) {
         String content = "<p>Hello,</p>"

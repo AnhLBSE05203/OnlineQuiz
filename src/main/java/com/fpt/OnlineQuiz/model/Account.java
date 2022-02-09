@@ -54,7 +54,7 @@ public class Account implements UserDetails {
     @JoinColumn(name = "imageId")
     private Image profileImage;
     @ManyToMany(mappedBy = "accounts")
-    private List<Package> packages;
+    private List<Course> courses;
     @OneToMany(mappedBy = "account")
     private List<Token> tokens;
     @OneToMany(mappedBy = "account")
