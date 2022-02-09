@@ -33,4 +33,7 @@ public class Subject {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "imageId")
     private Image image;
+
+    @OneToMany(mappedBy = "subject")
+    private List<Lesson> lessons;
 }

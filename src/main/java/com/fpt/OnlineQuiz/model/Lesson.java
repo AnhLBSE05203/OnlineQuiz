@@ -23,4 +23,8 @@ public class Lesson {
     @JoinColumn(name = "typeId")
     private LessonType lessonType;
 
+    @ManyToOne
+    @JoinColumn(name = "subjectId")
+    private Subject subject;
+
 }
