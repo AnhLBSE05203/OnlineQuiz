@@ -12,14 +12,16 @@ public class Constants {
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     public static final String ROLE_EXPERT = "ROLE_EXPERT";
     public static final String ROLE_SALES = "ROLE_SALES";
-    //record common constants
-    public static final int STATUS_DELETED = 2;
+    //db record common constants
+    public static final int STATUS_DELETED = 0;
     public static final int STATUS_DEFAULT = 1;
     //messages
     public static final String MESSAGE_INVALID_TOKEN = "Invalid Token!";
     public static final String MESSAGE_REGISTER_SUCCESS = "Register successful! Check email for confirmation link!";
     public static final String MESSAGE_CONFIRM_SUCCESS = "Registration Confirm Success!";
-
+    public static final String MESSAGE_ERROR_SEND_EMAIL = "Error while sending email";
+    public static final String MESSAGE_CHANGE_PASSWORD_SUCCESS = "You have successfully changed your password.";
+    public static final String MESSAGE_ACCOUNT_NOT_FOUND = "Account not found!";
     //token types
     public static final String TOKEN_TYPE_RESET_PASSWORD = "TOKEN_RESET_PASSWORD";
     public static final String TOKEN_TYPE_CONFIRM_REGISTRATION = "TOKEN_CONFIRM";
@@ -32,6 +34,7 @@ public class Constants {
     public static final String MAIL_SUBJECT_CONFIRM_REGISTRATION = "Here's the link to confirm your registration";
 
     //links
+    public static final String LINK_REDIRECT = "redirect:";
     public static final String LINK_ACCOUNT_CONTROLLER = "/account";
     public static final String LINK_LOGIN = "/login";
     public static final String LINK_LOGIN_PROCESS = "/login";
@@ -54,6 +57,9 @@ public class Constants {
     public static final String PAGE_CHANGE_PASSWORD = "change_password";
     public static final String PAGE_ERROR = "error";
 
+    //model attributes
+    public static final String ATTRIBUTE_MESSAGE = "message";
+    //token constants
     public static final int TOKEN_LENGTH = 30;
 
 
