@@ -80,6 +80,7 @@ public class Constants {
     public static final String SQL_PATH_FIND_ALL_ROLES = "/static/sql/findAllRoles.sql";
     public static final String SQL_PATH_FIND_TOKEN_BY_TOKEN_STRING = "/static/sql/findTokenByTokenString.sql";
     public static final String SQL_PATH_FIND_ROLE_BY_NAME = "/static/sql/findRoleByName.sql";
+    public static final String SQL_PATH_GET_ALL_BLOG_LIST = "/static/sql/findAllBlog.sql";
     public static final String SQL_PATH_GET_TOP_COURSES = "/static/sql/getTopCourses.sql";
     public static final String SQL_PATH_GET_FEATURED_EXPERTS = "/static/sql/getFeaturedExperts.sql";
     //home page constants
