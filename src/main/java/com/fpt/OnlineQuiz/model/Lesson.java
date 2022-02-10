@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Table(name = "Lesson")
 public class Lesson {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lessonId")
     private int id;
     @Column(name = "name")
