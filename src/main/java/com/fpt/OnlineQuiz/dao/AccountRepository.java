@@ -47,7 +47,7 @@ public class AccountRepository {
      */
     public void addAccount(Account account) {
         this.em.persist(account);
-    }
+    }//thêm vào entitymanagement và cũng thêm vào database luôn
 
     /**
      * Update account to DB
@@ -55,7 +55,7 @@ public class AccountRepository {
      */
     public void updateAccount(Account account) {
         this.em.merge(account);
-        em.flush();
+        em.flush();//Thực hiện ngay ko cần tích trữ câu lệnh
     }
 
     /**

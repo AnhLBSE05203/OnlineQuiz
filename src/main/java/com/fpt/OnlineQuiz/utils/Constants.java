@@ -2,7 +2,6 @@ package com.fpt.OnlineQuiz.utils;
 
 public class Constants {
     public static final String STRING_EMPTY = "";
-
     //account constants
     public static final int STATUS_CONFIRMED = 1;
     public static final int STATUS_UNCONFIRMED = 0;
