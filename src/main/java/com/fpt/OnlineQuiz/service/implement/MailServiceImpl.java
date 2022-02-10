@@ -4,6 +4,7 @@ import com.fpt.OnlineQuiz.service.MailService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.apache.commons.io.IOUtils;
 import org.hibernate.service.spi.ServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -18,15 +19,10 @@ import java.util.Properties;
 
 @Service
 public class MailServiceImpl implements MailService {
-
-    private final JavaMailSender mailSender;
-
-    private final JavaMailSender javaMailSender;
-
-    public MailServiceImpl(JavaMailSender mailSender, JavaMailSender javaMailSender) {
-        this.mailSender = mailSender;
-        this.javaMailSender = javaMailSender;
-    }
+    @Autowired
+    private JavaMailSender mailSender;
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     public void sendResetPasswordEmail(String recipientEmail, String link)
             throws MessagingException, UnsupportedEncodingException {

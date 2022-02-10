@@ -199,8 +199,12 @@ public class AccountController {
             sb.append(Constants.LINK_REGISTER);
             return sb.toString();
         }
-        model.addAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_REGISTER_SUCCESS);
-        return Constants.PAGE_REGISTER;
+        redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_REGISTER_SUCCESS);
+        StringBuilder sb = new StringBuilder();
+        sb.append(Constants.LINK_REDIRECT);
+        sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+        sb.append(Constants.LINK_REGISTER);
+        return sb.toString();
     }
 
     /**
