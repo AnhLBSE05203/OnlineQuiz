@@ -19,8 +19,9 @@ public class BlogRepository{
     private EntityManager em;
 
     public ArrayList<Blog> getAllBlog(){
-        String sql = "SELECT * FROM Blog";
+        String sql = "SELECT a FROM Blog a";
         Query query = em.createQuery(sql);
-        return null;
+        ArrayList<Blog> blogList = (ArrayList<Blog>) query.getSingleResult();
+        return  blogList;
     }
 }
