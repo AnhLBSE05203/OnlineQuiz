@@ -36,4 +36,6 @@ public class Subject {
 
     @OneToMany(mappedBy = "subject")
     private List<Lesson> lessons;
+    @ManyToMany(mappedBy = "subjects")
+    private List<Expert> experts;
 }

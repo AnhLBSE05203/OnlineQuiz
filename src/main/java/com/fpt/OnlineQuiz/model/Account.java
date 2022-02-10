@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -21,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "Account")
 public class Account implements UserDetails {
-//test
+
     private static final long serialVersionUID = -3164082858501464263L;
 
     @Id
@@ -61,7 +62,8 @@ public class Account implements UserDetails {
     private List<Review> reviews;
     @OneToMany(mappedBy = "account")
     private List<QuizHistory> quizHistories;
-
+    @OneToOne(mappedBy = "account")
+    private Expert expert;
     @Column(name = "status")
     private int status;
 
