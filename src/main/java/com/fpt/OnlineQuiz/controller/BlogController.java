@@ -2,6 +2,7 @@ package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dao.BlogRepository;
 import com.fpt.OnlineQuiz.model.Blog;
+import com.fpt.OnlineQuiz.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,11 +17,11 @@ import java.util.ArrayList;
 public class BlogController {
 
     @Autowired
-    private BlogRepository blogRepository;
+    private BlogService blogService;
     @RequestMapping(value = "",method = RequestMethod.GET)
     public String getAllBlog(ModelMap modelMap){
         //data send to html:ModelMap
-        ArrayList<Blog> listBlog = blogRepository.getAllBlog();
+        ArrayList<Blog> listBlog = blogService.getAllBlog();
         modelMap.addAttribute("listBlog",listBlog);
         return "blog";
     }
