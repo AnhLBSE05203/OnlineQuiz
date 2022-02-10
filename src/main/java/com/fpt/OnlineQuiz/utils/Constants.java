@@ -72,6 +72,8 @@ public class Constants {
     public static final String SQL_PATH_FIND_ALL_ROLES = "/static/sql/findAllRoles.sql";
     public static final String SQL_PATH_FIND_TOKEN_BY_TOKEN_STRING = "/static/sql/findTokenByTokenString.sql";
     public static final String SQL_PATH_FIND_ROLE_BY_NAME = "/static/sql/findRoleByName.sql";
+    public static final String SQL_PATH_GET_ALL_BLOG_LIST = "/static/sql/findAllBlog.sql";
+
     //mail templates
     public static String getResetPasswordMailTemplate(String link) {
         String content = "<p>Hello,</p>"
