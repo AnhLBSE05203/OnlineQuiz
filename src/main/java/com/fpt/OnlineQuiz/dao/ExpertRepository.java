@@ -1,8 +1,6 @@
 package com.fpt.OnlineQuiz.dao;
 
 import com.fpt.OnlineQuiz.dto.ExpertFeaturedDTO;
-import com.fpt.OnlineQuiz.model.Course;
-import com.fpt.OnlineQuiz.model.Expert;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +20,7 @@ public class ExpertRepository {
     @PersistenceContext
     EntityManager em;
 
-    public List<ExpertFeaturedDTO> getTopExperts(int number){
+    public List<ExpertFeaturedDTO> getFeaturedExperts(int number){
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
                     this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_FEATURED_EXPERTS)));

@@ -2,7 +2,6 @@ package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dto.ExpertFeaturedDTO;
 import com.fpt.OnlineQuiz.model.Course;
-import com.fpt.OnlineQuiz.model.Expert;
 import com.fpt.OnlineQuiz.service.CourseService;
 import com.fpt.OnlineQuiz.service.ExpertService;
 import com.fpt.OnlineQuiz.utils.Constants;
@@ -34,7 +33,7 @@ public class CommonController {
 
         List<Course> courseFeatured = courseService.getTopCourses(Constants.HOME_PAGE_COURSE_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_COURSE_FEATURED, courseFeatured);
-        List<ExpertFeaturedDTO> expertFeatured = expertService.getTopExperts(Constants.HOME_PAGE_EXPERT_NUMBER);
+        List<ExpertFeaturedDTO> expertFeatured = expertService.getFeaturedExperts(Constants.HOME_PAGE_EXPERT_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_EXPERT_FEATURED, expertFeatured);
         System.out.println();
         return Constants.PAGE_HOME;
