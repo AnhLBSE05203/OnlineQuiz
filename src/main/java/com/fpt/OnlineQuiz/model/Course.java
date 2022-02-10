@@ -14,24 +14,26 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Package")
-public class Package {
+@Table(name = "Course")
+public class Course {
     @Id
-    @Column(name = "packageId")
+    @Column(name = "courseId")
     private int id;
     @Column(name = "name")
     private String name;
+    @Column(name = "description")
+    private String description;
     @Column(name = "lessonTotal")
     private int lessonTotal;
     @Column(name = "price")
     private double price;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subjectId")
     private Subject subject;
 
     @ManyToMany
-    @JoinTable(name = "AccountPackage", joinColumns = @JoinColumn(name = "packageId"), inverseJoinColumns = @JoinColumn(name = "accountId"))
+    @JoinTable(name = "AccountCourse", joinColumns = @JoinColumn(name = "courseId"), inverseJoinColumns = @JoinColumn(name = "accountId"))
     private List<Account> accounts;
-    @OneToMany(mappedBy = "subjectPackage")
+    @OneToMany(mappedBy = "course")
     private List<PurchaseHistory> purchaseHistories;
 }

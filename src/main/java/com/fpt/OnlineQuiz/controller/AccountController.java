@@ -18,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.yaml.snakeyaml.scanner.Constant;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -69,44 +71,52 @@ public class AccountController {
      */
     @PostMapping(Constants.LINK_FORGOT_PASSWORD)
     public String processForgotPassword(Model model, HttpServletRequest request,
-                                @RequestParam("email") String email) {
+                                        @RequestParam("email") String email, RedirectAttributes redirectAttributes) {
         Account account = accountService.findAccountByEmail(email);
         if (account == null) {
-            String message = "Account not found";
-            model.addAttribute("message", message);
-            return Constants.PAGE_FORGOT_PASSWORD;
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_ACCOUNT_NOT_FOUND);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_FORGOT_PASSWORD);
+            return sb.toString();
         }
         String tokenString = RandomString.make(Constants.TOKEN_LENGTH);
         try {
             String resetPasswordLink = Utils.getSiteURL(request) + "/account/resetPassword?token=" + tokenString;
             mailService.sendResetPasswordEmail(email, resetPasswordLink);
-            accountService.updateResetPasswordToken(tokenString, email);
+            accountService.addToken(tokenString, email, Constants.TOKEN_TYPE_RESET_PASSWORD);
         } catch (UnsupportedEncodingException | MessagingException e) {
-            model.addAttribute("message", "Error while sending email");
             //if fail to send mail, delete generated token
             Token token = tokenService.findByTokenString(tokenString);
             tokenService.deleteToken(token);
-            return Constants.PAGE_FORGOT_PASSWORD;
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_ERROR_SEND_EMAIL);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_FORGOT_PASSWORD);
+            return sb.toString();
         }
-        model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
+        model.addAttribute(Constants.ATTRIBUTE_MESSAGE, "We have sent a reset password link to your email. Please check.");
         return Constants.PAGE_FORGOT_PASSWORD;
     }
 
     /**
      * Display Reset Password Page
-     * @param token user's reset password token
+     * @param tokenString user's reset password token
      * @param model spring's model class
      * @return Reset Password Page html
      */
     @GetMapping(Constants.LINK_RESET_PASSWORD)
-    public String showResetPasswordPage(@Param(value = "token") String token, Model model) {
-        Account account = accountService.findByResetPasswordToken(token);
-        model.addAttribute("token", token);
+    public String showResetPasswordPage(@Param(value = "token") String tokenString, Model model) {
+        Account account = accountService.findByToken(tokenString, Constants.TOKEN_TYPE_RESET_PASSWORD);
+        model.addAttribute("token", tokenString);
 
         if (account == null) {
-            model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
+            model.addAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_INVALID_TOKEN);
             return Constants.PAGE_FORGOT_PASSWORD;
         }
+
         return Constants.PAGE_RESET_PASSWORD;
     }
 
@@ -119,10 +129,14 @@ public class AccountController {
     public String showRegisterPage(Model model){
         //to do - create register page
         model.addAttribute("registerDTO", new RegisterDTO());
-        model.addAttribute("message", Constants.STRING_EMPTY);
         return Constants.PAGE_REGISTER;
     }
 
+    @GetMapping(Constants.LINK_CHANGE_PASSWORD)
+    public String showChangePasswordPage(Model model){
+        //to do - create register page
+        return Constants.PAGE_CHANGE_PASSWORD;
+    }
     /**
      * Process Registration Submission
      * @param registerDTO register DTO
@@ -131,13 +145,17 @@ public class AccountController {
      * @return
      */
     @PostMapping(Constants.LINK_REGISTER)
-    public String processRegistration(@ModelAttribute RegisterDTO registerDTO, Model model, HttpServletRequest request) {
+    public String processRegistration(@ModelAttribute RegisterDTO registerDTO, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         Account account = accountService.findAccountByEmail(registerDTO.getEmail());
         //add new account
         if(account != null){
             String message = "Email is already used!";
-            model.addAttribute("message", message);
-            return Constants.PAGE_REGISTER;
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, message);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_REGISTER);
+            return sb.toString();
         }
         account = new Account();
         account.setEmail(registerDTO.getEmail().toLowerCase());
@@ -163,20 +181,25 @@ public class AccountController {
         //add account
         accountService.addAccount(account);
         //add token
-        accountService.updateConfirmToken(tokenString, account.getEmail());
+        accountService.addToken(tokenString, account.getEmail(), Constants.TOKEN_TYPE_CONFIRM_REGISTRATION);
         try {
             //send confirmation email
             String confirmLink = Utils.getSiteURL(request) + "/account/confirmRegistration?token=" + tokenString;
             mailService.sendConfirmRegistrationEmail(registerDTO.getEmail(), confirmLink);
 
         } catch (UnsupportedEncodingException | MessagingException e) {
-            model.addAttribute("message", "Error while sending email");
             //if fail to send mail, delete generated token
             Token token = tokenService.findByTokenString(tokenString);
             tokenService.deleteToken(token);
-            return Constants.PAGE_REGISTER;
+
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_ERROR_SEND_EMAIL);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_REGISTER);
+            return sb.toString();
         }
-        model.addAttribute("message", Constants.MESSAGE_REGISTER_SUCCESS);
+        model.addAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_REGISTER_SUCCESS);
         return Constants.PAGE_REGISTER;
     }
 
@@ -187,19 +210,26 @@ public class AccountController {
      * @return
      */
     @GetMapping(Constants.LINK_CONFIRM_REGISTRATION)
-    public String processConfirmRegistration(HttpServletRequest request, Model model) {
+    public String processConfirmRegistration(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
         String tokenString = request.getParameter("token");
-        Account account = accountService.findByConfirmToken(tokenString);
+        Account account = accountService.findByToken(tokenString, Constants.TOKEN_TYPE_CONFIRM_REGISTRATION);
         String message = "";
         if (account == null) {
-            message = "Account not found";
-            model.addAttribute("message", message);
-            return Constants.PAGE_REGISTER;
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_ACCOUNT_NOT_FOUND);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_REGISTER);
+            return sb.toString();
         }
         Token token = tokenService.findByTokenString(tokenString);
         if(token == null) {
-            model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
-            return Constants.PAGE_REGISTER;
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_INVALID_TOKEN);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_REGISTER);
+            return sb.toString();
         }
         Date now = new Date();
         long diff = now.getTime() - token.getCreatedDate().getTime();
@@ -209,14 +239,24 @@ public class AccountController {
         String StrTokenDuration = env.getProperty("tokenDuration");
         int tokenDuration = Integer.parseInt(StrTokenDuration);
         if (seconds > tokenDuration) {
-            model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
-            return Constants.PAGE_REGISTER;
+            tokenService.deleteToken(token);
+
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_INVALID_TOKEN);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_REGISTER);
+            return sb.toString();
         }
         account.setStatus(Constants.STATUS_CONFIRMED);
         accountService.updateAccount(account);
         tokenService.deleteToken(token);
-        model.addAttribute("message", Constants.MESSAGE_CONFIRM_SUCCESS);
-        return Constants.PAGE_REGISTER;
+        redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_CONFIRM_SUCCESS);
+        StringBuilder sb = new StringBuilder();
+        sb.append(Constants.LINK_REDIRECT);
+        sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+        sb.append(Constants.LINK_REGISTER);
+        return sb.toString();
     }
     /**
      * Process Reset Password Function
@@ -225,21 +265,28 @@ public class AccountController {
      * @return return to Reset Password Page
      */
     @PostMapping(Constants.LINK_RESET_PASSWORD)
-    public String processResetPassword(HttpServletRequest request, Model model) {
+    public String processResetPassword(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
         String tokenString = request.getParameter("token");
         String password = request.getParameter("password");
 
-        Account account = accountService.findByResetPasswordToken(tokenString);
+        Account account = accountService.findByToken(tokenString, Constants.TOKEN_TYPE_RESET_PASSWORD);
         String message = "";
         if (account == null) {
-            message = "Account not found";
-            model.addAttribute("message", message);
-            return Constants.PAGE_RESET_PASSWORD;
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_ACCOUNT_NOT_FOUND);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_RESET_PASSWORD);
+            return sb.toString();
         }
         Token token = tokenService.findByTokenString(tokenString);
         if(token == null) {
-            model.addAttribute("message", Constants.MESSAGE_INVALID_TOKEN);
-            return Constants.PAGE_RESET_PASSWORD;
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_INVALID_TOKEN);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_RESET_PASSWORD);
+            return sb.toString();
         }
 
         //calculate time diff between current time & token creation
@@ -251,11 +298,20 @@ public class AccountController {
         String StrTokenDuration = env.getProperty("tokenDuration");
         int tokenDuration = Integer.parseInt(StrTokenDuration);
         if (seconds > tokenDuration) {
-            model.addAttribute("message", "Invalid Token");
-            return Constants.PAGE_RESET_PASSWORD;
+            tokenService.deleteToken(token);
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_INVALID_TOKEN);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_RESET_PASSWORD);
+            return sb.toString();
         }
         accountService.resetPassword(account, password, token);
-        model.addAttribute("message", "You have successfully changed your password.");
-        return Constants.PAGE_RESET_PASSWORD;
+        redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_CHANGE_PASSWORD_SUCCESS);
+        StringBuilder sb = new StringBuilder();
+        sb.append(Constants.LINK_REDIRECT);
+        sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+        sb.append(Constants.LINK_RESET_PASSWORD);
+        return sb.toString();
     }
 }

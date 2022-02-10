@@ -21,6 +21,6 @@ public class PurchaseHistory {
     @JoinColumn(name = "accountId")
     private Account account;
     @ManyToOne
-    @JoinColumn(name = "packageId")
-    private Package subjectPackage;
+    @JoinColumn(name = "courseId")
+    private Course course;
 }

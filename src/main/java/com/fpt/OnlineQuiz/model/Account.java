@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -54,14 +55,15 @@ public class Account implements UserDetails {
     @JoinColumn(name = "imageId")
     private Image profileImage;
     @ManyToMany(mappedBy = "accounts")
-    private List<Package> packages;
+    private List<Course> courses;
     @OneToMany(mappedBy = "account")
     private List<Token> tokens;
     @OneToMany(mappedBy = "account")
     private List<Review> reviews;
     @OneToMany(mappedBy = "account")
     private List<QuizHistory> quizHistories;
-
+    @OneToOne(mappedBy = "account")
+    private Expert expert;
     @Column(name = "status")
     private int status;
 

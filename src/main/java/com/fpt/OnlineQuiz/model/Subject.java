@@ -22,11 +22,20 @@ public class Subject {
     private String name;
 
     @OneToMany(mappedBy = "subject")
-    private List<Package> packages;
+    private List<Course> courses;
 
     @OneToMany(mappedBy = "subject")
     private List<Question> questions;
 
     @OneToMany(mappedBy = "subject")
     private List<Review> reviews;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "imageId")
+    private Image image;
+
+    @OneToMany(mappedBy = "subject")
+    private List<Lesson> lessons;
+    @ManyToMany(mappedBy = "subjects")
+    private List<Expert> experts;
 }

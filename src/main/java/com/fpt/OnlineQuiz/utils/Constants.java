@@ -11,14 +11,16 @@ public class Constants {
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     public static final String ROLE_EXPERT = "ROLE_EXPERT";
     public static final String ROLE_SALES = "ROLE_SALES";
-    //record common constants
-    public static final int STATUS_DELETED = 2;
+    //db record common constants
+    public static final int STATUS_DELETED = 0;
     public static final int STATUS_DEFAULT = 1;
     //messages
     public static final String MESSAGE_INVALID_TOKEN = "Invalid Token!";
     public static final String MESSAGE_REGISTER_SUCCESS = "Register successful! Check email for confirmation link!";
     public static final String MESSAGE_CONFIRM_SUCCESS = "Registration Confirm Success!";
-
+    public static final String MESSAGE_ERROR_SEND_EMAIL = "Error while sending email";
+    public static final String MESSAGE_CHANGE_PASSWORD_SUCCESS = "You have successfully changed your password.";
+    public static final String MESSAGE_ACCOUNT_NOT_FOUND = "Account not found!";
     //token types
     public static final String TOKEN_TYPE_RESET_PASSWORD = "TOKEN_RESET_PASSWORD";
     public static final String TOKEN_TYPE_CONFIRM_REGISTRATION = "TOKEN_CONFIRM";
@@ -31,6 +33,7 @@ public class Constants {
     public static final String MAIL_SUBJECT_CONFIRM_REGISTRATION = "Here's the link to confirm your registration";
 
     //links
+    public static final String LINK_REDIRECT = "redirect:";
     public static final String LINK_ACCOUNT_CONTROLLER = "/account";
     public static final String LINK_LOGIN = "/login";
     public static final String LINK_LOGIN_PROCESS = "/login";
@@ -41,6 +44,7 @@ public class Constants {
     public static final String LINK_ACCESS_DENIED = "/access_denied";
     public static final String LINK_FORGOT_PASSWORD = "/forgotPassword";
     public static final String LINK_RESET_PASSWORD = "/resetPassword";
+    public static final String LINK_CHANGE_PASSWORD = "/changePassword";
     public static final String LINK_CONFIRM_REGISTRATION = "/confirmRegistration";
     //pages
     public static final String PAGE_LOGIN = "login_page";
@@ -49,8 +53,12 @@ public class Constants {
     public static final String PAGE_ACCESS_DENIED = "access_denied_page";
     public static final String PAGE_FORGOT_PASSWORD = "forgot_password_page";
     public static final String PAGE_RESET_PASSWORD = "reset_password_page";
+    public static final String PAGE_CHANGE_PASSWORD = "change_password";
     public static final String PAGE_ERROR = "error";
 
+    //model attributes
+    public static final String ATTRIBUTE_MESSAGE = "message";
+    //token constants
     public static final int TOKEN_LENGTH = 30;
 
 
@@ -73,7 +81,13 @@ public class Constants {
     public static final String SQL_PATH_FIND_TOKEN_BY_TOKEN_STRING = "/static/sql/findTokenByTokenString.sql";
     public static final String SQL_PATH_FIND_ROLE_BY_NAME = "/static/sql/findRoleByName.sql";
     public static final String SQL_PATH_GET_ALL_BLOG_LIST = "/static/sql/findAllBlog.sql";
-
+    public static final String SQL_PATH_GET_TOP_COURSES = "/static/sql/getTopCourses.sql";
+    public static final String SQL_PATH_GET_FEATURED_EXPERTS = "/static/sql/getFeaturedExperts.sql";
+    //home page constants
+    public static final int HOME_PAGE_COURSE_NUMBER = 4;
+    public static final int HOME_PAGE_EXPERT_NUMBER = 3;
+    public static final String HOME_PAGE_ATTRIBUTE_COURSE_FEATURED = "courseFeatured";
+    public static final String HOME_PAGE_ATTRIBUTE_EXPERT_FEATURED = "expertFeatured";
     //mail templates
     public static String getResetPasswordMailTemplate(String link) {
         String content = "<p>Hello,</p>"
