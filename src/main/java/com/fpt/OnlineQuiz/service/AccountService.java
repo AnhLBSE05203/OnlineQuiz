@@ -5,6 +5,10 @@ import com.fpt.OnlineQuiz.model.Token;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface AccountService extends UserDetailsService {
+    /**
+     * Add new Account
+     * @param account User's Account
+     */
     void addAccount(Account account);
 
     /**
@@ -36,5 +40,9 @@ public interface AccountService extends UserDetailsService {
      */
     void resetPassword(Account account, String newPassword, Token token);
 
+    /**
+     * Update Account
+     * @param account User's Account
+     */
     void updateAccount(Account account);
 }
