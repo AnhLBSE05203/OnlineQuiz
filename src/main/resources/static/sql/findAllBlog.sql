@@ -1,0 +1,1 @@
+SELECT a FROM Blog a
