@@ -206,7 +206,75 @@ public class AccountController {
         sb.append(Constants.LINK_REGISTER);
         return sb.toString();
     }
+    /**
+     * Process Registration Submission
+     * @param registerDTO register DTO
+     * @param model spring's model class
+     * @param request user's request
+     * @return
+     */
+    @PostMapping(Constants.LINK_REGISTER)
+    public String processChangePassword(@ModelAttribute RegisterDTO registerDTO, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        Account account = accountService.findAccountByEmail(registerDTO.getEmail());
+        //add new account
+        if(account != null){
+            String message = "Email is already used!";
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, message);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_REGISTER);
+            return sb.toString();
+        }
+        account = new Account();
+        account.setEmail(registerDTO.getEmail().toLowerCase());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(registerDTO.getPassword());
+        account.setPassword(encodedPassword);
+        Date now = new Date();
+        account.setCreatedTime(now);
+        account.setUpdatedTime(now);
+        account.setCreatedUserId(1);
+        account.setUpdatedUserId(1);
+        account.setGender(registerDTO.getGender());
+        account.setPhone(registerDTO.getPhone());
+        account.setFullName(registerDTO.getFullName());
+        account.setCreatedUserId(1);
+        account.setStatus(Constants.STATUS_UNCONFIRMED);
+        Role role = roleService.findRoleByName(Constants.ROLE_USER);
+        List<Role> roles= new ArrayList<>();
+        roles.add(role);
+        account.setRoles(roles);
+        //create confirmation token
+        String tokenString = RandomString.make(Constants.TOKEN_LENGTH);
+        //add account
+        accountService.addAccount(account);
+        //add token
+        accountService.addToken(tokenString, account.getEmail(), Constants.TOKEN_TYPE_CONFIRM_REGISTRATION);
+        try {
+            //send confirmation email
+            String confirmLink = Utils.getSiteURL(request) + "/account/confirmRegistration?token=" + tokenString;
+            mailService.sendConfirmRegistrationEmail(registerDTO.getEmail(), confirmLink);
 
+        } catch (UnsupportedEncodingException | MessagingException e) {
+            //if fail to send mail, delete generated token
+            Token token = tokenService.findByTokenString(tokenString);
+            tokenService.deleteToken(token);
+
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_ERROR_SEND_EMAIL);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_REGISTER);
+            return sb.toString();
+        }
+        redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_REGISTER_SUCCESS);
+        StringBuilder sb = new StringBuilder();
+        sb.append(Constants.LINK_REDIRECT);
+        sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+        sb.append(Constants.LINK_REGISTER);
+        return sb.toString();
+    }
     /**
      * Process Registration Confirm
      * @param request user's request
