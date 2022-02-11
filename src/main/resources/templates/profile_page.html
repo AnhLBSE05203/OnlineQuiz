@@ -35,7 +35,7 @@
         <div class="preloader-inner position-relative">
             <div class="preloader-circle"></div>
             <div class="preloader-img pere-text">
-                <img src="assets/img/logo/loder.png" alt="">
+                <img th:src="@{/img/logo/loder.png}" alt="">
             </div>
         </div>
     </div>
@@ -517,8 +517,8 @@
                     <ul class="nav nav-pills nav-stacked">
                         <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
                         <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
-                        <li><a href="changePassword.html"> <i class="fa fa-key"></i> Change Password</a></li>
-                        <li><a href="editProfile_page.html"> <i class="fa fa-edit"></i> Edit Profile</a></li>
+                        <li><a href="/account/changePassword"> <i class="fa fa-key"></i> Change Password</a></li>
+                        <li><a href="/account/edit-profile"> <i class="fa fa-edit"></i> Edit Profile</a></li>
                     </ul>
                 </div>
             </div>
