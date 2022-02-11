@@ -1,7 +1,10 @@
 package com.fpt.OnlineQuiz.utils;
 
 public class Constants {
+
     public static final String STRING_EMPTY = "";
+    public static final int NUMBER_ZERO = 0;
+
     //account constants
     public static final int STATUS_CONFIRMED = 1;
     public static final int STATUS_UNCONFIRMED = 0;
@@ -89,7 +92,7 @@ public class Constants {
     public static final String SQL_PATH_FIND_TOKEN_BY_TOKEN_STRING = "/static/sql/findTokenByTokenString.sql";
     public static final String SQL_PATH_FIND_ROLE_BY_NAME = "/static/sql/findRoleByName.sql";
     public static final String SQL_PATH_GET_ALL_BLOG_LIST = "/static/sql/findAllBlog.sql";
-    public static final String SQL_PATH_GET_TOP_COURSES = "/static/sql/getTopCourses.sql";
+    public static final String SQL_PATH_GET_FEATURED_COURSES = "/static/sql/getFeaturedCourses.sql";
     public static final String SQL_PATH_GET_ALL_SUBJECTS = "/static/sql/getAllSubjects.sql";
     public static final String SQL_PATH_GET_FEATURED_EXPERTS = "/static/sql/getFeaturedExperts.sql";
     //home page constants
@@ -99,6 +102,8 @@ public class Constants {
     public static final String HOME_PAGE_ATTRIBUTE_COURSE_FEATURED = "courseFeatured";
     public static final String HOME_PAGE_ATTRIBUTE_EXPERT_FEATURED = "expertFeatured";
     public static final String HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED = "subjectFeatured";
+    public static final int DESCRIPTION_TRIM_LENGTH = 147;
+    public static final String DESCRIPTION_TRIM_TAIL = "...";
     //mail templates
     public static String getResetPasswordMailTemplate(String link) {
         String content = "<p>Hello,</p>"
