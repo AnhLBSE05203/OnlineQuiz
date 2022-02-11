@@ -140,8 +140,7 @@
                 </div>
                 <div class="courses-actives">
                     <!-- Single -->
-                    <div  th:each = "course : ${courseFeatured}">
-                    <div class="properties pb-20">
+                    <div class="properties pb-20" th:each = "course : ${courseFeatured}">
                         <div class="properties__card">
                             <div class="properties__img overlay1">
                                 <a href="#"><img th:src="@{${course.subject.image.src}}" alt=""></a>
@@ -158,7 +157,6 @@
                                 <a href="#" class="border-btn border-btn2">Find out more</a>
                             </div>
                         </div>
-                    </div>
                     </div>
                     <!-- Single -->
                 </div>
@@ -224,97 +222,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="col-lg-3 col-md-4 col-sm-6" th:each="subject : ${subjectFeatured}">
                         <div class="single-topic text-center mb-30">
                             <div class="topic-img">
-                                <img th:src="@{/img/gallery/topic1.png}" alt="">
+                                <img th:src="@{${subject.image.src}}" alt="">
                                 <div class="topic-content-box">
                                     <div class="topic-content">
-                                        <h3><a href="#">Programing</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-topic text-center mb-30">
-                            <div class="topic-img">
-                                <img th:src="@{/img/gallery/topic1.png}" alt="">
-                                <div class="topic-content-box">
-                                    <div class="topic-content">
-                                        <h3><a href="#">Programing</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-topic text-center mb-30">
-                            <div class="topic-img">
-                                <img th:src="@{/img/gallery/topic1.png}" alt="">
-                                <div class="topic-content-box">
-                                    <div class="topic-content">
-                                        <h3><a href="#">Programing</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-topic text-center mb-30">
-                            <div class="topic-img">
-                                <img th:src="@{/img/gallery/topic1.png}" alt="">
-                                <div class="topic-content-box">
-                                    <div class="topic-content">
-                                        <h3><a href="#">Programing</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-topic text-center mb-30">
-                            <div class="topic-img">
-                                <img th:src="@{/img/gallery/topic1.png}" alt="">
-                                <div class="topic-content-box">
-                                    <div class="topic-content">
-                                        <h3><a href="#">Programing</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-topic text-center mb-30">
-                            <div class="topic-img">
-                                <img th:src="@{/img/gallery/topic1.png}" alt="">
-                                <div class="topic-content-box">
-                                    <div class="topic-content">
-                                        <h3><a href="#">Programing</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-topic text-center mb-30">
-                            <div class="topic-img">
-                                <img th:src="@{/img/gallery/topic1.png}" alt="">
-                                <div class="topic-content-box">
-                                    <div class="topic-content">
-                                        <h3><a href="#">Programing</a></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-topic text-center mb-30">
-                            <div class="topic-img">
-                                <img th:src="@{/img/gallery/topic1.png}" alt="">
-                                <div class="topic-content-box">
-                                    <div class="topic-content">
-                                        <h3><a href="#">Programing</a></h3>
+                                        <h3><a href="#" th:text="${subject.name}"></a></h3>
                                     </div>
                                 </div>
                             </div>
@@ -387,15 +301,13 @@
                     </div>
                 </div>
                 <div class="team-active">
-                    <div th:each="expert : ${expertFeatured}">
-                        <div class="single-cat text-center">
-                            <div class="cat-icon">
-                                <img th:src="@{${expert.imgSrc}}" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="#" th:text="${expert.fullName}"></a></h5>
-                                <p th:text="${expert.description}"></p>
-                            </div>
+                    <div class="single-cat text-center" th:each="expert : ${expertFeatured}">
+                        <div class="cat-icon">
+                            <img th:src="@{${expert.imgSrc}}" alt="">
+                        </div>
+                        <div class="cat-cap">
+                            <h5><a href="#" th:text="${expert.fullName}"></a></h5>
+                            <p th:text="${expert.description}"></p>
                         </div>
                     </div>
                 </div>

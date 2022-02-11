@@ -90,12 +90,15 @@ public class Constants {
     public static final String SQL_PATH_FIND_ROLE_BY_NAME = "/static/sql/findRoleByName.sql";
     public static final String SQL_PATH_GET_ALL_BLOG_LIST = "/static/sql/findAllBlog.sql";
     public static final String SQL_PATH_GET_TOP_COURSES = "/static/sql/getTopCourses.sql";
+    public static final String SQL_PATH_GET_ALL_SUBJECTS = "/static/sql/getAllSubjects.sql";
     public static final String SQL_PATH_GET_FEATURED_EXPERTS = "/static/sql/getFeaturedExperts.sql";
     //home page constants
     public static final int HOME_PAGE_COURSE_NUMBER = 4;
     public static final int HOME_PAGE_EXPERT_NUMBER = 3;
+    public static final int HOME_PAGE_SUBJECT_NUMBER = 8;
     public static final String HOME_PAGE_ATTRIBUTE_COURSE_FEATURED = "courseFeatured";
     public static final String HOME_PAGE_ATTRIBUTE_EXPERT_FEATURED = "expertFeatured";
+    public static final String HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED = "subjectFeatured";
     //mail templates
     public static String getResetPasswordMailTemplate(String link) {
         String content = "<p>Hello,</p>"
