@@ -45,6 +45,10 @@ public class Constants {
     public static final String LINK_FORGOT_PASSWORD = "/forgotPassword";
     public static final String LINK_RESET_PASSWORD = "/resetPassword";
     public static final String LINK_CHANGE_PASSWORD = "/changePassword";
+    public static final String LINK_PROFILE = "/profile";
+    public static final String LINK_EDIT_PROFILE = "/edit-profile";
+
+
     public static final String LINK_CONFIRM_REGISTRATION = "/confirmRegistration";
     //pages
     public static final String PAGE_LOGIN = "login_page";
@@ -54,6 +58,10 @@ public class Constants {
     public static final String PAGE_FORGOT_PASSWORD = "forgot_password_page";
     public static final String PAGE_RESET_PASSWORD = "reset_password_page";
     public static final String PAGE_CHANGE_PASSWORD = "change_password";
+    public static final String PAGE_PROFILE = "profile_page";
+    public static final String PAGE_EDIT_PROFILE = "editProfile_page";
+
+
     public static final String PAGE_ERROR = "error";
 
     //model attributes
