@@ -217,16 +217,7 @@ public class AccountController {
     public String processChangePassword(@ModelAttribute RegisterDTO registerDTO, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         Account account = accountService.findAccountByEmail(registerDTO.getEmail());
         //add new account
-        if(account != null){
-            String message = "Email is already used!";
-            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, message);
-            StringBuilder sb = new StringBuilder();
-            sb.append(Constants.LINK_REDIRECT);
-            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_REGISTER);
-            return sb.toString();
-        }
-        account = new Account();
+
         account.setEmail(registerDTO.getEmail().toLowerCase());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(registerDTO.getPassword());
