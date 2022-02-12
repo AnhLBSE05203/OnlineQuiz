@@ -1,3 +1,14 @@
-.subject-img{
+.featured-course-img{
+height: 200px;
+}
+.featured-subject-img{
 height: 150px;
+}
+.featured-expert-img{
+height: 150px;
+}
+.expert-description{
+height:150px;
+overflow: hidden;
+text-overflow: ellipsis;
 }
