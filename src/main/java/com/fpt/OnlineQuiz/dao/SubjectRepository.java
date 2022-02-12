@@ -1,7 +1,6 @@
 package com.fpt.OnlineQuiz.dao;
 
 
-import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.utils.Constants;
@@ -23,7 +22,7 @@ public class SubjectRepository {
     private EntityManager em;
 
     /**
-     * Get a number of Course which user registered
+     * Get a number of Course which user currently registers
      * @param account_id user's id
      * @return
      */
@@ -42,11 +41,11 @@ public class SubjectRepository {
     }
 
     /**
-     * Get a number of Subjects
+     * Get a number of Subjects to feature on Home page
      * @param number how many Subjects are retrieved
      * @return
      */
-    public List<Subject> getTopSubjects(int number) {
+    public List<Subject> getFeaturedSubjects(int number) {
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
                     this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_SUBJECTS)));

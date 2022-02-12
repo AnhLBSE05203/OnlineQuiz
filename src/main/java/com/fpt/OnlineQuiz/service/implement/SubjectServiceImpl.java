@@ -23,11 +23,12 @@ public class SubjectServiceImpl implements SubjectService {
         for (int i = 0; i < list_course.size(); i++){
              list_subject.add(list_course.get(i).getSubject());
         }
+
         return list_subject;
     }
 
     @Override
-    public List<Subject> getTopSubjects(int number) {
-        return subjectRepository.getTopSubjects(number);
+    public List<Subject> getFeaturedSubjects(int number) {
+        return subjectRepository.getFeaturedSubjects(number);
     }
 }

@@ -7,5 +7,5 @@ import java.util.List;
 public interface SubjectService {
     List<Subject>  getAllMySubject(int account_id);
 
-    List<Subject> getTopSubjects(int number);
+    List<Subject> getFeaturedSubjects(int number);
 }

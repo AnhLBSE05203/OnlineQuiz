@@ -1,6 +1,10 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.model.Subject;
+import com.fpt.OnlineQuiz.service.AccountService;
+import com.fpt.OnlineQuiz.service.SubjectService;
 import com.fpt.OnlineQuiz.service.implement.SubjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +20,13 @@ import java.util.List;
 public class SubjectController {
 
     @Autowired
-    private SubjectServiceImpl subjectService;
+    private SubjectService subjectService;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public String showMySubjectPage(ModelMap modelMap){
         List<Subject> list = subjectService.getAllMySubject(3);
         System.out.println(list.get(0));
+
         modelMap.addAttribute("my_subject_list", list);
         return "my_subject_page";
     }
