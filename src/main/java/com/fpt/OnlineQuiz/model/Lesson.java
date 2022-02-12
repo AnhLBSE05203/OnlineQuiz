@@ -20,6 +20,9 @@ public class Lesson {
     private int id;
     @Column(name = "name")
     private String name;
+    @Column(name = "content")
+    private String content;
+
     @ManyToOne
     @JoinColumn(name = "typeId")
     private LessonType lessonType;
