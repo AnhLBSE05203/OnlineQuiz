@@ -7,19 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping(path = "/user/mysubject")
 public class SubjectController {
 
     @Autowired
     private SubjectServiceImpl subjectService;
 
-    @GetMapping(path = "/mysubject")
+    @RequestMapping(value = "",method = RequestMethod.GET)
     public String showMySubjectPage(ModelMap modelMap){
         List<Subject> list = subjectService.getAllMySubject(3);
+        System.out.println(list.get(0));
         modelMap.addAttribute("my_subject_list", list);
         return "my_subject_page";
     }
