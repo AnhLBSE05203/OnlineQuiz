@@ -25,6 +25,7 @@
     <link rel="stylesheet" th:href="@{/css/nice-select.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
+    <link rel="stylesheet" th:href="@{/css/home_page.css}">
 </head>
 
 <body>
@@ -225,7 +226,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-6" th:each="subject : ${subjectFeatured}">
                         <div class="single-topic text-center mb-30">
                             <div class="topic-img">
-                                <img th:src="@{${subject.image.src}}" alt="">
+                                <img th:src="@{${subject.image.src}}" class = "subject-img" alt="">
                                 <div class="topic-content-box">
                                     <div class="topic-content">
                                         <h3><a href="#" th:text="${subject.name}"></a></h3>
