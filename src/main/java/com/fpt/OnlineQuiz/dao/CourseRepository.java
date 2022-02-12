@@ -1,6 +1,6 @@
 package com.fpt.OnlineQuiz.dao;
 
-import com.fpt.OnlineQuiz.model.Course;
+import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
 
@@ -20,19 +20,19 @@ public class CourseRepository {
     @PersistenceContext
     EntityManager em;
 
-    public List<Course> getTopCourses(int number){
+    public List<CourseFeaturedDTO> getFeaturedCourses(int number){
         try {
             BufferedReader buffer  = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_TOP_COURSES)));
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_FEATURED_COURSES)));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while((line = buffer.readLine()) !=null){
                 sb.append(" ").append(line);
             }
             String sql = sb.toString();
-            Query query = em.createQuery(sql, Course.class);
+            Query query = em.createQuery(sql, CourseFeaturedDTO.class);
             query.setMaxResults(number);
-            return (List<Course>) query.getResultList();
+            return (List<CourseFeaturedDTO>) query.getResultList();
         } catch (NoResultException | IOException e) {
             return null;
         }

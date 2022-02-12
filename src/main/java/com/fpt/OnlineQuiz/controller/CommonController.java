@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
 import com.fpt.OnlineQuiz.dto.ExpertFeaturedDTO;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.model.Subject;
@@ -35,7 +36,7 @@ public class CommonController {
     String homePage(Model model, Principal principal) {
         model.addAttribute("principal", principal);
 
-        List<Course> courseFeatured = courseService.getTopCourses(Constants.HOME_PAGE_COURSE_NUMBER);
+        List<CourseFeaturedDTO> courseFeatured = courseService.getFeaturedCourses(Constants.HOME_PAGE_COURSE_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_COURSE_FEATURED, courseFeatured);
         List<ExpertFeaturedDTO> expertFeatured = expertService.getFeaturedExperts(Constants.HOME_PAGE_EXPERT_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_EXPERT_FEATURED, expertFeatured);
