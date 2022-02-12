@@ -35,4 +35,14 @@ public class Screen {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "ScreenRole", joinColumns = @JoinColumn(name = "screenId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
 	private List<Role> roles;
+
+	public void addRole(Role role) {
+		roles.add(role);
+		role.getScreens().add(this);
+	}
+
+	public void removeRole(Role role) {
+		roles.remove(role);
+		role.getScreens().remove(this);
+	}
 }

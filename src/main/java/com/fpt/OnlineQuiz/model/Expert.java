@@ -27,4 +27,14 @@ public class Expert implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ExpertSubject", joinColumns = @JoinColumn(name = "expertId"), inverseJoinColumns = @JoinColumn(name = "subjectId"))
     private List<Subject> subjects;
+
+    public void addSubject(Subject subject) {
+        subjects.add(subject);
+        subject.getExperts().add(this);
+    }
+
+    public void removeSubject(Subject subject) {
+        subjects.remove(subject);
+        subject.getExperts().remove(this);
+    }
 }

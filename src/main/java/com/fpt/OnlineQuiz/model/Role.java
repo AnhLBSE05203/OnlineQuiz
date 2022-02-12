@@ -50,4 +50,25 @@ public class Role {
 	private List<Account> accounts;
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
 	private List<Screen> screens;
+
+	public void addAccount(Account account) {
+		accounts.add(account);
+		account.getRoles().add(this);
+	}
+
+	public void removeRole(Account account) {
+		accounts.remove(account);
+		account.getRoles().remove(this);
+	}
+
+	public void addScreen(Screen screen) {
+		screens.add(screen);
+		screen.getRoles().add(this);
+	}
+
+	public void removeScreen(Screen screen) {
+		screens.remove(screen);
+		screen.getRoles().remove(this);
+	}
+
 }

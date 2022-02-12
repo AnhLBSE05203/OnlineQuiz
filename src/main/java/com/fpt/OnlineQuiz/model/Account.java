@@ -90,6 +90,26 @@ public class Account implements UserDetails {
         return authorities;
     }
 
+    public void addRole(Role role) {
+        roles.add(role);
+        role.getAccounts().add(this);
+    }
+
+    public void removeRole(Role role) {
+        roles.remove(role);
+        role.getAccounts().remove(this);
+    }
+
+    public void addCourse(Course course) {
+        courses.add(course);
+        course.getAccounts().add(this);
+    }
+
+    public void removeCourse(Course course) {
+        courses.remove(course);
+        course.getAccounts().remove(this);
+    }
+
     @Override
     public String getPassword() {
         // TODO Auto-generated method stub
