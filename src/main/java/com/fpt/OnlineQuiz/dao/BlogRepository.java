@@ -38,4 +38,17 @@ public class BlogRepository{
         }
         return null;
     }
+    public ArrayList<Blog> getBlogByIndexPage(int pageindex){
+        try {
+            String sql = "Select b From Blog b";
+            Query query = em.createQuery(sql,Blog.class);
+            int pageSize = 2;
+            query.setFirstResult((pageindex - 1) * pageSize);
+            query.setMaxResults(pageSize);
+            ArrayList<Blog> blogList = (ArrayList<Blog>) query.getResultList();
+            return blogList;
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }
