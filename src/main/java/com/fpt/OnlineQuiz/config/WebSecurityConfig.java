@@ -106,7 +106,7 @@ public class WebSecurityConfig {
 					.and()
 					.exceptionHandling().accessDeniedPage(Constants.LINK_ADMIN_LOGIN)
 					.and()
-					.logout().logoutRequestMatcher(new AntPathRequestMatcher(Constants.LINK_LOGOUT))
+					.logout().logoutRequestMatcher(new AntPathRequestMatcher(Constants.LINK_ADMIN_LOGOUT))
 					.deleteCookies("remember-me", "JSESSIONID")
 					.invalidateHttpSession(true)
 					.clearAuthentication(true)

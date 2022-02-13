@@ -79,6 +79,7 @@ public class Constants {
     public static final String LINK_ADMIN_LOGIN_PROCESS = "/admin/login";
     public static final String LINK_ADMIN_LOGIN_FAILURE = "/admin/login?error=true";
     public static final String LINK_ADMIN_DASHBOARD = "/admin/dashboard";
+    public static final String LINK_ADMIN_LOGOUT = "/admin/logout";
 
     //pages admin
     public static final String PAGE_DASHBOARD = "admin_dashboard";

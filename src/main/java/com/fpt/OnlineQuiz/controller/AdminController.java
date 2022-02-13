@@ -25,14 +25,17 @@ public class AdminController {
         return "admin_login_page";
     }
 
-//    @GetMapping("/forget_pass")
-//    String forgetPass() {
-//        return "admin_forget_password";
-//    }
+    @GetMapping("/forget_pass")
+    String forgetPass() {
+        return "admin_forget_password";
+    }
 
     @GetMapping("/dashboard")
     String dashboardPage() {
         return "admin_dashboard";
     }
+
+    @GetMapping("/blog")
+    String blogPage() { return "admin_blog_page";}
 
 }
