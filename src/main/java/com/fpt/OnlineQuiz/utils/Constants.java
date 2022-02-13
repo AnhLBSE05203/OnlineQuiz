@@ -36,13 +36,15 @@ public class Constants {
     public static final String MAIL_SUBJECT_CONFIRM_REGISTRATION = "Here's the link to confirm your registration";
 
     //common links
-    public static final String LINK_LOGIN_PROCESS = "/login";
+
+
     //links
     public static final String LINK_REDIRECT = "redirect:";
     public static final String LINK_ACCOUNT_CONTROLLER = "/account";
     public static final String LINK_LOGIN = "/login";
-    public static final String LINK_LOGIN_FAILURE = "/login?error=true";
-    public static final String LINK_LOGOUT = "/logout";
+    public static final String LINK_ACCOUNT_LOGIN_PROCESS = "/account/login";
+    public static final String LINK_ACCOUNT_LOGIN_FAILURE = "/account/login?error=true";
+    public static final String LINK_ACCOUNT_LOGOUT = "/account/logout";
     public static final String LINK_REGISTER = "/register";
     public static final String LINK_HOME = "/home";
     public static final String LINK_ACCESS_DENIED = "/access_denied";
@@ -77,6 +79,7 @@ public class Constants {
     //links admin
     public static final String LINK_ADMIN_CONTROLLER = "/admin";
     public static final String LINK_ADMIN_LOGIN = "/admin/login";
+    public static final String LINK_ADMIN_LOGIN_PROCESS = "/admin/login";
     public static final String LINK_ADMIN_LOGIN_FAILURE = "/admin/login?error=true";
     public static final String LINK_ADMIN_DASHBOARD = "/admin/dashboard";
     public static final String LINK_ADMIN_LOGOUT = "/admin/logout";
