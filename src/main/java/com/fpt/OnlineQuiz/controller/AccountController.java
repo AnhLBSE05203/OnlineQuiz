@@ -145,7 +145,7 @@ public class AccountController {
      * @param request     user's request
      * @return
      */
-    @PostMapping(Constants.LINK_CHANGE_PASSWORD)
+    @PostMapping(Constants.LINK_REGISTER)
     public String processRegistration(@ModelAttribute RegisterDTO registerDTO, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         Account account = accountService.findAccountByEmail(registerDTO.getEmail());
         //add new account
@@ -230,22 +230,35 @@ public class AccountController {
      * @param email user's email
      * @return
      */
-//    @PostMapping(Constants.LINK_CHANGE_PASSWORD)
-//    public String processChangePassword(Model model, HttpServletRequest request,String email) {
-//        Account account = accountService.findAccountByEmail(email);
-//        String oldPass = account.getPassword();
-//        while (true){
-//        if(oldPass != request.getParameter("oldpass")){
-//            model.addAttribute(Constants.ATTRIBUTE_MESSAGE, "Password is wrong.Please try again");
-//        }
-//        else {
-//            model.addAttribute(Constants.ATTRIBUTE_MESSAGE, "Change Password Successfully !");
-//            break;
-//        }
-//        }
-//        return Constants.PAGE_PROFILE;
-//    }
-
+    @PostMapping(Constants.LINK_CHANGE_PASSWORD)
+    public String processChangePassword(Model model, HttpServletRequest request,@Param(value = "email") String email) {
+        Account account = accountService.findAccountByEmail(email);
+        String oldPass = account.getPassword();
+        while (true){
+        if(oldPass != request.getParameter("oldpass")){
+            model.addAttribute(Constants.ATTRIBUTE_MESSAGE, "Password is wrong.Please try again");
+        }
+        else {
+            accountService.updatePassword(account,request.getParameter("newpass"));
+            model.addAttribute(Constants.ATTRIBUTE_MESSAGE, "Change Password Successfully !");
+            break;
+        }
+        }
+        return Constants.PAGE_PROFILE;
+    }
+    /**
+     * Display Profile Page
+     *
+     * @param model spring's model class
+     * @param email user's email
+     * @return
+     */
+    @GetMapping(Constants.LINK_PROFILE)
+    public String showProfilePage(@Param(value = "email") String email, Model model) {
+        Account account = accountService.findAccountByEmail(email);
+        model.addAttribute("email", email);
+        return Constants.PAGE_PROFILE;
+    }
     /**
      * Process Registration Confirm
      *
