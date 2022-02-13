@@ -61,8 +61,6 @@ public class WebSecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 			sharedConfigure(http);
 			configureForRole(roleService, Constants.ROLE_USER, http);
-			configureForRole(roleService, Constants.ROLE_EXPERT, http);
-			configureForRole(roleService, Constants.ROLE_SALES, http);
 
 			http.formLogin().permitAll()
 					.loginProcessingUrl(Constants.LINK_ACCOUNT_LOGIN_PROCESS)
@@ -115,6 +113,8 @@ public class WebSecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 			sharedConfigure(http);
 			configureForRole(roleService, Constants.ROLE_ADMIN, http);
+			configureForRole(roleService, Constants.ROLE_EXPERT, http);
+			configureForRole(roleService, Constants.ROLE_SALES, http);
 
 			http.formLogin().permitAll()
 					.loginProcessingUrl(Constants.LINK_ADMIN_LOGIN)
