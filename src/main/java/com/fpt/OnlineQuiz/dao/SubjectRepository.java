@@ -21,24 +21,6 @@ public class SubjectRepository {
     @PersistenceContext
     private EntityManager em;
 
-    /**
-     * Get a number of Course which user currently registers
-     * @param account_id user's id
-     * @return
-     */
-    public List<Course> getCourses(int account_id){
-        try {
-            StringBuilder sb = new StringBuilder();
-            sb.append("select a.courses from Account a where a.id =:id");
-            String sql = sb.toString();
-            Query query = em.createQuery(sql, Collection.class);
-            query.setParameter("id", account_id);
-            return (List<Course>) query.getResultList();
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-        return null;
-    }
 
     /**
      * Get a number of Subjects to feature on Home page
