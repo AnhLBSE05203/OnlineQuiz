@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Account")
+@Where(clause = "status != 0")
 public class Account implements UserDetails {
 
     private static final long serialVersionUID = -3164082858501464263L;
@@ -86,6 +88,26 @@ public class Account implements UserDetails {
         }
 
         return authorities;
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
+        role.getAccounts().add(this);
+    }
+
+    public void removeRole(Role role) {
+        roles.remove(role);
+        role.getAccounts().remove(this);
+    }
+
+    public void addCourse(Course course) {
+        courses.add(course);
+        course.getAccounts().add(this);
+    }
+
+    public void removeCourse(Course course) {
+        courses.remove(course);
+        course.getAccounts().remove(this);
     }
 
     @Override

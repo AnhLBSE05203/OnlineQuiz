@@ -37,4 +37,14 @@ public class Course {
     private List<Account> accounts;
     @OneToMany(mappedBy = "course")
     private List<PurchaseHistory> purchaseHistories;
+
+    public void addAccount(Account account) {
+        accounts.add(account);
+        account.getCourses().add(this);
+    }
+
+    public void removeAccount(Account account) {
+        accounts.remove(account);
+        account.getCourses().remove(this);
+    }
 }

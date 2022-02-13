@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.SubjectRepository;
+import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,17 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<Subject> getAllMySubject(int account_id) {
-        List<Integer> list_package_id = subjectRepository.getPackageId(account_id);
+        List<Course> list_course = subjectRepository.getCourses(account_id);
         List<Subject> list_subject = new ArrayList<>();
-        for (int i = 0; i < list_package_id.size(); i++){
-            List<Subject> list = subjectRepository.getSubjectByPackageId(list_package_id.get(i));
-            for (int j = 0; j < list.size(); j++){
-                list_subject.add(list.get(j));
-            }
+        for (int i = 0; i < list_course.size(); i++){
+             list_subject.add(list_course.get(i).getSubject());
         }
+
         return list_subject;
     }
 
     @Override
-    public List<Subject> getTopSubjects(int number) {
-        return subjectRepository.getTopSubjects(number);
+    public List<Subject> getFeaturedSubjects(int number) {
+        return subjectRepository.getFeaturedSubjects(number);
     }
 }

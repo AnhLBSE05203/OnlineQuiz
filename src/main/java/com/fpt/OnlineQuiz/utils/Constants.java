@@ -7,7 +7,7 @@ public class Constants {
 
     //account constants
     public static final int STATUS_CONFIRMED = 1;
-    public static final int STATUS_UNCONFIRMED = 0;
+    public static final int STATUS_UNCONFIRMED = 2;
     public static final int GENDER_MALE = 0;
     public static final int GENDER_FEMALE = 1;
     public static final String ROLE_USER = "ROLE_USER";
