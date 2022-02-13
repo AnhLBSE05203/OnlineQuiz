@@ -2,11 +2,14 @@ package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.CourseRepository;
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
+import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.service.CourseService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Query;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -29,5 +32,10 @@ public class CourseServiceImpl implements CourseService {
             }
         }
         return courses;
+    }
+
+    @Override
+    public List<Course> getCoursesRegistration(int account_id) {
+        return courseRepository.getCourses(account_id);
     }
 }
