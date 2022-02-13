@@ -67,7 +67,7 @@ public class WebSecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 			sharedConfigure(http);
 			http.formLogin().permitAll()
-					.loginProcessingUrl(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN_PROCESS)
+					.loginProcessingUrl(Constants.LINK_LOGIN_PROCESS)
 					.failureUrl(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN_FAILURE)
 					.defaultSuccessUrl(Constants.LINK_HOME)
 					.loginPage(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN)
@@ -99,14 +99,14 @@ public class WebSecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 			sharedConfigure(http);
 			http.formLogin().permitAll()
-					.loginProcessingUrl(Constants.LINK_ADMIN_LOGIN_PROCESS)
+					.loginProcessingUrl(Constants.LINK_LOGIN_PROCESS)
 					.failureUrl(Constants.LINK_ADMIN_LOGIN_FAILURE)
 					.defaultSuccessUrl(Constants.LINK_ADMIN_DASHBOARD)
 					.loginPage(Constants.LINK_ADMIN_LOGIN)
 					.and()
 					.exceptionHandling().accessDeniedPage(Constants.LINK_ADMIN_LOGIN)
 					.and()
-					.logout().logoutRequestMatcher(new AntPathRequestMatcher(Constants.LINK_LOGOUT))
+					.logout().logoutRequestMatcher(new AntPathRequestMatcher(Constants.LINK_ADMIN_LOGOUT))
 					.deleteCookies("remember-me", "JSESSIONID")
 					.invalidateHttpSession(true)
 					.clearAuthentication(true)
