@@ -16,6 +16,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
     private SubjectRepository subjectRepository;
 
     @Override
