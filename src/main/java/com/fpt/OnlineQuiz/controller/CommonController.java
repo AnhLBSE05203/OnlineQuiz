@@ -2,6 +2,7 @@ package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
 import com.fpt.OnlineQuiz.dto.ExpertFeaturedDTO;
+import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.CourseService;
 import com.fpt.OnlineQuiz.service.ExpertService;
@@ -33,6 +34,10 @@ public class CommonController {
      */
     @GetMapping(value = {Constants.STRING_EMPTY, Constants.LINK_HOME})
     String homePage(Model model, Principal principal) {
+        if(principal != null){
+            Account account = (Account) principal;
+            System.out.println(account.getEmail());
+        };
         model.addAttribute("principal", principal);
 
         List<CourseFeaturedDTO> courseFeatured = courseService.getFeaturedCourses(Constants.HOME_PAGE_COURSE_NUMBER);
