@@ -16,6 +16,7 @@ import java.util.List;
 @Table(name = "Subject")
 public class Subject {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subjectId")
     private int id;
     @Column(name = "subjectName")
@@ -38,4 +39,14 @@ public class Subject {
     private List<Lesson> lessons;
     @ManyToMany(mappedBy = "subjects")
     private List<Expert> experts;
+
+    public void addExpert(Expert expert) {
+        experts.add(expert);
+        expert.getSubjects().add(this);
+    }
+
+    public void removeExpert(Expert expert) {
+        experts.remove(expert);
+        expert.getSubjects().remove(this);
+    }
 }

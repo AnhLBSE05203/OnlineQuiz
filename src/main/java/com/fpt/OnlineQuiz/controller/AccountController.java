@@ -19,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.yaml.snakeyaml.scanner.Constant;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -127,14 +126,12 @@ public class AccountController {
      */
     @GetMapping(Constants.LINK_REGISTER)
     public String showRegisterPage(Model model){
-        //to do - create register page
         model.addAttribute("registerDTO", new RegisterDTO());
         return Constants.PAGE_REGISTER;
     }
 
     @GetMapping(Constants.LINK_CHANGE_PASSWORD)
     public String showChangePasswordPage(Model model){
-        //to do - create register page
         return Constants.PAGE_CHANGE_PASSWORD;
     }
     /**
@@ -199,8 +196,12 @@ public class AccountController {
             sb.append(Constants.LINK_REGISTER);
             return sb.toString();
         }
-        model.addAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_REGISTER_SUCCESS);
-        return Constants.PAGE_REGISTER;
+        redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_REGISTER_SUCCESS);
+        StringBuilder sb = new StringBuilder();
+        sb.append(Constants.LINK_REDIRECT);
+        sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+        sb.append(Constants.LINK_REGISTER);
+        return sb.toString();
     }
 
     /**

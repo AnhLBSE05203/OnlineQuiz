@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Table(name = "PurchaseHistory")
 public class PurchaseHistory {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "purchaseId")
     private int id;
     @ManyToOne

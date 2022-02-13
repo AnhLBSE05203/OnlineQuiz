@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Getter
@@ -23,6 +24,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Role")
+@Where(clause = "status != 0")
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,4 +50,25 @@ public class Role {
 	private List<Account> accounts;
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
 	private List<Screen> screens;
+
+	public void addAccount(Account account) {
+		accounts.add(account);
+		account.getRoles().add(this);
+	}
+
+	public void removeRole(Account account) {
+		accounts.remove(account);
+		account.getRoles().remove(this);
+	}
+
+	public void addScreen(Screen screen) {
+		screens.add(screen);
+		screen.getRoles().add(this);
+	}
+
+	public void removeScreen(Screen screen) {
+		screens.remove(screen);
+		screen.getRoles().remove(this);
+	}
+
 }

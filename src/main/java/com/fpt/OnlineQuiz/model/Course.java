@@ -17,6 +17,7 @@ import java.util.List;
 @Table(name = "Course")
 public class Course {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "courseId")
     private int id;
     @Column(name = "name")
@@ -36,4 +37,14 @@ public class Course {
     private List<Account> accounts;
     @OneToMany(mappedBy = "course")
     private List<PurchaseHistory> purchaseHistories;
+
+    public void addAccount(Account account) {
+        accounts.add(account);
+        account.getCourses().add(this);
+    }
+
+    public void removeAccount(Account account) {
+        accounts.remove(account);
+        account.getCourses().remove(this);
+    }
 }

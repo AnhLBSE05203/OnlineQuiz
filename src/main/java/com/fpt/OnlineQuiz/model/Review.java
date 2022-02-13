@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Table(name = "Review")
 public class Review {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reviewId")
     private int id;
     @Column(name = "comment")
