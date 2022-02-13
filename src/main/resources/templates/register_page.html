@@ -60,7 +60,7 @@
             </div>
             <div class="form-input">
                 <label>Email Address</label>
-                <input type="email" th:field="*{email}" placeholder="Email Address" required>
+                <input type="email" th:field="*{email}" placeholder="Email Address" required oninput="checkEmailValid(this);">
             </div>
             <div class="form-input">
                 <label>Phone</label>
@@ -68,7 +68,7 @@
             </div>
             <div class="form-input">
                 <label>Password</label>
-                <input type="password" th:field="*{password}" placeholder="Password" id="password" name="password" required>
+                <input type="password" th:field="*{password}" placeholder="Password" id="password" name="password" required oninput="checkPasswordValid(this);">
             </div>
             <div class="form-input">
                 <label>Confirm Password</label>
