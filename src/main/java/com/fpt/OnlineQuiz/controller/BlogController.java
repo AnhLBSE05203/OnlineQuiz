@@ -21,6 +21,7 @@ public class BlogController {
     public String getAllBlog(ModelMap modelMap){
         //data send to html:ModelMap
         ArrayList<Blog> listBlog = blogRepository.getAllBlog();
+        System.out.println(listBlog.get(0));
         modelMap.addAttribute("listBlog",listBlog);
         return "blog";
     }
