@@ -33,6 +33,7 @@ public class SubjectRepository {
             String sql = sb.toString();
             Query query = em.createQuery(sql, Collection.class);
             query.setParameter("id", account_id);
+            query.setMaxResults(3);
             return (List<Course>) query.getResultList();
         }catch (Exception ex){
             ex.printStackTrace();

@@ -16,17 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-@RequestMapping(path = "/user/mysubject")
+@RequestMapping(path = "/user")
 public class SubjectController {
 
     @Autowired
     private SubjectService subjectService;
 
-    @RequestMapping(value = "",method = RequestMethod.GET)
+    @GetMapping(path = "/mysubject")
     public String showMySubjectPage(ModelMap modelMap){
         List<Subject> list = subjectService.getAllMySubject(3);
-        System.out.println(list.get(0));
-
         modelMap.addAttribute("my_subject_list", list);
         return "my_subject_page";
     }
