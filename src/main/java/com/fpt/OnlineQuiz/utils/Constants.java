@@ -60,7 +60,7 @@ public class Constants {
     public static final String PAGE_ACCESS_DENIED = "access_denied_page";
     public static final String PAGE_FORGOT_PASSWORD = "forgot_password_page";
     public static final String PAGE_RESET_PASSWORD = "reset_password_page";
-    public static final String PAGE_CHANGE_PASSWORD = "change_password";
+    public static final String PAGE_CHANGE_PASSWORD = "change_password_page";
     public static final String PAGE_PROFILE = "profile_page";
     public static final String PAGE_EDIT_PROFILE = "editProfile_page";
 

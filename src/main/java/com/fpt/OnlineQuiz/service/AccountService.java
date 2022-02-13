@@ -45,4 +45,15 @@ public interface AccountService extends UserDetailsService {
      * @param account User's Account
      */
     void updateAccount(Account account);
+
+    /**
+     * Update Account
+     * @param account User's Account
+     */
+    void updatePassword(Account account, String newPassword);
+    /**
+     * Update Account
+     * @param account User's Account
+     */
+
 }
