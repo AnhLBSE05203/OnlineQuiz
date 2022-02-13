@@ -51,4 +51,13 @@ public class BlogRepository{
             return null;
         }
     }
+    public Long countBlog(){
+        try {
+            String sql = "Select COUNT(a) FROM Blog a";
+            Query query = em.createQuery(sql,Long.class);
+            return (Long) query.getSingleResult();
+        }catch (NoResultException e){
+            return 0l;
+        }
+    }
 }
