@@ -12,4 +12,5 @@ public interface BlogService {
      */
     ArrayList<Blog> getAllBlog();
 
+    Blog getDetailBlog(Integer blogId);
 }

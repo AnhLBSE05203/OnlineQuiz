@@ -60,4 +60,25 @@ public class BlogRepository{
             return 0l;
         }
     }
+
+    public Blog getDetailBlog(int id) {
+        try {
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_DETAIL_BLOG)));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while ((line = buffer.readLine()) != null) {
+                sb.append(" ").append(line);
+            }
+            String sql = sb.toString();
+            //String sql = "SELECT a FROM Blog a";
+            Query query = em.createQuery(sql, Blog.class);
+            query.setParameter("id", id);
+            Blog blog = (Blog) query.getSingleResult();
+            return blog;
+        } catch (NoResultException | IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
