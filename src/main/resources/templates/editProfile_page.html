@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -509,15 +509,15 @@
             <a href="#">
               <img src="https://pbs.twimg.com/profile_images/534863086276988928/bX3juDCC_400x400.jpeg" alt="">
             </a>
-            <h1>Bruce Lee</h1>
-            <p>brucelee@gmail.com</p>
+            <h1 name="name" th:text="${name}">Bruce Lee</h1>
+            <p name="email" th:text="${email}">brucelee@gmail.com</p>
           </div>
 
           <ul class="nav nav-pills nav-stacked">
             <li><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
             <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
-            <li><a href="/account/changePassword"> <i class="fa fa-key"></i> Change Password</a></li>
-            <li  class="active"><a href="#"> <i class="fa fa-edit"></i> Edit Profile</a></li>
+            <li><a th:href="@{/account/changePassword(email=${email})}"> <i class="fa fa-key"></i> Change Password</a></li>
+            <li><a th:href="@{/account/edit-profile(email=${email})}"> <i class="fa fa-edit"></i> Edit Profile</a></li>
           </ul>
         </div>
       </div>
@@ -550,33 +550,37 @@
             You put water into a bottle and it becomes the bottle. You put it in a teapot, it becomes the teapot.
             Now, water can flow or it can crash. Be water, my friend.
           </div>
-          <div class="panel-body bio-graph-info">
+          <form class="form-default" th:action="@{/account/edit-profile}" method="POST" th:object="${registerDTO}">
+            <input type="hidden" name="mail" th:value="${email}" />
+            <div class="panel-body bio-graph-info">
             <h1>Bio Graph</h1>
             <div class="row">
               <div class="bio-row">
-                <p><span>First Name </span>: <input type="text" value=""></p>
+                Full Name:
+                <p><input type="text" name = "nameI"th:value="${name}"></p>
               </div>
               <div class="bio-row">
-                <p><span>Last Name </span>: <input type="text" value=""></p>
+                Gender:<br>
+                <input type="radio" th:field="*{gender}" value="0" >
+                Male
+                <input type="radio" th:field="*{gender}" value="1">
+                Female
               </div>
               <div class="bio-row">
-                <p><span>Country </span>: <input type="text" value=""></p>
+                Email:
+                <p><input type="email" name ="emailI" th:value="${email}"></p>
               </div>
               <div class="bio-row">
-                <p><span>Birthday</span>: <input type="date" value=""></p>
-              </div>
-              <div class="bio-row">
-                <p><span>Email </span>: <input type="email" value=""></p>
-              </div>
-              <div class="bio-row">
-                <p><span>Phone </span>: <input type="text" value="">
+                Phone:
+                <p><input type="text" name ="phoneI" th:value="${phone}">
                 </p>
               </div>
                 <div >
-                      <input type="button" class="btn btn-outline-success" value="Save Changes">
+                      <input type="submit" name="submit" class="btn btn-outline-success" value="Save Changes">
                 </div>
             </div>
           </div>
+          </form>
         </div>
         <div>
           <div class="row">

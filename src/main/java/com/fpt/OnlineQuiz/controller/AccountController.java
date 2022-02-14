@@ -160,14 +160,14 @@ public class AccountController {
             sb.append(Constants.LINK_REGISTER);
             return sb.toString();
         }
-        if(!isPasswordValid(registerDTO.getPassword())){
+        if (!isPasswordValid(registerDTO.getPassword())) {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_PASSWORD_INVALID);
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
             sb.append(Constants.LINK_REGISTER);
         }
-        if(!isEmailValid(registerDTO.getEmail())){
+        if (!isEmailValid(registerDTO.getEmail())) {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_EMAIL_INVALID);
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
@@ -235,7 +235,6 @@ public class AccountController {
     public String showChangePasswordPage(@Param(value = "email") String email, Model model) {
         Account account = accountService.findAccountByEmail(email);
         model.addAttribute("email", email);
-        model.addAttribute(Constants.ATTRIBUTE_MESSAGE, "Please fill all input");
         return Constants.PAGE_CHANGE_PASSWORD;
     }
 
@@ -254,15 +253,21 @@ public class AccountController {
         String oldPassInput = request.getParameter("oldpass");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        if (passwordEncoder.matches(oldPassInput,oldPass)) {
+        if (passwordEncoder.matches(oldPassInput, oldPass)) {
             accountService.updatePassword(account, request.getParameter("newpass"));
-            return Constants.PAGE_PROFILE;
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_PROFILE+"?email=");
+            sb.append(email);
+            return sb.toString();
         } else {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, "Password is wrong.Please try again");
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_CHANGE_PASSWORD);
+            sb.append(Constants.LINK_CHANGE_PASSWORD+"?email=");
+            sb.append(email);
             return sb.toString();
         }
 
@@ -279,12 +284,63 @@ public class AccountController {
     public String showProfilePage(@Param(value = "email") String email, Model model) {
         Account account = accountService.findAccountByEmail(email);
         model.addAttribute("email", email);
-        model.addAttribute("name",account.getFullName());
-        model.addAttribute("phone",account.getPhone());
-        model.addAttribute("gender",account.getGender());
+        model.addAttribute("name", account.getFullName());
+        model.addAttribute("phone", account.getPhone());
+        model.addAttribute("gender", account.getGender());
         return Constants.PAGE_PROFILE;
     }
 
+    /**
+     * Display Profile Page
+     *
+     * @param model spring's model class
+     * @param email user's email
+     * @return
+     */
+    @GetMapping(Constants.LINK_EDIT_PROFILE)
+    public String showEditProfilePage(@Param(value = "email") String email, Model model) {
+        Account account = accountService.findAccountByEmail(email);
+        model.addAttribute("email", email);
+        model.addAttribute("registerDTO", new RegisterDTO());
+        model.addAttribute("name", account.getFullName());
+        model.addAttribute("phone", account.getPhone());
+        model.addAttribute("gender", account.getGender());
+        return Constants.PAGE_EDIT_PROFILE;
+    }
+
+    /**
+     * Display Profile Page
+     *
+     * @param model spring's model class
+     * @param registerDTO user's input gender
+     * @return
+     */
+    @PostMapping(Constants.LINK_EDIT_PROFILE)
+    public String processEditProfilePage(@ModelAttribute RegisterDTO registerDTO, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        String email = request.getParameter("mail");
+        Account account = accountService.findAccountByEmail(email);
+        if (!isEmailValid(request.getParameter("emailI"))) {
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_EMAIL_INVALID);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_EDIT_PROFILE + "?email=");
+            sb.append(account.getEmail());
+            return sb.toString();
+        } else {
+            account.setEmail(request.getParameter("emailI"));
+            account.setPhone(request.getParameter("phoneI"));
+            account.setFullName(request.getParameter("nameI"));
+            account.setGender(registerDTO.getGender());
+            accountService.updateAccount(account);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_PROFILE + "?email=");
+            sb.append(account.getEmail());
+            return sb.toString();
+        }
+    }
     /**
      * Process Registration Confirm
      *
@@ -364,7 +420,7 @@ public class AccountController {
             sb.append(Constants.LINK_RESET_PASSWORD);
             return sb.toString();
         }
-        if(!isPasswordValid(password)){
+        if (!isPasswordValid(password)) {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_PASSWORD_INVALID);
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
@@ -411,6 +467,7 @@ public class AccountController {
     public boolean isEmailValid(String email) {
         return Pattern.matches(Constants.REGEX_EMAIL, email);
     }
+
     public boolean isPasswordValid(String password) {
         return Pattern.matches(Constants.REGEX_PASSWORD, password);
     }

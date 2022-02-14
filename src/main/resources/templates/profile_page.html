@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -524,8 +524,8 @@
                             <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
                             <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span
                                     class="label label-warning pull-right r-activity">9</span></a></li>
-                            <li><a href="/account/changePassword"> <i class="fa fa-key"></i> Change Password</a></li>
-                            <li><a href="/account/edit-profile"> <i class="fa fa-edit"></i> Edit Profile</a></li>
+                            <li><a th:href="@{/account/changePassword(email=${email})}"> <i class="fa fa-key"></i> Change Password</a></li>
+                            <li><a th:href="@{/account/edit-profile(email=${email})}"> <i class="fa fa-edit"></i> Edit Profile</a></li>
                         </ul>
                     </div>
                 </div>
@@ -567,7 +567,15 @@
                                     Full Name: <p name="name" th:text="${name}"><span></span></p>
                                 </div>
                                 <div class="bio-row">
-                                    Gender: <p name="gender" th:text="${gender}"><span></span></p>
+                                    Gender:
+                                    <p name="gender" id="gender" th:text="${gender}"><span></span></p>
+                                    <script>
+                                        if (document.getElementById("gender").innerText = 1) {
+                                            document.getElementById("gender").innerText = "Female";
+                                        }else {
+                                            document.getElementById("gender").innerText = "Male";
+                                        }
+                                    </script>
                                 </div>
                                 <div class="bio-row">
                                     Email: <p name="email" th:text="${email}"><span></span></p>
@@ -753,7 +761,6 @@
 <div id="back-top">
     <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
-
 
 <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
 <!-- Jquery, Popper, Bootstrap -->
