@@ -24,6 +24,10 @@ public class Constants {
     public static final String MESSAGE_ERROR_SEND_EMAIL = "Error while sending email";
     public static final String MESSAGE_CHANGE_PASSWORD_SUCCESS = "You have successfully changed your password.";
     public static final String MESSAGE_ACCOUNT_NOT_FOUND = "Account not found!";
+    public static final String MESSAGE_PASSWORD_INVALID = "Invalid Password! " +
+                                                            "Password need at least 1 upper case, " +
+                                                            "1 special character & length >= 8";
+    public static final String MESSAGE_EMAIL_INVALID = "Invalid Email Input!";
     //token types
     public static final String TOKEN_TYPE_RESET_PASSWORD = "TOKEN_RESET_PASSWORD";
     public static final String TOKEN_TYPE_CONFIRM_REGISTRATION = "TOKEN_CONFIRM";
@@ -35,14 +39,19 @@ public class Constants {
     public static final String MAIL_SUBJECT_RESET_PASSWORD = "Here's the link to reset your password";
     public static final String MAIL_SUBJECT_CONFIRM_REGISTRATION = "Here's the link to confirm your registration";
 
+    //regex
+    public static final String REGEX_EMAIL = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+    public static final String REGEX_PASSWORD = "^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[#?!@$%^&*\\-_]).{8,}$";
     //common links
-    public static final String LINK_LOGIN_PROCESS = "/login";
+
+
     //links
     public static final String LINK_REDIRECT = "redirect:";
     public static final String LINK_ACCOUNT_CONTROLLER = "/account";
     public static final String LINK_LOGIN = "/login";
-    public static final String LINK_LOGIN_FAILURE = "/login?error=true";
-    public static final String LINK_LOGOUT = "/logout";
+    public static final String LINK_ACCOUNT_LOGIN_PROCESS = "/account/login";
+    public static final String LINK_ACCOUNT_LOGIN_FAILURE = "/account/login?error=true";
+    public static final String LINK_ACCOUNT_LOGOUT = "/account/logout";
     public static final String LINK_REGISTER = "/register";
     public static final String LINK_HOME = "/home";
     public static final String LINK_ACCESS_DENIED = "/access_denied";
@@ -77,6 +86,7 @@ public class Constants {
     //links admin
     public static final String LINK_ADMIN_CONTROLLER = "/admin";
     public static final String LINK_ADMIN_LOGIN = "/admin/login";
+    public static final String LINK_ADMIN_LOGIN_PROCESS = "/admin/login";
     public static final String LINK_ADMIN_LOGIN_FAILURE = "/admin/login?error=true";
     public static final String LINK_ADMIN_DASHBOARD = "/admin/dashboard";
     public static final String LINK_ADMIN_LOGOUT = "/admin/logout";

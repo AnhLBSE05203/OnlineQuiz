@@ -9,6 +9,7 @@ import com.fpt.OnlineQuiz.service.ExpertService;
 import com.fpt.OnlineQuiz.service.SubjectService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,10 +36,8 @@ public class CommonController {
     @GetMapping(value = {Constants.STRING_EMPTY, Constants.LINK_HOME})
     String homePage(Model model, Principal principal) {
         if(principal != null){
-            Account account = (Account) principal;
-            System.out.println(account.getEmail());
+            System.out.println(principal.getName());
         };
-        model.addAttribute("principal", principal);
 
         List<CourseFeaturedDTO> courseFeatured = courseService.getFeaturedCourses(Constants.HOME_PAGE_COURSE_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_COURSE_FEATURED, courseFeatured);

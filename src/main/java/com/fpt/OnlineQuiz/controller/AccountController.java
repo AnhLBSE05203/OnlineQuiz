@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping(Constants.LINK_ACCOUNT_CONTROLLER)
@@ -158,6 +159,20 @@ public class AccountController {
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
             sb.append(Constants.LINK_REGISTER);
             return sb.toString();
+        }
+        if(!isPasswordValid(registerDTO.getPassword())){
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_PASSWORD_INVALID);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_REGISTER);
+        }
+        if(!isEmailValid(registerDTO.getEmail())){
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_EMAIL_INVALID);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_REGISTER);
         }
         account = new Account();
         account.setEmail(registerDTO.getEmail().toLowerCase());
@@ -348,6 +363,14 @@ public class AccountController {
             sb.append(Constants.LINK_RESET_PASSWORD);
             return sb.toString();
         }
+        if(!isPasswordValid(password)){
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_PASSWORD_INVALID);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_RESET_PASSWORD);
+            return sb.toString();
+        }
         Token token = tokenService.findByTokenString(tokenString);
         if (token == null) {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_INVALID_TOKEN);
@@ -382,5 +405,12 @@ public class AccountController {
         sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
         sb.append(Constants.LINK_RESET_PASSWORD);
         return sb.toString();
+    }
+
+    public boolean isEmailValid(String email) {
+        return Pattern.matches(Constants.REGEX_EMAIL, email);
+    }
+    public boolean isPasswordValid(String password) {
+        return Pattern.matches(Constants.REGEX_PASSWORD, password);
     }
 }
