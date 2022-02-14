@@ -43,6 +43,7 @@
                                 <th>Title</th>
                                 <th>Content</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody th:each="blog : ${listBlog}">
@@ -51,6 +52,16 @@
                                 <td th:text="${blog.getTitle()}"></td>
                                 <td th:text="${#strings.abbreviate(blog.content,100)} "></td>
                                 <td th:text="${blog.getStatus()}"></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModal1">
+                                        Detail
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModal1">
+                                        Delete
+                                    </button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
