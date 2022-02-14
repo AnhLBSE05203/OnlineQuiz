@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
+import javax.security.auth.login.AccountException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -219,33 +220,41 @@ public class AccountController {
     public String showChangePasswordPage(@Param(value = "email") String email, Model model) {
         Account account = accountService.findAccountByEmail(email);
         model.addAttribute("email", email);
+        model.addAttribute(Constants.ATTRIBUTE_MESSAGE, "Please fill all input");
         return Constants.PAGE_CHANGE_PASSWORD;
     }
 
     /**
      * Process Registration Submission
      *
-     * @param model       spring's model class
-     * @param request     user's request
-     * @param email user's email
+     * @param model   spring's model class
+     * @param request user's request
      * @return
      */
     @PostMapping(Constants.LINK_CHANGE_PASSWORD)
-    public String processChangePassword(Model model, HttpServletRequest request,@Param(value = "email") String email) {
+    public String processChangePassword(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        String email = request.getParameter("mail");
         Account account = accountService.findAccountByEmail(email);
         String oldPass = account.getPassword();
-        while (true){
-        if(oldPass != request.getParameter("oldpass")){
-            model.addAttribute(Constants.ATTRIBUTE_MESSAGE, "Password is wrong.Please try again");
+        String oldPassInput = request.getParameter("oldpass");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(oldPassInput);
+
+        if (!passwordEncoder.matches(oldPassInput,encodedPassword)) {
+            // model.addAttribute(Constants.ATTRIBUTE_MESSAGE, "Password is wrong.Please try again");
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, "Password is wrong.Please try again");
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_CHANGE_PASSWORD);
+            return sb.toString();
+        } else {
+            accountService.updatePassword(account, request.getParameter("newpass"));
+            return Constants.PAGE_PROFILE;
         }
-        else {
-            accountService.updatePassword(account,request.getParameter("newpass"));
-            model.addAttribute(Constants.ATTRIBUTE_MESSAGE, "Change Password Successfully !");
-            break;
-        }
-        }
-        return Constants.PAGE_PROFILE;
+
     }
+
     /**
      * Display Profile Page
      *
@@ -259,6 +268,7 @@ public class AccountController {
         model.addAttribute("email", email);
         return Constants.PAGE_PROFILE;
     }
+
     /**
      * Process Registration Confirm
      *
