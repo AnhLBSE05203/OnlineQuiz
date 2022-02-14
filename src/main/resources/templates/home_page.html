@@ -10,20 +10,7 @@
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
 
     <!-- CSS here -->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/slicknav.css}">
-    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
-    <link rel="stylesheet" th:href="@{/css/progressbar_barfiller.css}">
-    <link rel="stylesheet" th:href="@{/css/gijgo.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animated-headline.css}">
-    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
-    <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
-    <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
-    <link rel="stylesheet" th:href="@{/css/slick.css}">
-    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <div th:replace="components/header_footer.html :: common-style"></div>
 
     <link rel="stylesheet" th:href="@{/css/home_page.css}">
 </head>
@@ -43,7 +30,7 @@
     <!-- Preloader Start -->
     <header>
         <!-- Header Start -->
-        <div th:insert="components/header_footer.html :: header"></div>
+        <div th:insert="components/header_footer.html :: user-header"></div>
         <!-- Header End -->
     </header>
     <main>
@@ -314,55 +301,14 @@
         </section>
         <!-- About Area End -->
     </main>
-    <footer th:replace="components/header_footer.html :: footer">
+    <footer th:replace="components/header_footer.html :: user-footer">
     </footer>
   <!-- Scroll Up -->
     <div th:insert="components/header_footer.html :: scroll-up">
     </div>
 
 <!-- JS here -->
-    <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
-    <!-- Jquery, Popper, Bootstrap -->
-    <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
-    <script th:src="@{/js/popper.min.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
-    <!-- Jquery Mobile Menu -->
-    <script th:src="@{/js/jquery.slicknav.min.js}"></script>
-
-    <!-- Video bg -->
-    <script th:src="@{/js/jquery.vide.js}"></script>
-
-    <!-- Jquery Slick , Owl-Carousel Plugins -->
-    <script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/slick.min.js}"></script>
-    <!-- One Page, Animated-HeadLin -->
-    <script th:src="@{/js/wow.min.js}"></script>
-    <script th:src="@{/js/animated.headline.js}"></script>
-    <script th:src="@{/js/jquery.magnific-popup.js}"></script>
-
-    <!-- Date Picker -->
-    <script th:src="@{/js/gijgo.min.js}"></script>
-    <!-- Nice-select, sticky -->
-    <script th:src="@{/js/jquery.nice-select.min.js}"></script>
-    <script th:src="@{/js/jquery.sticky.js}"></script>
-    <!-- Progress -->
-    <script th:src="@{/js/jquery.barfiller.js}"></script>
-
-    <!-- counter , waypoint,Hover Direction -->
-    <script th:src="@{/js/jquery.counterup.min.js}"></script>
-    <script th:src="@{/js/waypoints.min.js}"></script>
-    <script th:src="@{/js/jquery.countdown.min.js}"></script>
-    <script th:src="@{/js/hover-direction-snake.min.js}"></script>
-
-    <!-- contact js -->
-    <script th:src="@{/js/contact.js}"></script>
-    <script th:src="@{/js/jquery.form.js}"></script>
-    <script th:src="@{/js/jquery.validate.min.js}"></script>
-    <script th:src="@{/js/mail-script.js}"></script>
-    <script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
-
-    <!-- Jquery Plugins, main Jquery -->
-    <script th:src="@{/js/plugins.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
+    <th:block th:insert="components/header_footer.html :: common-script">
+    </th:block>
 </body>
 </html>

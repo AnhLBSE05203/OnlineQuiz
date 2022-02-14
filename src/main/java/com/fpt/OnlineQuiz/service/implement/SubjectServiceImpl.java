@@ -21,10 +21,20 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<Subject> getAllMySubject(int account_id) {
-        List<Course> list_course = courseRepository.getCourses(account_id);
+        List<Course> list_course = courseRepository.getTop3Courses(account_id);
         List<Subject> list_subject = new ArrayList<>();
         for (int i = 0; i < list_course.size(); i++){
              list_subject.add(list_course.get(i).getSubject());
+        }
+        return list_subject;
+    }
+
+    @Override
+    public List<Subject> getNext3Subject(int account_id, int amount) {
+        List<Course> list_course = courseRepository.getNext3Courses(account_id, 3);
+        List<Subject> list_subject = new ArrayList<>();
+        for (int i = 0; i < list_course.size(); i++){
+            list_subject.add(list_course.get(i).getSubject());
         }
         return list_subject;
     }

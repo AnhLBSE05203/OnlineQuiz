@@ -11,5 +11,7 @@ public interface BlogService {
      * @return
      */
     ArrayList<Blog> getAllBlog();
-
+    ArrayList<Blog> getBlogByIndexPage(int indexPage);
+    Long countBlog();
+    Blog getDetailBlog(Integer blogId);
 }

@@ -8,5 +8,7 @@ import java.util.List;
 public interface SubjectService {
     List<Subject>  getAllMySubject(int account_id);
 
+    List<Subject> getNext3Subject(int account_id, int amount);
+
     List<Subject> getFeaturedSubjects(int number);
 }
