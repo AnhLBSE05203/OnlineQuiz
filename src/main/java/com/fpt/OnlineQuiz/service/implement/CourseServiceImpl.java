@@ -36,6 +36,6 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> getCoursesRegistration(int account_id) {
-        return courseRepository.getCourses(account_id);
+        return courseRepository.getTop3Courses(account_id);
     }
 }

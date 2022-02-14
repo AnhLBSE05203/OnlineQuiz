@@ -92,7 +92,7 @@
             <!-- Single Slider -->
             <div class="single-slider slider-height2">
                 <div class="container">
-                    <div class="row">
+                    <div class="row" id="content">
                         <div class="col-xl-8 col-lg-11 col-md-12">
                             <div class="hero__caption hero__caption2">
                                 <h1 data-animation="bounceIn" data-delay="0.2s">My Subject</h1>
@@ -115,8 +115,8 @@
     <!-- Courses area start -->
     <div class="courses-area section-padding40 fix">
         <div class="container">
-            <div class="row" >
-                <div class="col-lg-4" th:each="subject : ${my_subject_list}">
+            <div class="row" id="listcontent">
+                <div class="col-lg-4 product" th:each="subject : ${my_subject_list}">
                     <div class="properties properties2 mb-30">
                         <div class="properties__card">
                             <div class="properties__img overlay1">
@@ -136,7 +136,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-7 col-lg-8">
                     <div class="section-tittle text-center mt-40">
-                        <a href="#" class="border-btn">Load More</a>
+                        <a class="border-btn" onclick="load()">Load More</a>
                     </div>
                 </div>
             </div>
@@ -324,5 +324,23 @@
 <!-- Jquery Plugins, main Jquery -->
 <script th:src="@{/js/plugins.js}"></script>
 <script th:src="@{/js/main.js}"></script>
+<script>
+
+    function load(){
+        var amount = document.getElementsByClassName("product").length;
+        $.ajax({
+            url:"/user/loadmore",
+            type:"get",
+            data:{
+              amount: amount
+            },
+            success: function (data){
+                var row = document.getElementById("listcontent");
+                row.innerHTML += data;
+            }
+        })
+    }
+
+</script>
 </body>
 </html>
