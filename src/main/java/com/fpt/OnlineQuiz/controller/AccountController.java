@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
+import javax.security.auth.login.AccountException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -42,8 +43,10 @@ public class AccountController {
     private TokenService tokenService;
     @Autowired
     private RoleService roleService;
+
     /**
      * Display Login Page
+     *
      * @param model spring's model class
      * @return Login Page html
      */
@@ -54,6 +57,7 @@ public class AccountController {
 
     /**
      * Display Forgot Password Page
+     *
      * @param model spring's model class
      * @return Forgot Page html
      */
@@ -64,9 +68,10 @@ public class AccountController {
 
     /**
      * Process Forgot Password Function by sending User the Password Reset Token
-     * @param model spring's model class
+     *
+     * @param model   spring's model class
      * @param request user's request
-     * @param email user's email
+     * @param email   user's email
      * @return return the user to Forgot Password page
      */
     @PostMapping(Constants.LINK_FORGOT_PASSWORD)
@@ -103,8 +108,9 @@ public class AccountController {
 
     /**
      * Display Reset Password Page
+     *
      * @param tokenString user's reset password token
-     * @param model spring's model class
+     * @param model       spring's model class
      * @return Reset Password Page html
      */
     @GetMapping(Constants.LINK_RESET_PASSWORD)
@@ -122,31 +128,30 @@ public class AccountController {
 
     /**
      * Display Register Page
+     *
      * @param model spring's model class
      * @return
      */
     @GetMapping(Constants.LINK_REGISTER)
-    public String showRegisterPage(Model model){
+    public String showRegisterPage(Model model) {
         model.addAttribute("registerDTO", new RegisterDTO());
         return Constants.PAGE_REGISTER;
     }
 
-    @GetMapping(Constants.LINK_CHANGE_PASSWORD)
-    public String showChangePasswordPage(Model model){
-        return Constants.PAGE_CHANGE_PASSWORD;
-    }
+
     /**
      * Process Registration Submission
+     *
      * @param registerDTO register DTO
-     * @param model spring's model class
-     * @param request user's request
+     * @param model       spring's model class
+     * @param request     user's request
      * @return
      */
     @PostMapping(Constants.LINK_REGISTER)
     public String processRegistration(@ModelAttribute RegisterDTO registerDTO, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         Account account = accountService.findAccountByEmail(registerDTO.getEmail());
         //add new account
-        if(account != null){
+        if (account != null) {
             String message = "Email is already used!";
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, message);
             StringBuilder sb = new StringBuilder();
@@ -155,14 +160,14 @@ public class AccountController {
             sb.append(Constants.LINK_REGISTER);
             return sb.toString();
         }
-        if(!isPasswordValid(registerDTO.getPassword())){
+        if (!isPasswordValid(registerDTO.getPassword())) {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_PASSWORD_INVALID);
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
             sb.append(Constants.LINK_REGISTER);
         }
-        if(!isEmailValid(registerDTO.getEmail())){
+        if (!isEmailValid(registerDTO.getEmail())) {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_EMAIL_INVALID);
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
@@ -185,7 +190,7 @@ public class AccountController {
         account.setCreatedUserId(1);
         account.setStatus(Constants.STATUS_UNCONFIRMED);
         Role role = roleService.findRoleByName(Constants.ROLE_USER);
-        List<Role> roles= new ArrayList<>();
+        List<Role> roles = new ArrayList<>();
         roles.add(role);
         account.setRoles(roles);
         //create confirmation token
@@ -220,9 +225,127 @@ public class AccountController {
     }
 
     /**
-     * Process Registration Confirm
-     * @param request user's request
+     * Display Change Password Page
+     *
      * @param model spring's model class
+     * @param email user's email
+     * @return
+     */
+    @GetMapping(Constants.LINK_CHANGE_PASSWORD)
+    public String showChangePasswordPage(@Param(value = "email") String email, Model model) {
+        Account account = accountService.findAccountByEmail(email);
+        model.addAttribute("email", email);
+        return Constants.PAGE_CHANGE_PASSWORD;
+    }
+
+    /**
+     * Process Registration Submission
+     *
+     * @param model   spring's model class
+     * @param request user's request
+     * @return
+     */
+    @PostMapping(Constants.LINK_CHANGE_PASSWORD)
+    public String processChangePassword(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        String email = request.getParameter("mail");
+        Account account = accountService.findAccountByEmail(email);
+        String oldPass = account.getPassword();
+        String oldPassInput = request.getParameter("oldpass");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        if (passwordEncoder.matches(oldPassInput, oldPass)) {
+            accountService.updatePassword(account, request.getParameter("newpass"));
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_PROFILE+"?email=");
+            sb.append(email);
+            return sb.toString();
+        } else {
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, "Password is wrong.Please try again");
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_CHANGE_PASSWORD+"?email=");
+            sb.append(email);
+            return sb.toString();
+        }
+
+    }
+
+    /**
+     * Display Profile Page
+     *
+     * @param model spring's model class
+     * @param email user's email
+     * @return
+     */
+    @GetMapping(Constants.LINK_PROFILE)
+    public String showProfilePage(@Param(value = "email") String email, Model model) {
+        Account account = accountService.findAccountByEmail(email);
+        model.addAttribute("email", email);
+        model.addAttribute("name", account.getFullName());
+        model.addAttribute("phone", account.getPhone());
+        model.addAttribute("gender", account.getGender());
+        return Constants.PAGE_PROFILE;
+    }
+
+    /**
+     * Display Profile Page
+     *
+     * @param model spring's model class
+     * @param email user's email
+     * @return
+     */
+    @GetMapping(Constants.LINK_EDIT_PROFILE)
+    public String showEditProfilePage(@Param(value = "email") String email, Model model) {
+        Account account = accountService.findAccountByEmail(email);
+        model.addAttribute("email", email);
+        model.addAttribute("registerDTO", new RegisterDTO());
+        model.addAttribute("name", account.getFullName());
+        model.addAttribute("phone", account.getPhone());
+        model.addAttribute("gender", account.getGender());
+        return Constants.PAGE_EDIT_PROFILE;
+    }
+
+    /**
+     * Display Profile Page
+     *
+     * @param model spring's model class
+     * @param registerDTO user's input gender
+     * @return
+     */
+    @PostMapping(Constants.LINK_EDIT_PROFILE)
+    public String processEditProfilePage(@ModelAttribute RegisterDTO registerDTO, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        String email = request.getParameter("mail");
+        Account account = accountService.findAccountByEmail(email);
+        if (!isEmailValid(request.getParameter("emailI"))) {
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_EMAIL_INVALID);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_EDIT_PROFILE + "?email=");
+            sb.append(account.getEmail());
+            return sb.toString();
+        } else {
+            account.setEmail(request.getParameter("emailI"));
+            account.setPhone(request.getParameter("phoneI"));
+            account.setFullName(request.getParameter("nameI"));
+            account.setGender(registerDTO.getGender());
+            accountService.updateAccount(account);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_PROFILE + "?email=");
+            sb.append(account.getEmail());
+            return sb.toString();
+        }
+    }
+    /**
+     * Process Registration Confirm
+     *
+     * @param request user's request
+     * @param model   spring's model class
      * @return
      */
     @GetMapping(Constants.LINK_CONFIRM_REGISTRATION)
@@ -239,7 +362,7 @@ public class AccountController {
             return sb.toString();
         }
         Token token = tokenService.findByTokenString(tokenString);
-        if(token == null) {
+        if (token == null) {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_INVALID_TOKEN);
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
@@ -274,10 +397,12 @@ public class AccountController {
         sb.append(Constants.LINK_REGISTER);
         return sb.toString();
     }
+
     /**
      * Process Reset Password Function
+     *
      * @param request user's request
-     * @param model spring's model class
+     * @param model   spring's model class
      * @return return to Reset Password Page
      */
     @PostMapping(Constants.LINK_RESET_PASSWORD)
@@ -295,7 +420,7 @@ public class AccountController {
             sb.append(Constants.LINK_RESET_PASSWORD);
             return sb.toString();
         }
-        if(!isPasswordValid(password)){
+        if (!isPasswordValid(password)) {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_PASSWORD_INVALID);
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
@@ -304,7 +429,7 @@ public class AccountController {
             return sb.toString();
         }
         Token token = tokenService.findByTokenString(tokenString);
-        if(token == null) {
+        if (token == null) {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_INVALID_TOKEN);
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
@@ -342,6 +467,7 @@ public class AccountController {
     public boolean isEmailValid(String email) {
         return Pattern.matches(Constants.REGEX_EMAIL, email);
     }
+
     public boolean isPasswordValid(String password) {
         return Pattern.matches(Constants.REGEX_PASSWORD, password);
     }

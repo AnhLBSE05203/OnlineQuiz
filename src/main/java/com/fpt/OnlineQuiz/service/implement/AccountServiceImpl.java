@@ -2,7 +2,6 @@ package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.TokenRepository;
 import com.fpt.OnlineQuiz.model.Token;
-import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,7 +12,6 @@ import com.fpt.OnlineQuiz.dao.AccountRepository;
 import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.service.AccountService;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service
@@ -83,4 +81,13 @@ public class AccountServiceImpl implements AccountService {
 	public void updateAccount(Account account) {
 		accountRepository.updateAccount(account);
 	}
+
+	@Override
+	public void updatePassword(Account account, String newPassword) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(newPassword);
+		account.setPassword(encodedPassword);
+		accountRepository.updateAccount(account);
+	}
+
 }

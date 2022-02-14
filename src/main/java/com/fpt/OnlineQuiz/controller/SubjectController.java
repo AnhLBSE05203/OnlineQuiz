@@ -35,6 +35,7 @@ public class SubjectController {
            @RequestParam("amount")String amount, HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
         int iamount = Integer.parseInt(amount);
+        System.out.println(iamount);
         List<Subject> subjects = subjectService.getNext3Subject(3, iamount);
         for (Subject s : subjects){
             out.println("<div class=\"col-lg-4 product\">\n" +
