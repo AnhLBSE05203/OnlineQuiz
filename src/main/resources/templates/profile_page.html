@@ -59,7 +59,7 @@
                             <div class="main-menu d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li class="active" ><a href="index.html">Home</a></li>
+                                        <li class="active"><a href="index.html">Home</a></li>
                                         <li><a href="courses.html">Courses</a></li>
                                         <li><a href="about.html">About</a></li>
                                         <li><a href="#">Blog</a>
@@ -124,8 +124,8 @@
             -moz-font-smoothing: antialiased;
         }
 
-        .profile-nav, .profile-info{
-            margin-top:30px;
+        .profile-nav, .profile-info {
+            margin-top: 30px;
         }
 
         .profile-nav .user-heading {
@@ -137,10 +137,10 @@
             text-align: center;
         }
 
-        .profile-nav .user-heading.round a  {
+        .profile-nav .user-heading.round a {
             border-radius: 50%;
             -webkit-border-radius: 50%;
-            border: 10px solid rgba(255,255,255,0.3);
+            border: 10px solid rgba(255, 255, 255, 0.3);
             display: inline-block;
         }
 
@@ -182,7 +182,7 @@
             border-left: 5px solid #fff;
         }
 
-        .profile-nav ul > li > a:hover, .profile-nav ul > li > a:focus, .profile-nav ul li.active  a {
+        .profile-nav ul > li > a:hover, .profile-nav ul > li > a:focus, .profile-nav ul li.active a {
             background: #f8f7f5 !important;
             border-left: 5px solid #DB68FF;
             color: #89817f !important;
@@ -193,7 +193,7 @@
             -webkit-border-radius: 0 0 4px 4px;
         }
 
-        .profile-nav ul > li > a > i{
+        .profile-nav ul > li > a > i {
             font-size: 16px;
             padding-right: 10px;
             color: #bcb3aa;
@@ -214,7 +214,7 @@
         }
 
         .profile-info .panel-footer {
-            background-color:#f8f7f5 ;
+            background-color: #f8f7f5;
             border-top: 1px solid #e7ebee;
         }
 
@@ -248,7 +248,7 @@
             width: 50%;
             float: left;
             margin-bottom: 10px;
-            padding:0 15px;
+            padding: 0 15px;
         }
 
         .bio-row p span {
@@ -270,7 +270,7 @@
 
         .bio-desk h4 {
             font-size: 15px;
-            font-weight:400;
+            font-weight: 400;
         }
 
         .bio-desk h4.terques {
@@ -313,12 +313,12 @@
         }
 
         .summary-head p {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
         }
 
         ul.summary-list {
             display: inline-block;
-            padding-left:0 ;
+            padding-left: 0;
             width: 100%;
             margin-bottom: 0;
         }
@@ -330,7 +330,7 @@
         }
 
         ul.summary-list > li > a > i {
-            display:block;
+            display: block;
             font-size: 18px;
             padding-bottom: 5px;
         }
@@ -341,11 +341,11 @@
             color: #818181;
         }
 
-        ul.summary-list > li  {
+        ul.summary-list > li {
             border-right: 1px solid #eaeaea;
         }
 
-        ul.summary-list > li:last-child  {
+        ul.summary-list > li:last-child {
             border-right: none;
         }
 
@@ -368,6 +368,7 @@
         .activity.alt span {
             float: right;
         }
+
         .activity span, .activity.alt span {
             width: 45px;
             height: 45px;
@@ -387,6 +388,7 @@
         .activity.terques h4 {
             color: #8dd7d6;
         }
+
         .activity.purple span {
             background: #b984dc;
         }
@@ -394,6 +396,7 @@
         .activity.purple h4 {
             color: #b984dc;
         }
+
         .activity.blue span {
             background: #90b4e6;
         }
@@ -401,6 +404,7 @@
         .activity.blue h4 {
             color: #90b4e6;
         }
+
         .activity.green span {
             background: #aec785;
         }
@@ -410,7 +414,7 @@
         }
 
         .activity h4 {
-            margin-top:0 ;
+            margin-top: 0;
             font-size: 16px;
         }
 
@@ -442,7 +446,7 @@
         }
 
         .activity-desk .panel {
-            background: #F4F4F4 ;
+            background: #F4F4F4;
             display: inline-block;
         }
 
@@ -450,6 +454,7 @@
         .activity .activity-desk .arrow {
             border-right: 8px solid #F4F4F4 !important;
         }
+
         .activity .activity-desk .arrow {
             border-bottom: 8px solid transparent;
             border-top: 8px solid transparent;
@@ -481,117 +486,116 @@
             margin-top: 10px;
         }
 
-        .activity-desk .album a{
+        .activity-desk .album a {
             margin-right: 10px;
         }
 
-        .activity-desk .album a:last-child{
+        .activity-desk .album a:last-child {
             margin-right: 0px;
         }
     </style>
-<div th:fragment = "">
-    <head>
-        <meta charset="utf-8">
-        <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
-        <!--  All snippets are MIT license http://bootdey.com/license -->
-        <title>user profile bio graph and total sales - Bootdey.com</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <div class="container bootstrap snippets bootdey">
-        <div class="row">
-            <div class="profile-nav col-md-3">
-                <div class="panel">
-                    <div class="user-heading round">
-                        <a href="#">
-                            <img src="https://pbs.twimg.com/profile_images/534863086276988928/bX3juDCC_400x400.jpeg" alt="">
-                        </a>
-                        <h1>Bruce Lee</h1>
-                        <p>brucelee@gmail.com</p>
-                    </div>
-
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-                        <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
-                        <li><a href="/account/changePassword"> <i class="fa fa-key"></i> Change Password</a></li>
-                        <li><a href="/account/edit-profile"> <i class="fa fa-edit"></i> Edit Profile</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="profile-info col-md-9">
-                <!--      <div class="panel">
-                          <form>
-                              <textarea placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area"></textarea>
-                          </form>
-                          <footer class="panel-footer">
-                              <button class="btn btn-warning pull-right">Post</button>
-                              <ul class="nav nav-pills">
-                                  <li>
-                                      <a href="#"><i class="fa fa-map-marker"></i></a>
-                                  </li>
-                                  <li>
-                                      <a href="#"><i class="fa fa-camera"></i></a>
-                                  </li>
-                                  <li>
-                                      <a href="#"><i class=" fa fa-film"></i></a>
-                                  </li>
-                                  <li>
-                                      <a href="#"><i class="fa fa-microphone"></i></a>
-                                  </li>
-                              </ul>
-                          </footer>
-                      </div>-->
-                <div class="panel">
-                    <div class="bio-graph-heading">
-                        Empty your mind, be formless. Shapeless, like water. If you put water into a cup, it becomes the cup.
-                        You put water into a bottle and it becomes the bottle. You put it in a teapot, it becomes the teapot.
-                        Now, water can flow or it can crash. Be water, my friend.
-                    </div>
-                    <div class="panel-body bio-graph-info">
-                        <h1>Bio Graph</h1>
-                        <div class="row">
-                            <div class="bio-row">
-                                <p><span>First Name </span>: Lee</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>Last Name </span>: Bruce</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>Country </span>: America</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>Birthday</span>: November 27, 1940</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>Email </span>: brucelee@gmail.com</p>
-                            </div>
-                            <div class="bio-row">
-                                <p><span>Phone </span>: 88 (02) 123456</p>
-                            </div>
+    <div th:fragment="">
+        <head>
+            <meta charset="utf-8">
+            <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+            <!--  All snippets are MIT license http://bootdey.com/license -->
+            <title>user profile bio graph and total sales - Bootdey.com</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+            <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+            <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        </head>
+        <body>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <div class="container bootstrap snippets bootdey">
+            <div class="row">
+                <div class="profile-nav col-md-3">
+                    <div class="panel">
+                        <div class="user-heading round">
+                            <a href="#">
+                                <img src="https://pbs.twimg.com/profile_images/534863086276988928/bX3juDCC_400x400.jpeg"
+                                     alt="">
+                            </a>
+                            <h1 name="name" th:text="${name}">Bruce Lee</h1>
+                            <p name="email" th:text="${email}">brucelee@gmail.com</p>
                         </div>
+
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+                            <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span
+                                    class="label label-warning pull-right r-activity">9</span></a></li>
+                            <li><a href="/account/changePassword"> <i class="fa fa-key"></i> Change Password</a></li>
+                            <li><a href="/account/edit-profile"> <i class="fa fa-edit"></i> Edit Profile</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <h2 ><a href="#">
-                                        Registration
-                                    </a></h2>
+                <div class="profile-info col-md-9">
+                    <!--      <div class="panel">
+                              <form>
+                                  <textarea placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area"></textarea>
+                              </form>
+                              <footer class="panel-footer">
+                                  <button class="btn btn-warning pull-right">Post</button>
+                                  <ul class="nav nav-pills">
+                                      <li>
+                                          <a href="#"><i class="fa fa-map-marker"></i></a>
+                                      </li>
+                                      <li>
+                                          <a href="#"><i class="fa fa-camera"></i></a>
+                                      </li>
+                                      <li>
+                                          <a href="#"><i class=" fa fa-film"></i></a>
+                                      </li>
+                                      <li>
+                                          <a href="#"><i class="fa fa-microphone"></i></a>
+                                      </li>
+                                  </ul>
+                              </footer>
+                          </div>-->
+                    <div class="panel">
+                        <div class="bio-graph-heading">
+                            Empty your mind, be formless. Shapeless, like water. If you put water into a cup, it becomes
+                            the cup.
+                            You put water into a bottle and it becomes the bottle. You put it in a teapot, it becomes
+                            the teapot.
+                            Now, water can flow or it can crash. Be water, my friend.
+                        </div>
+                        <div class="panel-body bio-graph-info">
+                            <h1>Bio Graph</h1>
+                            <div class="row">
+                                <div class="bio-row">
+                                    Full Name: <p name="name" th:text="${name}"><span></span></p>
+                                </div>
+                                <div class="bio-row">
+                                    Gender: <p name="gender" th:text="${gender}"><span></span></p>
+                                </div>
+                                <div class="bio-row">
+                                    Email: <p name="email" th:text="${email}"><span></span></p>
+                                </div>
+                                <div class="bio-row">
+                                    Phone: <p name="phone" th:text="${phone}"><span></span></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="panel">
-                                <div class="panel-body">
-                                    <h2 ><a href="#">
-                                        My Subject
-                                    </a></h2>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <h2><a href="#">
+                                            Registration
+                                        </a></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <h2><a href="#">
+                                            My Subject
+                                        </a></h2>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -599,13 +603,12 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-    </script>
-    </body>
+        </script>
+        </body>
     </html>
 
     <!-- top subjects End -->
@@ -729,9 +732,14 @@
                     <div class="row d-flex align-items-center">
                         <div class="col-xl-12 ">
                             <div class="footer-copy-right text-center">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                                <p>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                                    All rights reserved | This template is made with <i class="fa fa-heart"
+                                                                                        aria-hidden="true"></i> by <a
+                                        href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -742,7 +750,7 @@
     </div>
 </footer>
 <!-- Scroll Up -->
-<div id="back-top" >
+<div id="back-top">
     <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
 

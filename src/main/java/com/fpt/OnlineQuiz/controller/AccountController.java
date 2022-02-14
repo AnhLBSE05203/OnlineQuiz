@@ -253,19 +253,17 @@ public class AccountController {
         String oldPass = account.getPassword();
         String oldPassInput = request.getParameter("oldpass");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(oldPassInput);
 
-        if (!passwordEncoder.matches(oldPassInput,encodedPassword)) {
-            // model.addAttribute(Constants.ATTRIBUTE_MESSAGE, "Password is wrong.Please try again");
+        if (passwordEncoder.matches(oldPassInput,oldPass)) {
+            accountService.updatePassword(account, request.getParameter("newpass"));
+            return Constants.PAGE_PROFILE;
+        } else {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, "Password is wrong.Please try again");
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
             sb.append(Constants.LINK_CHANGE_PASSWORD);
             return sb.toString();
-        } else {
-            accountService.updatePassword(account, request.getParameter("newpass"));
-            return Constants.PAGE_PROFILE;
         }
 
     }
@@ -281,6 +279,9 @@ public class AccountController {
     public String showProfilePage(@Param(value = "email") String email, Model model) {
         Account account = accountService.findAccountByEmail(email);
         model.addAttribute("email", email);
+        model.addAttribute("name",account.getFullName());
+        model.addAttribute("phone",account.getPhone());
+        model.addAttribute("gender",account.getGender());
         return Constants.PAGE_PROFILE;
     }
 
