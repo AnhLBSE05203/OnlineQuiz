@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!-- User's header footer fragments: header, footer, scroll-up -->
-<!-- Admin's header footer fragments: admin-header, admin-side-nav, admin-footer -->
+<!-- User's fragments:
+common-style -> div th:replace,
+common-script -> th:block th:replace,
+header, -> div th:insert,
+user-footer -> footer th:replace,
+scroll-up -> th:insert
+-->
+<!-- Admin's fragments:
+admin-common-style -> div th:replace,
+admin-common-script -> th:block th:replace,
+admin-header -> nav th:replace,
+admin-side-nav -> nav th:replace,
+admin-footer -> footer th:replace
+-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -12,6 +24,8 @@
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/static/img/favicon.ico}">
 
     <!-- CSS here -->
+    <!--User style -->
+    <div th:fragment="common-style" th:remove="tag">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
     <link rel="stylesheet" th:href="@{/css/slicknav.css}">
@@ -26,10 +40,12 @@
     <link rel="stylesheet" th:href="@{/css/slick.css}">
     <link rel="stylesheet" th:href="@{/css/nice-select.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-
+    </div>
+    <!-- Admin style -->
+    <div th:fragment="admin-common-style" th:remove="tag">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link th:href="@{/css/admin-styles.css}" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    </div>
 </head>
 <body>
 <!-- Header Start -->
@@ -79,7 +95,7 @@
     </div>
 </div>
 <!-- Header End -->
-<footer th:fragment="footer">
+<footer th:fragment="user-footer">
     <div class="footer-wrappper footer-bg">
         <!-- Footer Start-->
         <div class="footer-area footer-padding">
@@ -278,6 +294,8 @@
 
 
 <!-- JS here -->
+    <!-- User js -->
+<th:block th:fragment="common-script">
 <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
 <!-- Jquery, Popper, Bootstrap -->
 <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
@@ -322,7 +340,9 @@
 <script th:src="@{/js/plugins.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 
+</th:block>
 <!-- Admin js -->
+<th:block th:fragment="admin-common-script">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script th:src="@{/js/scripts.js}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -330,5 +350,7 @@
 <script th:src="@{/assets/demo/chart-bar-demo.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script th:src="@{/js/datatables-simple-demo.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+</th:block>
 </body>
 </html>
