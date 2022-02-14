@@ -19,4 +19,10 @@ public class BlogServiceImpl implements BlogService {
         ArrayList<Blog> listBlog = blogRepository.getAllBlog();
         return listBlog;
     }
+
+    @Override
+    public Blog getDetailBlog(Integer blogId) {
+        Blog blog = blogRepository.getDetailBlog(blogId);
+        return blog;
+    }
 }
