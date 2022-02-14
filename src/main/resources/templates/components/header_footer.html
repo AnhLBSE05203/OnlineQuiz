@@ -3,7 +3,7 @@
 <!-- User's fragments:
 common-style -> div th:replace,
 common-script -> th:block th:replace,
-header -> div th:insert,
+user-header -> div th:insert,
 user-footer -> footer th:replace,
 scroll-up -> div th:insert
 -->
@@ -48,8 +48,8 @@ admin-footer -> footer th:replace
     </div>
 </head>
 <body>
-<!-- Header Start -->
-<div class="header-area header-transparent" th:fragment="header">
+<!-- User header -->
+<div class="header-area header-transparent" th:fragment="user-header">
     <div class="main-header ">
         <div class="header-bottom  header-sticky">
             <div class="container-fluid">
@@ -95,6 +95,7 @@ admin-footer -> footer th:replace
     </div>
 </div>
 <!-- Header End -->
+<!-- User footer -->
 <footer th:fragment="user-footer">
     <div class="footer-wrappper footer-bg">
         <!-- Footer Start-->
@@ -183,9 +184,9 @@ admin-footer -> footer th:replace
                 </div>
             </div>
         </div>
-        <!-- Footer End-->
     </div>
 </footer>
+<!-- Footer End-->
 <!-- Scroll Up -->
 <div id="back-top" th:fragment="scroll-up">
     <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
