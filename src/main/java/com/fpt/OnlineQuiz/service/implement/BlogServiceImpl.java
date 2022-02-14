@@ -25,4 +25,16 @@ public class BlogServiceImpl implements BlogService {
         Blog blog = blogRepository.getDetailBlog(blogId);
         return blog;
     }
+
+    @Override
+    public ArrayList<Blog> getBlogByIndexPage(int pageIndex) {
+        ArrayList<Blog> listBlog = blogRepository.getBlogByIndexPage(pageIndex);
+        return listBlog;
+    }
+
+    @Override
+    public Long countBlog() {
+        long count = blogRepository.countBlog();
+        return count;
+    }
 }
