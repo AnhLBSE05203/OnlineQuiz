@@ -17,16 +17,7 @@
 
 <body>
     <!-- ? Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img th:src="@{/img/logo/loder.png}" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="components/header_footer.html :: user-preload"></div>
     <!-- Preloader Start -->
         <!-- Header Start -->
         <div th:replace="components/header_footer.html :: user-header"></div>
@@ -308,6 +299,7 @@
 <!-- JS here -->
     <th:block th:insert="components/header_footer.html :: common-script">
     </th:block>
+    <!-- page-specific js -->
     <script th:src="@{/js/home_page.js}"></script>
 </body>
 </html>
