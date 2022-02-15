@@ -17,22 +17,11 @@
 
 <body>
     <!-- ? Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img th:src="@{/img/logo/loder.png}" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="components/header_footer.html :: user-preload"></div>
     <!-- Preloader Start -->
-    <header>
         <!-- Header Start -->
-        <div th:insert="components/header_footer.html :: user-header"></div>
+        <div th:replace="components/header_footer.html :: user-header"></div>
         <!-- Header End -->
-    </header>
     <main>
         <!--? slider Area Start-->
         <section class="slider-area ">
@@ -45,7 +34,7 @@
                                 <div class="hero__caption">
                                     <h1 data-animation="fadeInLeft" data-delay="0.2s">Online learning<br> platform</h1>
                                     <p data-animation="fadeInLeft" data-delay="0.4s">Build skills with courses, certificates, and degrees online from world-class universities and companies</p>
-                                    <a th:href="@{/account/register}" class="btn hero-btn" data-animation="fadeInLeft" data-delay="0.7s">Join for Free</a>
+                                    <a th:href="@{/account/register}" class="btn hero-btn" data-animation="fadeInLeft" data-delay="0.7s" id="register-button-1">Join for Free</a>
                                 </div>
                             </div>
                         </div>
@@ -293,7 +282,7 @@
                                 toward your personal
                                 and professional goals
                             with us.</h2>
-                            <a href="/account/register" class="btn">Join now for Free</a>
+                            <a href="/account/register" class="btn" id="register-button-2">Join now for Free</a>
                         </div>
                     </div>
                 </div>
@@ -310,5 +299,7 @@
 <!-- JS here -->
     <th:block th:insert="components/header_footer.html :: common-script">
     </th:block>
+    <!-- page-specific js -->
+    <script th:src="@{/js/home_page.js}"></script>
 </body>
 </html>

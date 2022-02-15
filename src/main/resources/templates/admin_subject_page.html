@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Subject Management</title>
+    <!-- Admin common css -->
+    <div th:replace="components/header_footer.html :: admin-common-style">
+        <link th:href="@{/css/admin_subject_page.css}" rel="stylesheet" />
+    </div>
+</head>
+<body class="sb-nav-fixed">
+<!-- Admin header -->
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" th:replace="components/header_footer.html :: admin-header">
+</nav>
+<!-- -->
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <!-- Admin side nav -->
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" th:replace="components/header_footer.html :: admin-side-nav">
+        </nav>
+        <!-- -->
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Subject</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Subject Management</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        List Subject
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Image</th>
+                                <th>Image Src</th>
+                                <th>Name</th>
+                                <th>Total Courses</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="subject, stat : ${listSubjects}">
+                            <tr>
+                                <td th:text="${subject.id}"></td>
+                                <td><img th:src="@{${subject.image.src}}" class="subject-img"></td>
+                                <td th:text="${subject.image.src}"></td>
+                                <td th:text="${subject.name}"></td>
+                                <td th:text="${subject.courses.size()} "></td>
+                                <td th:text="${listStatus[stat.index]}"></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#editModal">
+                                        Edit
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModal" th:unless="${subject.status == 0}">
+                                        Delete
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModal" th:if="${subject.status == 0}">Recover</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="components/header_footer.html :: admin-footer">
+        </footer>
+    </div>
+</div>
+<!-- Admin common js -->
+<th:block th:insert="components/header_footer.html :: admin-common-script">
+</th:block>
+<!-- -->
+</body>
+</html>

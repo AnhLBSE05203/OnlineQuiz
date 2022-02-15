@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ import org.hibernate.annotations.Where;
 @AllArgsConstructor
 @Table(name = "Role")
 @Where(clause = "status != 0")
+@JsonIgnoreProperties(value= {"accounts", "screens"})
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

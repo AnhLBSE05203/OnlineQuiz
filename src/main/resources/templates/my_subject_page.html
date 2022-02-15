@@ -10,33 +10,12 @@
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
 
     <!-- CSS here -->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/slicknav.css}">
-    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
-    <link rel="stylesheet" th:href="@{/css/progressbar_barfiller.css}">
-    <link rel="stylesheet" th:href="@{/css/gijgo.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animated-headline.css}">
-    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
-    <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
-    <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
-    <link rel="stylesheet" th:href="@{/css/slick.css}">
-    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <div th:replace="components/header_footer.html :: common-style"></div>
+    <!-- page-specific css -->
 </head>
 <body>
 <!-- ? Preloader Start -->
-<div id="preloader-active">
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-            <div class="preloader-circle"></div>
-            <div class="preloader-img pere-text">
-                <img th:src="@{/img/logo/loder.png}" alt="">
-            </div>
-        </div>
-    </div>
-</div>
+<div th:replace="components/header_footer.html :: user-preload"></div>
 <!-- Preloader Start -->
 <!-- Header Start -->
 <div class="header-area header-transparent">
@@ -184,146 +163,16 @@
         </div>
     </div>
 </main>
-<footer>
-    <div class="footer-wrappper footer-bg">
-        <!-- Footer Start-->
-        <div class="footer-area footer-padding">
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-xl-4 col-lg-5 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="single-footer-caption mb-30">
-                                <!-- logo -->
-                                <div class="footer-logo mb-25">
-                                    <a href="index.html"><img th:src="@{/img/logo/logo2_footer.png}"  alt=""></a>
-                                </div>
-                                <div class="footer-tittle">
-                                    <div class="footer-pera">
-                                        <p>The automated process starts as soon as your clothes go into the machine.</p>
-                                    </div>
-                                </div>
-                                <!-- social -->
-                                <div class="footer-social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Our solutions</h4>
-                                <ul>
-                                    <li><a href="#">Design & creatives</a></li>
-                                    <li><a href="#">Telecommunication</a></li>
-                                    <li><a href="#">Restaurant</a></li>
-                                    <li><a href="#">Programing</a></li>
-                                    <li><a href="#">Architecture</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Support</h4>
-                                <ul>
-                                    <li><a href="#">Design & creatives</a></li>
-                                    <li><a href="#">Telecommunication</a></li>
-                                    <li><a href="#">Restaurant</a></li>
-                                    <li><a href="#">Programing</a></li>
-                                    <li><a href="#">Architecture</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Company</h4>
-                                <ul>
-                                    <li><a href="#">Design & creatives</a></li>
-                                    <li><a href="#">Telecommunication</a></li>
-                                    <li><a href="#">Restaurant</a></li>
-                                    <li><a href="#">Programing</a></li>
-                                    <li><a href="#">Architecture</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- footer-bottom area -->
-        <div class="footer-bottom-area">
-            <div class="container">
-                <div class="footer-border">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-xl-12 ">
-                            <div class="footer-copy-right text-center">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End-->
-    </div>
+<footer th:replace="components/header_footer.html :: user-footer">
 </footer>
 <!-- Scroll Up -->
-<div id="back-top" >
-    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+<div th:insert="components/header_footer.html :: scroll-up">
 </div>
 
 <!-- JS here -->
-<script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
-<!-- Jquery, Popper, Bootstrap -->
-<script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
-<script th:src="@{/js/popper.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<!-- Jquery Mobile Menu -->
-<script th:src="@{/js/jquery.slicknav.min.js}"></script>
-
-<!-- Video bg -->
-<script th:src="@{/js/jquery.vide.js}"></script>
-
-<!-- Jquery Slick , Owl-Carousel Plugins -->
-<script th:src="@{/js/owl.carousel.min.js}"></script>
-<script th:src="@{/js/slick.min.js}"></script>
-<!-- One Page, Animated-HeadLin -->
-<script th:src="@{/js/wow.min.js}"></script>
-<script th:src="@{/js/animated.headline.js}"></script>
-<script th:src="@{/js/jquery.magnific-popup.js}"></script>
-
-<!-- Date Picker -->
-<script th:src="@{/js/gijgo.min.js}"></script>
-<!-- Nice-select, sticky -->
-<script th:src="@{/js/jquery.nice-select.min.js}"></script>
-<script th:src="@{/js/jquery.sticky.js}"></script>
-<!-- Progress -->
-<script th:src="@{/js/jquery.barfiller.js}"></script>
-
-<!-- counter , waypoint,Hover Direction -->
-<script th:src="@{/js/jquery.counterup.min.js}"></script>
-<script th:src="@{/js/waypoints.min.js}"></script>
-<script th:src="@{/js/jquery.countdown.min.js}"></script>
-<script th:src="@{/js/hover-direction-snake.min.js}"></script>
-
-<!-- contact js -->
-<script th:src="@{/js/contact.js}"></script>
-<script th:src="@{/js/jquery.form.js}"></script>
-<script th:src="@{/js/jquery.validate.min.js}"></script>
-<script th:src="@{/js/mail-script.js}"></script>
-<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
-
-<!-- Jquery Plugins, main Jquery -->
-<script th:src="@{/js/plugins.js}"></script>
-<script th:src="@{/js/main.js}"></script>
+<th:block th:insert="components/header_footer.html :: common-script">
+</th:block>
+<!-- page-specific js -->
 <script>
 
     function load(){

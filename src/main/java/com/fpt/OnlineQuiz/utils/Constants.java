@@ -1,13 +1,17 @@
 package com.fpt.OnlineQuiz.utils;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Constants {
 
     public static final String STRING_EMPTY = "";
     public static final int NUMBER_ZERO = 0;
 
     //account constants
-    public static final int STATUS_CONFIRMED = 1;
-    public static final int STATUS_UNCONFIRMED = 2;
+    public static final int STATUS_ACCOUNT_CONFIRMED = 1;
+    public static final int STATUS_ACCOUNT_UNCONFIRMED = 2;
     public static final int GENDER_MALE = 0;
     public static final int GENDER_FEMALE = 1;
     public static final String ROLE_USER = "ROLE_USER";
@@ -17,6 +21,13 @@ public class Constants {
     //db record common constants
     public static final int STATUS_DELETED = 0;
     public static final int STATUS_DEFAULT = 1;
+
+    //subject constants
+    public static final Map<Integer, String> subjectStatusConversion = initSubjectStatusMap();
+    public static final int STATUS_SUBJECT_DELETED = 0;
+    public static final int STATUS_SUBJECT_ACTIVE = 1;
+    public static final int STATUS_SUBJECT_INACTIVE = 2;
+
     //messages
     public static final String MESSAGE_INVALID_TOKEN = "Invalid Token!";
     public static final String MESSAGE_REGISTER_SUCCESS = "Register successful! Check email for confirmation link!";
@@ -116,6 +127,15 @@ public class Constants {
     public static final String HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED = "subjectFeatured";
     public static final int DESCRIPTION_TRIM_LENGTH = 147;
     public static final String DESCRIPTION_TRIM_TAIL = "...";
+
+    private static Map<Integer, String> initSubjectStatusMap() {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(STATUS_SUBJECT_DELETED, "Deleted");
+        map.put(STATUS_SUBJECT_ACTIVE, "Active");
+        map.put(STATUS_SUBJECT_INACTIVE, "Inactive");
+        return Collections.unmodifiableMap(map);
+    }
+
     //mail templates
     public static String getResetPasswordMailTemplate(String link) {
         String content = "<p>Hello,</p>"

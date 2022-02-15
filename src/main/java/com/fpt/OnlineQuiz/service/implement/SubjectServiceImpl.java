@@ -41,6 +41,11 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<Subject> getFeaturedSubjects(int number) {
-        return subjectRepository.getFeaturedSubjects(number);
+        return subjectRepository.getTopNumberOfSubjects(number);
+    }
+
+    @Override
+    public List<Subject> findAllSubjects() {
+        return subjectRepository.findAllSubjects();
     }
 }
