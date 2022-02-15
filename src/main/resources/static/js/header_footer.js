@@ -1,3 +1,4 @@
+var principal = "";
 $(document).ready(function(){
     $.ajax({
                 url:"/getPrincipal",
@@ -5,10 +6,11 @@ $(document).ready(function(){
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data){
-                    if(data != ""){
+                principal = data;
+                    if(principal != ""){
                         $("#login-button").attr("href", "account/logout");
                         $("#login-button").html("Logout");
-                        $("#register-button").parent().hide();
+                        $("#register-button").parent().css('visibility','hidden');
                     }
                 }
             });
