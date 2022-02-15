@@ -3,7 +3,8 @@
 <!-- User's fragments:
 common-style -> div th:replace,
 common-script -> th:block th:replace,
-user-header -> div th:insert,
+user-preload -> div th:replace,
+user-header -> div th:replace,
 user-footer -> footer th:replace,
 scroll-up -> div th:insert
 -->
@@ -48,6 +49,17 @@ admin-footer -> footer th:replace
     </div>
 </head>
 <body>
+<!-- User preload -->
+<div id="preloader-active" th:fragment="user-preload">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img th:src="@{/img/logo/loder.png}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
 <!-- User header -->
 <div class="header-area header-transparent" th:fragment="user-header">
     <div class="main-header ">
