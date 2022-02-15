@@ -63,9 +63,11 @@
                                         Edit
                                     </button>
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#exampleModal">
+                                            data-target="#exampleModal" th:unless="${subject.status == 0}">
                                         Delete
                                     </button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModal" th:if="${subject.status == 0}">Recover</button>
                                 </td>
                             </tr>
                             </tbody>
