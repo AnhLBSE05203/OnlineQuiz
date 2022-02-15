@@ -115,8 +115,8 @@
     <!-- Courses area start -->
     <div class="courses-area section-padding40 fix">
         <div class="container">
-            <div class="row" id="listcontent">
-                <div class="col-lg-4 product" th:each="subject : ${my_subject_list}">
+            <div class="row" id="listsubject">
+                <div class="col-lg-4 subject" th:each="subject : ${my_subject_list}">
                     <div class="properties properties2 mb-30">
                         <div class="properties__card">
                             <div class="properties__img overlay1">
@@ -327,16 +327,18 @@
 <script>
 
     function load(){
-        var amount = document.getElementsByClassName("product").length;
+        var amount = document.getElementsByClassName("subject").length;
         $.ajax({
-            url:"/user/loadmore",
+            url:"/user/loadmoresubject",
             type:"get",
             data:{
               amount: amount
             },
             success: function (data){
-                var row = document.getElementById("listcontent");
-                row.innerHTML += data;
+                if(data != ""){
+                    var row = document.getElementById("listsubject");
+                    row.innerHTML += data;
+                }
             }
         })
     }

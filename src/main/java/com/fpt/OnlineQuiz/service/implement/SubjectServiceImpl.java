@@ -31,7 +31,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public List<Subject> getNext3Subject(int account_id, int amount) {
-        List<Course> list_course = courseRepository.getNext3Courses(account_id, 3);
+        List<Course> list_course = courseRepository.getNext3Courses(account_id, amount);
         List<Subject> list_subject = new ArrayList<>();
         for (int i = 0; i < list_course.size(); i++){
             list_subject.add(list_course.get(i).getSubject());
