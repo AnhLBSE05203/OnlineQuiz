@@ -240,6 +240,17 @@ admin-footer -> footer th:replace
                     <a class="nav-link" href="layout-sidenav-light.html">Create blog</a>
                 </nav>
             </div>
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSubjects" aria-expanded="false" aria-controls="collapseSubjects">
+                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                Subject
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseSubjects" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" th:href="@{/admin/subject}">List Subject</a>
+                    <a class="nav-link" href="layout-sidenav-light.html">Create Subject</a>
+                </nav>
+            </div>
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                 Pages

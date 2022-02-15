@@ -1,7 +1,13 @@
 package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.model.Blog;
+import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.BlogService;
+import com.fpt.OnlineQuiz.service.CourseService;
+import com.fpt.OnlineQuiz.service.SubjectService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -10,17 +16,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
+@NoArgsConstructor
+@AllArgsConstructor
 public class AdminController {
-
-    private final BlogService blogService;
-
-    public AdminController(BlogService blogService) {
-        this.blogService = blogService;
-    }
-
+    @Autowired
+    private BlogService blogService;
+    @Autowired
+    private SubjectService subjectService;
+    @Autowired
+    private CourseService courseService;
 
     @GetMapping("/login")
     String loginPage(Model model) {
@@ -50,5 +58,10 @@ public class AdminController {
         modelMap.addAttribute("detailBlog", blog);
         return "";
     }
-
+    @GetMapping("/subject")
+    String blogPage(Model model) {
+        List<Subject> listSubjects = subjectService.findAllSubjects();
+        model.addAttribute("listSubjects",listSubjects);
+        return "admin_subject_page";
+    }
 }
