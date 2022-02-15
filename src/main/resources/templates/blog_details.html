@@ -10,17 +10,20 @@
    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
    <!-- CSS here -->
-   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-   <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-   <link rel="stylesheet" href="assets/css/slicknav.css">
-   <link rel="stylesheet" href="assets/css/animate.min.css">
-   <link rel="stylesheet" href="assets/css/hamburgers.min.css">
-   <link rel="stylesheet" href="assets/css/magnific-popup.css">
-   <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-   <link rel="stylesheet" href="assets/css/themify-icons.css">
-   <link rel="stylesheet" href="assets/css/slick.css">
-   <link rel="stylesheet" href="assets/css/nice-select.css">
-   <link rel="stylesheet" href="assets/css/style.css">
+   <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+   <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+   <link rel="stylesheet" th:href="@{/css/slicknav.css}">
+   <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+   <link rel="stylesheet" th:href="@{/css/progressbar_barfiller.css}">
+   <link rel="stylesheet" th:href="@{/css/gijgo.css}">
+   <link rel="stylesheet" th:href="@{/css/animate.min.css}">
+   <link rel="stylesheet" th:href="@{/css/animated-headline.css}">
+   <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+   <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
+   <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
+   <link rel="stylesheet" th:href="@{/css/slick.css}">
+   <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+   <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -119,43 +122,16 @@
                   <img class="img-fluid" src="assets/img/blog/single_blog_1.png" alt="">
                </div>
                <div class="blog_details">
-                  <h2 style="color: #2d2d2d;">Second divided from form fish beast made every of seas
+                  <h2 style="color: #2d2d2d;" th:text="${blogdetail.title}">Second divided from form fish beast made every of seas
                      all gathered us saying he our
                   </h2>
                   <ul class="blog-info-link mt-3 mb-4">
                      <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
                      <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
                   </ul>
-                  <p class="excert">
-                     MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                     should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                     fraction of the camp price. However, who has the willpower
+                  <p class="excert" th:text="${blogdetail.content}">
                   </p>
-                  <p>
-                     MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                     should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                     fraction of the camp price. However, who has the willpower to actually sit through a
-                     self-imposed MCSE training. who has the willpower to actually
-                  </p>
-                  <div class="quote-wrapper">
-                     <div class="quotes">
-                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                        should have to spend money on boot camp when you can get the MCSE study materials yourself at
-                        a fraction of the camp price. However, who has the willpower to actually sit through a
-                        self-imposed MCSE training.
-                     </div>
-                  </div>
-                  <p>
-                     MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                     should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                     fraction of the camp price. However, who has the willpower
-                  </p>
-                  <p>
-                     MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                     should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                     fraction of the camp price. However, who has the willpower to actually sit through a
-                     self-imposed MCSE training. who has the willpower to actually
-                  </p>
+
                </div>
             </div>
             <div class="navigation-top">
@@ -615,46 +591,50 @@
    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
 
-<!-- JS here -->
+   <!-- JS here -->
+   <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
+   <!-- Jquery, Popper, Bootstrap -->
+   <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
+   <script th:src="@{/js/popper.min.js}"></script>
+   <script th:src="@{/js/bootstrap.min.js}"></script>
+   <!-- Jquery Mobile Menu -->
+   <script th:src="@{/js/jquery.slicknav.min.js}"></script>
 
-<script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-<!-- Jquery, Popper, Bootstrap -->
-<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-<script src="./assets/js/popper.min.js"></script>
-<script src="./assets/js/bootstrap.min.js"></script>
-<!-- Jquery Mobile Menu -->
-<script src="./assets/js/jquery.slicknav.min.js"></script>
+   <!-- Video bg -->
+   <script th:src="@{/js/jquery.vide.js}"></script>
 
-<!-- Jquery Slick , Owl-Carousel Plugins -->
-<script src="./assets/js/owl.carousel.min.js"></script>
-<script src="./assets/js/slick.min.js"></script>
-<!-- One Page, Animated-HeadLin -->
-<script src="./assets/js/wow.min.js"></script>
-<script src="./assets/js/animated.headline.js"></script>
-<script src="./assets/js/jquery.magnific-popup.js"></script>
+   <!-- Jquery Slick , Owl-Carousel Plugins -->
+   <script th:src="@{/js/owl.carousel.min.js}"></script>
+   <script th:src="@{/js/slick.min.js}"></script>
+   <!-- One Page, Animated-HeadLin -->
+   <script th:src="@{/js/wow.min.js}"></script>
+   <script th:src="@{/js/animated.headline.js}"></script>
+   <script th:src="@{/js/jquery.magnific-popup.js}"></script>
 
-<!-- Date Picker -->
-<script src="./assets/js/gijgo.min.js"></script>
-<!-- Nice-select, sticky -->
-<script src="./assets/js/jquery.nice-select.min.js"></script>
-<script src="./assets/js/jquery.sticky.js"></script>
+   <!-- Date Picker -->
+   <script th:src="@{/js/gijgo.min.js}"></script>
+   <!-- Nice-select, sticky -->
+   <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+   <script th:src="@{/js/jquery.sticky.js}"></script>
+   <!-- Progress -->
+   <script th:src="@{/js/jquery.barfiller.js}"></script>
 
-<!-- counter , waypoint,Hover Direction -->
-<script src="./assets/js/jquery.counterup.min.js"></script>
-<script src="./assets/js/waypoints.min.js"></script>
-<script src="./assets/js/jquery.countdown.min.js"></script>
-<script src="./assets/js/hover-direction-snake.min.js"></script>
+   <!-- counter , waypoint,Hover Direction -->
+   <script th:src="@{/js/jquery.counterup.min.js}"></script>
+   <script th:src="@{/js/waypoints.min.js}"></script>
+   <script th:src="@{/js/jquery.countdown.min.js}"></script>
+   <script th:src="@{/js/hover-direction-snake.min.js}"></script>
 
-<!-- contact js -->
-<script src="./assets/js/contact.js"></script>
-<script src="./assets/js/jquery.form.js"></script>
-<script src="./assets/js/jquery.validate.min.js"></script>
-<script src="./assets/js/mail-script.js"></script>
-<script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+   <!-- contact js -->
+   <script th:src="@{/js/contact.js}"></script>
+   <script th:src="@{/js/jquery.form.js}"></script>
+   <script th:src="@{/js/jquery.validate.min.js}"></script>
+   <script th:src="@{/js/mail-script.js}"></script>
+   <script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
 
-<!-- Jquery Plugins, main Jquery -->	
-<script src="./assets/js/plugins.js"></script>
-<script src="./assets/js/main.js"></script>
+   <!-- Jquery Plugins, main Jquery -->
+   <script th:src="@{/js/plugins.js}"></script>
+   <script th:src="@{/js/main.js}"></script>
 
 </body>
 </html>

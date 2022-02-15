@@ -19,39 +19,42 @@ public class BlogController {
 
     @Autowired
     private BlogService blogService;
-    @RequestMapping(value = "",method = RequestMethod.GET)
-    public String getAllBlog(ModelMap modelMap){
-        //data send to html:ModelMap
-        ArrayList<Blog> listBlog = blogService.getAllBlog();
-        //modelMap.addAttribute("listBlog",listBlog);
-        String page = "1";
-        int pageSize = 2;
-        int pageIndex = Integer.parseInt(page);
-        ArrayList<Blog> listBlogByIndex = blogService.getBlogByIndexPage(pageIndex);
-        long totalRecord = blogService.countBlog();
-        long totalPage = totalRecord % pageSize == 0 ? totalRecord / pageSize : (totalRecord / pageSize) + 1;
-
-        modelMap.addAttribute("totalPage",totalPage);
-        modelMap.addAttribute("pageIndex",pageIndex);
-        modelMap.addAttribute("listBlog",listBlogByIndex);
-        return "blog";
-    }
-    @RequestMapping(value = "",method = RequestMethod.POST)
-    public String getPageIndexAndPaging(ModelMap modelMap, HttpServletRequest request){
+    @RequestMapping(value = "/listblog",method = RequestMethod.GET)
+    public String getAllBlog(ModelMap modelMap,HttpServletRequest request){
         //data send to html:ModelMap
         String page = request.getParameter("page");
-        int pageSize = 2;
-        if(page == null || page.length()== 0){
+        System.out.println(page);
+        if(page == null){
             page = "1";
-        }
-        int pageIndex = Integer.parseInt(page);
-        ArrayList<Blog> listBlog = blogService.getBlogByIndexPage(pageIndex);
-        long totalRecord = blogService.countBlog();
-        long totalPage = totalRecord % pageSize == 0 ? totalRecord / pageSize : (totalRecord / pageSize) + 1;
+            int pageSize = 2;
+            int pageIndex = Integer.parseInt(page);
+            ArrayList<Blog> listBlogByIndex = blogService.getBlogByIndexPage(pageIndex);
+            long totalRecord = blogService.countBlog();
+            long totalPage = totalRecord % pageSize == 0 ? totalRecord / pageSize : (totalRecord / pageSize) + 1;
 
-        modelMap.addAttribute("totalPage",totalPage);
-        modelMap.addAttribute("pageIndex",pageIndex);
-        modelMap.addAttribute("listBlog",listBlog);
+            modelMap.addAttribute("totalPage",totalPage);
+            modelMap.addAttribute("pageIndex",pageIndex);
+            modelMap.addAttribute("listBlog",listBlogByIndex);
+        }else{
+            page = request.getParameter("page");
+            int pageSize = 2;
+            int pageIndex = Integer.parseInt(page);
+            ArrayList<Blog> listBlog = blogService.getBlogByIndexPage(pageIndex);
+            long totalRecord = blogService.countBlog();
+            long totalPage = totalRecord % pageSize == 0 ? totalRecord / pageSize : (totalRecord / pageSize) + 1;
+
+            modelMap.addAttribute("totalPage",totalPage);
+            modelMap.addAttribute("pageIndex",pageIndex);
+            modelMap.addAttribute("listBlog",listBlog);
+        }
         return "blog";
+    }
+    @RequestMapping(value = "/blogdetail",method = RequestMethod.GET)
+    public String getBlogDetail(ModelMap modelMap, HttpServletRequest request){
+        //data send to html:ModelMap
+        int blogid = Integer.parseInt(request.getParameter("blogid"));
+        Blog blog = blogService.getDetailBlog(blogid);
+        modelMap.addAttribute("blogdetail",blog);
+        return "blog_details";
     }
 }

@@ -128,7 +128,7 @@
                                     </a>
                                 </div>
                                 <div class="blog_details">
-                                    <a class="d-inline-block" href="blog_details.html">
+                                    <a class="d-inline-block" th:href="@{/blogcontroller/blogdetail(blogid=${blog.id})}">
                                         <h2 class="blog-head" style="color: #2d2d2d;" th:text="${blog.title}"></h2>
                                     </a>
                                     <p th:text="${#strings.abbreviate(blog.content,100)} "></p>
@@ -147,7 +147,7 @@
                                         </a>
                                     </li>
                                     <li class="page-item" th:each="i: ${#numbers.sequence(1,totalPage)}">
-                                        <a th:href="@{'/blogcontroller?page = '+${i}}" class="page-link">[[${i}]]</a>
+                                        <a th:href="@{/blogcontroller/listblog(page=${i})}" class="page-link">[[${i}]]</a>
                                     </li>
                                     <li class="page-item">
                                         <a href="#" class="page-link" aria-label="Next">
