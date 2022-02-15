@@ -49,14 +49,14 @@
                                 <th>Action</th>
                             </tr>
                             </thead>
-                            <tbody th:each="subject : ${listSubjects}">
+                            <tbody th:each="subject, stat : ${listSubjects}">
                             <tr>
                                 <td th:text="${subject.id}"></td>
                                 <td><img th:src="@{${subject.image.src}}" class="subject-img"></td>
                                 <td th:text="${subject.image.src}"></td>
                                 <td th:text="${subject.name}"></td>
                                 <td th:text="${subject.courses.size()} "></td>
-                                <td th:text="${subject.status}"></td>
+                                <td th:text="${listStatus[stat.index]}"></td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#editModal">

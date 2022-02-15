@@ -5,6 +5,7 @@ import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.BlogService;
 import com.fpt.OnlineQuiz.service.CourseService;
 import com.fpt.OnlineQuiz.service.SubjectService;
+import com.fpt.OnlineQuiz.utils.Constants;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,12 @@ public class AdminController {
     @GetMapping("/subject")
     String blogPage(Model model) {
         List<Subject> listSubjects = subjectService.findAllSubjects();
-        model.addAttribute("listSubjects",listSubjects);
+        List<String> statuses = new ArrayList<>();
+        for(Subject subject : listSubjects) {
+            statuses.add(Constants.subjectStatusConversion.get(subject.getStatus()));
+        }
+        model.addAttribute("listSubjects", listSubjects);
+        model.addAttribute("listStatus", statuses);
         return "admin_subject_page";
     }
 }
