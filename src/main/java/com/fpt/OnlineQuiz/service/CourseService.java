@@ -8,5 +8,7 @@ import java.util.List;
 public interface CourseService {
     public List<CourseFeaturedDTO> getFeaturedCourses(int number);
 
+    List<Course> getNext3Courses(int account_id, int amount);
+
     List<Course> getCoursesRegistration(int account_id);
 }
