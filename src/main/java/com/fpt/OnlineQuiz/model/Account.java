@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "Account")
 @Where(clause = "status != 0")
+@JsonIgnoreProperties(value= {"purchaseHistories", "quizHistories", "courses","tokens","reviews"})
 public class Account implements UserDetails {
 
     private static final long serialVersionUID = -3164082858501464263L;

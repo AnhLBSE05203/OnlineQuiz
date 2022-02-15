@@ -78,8 +78,8 @@ admin-footer -> footer th:replace
                                         </li>
                                         <li><a href="contact.html">Contact</a></li>
                                         <!-- Button -->
-                                        <li class="button-header margin-left "><a href="#" class="btn">Join</a></li>
-                                        <li class="button-header"><a href="account/login" class="btn btn3">Log in</a></li>
+                                        <li class="button-header margin-left "><a href="account/register" class="btn" id="register-button">Join</a></li>
+                                        <li class="button-header"><a href="account/login" class="btn btn3" id="login-button">Log in</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -352,17 +352,19 @@ admin-footer -> footer th:replace
 <script th:src="@{/js/plugins.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 
+<script th:src="@{/js/header_footer.js}"></script>
 </th:block>
 <!-- Admin js -->
 <th:block th:fragment="admin-common-script">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script th:src="@{/js/scripts.js}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script th:src="@{/assets/demo/chart-area-demo.js}"></script>
-<script th:src="@{/assets/demo/chart-bar-demo.js}"></script>
-<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-<script th:src="@{/js/datatables-simple-demo.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/scripts.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script th:src="@{/assets/demo/chart-area-demo.js}"></script>
+    <script th:src="@{/assets/demo/chart-bar-demo.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script th:src="@{/js/datatables-simple-demo.js}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/header_footer.js}"></script>
 </th:block>
 </body>
 </html>
