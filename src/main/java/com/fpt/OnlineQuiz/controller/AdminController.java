@@ -41,7 +41,7 @@ public class AdminController {
     String blogPage(ModelMap modelMap) {
         ArrayList<Blog> listBlog = blogService.getAllBlog();
         modelMap.addAttribute("listBlog",listBlog);
-        return "admin_blog_page";
+        return "admin_blog_list";
     }
 
     @GetMapping("/blog/{id}")
