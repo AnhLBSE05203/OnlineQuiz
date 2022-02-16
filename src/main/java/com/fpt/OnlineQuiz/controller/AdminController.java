@@ -60,7 +60,7 @@ public class AdminController {
         return "";
     }
     @GetMapping("/subject")
-    String blogPage(Model model) {
+    String subjectPage(Model model) {
         List<Subject> listSubjects = subjectService.findAllSubjects();
         List<String> statuses = new ArrayList<>();
         for(Subject subject : listSubjects) {
