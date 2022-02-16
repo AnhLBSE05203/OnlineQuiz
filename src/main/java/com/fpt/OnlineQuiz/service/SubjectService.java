@@ -11,4 +11,6 @@ public interface SubjectService {
     List<Subject> getNext3Subject(int account_id, int amount);
 
     List<Subject> getFeaturedSubjects(int number);
+
+    List<Subject> findAllSubjects();
 }

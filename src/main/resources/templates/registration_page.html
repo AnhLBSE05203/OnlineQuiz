@@ -102,22 +102,24 @@
     <!-- Courses area start -->
     <div class="courses-area section-padding40 fix">
         <div class="container">
-            <div class="col-lg-12" th:each="course : ${courselist}">
-                <div class="properties properties2 mb-30">
-                    <div class="properties__card">
-                        <div class="properties__caption">
-<!--                            <p th:text="${course.name}"></p>-->
-                            <h3><a href="#" th:text="${course.name}"></a></h3>
-                            <p th:text="${course.description}"></p>
-                        </div>
+            <div class="row" id="listcourse">
+                <div class="col-lg-12 course" th:each="course : ${courselist}">
+                    <div class="properties properties2 mb-30">
+                        <div class="properties__card">
+                            <div class="properties__caption">
+    <!--                            <p th:text="${course.name}"></p>-->
+                                <h3><a href="#" th:text="${course.name}"></a></h3>
+                                <p th:text="${course.description}"></p>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-xl-7 col-lg-8">
                     <div class="section-tittle text-center mt-40">
-                        <a href="#" class="border-btn">Load More</a>
+                        <a class="border-btn" onclick="load()">Load More</a>
                     </div>
                 </div>
             </div>
@@ -303,5 +305,23 @@
 <!-- Jquery Plugins, main Jquery -->
 <script th:src="@{/js/plugins.js}"></script>
 <script th:src="@{/js/main.js}"></script>
+<script>
+    function load(){
+        var amount = document.getElementsByClassName("course").length;
+        $.ajax({
+            url:"/user/loadmorecourse",
+            type:"get",
+            data:{
+                amount: amount
+            },
+            success: function (data){
+                if(data != ""){
+                    var row = document.getElementById("listcourse");
+                    row.innerHTML += data;
+                }
+            }
+        })
+    }
+</script>
 </body>
 </html>

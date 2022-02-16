@@ -68,7 +68,7 @@ public class CourseRepository {
             int size = 3;
             Query query = em.createQuery(sql, Collection.class);
             query.setParameter("id", account_id);
-            query.setFirstResult((amount));
+            query.setFirstResult(amount);
             query.setMaxResults(size);
             return (List<Course>) query.getResultList();
         }catch (Exception ex){

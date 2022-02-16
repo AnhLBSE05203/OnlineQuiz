@@ -5,11 +5,12 @@ import com.fpt.OnlineQuiz.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -19,11 +20,32 @@ public class CourseController {
     private CourseService courseService;
 
     @GetMapping(path = "/registration")
-    public String showRegistrationPage(ModelMap modelMap){
+    public String showRegistrationPage(ModelMap modelMap) {
         List<Course> courseList = courseService.getCoursesRegistration(3);
         modelMap.addAttribute("courselist", courseList);
         return "registration_page";
     }
 
-
+    @GetMapping(path = "/loadmorecourse")
+    public @ResponseBody void loadMore(
+            @RequestParam("amount") String amount, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        int iamount = Integer.parseInt(amount);
+        List<Course> courses = courseService.getNext3Courses(3, iamount);
+        if (courses.size() != 0) {
+            for (Course c : courses) {
+                out.println("<div class=\"col-lg-12 course\" th:each=\"course : ${courselist}\">\n" +
+                        "                    <div class=\"properties properties2 mb-30\">\n" +
+                        "                        <div class=\"properties__card\">\n" +
+                        "                            <div class=\"properties__caption\">\n" +
+                        "                                <h3><a href=\"#\">"+c.getName()+"</a></h3>\n" +
+                        "                                <p>"+c.getDescription()+"</p>\n" +
+                        "                            </div>\n" +
+                        "    \n" +
+                        "                        </div>\n" +
+                        "                    </div>\n" +
+                        "                </div>");
+            }
+        }
+    }
 }

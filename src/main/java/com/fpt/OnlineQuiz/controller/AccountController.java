@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
-import javax.security.auth.login.AccountException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -188,7 +187,7 @@ public class AccountController {
         account.setPhone(registerDTO.getPhone());
         account.setFullName(registerDTO.getFullName());
         account.setCreatedUserId(1);
-        account.setStatus(Constants.STATUS_UNCONFIRMED);
+        account.setStatus(Constants.STATUS_ACCOUNT_UNCONFIRMED);
         Role role = roleService.findRoleByName(Constants.ROLE_USER);
         List<Role> roles = new ArrayList<>();
         roles.add(role);
@@ -387,7 +386,7 @@ public class AccountController {
             sb.append(Constants.LINK_REGISTER);
             return sb.toString();
         }
-        account.setStatus(Constants.STATUS_CONFIRMED);
+        account.setStatus(Constants.STATUS_ACCOUNT_CONFIRMED);
         accountService.updateAccount(account);
         tokenService.deleteToken(token);
         redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_CONFIRM_SUCCESS);

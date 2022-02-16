@@ -21,7 +21,8 @@ public class Subject {
     private int id;
     @Column(name = "subjectName")
     private String name;
-
+    @Column(name = "status")
+    private int status;
     @OneToMany(mappedBy = "subject")
     private List<Course> courses;
 
