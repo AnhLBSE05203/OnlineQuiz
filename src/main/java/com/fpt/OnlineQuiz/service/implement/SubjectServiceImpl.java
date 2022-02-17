@@ -6,11 +6,10 @@ import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.SubjectService;
-import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -56,14 +55,7 @@ public class SubjectServiceImpl implements SubjectService {
         List<Subject> listSubjects = subjectRepository.findAllSubjects();
         List<SubjectAdminDTO> listSubjectDTO = new ArrayList<>();
         for(Subject subject : listSubjects) {
-            SubjectAdminDTO subjectAdminDTO = new SubjectAdminDTO();
-            subjectAdminDTO.setId(subject.getId());
-            subjectAdminDTO.setImgSrc(subject.getImage().getSrc());
-            subjectAdminDTO.setName(subject.getName());
-            subjectAdminDTO.setTotalCourse(subject.getCourses().size());
-            String statusStr = Constants.subjectStatusConversion.get(subject.getStatus());
-            subjectAdminDTO.setStatusStr(statusStr);
-            subjectAdminDTO.setStatus(subject.getStatus());
+            SubjectAdminDTO subjectAdminDTO = subject.toSubjectAdminDTO();
             listSubjectDTO.add(subjectAdminDTO);
         }
         return listSubjectDTO;
@@ -72,14 +64,7 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public SubjectAdminDTO getSubjectAdminDTOById(int id) {
         Subject subject = subjectRepository.getSubjectById(id);
-        SubjectAdminDTO subjectAdminDTO = new SubjectAdminDTO();
-        subjectAdminDTO.setId(subject.getId());
-        subjectAdminDTO.setImgSrc(subject.getImage().getSrc());
-        subjectAdminDTO.setName(subject.getName());
-        subjectAdminDTO.setTotalCourse(subject.getCourses().size());
-        String statusStr = Constants.subjectStatusConversion.get(subject.getStatus());
-        subjectAdminDTO.setStatusStr(statusStr);
-        subjectAdminDTO.setStatus(subject.getStatus());
+        SubjectAdminDTO subjectAdminDTO = subject.toSubjectAdminDTO();
         return subjectAdminDTO;
     }
 

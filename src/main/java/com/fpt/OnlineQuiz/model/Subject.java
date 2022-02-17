@@ -1,5 +1,7 @@
 package com.fpt.OnlineQuiz.model;
 
+import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
+import com.fpt.OnlineQuiz.utils.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,8 +48,15 @@ public class Subject {
         expert.getSubjects().add(this);
     }
 
-    public void removeExpert(Expert expert) {
-        experts.remove(expert);
-        expert.getSubjects().remove(this);
+    public SubjectAdminDTO toSubjectAdminDTO(){
+        SubjectAdminDTO subjectAdminDTO = new SubjectAdminDTO();
+        subjectAdminDTO.setId(this.getId());
+        subjectAdminDTO.setImgSrc(this.getImage().getSrc());
+        subjectAdminDTO.setName(this.getName());
+        subjectAdminDTO.setTotalCourse(this.getCourses().size());
+        String statusStr = Constants.subjectStatusConversion.get(this.getStatus());
+        subjectAdminDTO.setStatusStr(statusStr);
+        subjectAdminDTO.setStatus(this.getStatus());
+        return subjectAdminDTO;
     }
 }
