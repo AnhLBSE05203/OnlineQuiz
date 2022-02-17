@@ -16,4 +16,10 @@ public interface SubjectService {
     List<Subject> findAllSubjects();
 
     List<SubjectAdminDTO> getAllSubjectAdminDTO();
+
+    SubjectAdminDTO getSubjectAdminDTOById(int id);
+
+    Subject getSubjectById(int id);
+
+    void update(Subject subject);
 }

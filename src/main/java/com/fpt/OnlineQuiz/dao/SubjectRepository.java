@@ -59,4 +59,26 @@ public class SubjectRepository {
             return null;
         }
     }
+    public Subject getSubjectById(int id) {
+        try {
+            BufferedReader buffer  = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_SUBJECT_BY_ID)));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while((line = buffer.readLine()) !=null){
+                sb.append(" ").append(line);
+            }
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Subject.class);
+            query.setParameter("id", id);
+            return (Subject) query.getSingleResult();
+        } catch (NoResultException | IOException e) {
+            return null;
+        }
+    }
+
+    public void update(Subject subject) {
+        em.merge(subject);
+        em.flush();
+    }
 }

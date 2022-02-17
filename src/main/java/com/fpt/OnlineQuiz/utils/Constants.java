@@ -118,6 +118,7 @@ public class Constants {
     public static final String SQL_PATH_GET_FEATURED_COURSES = "/static/sql/getFeaturedCourses.sql";
     public static final String SQL_PATH_GET_ALL_SUBJECTS = "/static/sql/getAllSubjects.sql";
     public static final String SQL_PATH_GET_FEATURED_EXPERTS = "/static/sql/getFeaturedExperts.sql";
+    public static final String SQL_PATH_FIND_SUBJECT_BY_ID = "/static/sql/findSubjectById.sql";
     //home page constants
     public static final int HOME_PAGE_COURSE_NUMBER = 4;
     public static final int HOME_PAGE_EXPERT_NUMBER = 3;
