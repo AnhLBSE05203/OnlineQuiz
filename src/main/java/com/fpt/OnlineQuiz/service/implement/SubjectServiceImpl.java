@@ -68,4 +68,28 @@ public class SubjectServiceImpl implements SubjectService {
         }
         return listSubjectDTO;
     }
+
+    @Override
+    public SubjectAdminDTO getSubjectAdminDTOById(int id) {
+        Subject subject = subjectRepository.getSubjectById(id);
+        SubjectAdminDTO subjectAdminDTO = new SubjectAdminDTO();
+        subjectAdminDTO.setId(subject.getId());
+        subjectAdminDTO.setImgSrc(subject.getImage().getSrc());
+        subjectAdminDTO.setName(subject.getName());
+        subjectAdminDTO.setTotalCourse(subject.getCourses().size());
+        String statusStr = Constants.subjectStatusConversion.get(subject.getStatus());
+        subjectAdminDTO.setStatusStr(statusStr);
+        subjectAdminDTO.setStatus(subject.getStatus());
+        return subjectAdminDTO;
+    }
+
+    @Override
+    public Subject getSubjectById(int id) {
+        return subjectRepository.getSubjectById(id);
+    }
+
+    @Override
+    public void update(Subject subject) {
+        subjectRepository.update(subject);
+    }
 }

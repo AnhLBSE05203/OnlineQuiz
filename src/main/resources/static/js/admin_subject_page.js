@@ -23,14 +23,14 @@ $(document).ready(function() {
         			}, {
         				title : 'Img',
         				data : 'imgSrc',
-        				render: function(data) {
+        				render: function(data, type, row, meta) {
         					return '<img src="' + data +'" class="subject-img" />';
         				}
         			}, {
         			    title : 'Action',
                         data : 'status',
-                        render: function(data) {
-                            var html = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">'
+                        render: function(data, type, row, meta) {
+                            var html = '<button type="button" class="btn btn-primary" onclick="showDetail('+ row['id'] + ')">'
                             + 'Edit</button>';
                             if (data == 0) {
                                 html += '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">'
@@ -44,3 +44,22 @@ $(document).ready(function() {
         			} ]
 		});
 });
+function showDetail(id) {
+    var link = "/admin/subject/" + id;
+    var subject = "";
+    $.ajax({
+                    url: link,
+                    type:"get",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data){
+                    subject = data;
+                        if(subject != ""){
+                            $("#subjectDetailForm").css("display", "block");
+                        }
+                    }
+                });
+}
+function closeDetailForm(){
+    $("#subjectDetailForm").hide();
+}

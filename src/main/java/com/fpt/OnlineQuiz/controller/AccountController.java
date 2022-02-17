@@ -50,7 +50,7 @@ public class AccountController {
      * @return Login Page html
      */
     @GetMapping(Constants.LINK_LOGIN)
-    String loginPage(Model model) {
+    public String loginPage(Model model) {
         return Constants.PAGE_LOGIN;
     }
 
