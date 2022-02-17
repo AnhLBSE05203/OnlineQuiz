@@ -2,9 +2,11 @@ package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.CourseRepository;
 import com.fpt.OnlineQuiz.dao.SubjectRepository;
+import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.SubjectService;
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +49,23 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public List<Subject> findAllSubjects() {
         return subjectRepository.findAllSubjects();
+    }
+
+    @Override
+    public List<SubjectAdminDTO> getAllSubjectAdminDTO() {
+        List<Subject> listSubjects = subjectRepository.findAllSubjects();
+        List<SubjectAdminDTO> listSubjectDTO = new ArrayList<>();
+        for(Subject subject : listSubjects) {
+            SubjectAdminDTO subjectAdminDTO = new SubjectAdminDTO();
+            subjectAdminDTO.setId(subject.getId());
+            subjectAdminDTO.setImgSrc(subject.getImage().getSrc());
+            subjectAdminDTO.setName(subject.getName());
+            subjectAdminDTO.setTotalCourse(subject.getCourses().size());
+            String statusStr = Constants.subjectStatusConversion.get(subject.getStatus());
+            subjectAdminDTO.setStatusStr(statusStr);
+            subjectAdminDTO.setStatus(subject.getStatus());
+            listSubjectDTO.add(subjectAdminDTO);
+        }
+        return listSubjectDTO;
     }
 }

@@ -9,6 +9,7 @@ import com.fpt.OnlineQuiz.service.ExpertService;
 import com.fpt.OnlineQuiz.service.SubjectService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,7 +32,7 @@ public class CommonController {
     @Autowired
     private SubjectService subjectService;
 
-    @GetMapping("/getPrincipal")
+    @GetMapping(value = "/getPrincipal", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Account getPrincipal(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

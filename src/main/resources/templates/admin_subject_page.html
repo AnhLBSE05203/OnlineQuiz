@@ -9,8 +9,9 @@
     <title>Subject Management</title>
     <!-- Admin common css -->
     <div th:replace="components/header_footer.html :: admin-common-style">
-        <link th:href="@{/css/admin_subject_page.css}" rel="stylesheet" />
     </div>
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+    <link th:href="@{/css/admin_subject_page.css}" rel="stylesheet" />
 </head>
 <body class="sb-nav-fixed">
 <!-- Admin header -->
@@ -37,40 +38,7 @@
                         List Subject
                     </div>
                     <div class="card-body">
-                        <table id="datatablesSimple">
-                            <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Image</th>
-                                <th>Image Src</th>
-                                <th>Name</th>
-                                <th>Total Courses</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody th:each="subject, stat : ${listSubjects}">
-                            <tr>
-                                <td th:text="${subject.id}"></td>
-                                <td><img th:src="@{${subject.image.src}}" class="subject-img"></td>
-                                <td th:text="${subject.image.src}"></td>
-                                <td th:text="${subject.name}"></td>
-                                <td th:text="${subject.courses.size()} "></td>
-                                <td th:text="${listStatus[stat.index]}"></td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#editModal">
-                                        Edit
-                                    </button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#exampleModal" th:unless="${subject.status == 0}">
-                                        Delete
-                                    </button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal" th:if="${subject.status == 0}">Recover</button>
-                                </td>
-                            </tr>
-                            </tbody>
+                        <table id="SubjectDatatable">
                         </table>
                     </div>
                 </div>
@@ -83,6 +51,9 @@
 <!-- Admin common js -->
 <th:block th:insert="components/header_footer.html :: admin-common-script">
 </th:block>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script th:src="@{/js/admin_subject_page.js}"></script>
 <!-- -->
 </body>
 </html>

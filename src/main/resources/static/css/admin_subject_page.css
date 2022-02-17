@@ -1,3 +1,7 @@
 .subject-img{
-max-width: 50px;
+  width: 100px;
+}
+.SubjectDatatable{
+    width: 100%;
+    overflow-x: auto;
 }
