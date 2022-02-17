@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.service;
 
+import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.model.Subject;
 
@@ -13,4 +14,6 @@ public interface SubjectService {
     List<Subject> getFeaturedSubjects(int number);
 
     List<Subject> findAllSubjects();
+
+    List<SubjectAdminDTO> getAllSubjectAdminDTO();
 }
