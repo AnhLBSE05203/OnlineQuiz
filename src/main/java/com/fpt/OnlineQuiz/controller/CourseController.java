@@ -19,11 +19,11 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @GetMapping(path = "/registration")
+    @GetMapping(path = "/mycourses")
     public String showRegistrationPage(ModelMap modelMap) {
-        List<Course> courseList = courseService.getCoursesRegistration(3);
-        modelMap.addAttribute("courselist", courseList);
-        return "registration_page";
+        List<Course> courseList = courseService.getTop3Courses(3);
+        modelMap.addAttribute("my_course_list", courseList);
+        return "my_courses_page";
     }
 
     @GetMapping(path = "/loadmorecourse")
@@ -34,14 +34,17 @@ public class CourseController {
         List<Course> courses = courseService.getNext3Courses(3, iamount);
         if (courses.size() != 0) {
             for (Course c : courses) {
-                out.println("<div class=\"col-lg-12 course\" th:each=\"course : ${courselist}\">\n" +
+                out.println("<div class=\"col-lg-4 course\">\n" +
                         "                    <div class=\"properties properties2 mb-30\">\n" +
                         "                        <div class=\"properties__card\">\n" +
-                        "                            <div class=\"properties__caption\">\n" +
-                        "                                <h3><a href=\"#\">"+c.getName()+"</a></h3>\n" +
-                        "                                <p>"+c.getDescription()+"</p>\n" +
+                        "                            <div class=\"properties__img overlay1\">\n" +
+                        "                                <a href=\"#\"><img src=\"/img/gallery/featured2.png\" alt=\"\"></a>\n" +
                         "                            </div>\n" +
-                        "    \n" +
+                        "                            <div class=\"properties__caption\">\n" +
+                        "                                <h3><a>"+c.getName()+"</a></h3>\n" +
+                        "                                <p>"+c.getDescription()+"</p>\n" +
+                        "                                <a href=\"#\" class=\"border-btn border-btn2\">Go to Course</a>\n" +
+                        "                            </div>\n" +
                         "                        </div>\n" +
                         "                    </div>\n" +
                         "                </div>");

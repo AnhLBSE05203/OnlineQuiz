@@ -10,5 +10,7 @@ public interface CourseService {
 
     List<Course> getNext3Courses(int account_id, int amount);
 
+    List<Course> getTop3Courses(int account_id);
+
     List<Course> getCoursesRegistration(int account_id);
 }

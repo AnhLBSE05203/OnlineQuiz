@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Courses | Education</title>
+    <title>My Courses</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -74,13 +74,13 @@
                     <div class="row" id="content">
                         <div class="col-xl-8 col-lg-11 col-md-12">
                             <div class="hero__caption hero__caption2">
-                                <h1 data-animation="bounceIn" data-delay="0.2s">My Subject</h1>
+                                <h1 data-animation="bounceIn" data-delay="0.2s">My Courses</h1>
                                 <!-- breadcrumb Start-->
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                                         <li class="breadcrumb-item"><a href="#">User Profile</a></li>
-                                        <li class="breadcrumb-item"><a href="#">My Subject</a></li>
+                                        <li class="breadcrumb-item"><a href="#">My Courses</a></li>
                                     </ol>
                                 </nav>
                                 <!-- breadcrumb End -->
@@ -94,24 +94,23 @@
     <!-- Courses area start -->
     <div class="courses-area section-padding40 fix">
         <div class="container">
-<!--            <div class="row" id="listsubject">-->
-<!--                <div class="col-lg-4 subject" th:each="subject : ${my_subject_list}">-->
-<!--                    <div class="properties properties2 mb-30">-->
-<!--                        <div class="properties__card">-->
-<!--                            <div class="properties__img overlay1">-->
-<!--                                <a href="#"><img th:src="@{/img/gallery/featured2.png}" alt=""></a>-->
-<!--                            </div>-->
-<!--                            <div class="properties__caption">-->
-<!--                                <p th:text="${subject.name}"></p>-->
-<!--                                <h3><a href="#">Fundamental of UX for Application design</a></h3>-->
-<!--                                <p>The automated process all your website tasks. Discover tools and techniques to engage effectively with vulnerable children and young people.-->
-<!--                                </p>-->
-<!--                                <a href="#" class="border-btn border-btn2">Go to subject</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="row" id="listcourse">
+                <div class="col-lg-4 course" th:each="course : ${my_course_list}">
+                    <div class="properties properties2 mb-30">
+                        <div class="properties__card">
+                            <div class="properties__img overlay1">
+                                <a href="#"><img th:src="@{/img/gallery/featured2.png}" alt=""></a>
+                            </div>
+                            <div class="properties__caption">
+<!--                                <p th:text="${course.name}"></p>-->
+                                 <h3><a href="#" th:text="${course.name}"></a></h3>
+                                <p th:text="${course.description}"></p>
+                                <a href="#" class="border-btn border-btn2">Go to Course</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row justify-content-center">
                 <div class="col-xl-7 col-lg-8">
                     <div class="section-tittle text-center mt-40">
@@ -175,22 +174,22 @@
 <!-- page-specific js -->
 <script>
 
-    // function load(){
-    //     var amount = document.getElementsByClassName("subject").length;
-    //     $.ajax({
-    //         url:"/user/loadmoresubject",
-    //         type:"get",
-    //         data:{
-    //           amount: amount
-    //         },
-    //         success: function (data){
-    //             if(data != ""){
-    //                 var row = document.getElementById("listsubject");
-    //                 row.innerHTML += data;
-    //             }
-    //         }
-    //     })
-    // }
+    function load(){
+        var amount = document.getElementsByClassName("course").length;
+        $.ajax({
+            url:"/user/loadmorecourse",
+            type:"get",
+            data:{
+                amount: amount
+            },
+            success: function (data){
+                if(data != ""){
+                    var row = document.getElementById("listcourse");
+                    row.innerHTML += data;
+                }
+            }
+        })
+    }
 
 </script>
 </body>
