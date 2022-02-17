@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Courses | Education</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/static/img/favicon.ico}">
-
+    <meta charset="UTF-8">
+    <title>Question | Edit</title>
     <!-- CSS here -->
+    <!--    <link rel="stylesheet" href="/static/css/bootstrap.min.css">-->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
     <link rel="stylesheet" th:href="@{/css/slicknav.css}">
@@ -32,13 +27,11 @@
         <div class="preloader-inner position-relative">
             <div class="preloader-circle"></div>
             <div class="preloader-img pere-text">
-                <img th:href="@{/static/img/logo/loder.png}" alt="">
+                <img th:src="@{/img/logo/loder.png}" alt="">
             </div>
         </div>
     </div>
 </div>
-<!-- Preloader Start -->
-<!-- Header Start -->
 <div class="header-area header-transparent">
     <div class="main-header ">
         <div class="header-bottom  header-sticky">
@@ -47,7 +40,7 @@
                     <!-- Logo -->
                     <div class="col-xl-2 col-lg-2">
                         <div class="logo">
-                            <a href="index.html"><img th:href="@{/static/img/logo/logo.png}" alt=""></a>
+                            <a href="index.html"><img th:src="@{/img/logo/logo.png}" alt=""></a>
                         </div>
                     </div>
                     <div class="col-xl-10 col-lg-10">
@@ -92,19 +85,10 @@
             <!-- Single Slider -->
             <div class="single-slider slider-height2">
                 <div class="container">
-                    <div class="row" id="content">
+                    <div class="row">
                         <div class="col-xl-8 col-lg-11 col-md-12">
                             <div class="hero__caption hero__caption2">
-                                <h1 data-animation="bounceIn" data-delay="0.2s">My Subject</h1>
-                                <!-- breadcrumb Start-->
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="#">User Profile</a></li>
-                                        <li class="breadcrumb-item"><a href="#">My Subject</a></li>
-                                    </ol>
-                                </nav>
-                                <!-- breadcrumb End -->
+                                <h1 data-animation="bounceIn" data-delay="0.2s">Edit Question</h1>
                             </div>
                         </div>
                     </div>
@@ -112,16 +96,26 @@
             </div>
         </div>
     </section>
-    <!-- Courses area start -->
     <div class="courses-area section-padding40 fix">
         <div class="container">
-            <div class="row" id="listcontent">
-                <div class="col-lg-4 product" th:each="subject : ${my_subject_list}">
-                    <div class="properties properties2 mb-30">
-                        <div class="properties__card">
-                            <div class="properties__img overlay1">
-                                <a href="#"><img th:href="@{/static/img/gallery/featured1.png}" alt=""></a>
+            <div class="col-lg-12">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3"><label class="form-label" for="subjectname"><strong>Subject Name</strong></label><input class="form-control" type="text" id="subjectname" placeholder="Subject Name" name="subjectname"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3 w-100"><label class="form-label" for="question"><strong>Question</strong></label><textarea class="form-control" style="resize: none" rows="10" type="text" id="question" placeholder="Question" name="question"></textarea></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="row-cols-1">
+                                <div class="mb-3"><label class="form-label" for="answer"><strong>Answer</strong></label><input class="form-control" type="text" id="answer" placeholder="Answer" name="answer"></div>
                             </div>
+<<<<<<< HEAD:src/main/resources/templates/my_subject_page.html
                             <div class="properties__caption">
                                 <p th:text="${subject.name}"></p>
                                 <h3><a href="#">Fundamental of UX for Application design</a></h3>
@@ -129,61 +123,60 @@
                                 </p>
                            <!--     <input type="hidden" name="subId" th:value="${subject.name}"/>-->
                                 <a th:href="@{/lesson/list(subId=${subject.id})}" class="border-btn border-btn2">Go to course</a>
+=======
+                            <div class="row-cols-1">
+                                <div class="mb-3 w-100"><button class="btn btn-primary btn-sm" type="submit">Save</button></div>
+>>>>>>> main:src/main/resources/templates/edit_question_page.html
                             </div>
                         </div>
+                        <div class="col-9">
+                            <div class="mb-3"><label class="form-label" for="explain"><strong>Explain</strong></label><textarea class="form-control" style="resize: none" rows="10" type="text" id="explain" placeholder="Explain" name="explain"></textarea></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="services-area services-area2 section-padding40">
+    <div class="container">
+        <div class="row justify-content-sm-center">
+            <div class="col-lg-4 col-md-6 col-sm-8">
+                <div class="single-services mb-30">
+                    <div class="features-icon">
+                        <img th:src="@{/img/icon/icon1.svg}" alt="">
+                    </div>
+                    <div class="features-caption">
+                        <h3>60+ UX courses</h3>
+                        <p>The automated process all your website tasks.</p>
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-7 col-lg-8">
-                    <div class="section-tittle text-center mt-40">
-                        <a class="border-btn" onclick="load()">Load More</a>
+            <div class="col-lg-4 col-md-6 col-sm-8">
+                <div class="single-services mb-30">
+                    <div class="features-icon">
+                        <img th:src="@{/img/icon/icon2.svg}" alt="">
+                    </div>
+                    <div class="features-caption">
+                        <h3>Expert instructors</h3>
+                        <p>The automated process all your website tasks.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-8">
+                <div class="single-services mb-30">
+                    <div class="features-icon">
+                        <img th:src="@{/img/icon/icon3.svg}" alt="">
+                    </div>
+                    <div class="features-caption">
+                        <h3>Life time access</h3>
+                        <p>The automated process all your website tasks.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- ? services-area -->
-    <div class="services-area services-area2 section-padding40">
-        <div class="container">
-            <div class="row justify-content-sm-center">
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img th:href="@{/static/img/icon/icon1.svg}" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>60+ UX courses</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img th:href="@{/static/img/icon/icon2.svg}" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>Expert instructors</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img th:href="@{/static/img/icon/icon3.svg}" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>Life time access</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 </main>
 <footer>
     <div class="footer-wrappper footer-bg">
@@ -196,7 +189,7 @@
                             <div class="single-footer-caption mb-30">
                                 <!-- logo -->
                                 <div class="footer-logo mb-25">
-                                    <a href="index.html"><img th:href="@{/static/img/logo/logo2_footer.png}"  alt=""></a>
+                                    <a href="index.html"><img th:src="@{/img/logo/logo2_footer.png}"  alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
@@ -280,7 +273,6 @@
 <div id="back-top" >
     <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
-
 <!-- JS here -->
 <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
 <!-- Jquery, Popper, Bootstrap -->
@@ -325,23 +317,5 @@
 <!-- Jquery Plugins, main Jquery -->
 <script th:src="@{/js/plugins.js}"></script>
 <script th:src="@{/js/main.js}"></script>
-<script>
-
-    function load(){
-        var amount = document.getElementsByClassName("product").length;
-        $.ajax({
-            url:"/user/loadmore",
-            type:"get",
-            data:{
-              amount: amount
-            },
-            success: function (data){
-                var row = document.getElementById("listcontent");
-                row.innerHTML += data;
-            }
-        })
-    }
-
-</script>
 </body>
 </html>

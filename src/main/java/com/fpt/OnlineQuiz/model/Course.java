@@ -28,6 +28,8 @@ public class Course {
     private int lessonTotal;
     @Column(name = "price")
     private double price;
+    @Column(name = "status")
+    private int status;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subjectId")
     private Subject subject;

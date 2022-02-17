@@ -50,7 +50,7 @@ public class AccountController {
      * @return Login Page html
      */
     @GetMapping(Constants.LINK_LOGIN)
-    String loginPage(Model model) {
+    public String loginPage(Model model) {
         return Constants.PAGE_LOGIN;
     }
 
@@ -190,7 +190,7 @@ public class AccountController {
         account.setPhone(registerDTO.getPhone());
         account.setFullName(registerDTO.getFullName());
         account.setCreatedUserId(1);
-        account.setStatus(Constants.STATUS_UNCONFIRMED);
+        account.setStatus(Constants.STATUS_ACCOUNT_UNCONFIRMED);
         Role role = roleService.findRoleByName(Constants.ROLE_USER);
         List<Role> roles = new ArrayList<>();
         roles.add(role);
@@ -389,7 +389,7 @@ public class AccountController {
             sb.append(Constants.LINK_REGISTER);
             return sb.toString();
         }
-        account.setStatus(Constants.STATUS_CONFIRMED);
+        account.setStatus(Constants.STATUS_ACCOUNT_CONFIRMED);
         accountService.updateAccount(account);
         tokenService.deleteToken(token);
         redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_CONFIRM_SUCCESS);

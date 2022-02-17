@@ -1,0 +1,14 @@
+.subject-img{
+  width: 100px;
+}
+/* placeholder for modal */
+#subjectDetailForm{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 15px;
+    z-index: 9999;
+    background-color: white;
+    width: 70%;
+    height: 70%;
+}

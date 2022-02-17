@@ -35,7 +35,19 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<Course> getNext3Courses(int account_id, int amount) {
+        return courseRepository.getNext3Courses(account_id, amount);
+    }
+
+    @Override
+    public List<Course> getTop3Courses(int account_id) {
+        return courseRepository.getTop3Courses(account_id);
+    }
+
+
+    @Override
     public List<Course> getCoursesRegistration(int account_id) {
         return courseRepository.getTop3Courses(account_id);
     }
+
 }

@@ -63,11 +63,13 @@ public class CourseRepository {
     public List<Course> getNext3Courses(int account_id, int amount){
         try {
             StringBuilder sb = new StringBuilder();
-            sb.append("select a.courses from Account a where a.id =:id offset "+amount+" rows fetch next 3 row only");
+            sb.append("select a.courses from Account a where a.id =:id");
             String sql = sb.toString();
+            int size = 3;
             Query query = em.createQuery(sql, Collection.class);
             query.setParameter("id", account_id);
-//            query.setMaxResults(3);
+            query.setFirstResult(amount);
+            query.setMaxResults(size);
             return (List<Course>) query.getResultList();
         }catch (Exception ex){
             ex.printStackTrace();
