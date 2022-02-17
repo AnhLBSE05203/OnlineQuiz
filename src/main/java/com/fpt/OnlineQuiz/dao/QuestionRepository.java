@@ -20,9 +20,8 @@ public class QuestionRepository {
 
     public List<Question> getQuestionsBySubjectId(int subject_id){
         try {
-            //TODO Fix SQL
             StringBuilder sb = new StringBuilder();
-            sb.append("select s.question from Subject s where s.id =:id");
+            sb.append("select q from Question q where q.subject.id =:id");
             String sql = sb.toString();
             Query query = em.createQuery(sql, Question.class);
             query.setParameter("id", subject_id);
