@@ -6,6 +6,16 @@
     <title>Title</title>
 </head>
 <body>
+<footer th:replace="components/header_footer.html :: user-footer">
+</footer>
+
+<!-- Scroll Up -->
+<div th:insert="components/header_footer.html :: scroll-up">
+</div>
+<!-- JS here -->
+<th:block th:insert="components/header_footer.html :: common-script">
+</th:block>
+<!-- add page-specific js here -->
 
 </body>
 </html>
