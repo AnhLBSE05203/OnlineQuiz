@@ -57,7 +57,7 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li class="active" ><a href="index.html">Home</a></li>
-                                        <li><a href="courses.html">Courses</a></li>
+                                        <li><a href="listLesson_page.html">Courses</a></li>
                                         <li><a href="about.html">About</a></li>
                                         <li><a href="#">Blog</a>
                                             <ul class="submenu">
@@ -127,7 +127,8 @@
                                 <h3><a href="#">Fundamental of UX for Application design</a></h3>
                                 <p>The automated process all your website tasks. Discover tools and techniques to engage effectively with vulnerable children and young people.
                                 </p>
-                                <a href="#" class="border-btn border-btn2">Go to course</a>
+                           <!--     <input type="hidden" name="subId" th:value="${subject.name}"/>-->
+                                <a th:href="@{/lesson/list(subId=${subject.id})}" class="border-btn border-btn2">Go to course</a>
                             </div>
                         </div>
                     </div>

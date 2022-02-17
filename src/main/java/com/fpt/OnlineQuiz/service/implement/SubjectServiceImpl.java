@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.CourseRepository;
+import com.fpt.OnlineQuiz.dao.DaiNT_CRUD_Interface.SubjectRepositoryCRUD;
 import com.fpt.OnlineQuiz.dao.SubjectRepository;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.model.Subject;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
@@ -18,7 +20,8 @@ public class SubjectServiceImpl implements SubjectService {
     private CourseRepository courseRepository;
     @Autowired
     private SubjectRepository subjectRepository;
-
+    @Autowired
+    private SubjectRepositoryCRUD subjectRepositoryCRUD;
     @Override
     public List<Subject> getAllMySubject(int account_id) {
         List<Course> list_course = courseRepository.getTop3Courses(account_id);
@@ -42,5 +45,11 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public List<Subject> getFeaturedSubjects(int number) {
         return subjectRepository.getFeaturedSubjects(number);
+    }
+
+    //get specific subject by subjectId
+    @Override
+    public Optional<Subject> getSubject(int id){
+        return subjectRepositoryCRUD.findById(id);
     }
 }

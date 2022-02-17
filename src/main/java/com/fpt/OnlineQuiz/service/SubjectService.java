@@ -1,9 +1,9 @@
 package com.fpt.OnlineQuiz.service;
 
-import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.model.Subject;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SubjectService {
     List<Subject>  getAllMySubject(int account_id);
@@ -11,4 +11,6 @@ public interface SubjectService {
     List<Subject> getNext3Subject(int account_id, int amount);
 
     List<Subject> getFeaturedSubjects(int number);
+
+    Optional<Subject> getSubject(int id);
 }
