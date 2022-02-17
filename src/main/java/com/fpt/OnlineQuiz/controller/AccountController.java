@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
-import javax.security.auth.login.AccountException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -65,7 +64,10 @@ public class AccountController {
     public String forgotPasswordPage(Model model) {
         return Constants.PAGE_FORGOT_PASSWORD;
     }
-
+    @GetMapping("/testho")
+    public String testt(Model model) {
+        return "cuu";
+    }
     /**
      * Process Forgot Password Function by sending User the Password Reset Token
      *
