@@ -1,4 +1,4 @@
-package com.fpt.OnlineQuiz.dao.DaiNT_CRUD_Interface;
+package com.fpt.OnlineQuiz.dao.CRUDRepository;
 
 import com.fpt.OnlineQuiz.model.Subject;
 import org.springframework.data.repository.CrudRepository;

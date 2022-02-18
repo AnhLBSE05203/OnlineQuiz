@@ -1,7 +1,7 @@
 package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.CourseRepository;
-import com.fpt.OnlineQuiz.dao.DaiNT_CRUD_Interface.SubjectRepositoryCRUD;
+import com.fpt.OnlineQuiz.dao.CRUDRepository.SubjectRepositoryCRUD;
 import com.fpt.OnlineQuiz.dao.SubjectRepository;
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.model.Course;
@@ -10,7 +10,6 @@ import com.fpt.OnlineQuiz.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
