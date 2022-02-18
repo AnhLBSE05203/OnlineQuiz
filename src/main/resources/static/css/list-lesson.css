@@ -1,0 +1,16 @@
+.le-titile {
+   color: black;
+
+}
+#course-content{
+   position: relative;
+   min-height: 1px;
+   padding-right: 15px;
+   padding-left: 15px;
+}
+#course-content div{
+   margin: 10px;
+}
+#course-content div > * {
+   margin-right: 10px;
+}

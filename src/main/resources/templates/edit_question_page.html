@@ -50,7 +50,7 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li class="active" ><a href="index.html">Home</a></li>
-                                        <li><a href="courses.html">Courses</a></li>
+                                        <li><a href="listLesson_page.html">Courses</a></li>
                                         <li><a href="about.html">About</a></li>
                                         <li><a href="#">Blog</a>
                                             <ul class="submenu">
@@ -115,8 +115,18 @@
                             <div class="row-cols-1">
                                 <div class="mb-3"><label class="form-label" for="answer"><strong>Answer</strong></label><input class="form-control" type="text" id="answer" placeholder="Answer" name="answer"></div>
                             </div>
+<<<<<<< HEAD:src/main/resources/templates/my_subject_page.html
+                            <div class="properties__caption">
+                                <p th:text="${subject.name}"></p>
+                                <h3><a href="#">Fundamental of UX for Application design</a></h3>
+                                <p>The automated process all your website tasks. Discover tools and techniques to engage effectively with vulnerable children and young people.
+                                </p>
+                           <!--     <input type="hidden" name="subId" th:value="${subject.name}"/>-->
+                                <a th:href="@{/lesson/list(subId=${subject.id})}" class="border-btn border-btn2">Go to course</a>
+=======
                             <div class="row-cols-1">
                                 <div class="mb-3 w-100"><button class="btn btn-primary btn-sm" type="submit">Save</button></div>
+>>>>>>> main:src/main/resources/templates/edit_question_page.html
                             </div>
                         </div>
                         <div class="col-9">

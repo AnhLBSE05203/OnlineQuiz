@@ -26,6 +26,8 @@ public class CourseController {
         return "my_courses_page";
     }
 
+
+
     @GetMapping(path = "/loadmorecourse")
     public @ResponseBody void loadMore(
             @RequestParam("amount") String amount, HttpServletRequest request, HttpServletResponse response) throws IOException {
