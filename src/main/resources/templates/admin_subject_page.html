@@ -51,19 +51,28 @@
             </div>
         </div>
         <!-- placeholder for modal -->
-        <!-- Modal -->
-        <div class="modal fade" id="subjectDetailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        <!-- Edit Subject Modal -->
+        <div class="modal fade" id="subjectEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form id="subjectEditForm" th:object="${subjectAdminDTO}">
+                    <form id="subjectEditForm" th:object="${subjectAdminDTO}"
+                          th:action="@{/admin/subject/edit}" method="POST">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel">Subject Detail</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="hidden" id="editSubjectId" name="id" th:value="${subjectAdminDTO.id}">
-                            <input type="text" id="editSubjectName" name="name" th:value="${subjectAdminDTO.name}">
+                            <img id="editSubjectImg"><br>
+                            <input type="hidden" id="editSubjectImgSrc" th:name="imgSrc">
+                            <input type="hidden" id="editSubjectStatusStr" th:name="statusStr" value="">
+                            Id: <input type="text" id="editSubjectId" th:name="id" readonly><br>
+                            Total no. of Courses: <input type="text" id="editSubjectTotalCourse" th:field="*{totalCourse}" readonly><br>
+                            Name: <input type="text" id="editSubjectName" th:name="name"><br>
+                            Status: <select id = "editSubjectStatus" th:name="status">
+                                <option th:each="status : ${statusMap}" th:value="${status.key}" th:text="${status.value}">
+                                </option>
+                            </select>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -73,6 +82,7 @@
                 </div>
             </div>
         </div>
+        <!-- End Edit Subject Modal -->
         <!-- Admin common js -->
         <th:block th:insert="components/header_footer.html :: admin-common-script">
         </th:block>

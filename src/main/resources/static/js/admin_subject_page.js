@@ -30,7 +30,7 @@ $(document).ready(function() {
         			    title : 'Action',
                         data : 'status',
                         render: function(data, type, row, meta) {
-                            var html = '<button type="button" class="btn btn-primary" onclick="showDetail('+ row['id'] + ')">'
+                            var html = '<button type="button" class="btn btn-primary" onclick="showSubjectEditModal('+ row['id'] + ')">'
                             + 'Edit</button>';
                             if (data == 0) {
                                 html += '<button type="button" class="btn btn-primary">'
@@ -44,7 +44,7 @@ $(document).ready(function() {
         			} ]
 		});
 });
-function showDetail(id) {
+function showSubjectEditModal(id) {
     var link = "/admin/subject/" + id;
     var subject = "";
     $.ajax({
@@ -57,14 +57,18 @@ function showDetail(id) {
                         if(subject != ""){
                             $("#editSubjectId").val(subject.id);
                             $("#editSubjectName").val(subject.name);
+                            $("#editSubjectTotalCourse").val(subject.totalCourse);
+                            $("#editSubjectImg").attr("src", subject.imgSrc);
+                            $("#editSubjectStatus").val(subject.status).change();
+
                         }
                     }
                 });
-    $('#subjectDetailModal').modal('show');
+    $('#subjectEditModal').modal('show');
 }
-$('#subjectDetailModal').on('hidden.bs.modal', function () {
+$('#subjectEditModal').on('hidden.bs.modal', function () {
   alert('close');
 })
-$('#myModal').on('shown.bs.modal', function (e) {
+$('#subjectEditModal').on('shown.bs.modal', function (e) {
   // do something...
 })

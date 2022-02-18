@@ -17,7 +17,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
@@ -62,17 +64,31 @@ public class AdminController {
     @GetMapping("/subject")
     public String subjectPage(Model model) {
         model.addAttribute("subjectAdminDTO", new SubjectAdminDTO());
+        model.addAttribute("statusMap", Constants.subjectStatusConversion);
         return "admin_subject_page";
     }
 
     @PostMapping("/subject/edit")
-    public void editSubject(@ModelAttribute SubjectAdminDTO subjectAdminDTO) {
+    public String editSubject(@ModelAttribute SubjectAdminDTO subjectAdminDTO) {
         Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
         subject.setName(subjectAdminDTO.getName());
         //set img - to do: image upload
         subject.setStatus(subjectAdminDTO.getStatus());
 
         subjectService.update(subject);
+        return "redirect:/admin/subject";
+    }
+
+    @PostMapping("/subject/add")
+    public String addSubject(@ModelAttribute SubjectAdminDTO subjectAdminDTO) {
+        //to do - add form to page
+        Subject subject = new Subject();
+        subject.setName(subjectAdminDTO.getName());
+        //set img - to do: image upload
+        subject.setStatus(subjectAdminDTO.getStatus());
+
+        subjectService.update(subject);
+        return "redirect:/admin/subject";
     }
 
     @GetMapping(value = "/getSubjects", produces = MediaType.APPLICATION_JSON_VALUE)
