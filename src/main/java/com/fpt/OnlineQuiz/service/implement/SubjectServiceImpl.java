@@ -1,7 +1,7 @@
 package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.CourseRepository;
-import com.fpt.OnlineQuiz.dao.CRUDRepository.SubjectRepositoryCRUD;
+import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDSubjectRepository;
 import com.fpt.OnlineQuiz.dao.SubjectRepository;
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.model.Course;
@@ -21,7 +21,7 @@ public class SubjectServiceImpl implements SubjectService {
     @Autowired
     private SubjectRepository subjectRepository;
     @Autowired
-    private SubjectRepositoryCRUD subjectRepositoryCRUD;
+    private CRUDSubjectRepository CRUDSubjectRepository;
     @Override
     public List<Subject> getAllMySubject(int account_id) {
         List<Course> list_course = courseRepository.getTop3Courses(account_id);
@@ -88,6 +88,6 @@ public class SubjectServiceImpl implements SubjectService {
     //get specific subject by subjectId
     @Override
     public Optional<Subject> getSubject(int id){
-        return subjectRepositoryCRUD.findById(id);
+        return CRUDSubjectRepository.findById(id);
     }
 }
