@@ -33,10 +33,10 @@ $(document).ready(function() {
                             var html = '<button type="button" class="btn btn-primary" onclick="showDetail('+ row['id'] + ')">'
                             + 'Edit</button>';
                             if (data == 0) {
-                                html += '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">'
+                                html += '<button type="button" class="btn btn-primary">'
                                 + 'Recover</button>';
                             } else {
-                                html += '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">'
+                                html += '<button type="button" class="btn btn-primary">'
                                 + 'Delete</button>';
                             }
                             return html;
@@ -55,11 +55,16 @@ function showDetail(id) {
                     success: function (data){
                     subject = data;
                         if(subject != ""){
-                            $("#subjectDetailForm").css("display", "block");
+                            $("#editSubjectId").val(subject.id);
+                            $("#editSubjectName").val(subject.name);
                         }
                     }
                 });
+    $('#subjectDetailModal').modal('show');
 }
-function closeDetailForm(){
-    $("#subjectDetailForm").hide();
-}
+$('#subjectDetailModal').on('hidden.bs.modal', function () {
+  alert('close');
+})
+$('#myModal').on('shown.bs.modal', function (e) {
+  // do something...
+})
