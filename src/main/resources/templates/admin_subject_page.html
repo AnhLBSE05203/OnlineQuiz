@@ -54,7 +54,7 @@
         <div id="subjectDetailForm">
             <form th:action="@{/admin/subject/edit}" th:object="${subjectAdminDTO}" method="POST">
                 Name: <input type="text" th:field="*{name}">
-                Image: <img th:src="">
+                Image: <img src="">
                 Upload Img: <input type="file" name="myImage" accept="image/*" />
                 <button type="submit" class="btn">Edit</button>
                 <button type="button" class="btn cancel" onclick="closeDetailForm()">Close</button>
