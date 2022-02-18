@@ -32,12 +32,14 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Subject</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Subject Management</li>
+                            <li class="breadcrumb-item active">Subject Management
+                            </li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                 List Subject
+                                <button id="addSubjectButton" type="button" class="btn btn-primary" onclick="showSubjectAddModal()">Add Subject</button>
                             </div>
                             <div class="card-body">
                                 <table id="SubjectDatatable" style="width:100%;">
@@ -56,7 +58,7 @@
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form id="subjectEditForm" th:object="${subjectAdminDTO}"
+                    <form id="subjectEditForm" th:object="${subjectEditDTO}"
                           th:action="@{/admin/subject/edit}" method="POST">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel">Subject Detail</h5>
@@ -68,7 +70,7 @@
                             <input type="hidden" id="editSubjectStatusStr" th:name="statusStr" value="">
                             Id: <input type="text" id="editSubjectId" th:name="id" readonly><br>
                             Total no. of Courses: <input type="text" id="editSubjectTotalCourse" th:field="*{totalCourse}" readonly><br>
-                            Name: <input type="text" id="editSubjectName" th:name="name"><br>
+                            Name: <input type="text" id="editSubjectName" th:name="name" required><br>
                             Status: <select id = "editSubjectStatus" th:name="status">
                                 <option th:each="status : ${statusMap}" th:value="${status.key}" th:text="${status.value}">
                                 </option>
@@ -76,13 +78,43 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary">
+                            <input type="submit" class="btn btn-primary" value="Save">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
         <!-- End Edit Subject Modal -->
+        <!-- Create Subject Modal -->
+        <div class="modal fade" id="subjectAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="subjectAddForm" th:object="${subjectAddDTO}"
+                          th:action="@{/admin/subject/add}" method="POST">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Subject Detail</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="addSubjectId" th:name="id" value="0">
+                            <input type="hidden" id="addSubjectImgSrc" th:name="imgSrc">
+                            <input type="hidden" id="addSubjectStatusStr" th:name="statusStr" value="">
+                            Name: <input type="text" id="addSubjectName" th:name="name" required><br>
+                            Status: <select id = "addSubjectStatus" th:name="status">
+                            <option th:each="status : ${statusMap}" th:value="${status.key}" th:text="${status.value}" th:selected="${status.key == 1}">
+                            </option>
+                        </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Add">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End Create Subject Modal -->
         <!-- Admin common js -->
         <th:block th:insert="components/header_footer.html :: admin-common-script">
         </th:block>

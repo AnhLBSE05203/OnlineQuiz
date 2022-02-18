@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.dao;
 
 
+import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
@@ -79,8 +80,12 @@ public class SubjectRepository {
         }
     }
 
-    public void update(Subject subject) {
+    public void updateSubject(Subject subject) {
         em.merge(subject);
         em.flush();
+    }
+
+    public void addSubject(Subject subject){
+        em.persist(subject);
     }
 }

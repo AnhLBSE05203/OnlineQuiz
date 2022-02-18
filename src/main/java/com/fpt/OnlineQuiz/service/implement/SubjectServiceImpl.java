@@ -76,8 +76,13 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public void update(Subject subject) {
-        subjectRepository.update(subject);
+    public void updateSubject(Subject subject) {
+        subjectRepository.updateSubject(subject);
+    }
+
+    @Override
+    public void addSubject(Subject subject) {
+        subjectRepository.addSubject(subject);
     }
 
     //get specific subject by subjectId
