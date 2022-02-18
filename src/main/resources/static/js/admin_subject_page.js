@@ -35,13 +35,13 @@ $(document).ready(function() {
                         data : 'status',
                         render: function(data, type, row, meta) {
                             var html = '<button type="button" class="btn btn-primary" onclick="showSubjectEditModal('+ row['id'] + ')">'
-                            + 'Edit</button>';
+                            + 'Edit</button>&nbsp';
                             if (data == 0) {
                                 html += '<button type="button" class="btn btn-primary" onclick="recoverSubject('+ row['id'] +')">'
-                                + 'Recover</button>';
+                                + 'Recover</button>&nbsp';
                             } else {
                                 html += '<button type="button" class="btn btn-primary" onclick="deleteSubject('+ row['id'] +')">'
-                                + 'Delete</button>';
+                                + 'Delete</button>&nbsp';
                             }
                             return html;
                         }
