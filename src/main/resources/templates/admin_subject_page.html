@@ -51,14 +51,27 @@
             </div>
         </div>
         <!-- placeholder for modal -->
-        <div id="subjectDetailForm">
-            <form th:action="@{/admin/subject/edit}" th:object="${subjectAdminDTO}" method="POST">
-                Name: <input type="text" th:field="*{name}">
-                Image: <img src="">
-                Upload Img: <input type="file" name="myImage" accept="image/*" />
-                <button type="submit" class="btn">Edit</button>
-                <button type="button" class="btn cancel" onclick="closeDetailForm()">Close</button>
-            </form>
+        <!-- Modal -->
+        <div class="modal fade" id="subjectDetailModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="subjectEditForm" th:object="${subjectAdminDTO}">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Subject Detail</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="editSubjectId" name="id" th:value="${subjectAdminDTO.id}">
+                            <input type="text" id="editSubjectName" name="name" th:value="${subjectAdminDTO.name}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <!-- Admin common js -->
         <th:block th:insert="components/header_footer.html :: admin-common-script">
