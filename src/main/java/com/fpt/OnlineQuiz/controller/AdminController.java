@@ -92,15 +92,7 @@ public class AdminController {
         return "redirect:/admin/subject";
     }
 
-//    @GetMapping(value = "/getSubjects", produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public List<SubjectAdminDTO> getSubjects() {
-//        List<SubjectAdminDTO> listSubjectDTO = subjectService.getAllSubjectAdminDTO();
-//
-//        return listSubjectDTO;
-//    }
-
-    @PostMapping(value = "/getSubjects", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/getSubjectsByPage", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Page<SubjectAdminDTO> getSubjectsByPage(@RequestBody PagingRequest pagingRequest) {
         Page<SubjectAdminDTO> listSubjectDTO = subjectService.getByPagingRequest(pagingRequest);
