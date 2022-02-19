@@ -3,7 +3,7 @@ $(document).ready(function() {
 		"serverSide": true,
 		pageLength : 5,
         			ajax : {
-        				url : '/admin/getSubjectsByPage',
+        				url : '/admin/subject/getSubjectsByPage',
         				"type": "POST",
                         "dataType": "json",
                         "contentType": "application/json",
