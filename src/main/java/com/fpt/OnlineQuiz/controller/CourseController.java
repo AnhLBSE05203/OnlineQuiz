@@ -20,10 +20,16 @@ public class CourseController {
     private CourseService courseService;
 
     @GetMapping(path = "/mycourses")
-    public String showRegistrationPage(ModelMap modelMap) {
+    public String showCoursePage(ModelMap modelMap) {
         List<Course> courseList = courseService.getTop3Courses(3);
         modelMap.addAttribute("my_course_list", courseList);
         return "my_courses_page";
+    }
+    @GetMapping(path = "/registration")
+    public String showRegistrationPage(ModelMap modelMap) {
+//        List<Course> courseList = courseService.getTop3Courses(3);
+//        modelMap.addAttribute("my_course_list", courseList);
+        return "registration_page";
     }
 
     @GetMapping(path = "/loadmorecourse")
