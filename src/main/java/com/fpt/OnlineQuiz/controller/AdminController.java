@@ -54,10 +54,10 @@ public class AdminController {
     }
 
     @GetMapping("/blog/{id}")
-    public String detailBlogPage(ModelMap modelMap, @PathVariable Integer id) {
+    public Blog detailBlogPage(ModelMap modelMap, @PathVariable Integer id) {
         Blog blog = blogService.getDetailBlog(id);
         modelMap.addAttribute("detailBlog", blog);
-        return "";
+        return blog;
     }
     @GetMapping("/subject")
     public String subjectPage(Model model) {
