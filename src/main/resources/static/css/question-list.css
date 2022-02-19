@@ -1,5 +1,4 @@
 body {
-    background: linear-gradient(to right, #c04848, #480048);
     min-height: 100vh
 }
 
@@ -8,6 +7,6 @@ body {
 }
 
 img ml-lg-5 {
-    height: 170px;
-    width: 140px
+    height: auto;
+    width: auto;
 }

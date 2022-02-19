@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface QuestionService {
     List<Question> getQuesitonBySubjectId(int subject_id);
+
+
 }

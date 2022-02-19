@@ -18,4 +18,5 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> getQuesitonBySubjectId(int subject_id) {
         return questionRepository.getQuestionsBySubjectId(subject_id);
     }
+
 }

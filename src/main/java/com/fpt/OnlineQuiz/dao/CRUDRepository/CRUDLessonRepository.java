@@ -14,5 +14,4 @@ public interface CRUDLessonRepository extends CrudRepository<Lesson, Integer> {
 
     @Query("select l from Lesson l where l.subject.id = ?1")
     List<Lesson> findBySubId(int subId);
-
 }
