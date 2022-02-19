@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.model;
 
+import com.fpt.OnlineQuiz.utils.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,4 +48,12 @@ public class Image {
     @OneToMany(mappedBy = "image")
     List<Subject> subjects;
 
+    public void setDefaultImg() {
+        Date now = new Date();
+        id = Constants.DEFAULT_SUBJECT_IMAGE_ID;
+        status = Constants.STATUS_DEFAULT;
+        createdTime = now;
+        updatedTime = now;
+        createdUserId = 1;
+    }
 }

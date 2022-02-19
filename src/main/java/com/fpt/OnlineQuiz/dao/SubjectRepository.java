@@ -1,7 +1,6 @@
 package com.fpt.OnlineQuiz.dao;
 
 
-import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Column;
 import com.fpt.OnlineQuiz.dto.paging.Order;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
@@ -29,16 +28,17 @@ public class SubjectRepository {
 
     /**
      * Get a number of Subjects to feature on Home page
+     *
      * @param number how many Subjects are retrieved
      * @return
      */
     public List<Subject> getTopNumberOfSubjects(int number) {
         try {
-            BufferedReader buffer  = new BufferedReader(new InputStreamReader(
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(
                     this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_SUBJECTS)));
             StringBuilder sb = new StringBuilder();
             String line = "";
-            while((line = buffer.readLine()) !=null){
+            while ((line = buffer.readLine()) != null) {
                 sb.append(" ").append(line);
             }
             String sql = sb.toString();
@@ -52,11 +52,11 @@ public class SubjectRepository {
 
     public List<Subject> findAllSubjects() {
         try {
-            BufferedReader buffer  = new BufferedReader(new InputStreamReader(
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(
                     this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_SUBJECTS)));
             StringBuilder sb = new StringBuilder();
             String line = "";
-            while((line = buffer.readLine()) !=null){
+            while ((line = buffer.readLine()) != null) {
                 sb.append(" ").append(line);
             }
             String sql = sb.toString();
@@ -66,21 +66,22 @@ public class SubjectRepository {
             return null;
         }
     }
+
     public List<Subject> getByPagingRequest(PagingRequest pagingRequest) {
         try {
-            BufferedReader buffer  = new BufferedReader(new InputStreamReader(
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(
                     this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_SUBJECTS)));
             StringBuilder sb = new StringBuilder();
             String line = "";
-            while((line = buffer.readLine()) !=null){
+            while ((line = buffer.readLine()) != null) {
                 sb.append(" ").append(line);
             }
             // append filtering
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
-                String key = "%" + pagingRequest.getSearch().getValue() + "%";
-                sb.append(" AND s.image.src LIKE " + key);
-                sb.append(" OR s.name LIKE " + key);
+                String key = "'%" + pagingRequest.getSearch().getValue() + "%'";
+                sb.append(" AND lower(s.image.src) LIKE " + key);
+                sb.append(" OR lower(s.name) LIKE " + key);
             }
             // append sorting
             Order order = pagingRequest.getOrder().get(0);
@@ -97,21 +98,22 @@ public class SubjectRepository {
             return null;
         }
     }
+
     public long getSubjectCountByPagingRequest(PagingRequest pagingRequest) {
         try {
-            BufferedReader buffer  = new BufferedReader(new InputStreamReader(
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(
                     this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_SUBJECT_COUNT)));
             StringBuilder sb = new StringBuilder();
             String line = "";
-            while((line = buffer.readLine()) !=null){
+            while ((line = buffer.readLine()) != null) {
                 sb.append(" ").append(line);
             }
             // append filtering
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
-                String key = "%" + pagingRequest.getSearch().getValue() + "%";
-                sb.append(" AND s.image.src LIKE " + key);
-                sb.append(" OR s.name LIKE " + key);
+                String key = "'%" + pagingRequest.getSearch().getValue() + "%'";
+                sb.append(" AND lower(s.image.src) LIKE " + key);
+                sb.append(" OR lower(s.name) LIKE " + key);
             }
 
             String sql = sb.toString();
@@ -121,13 +123,14 @@ public class SubjectRepository {
             return 0;
         }
     }
+
     public Subject getSubjectById(int id) {
         try {
-            BufferedReader buffer  = new BufferedReader(new InputStreamReader(
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(
                     this.getClass().getResourceAsStream(Constants.SQL_PATH_FIND_SUBJECT_BY_ID)));
             StringBuilder sb = new StringBuilder();
             String line = "";
-            while((line = buffer.readLine()) !=null){
+            while ((line = buffer.readLine()) != null) {
                 sb.append(" ").append(line);
             }
             String sql = sb.toString();
@@ -144,7 +147,7 @@ public class SubjectRepository {
         em.flush();
     }
 
-    public void addSubject(Subject subject){
+    public void addSubject(Subject subject) {
         em.persist(subject);
     }
 }
