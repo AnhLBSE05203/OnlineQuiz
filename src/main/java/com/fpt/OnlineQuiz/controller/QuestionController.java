@@ -27,7 +27,7 @@ public class QuestionController {
         return "edit_question_page";
     }
     @GetMapping(path = "/listquestion")
-    String showListQuestionPage(ModelMap modelMap){
+    String showListQuestionPage(ModelMap modelMap) {
         List<Question> questionList = questionService.getQuesitonBySubjectId(1);
         return "question_list_page";
     }
