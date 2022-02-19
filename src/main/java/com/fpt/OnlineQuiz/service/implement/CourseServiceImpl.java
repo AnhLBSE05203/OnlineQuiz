@@ -8,8 +8,6 @@ import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Query;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -21,9 +19,9 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseFeaturedDTO> getFeaturedCourses(int number) {
         List<CourseFeaturedDTO> courses = courseRepository.getFeaturedCourses(number);
         //trim description
-        for(CourseFeaturedDTO course : courses) {
+        for (CourseFeaturedDTO course : courses) {
             String description = course.getDescription();
-            if(description.length() > Constants.DESCRIPTION_TRIM_LENGTH) {
+            if (description.length() > Constants.DESCRIPTION_TRIM_LENGTH) {
                 description = description.substring(
                         Constants.NUMBER_ZERO,
                         Math.min(description.length(), Constants.DESCRIPTION_TRIM_LENGTH));
