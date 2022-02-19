@@ -43,4 +43,5 @@ public class QuestionController {
         model.addAttribute("sub",subject);
         return "question_list_page";
     }
+    //create 1
 }
