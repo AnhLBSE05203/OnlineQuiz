@@ -34,6 +34,7 @@ public class QuestionController {
         //TODO Code Edit Question
         return "edit_question_page";
     }
+    //
     @GetMapping(path = "/listquestion")
     String showListQuestionPage(@Param(value = "subId") int subId, Model model, HttpServletRequest request) {
         List<Question> questionList = questionService.getQuesitonBySubjectId(1);
