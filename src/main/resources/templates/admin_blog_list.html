@@ -53,7 +53,7 @@
                                 <td th:text="${#strings.abbreviate(blog.content,100)} "></td>
                                 <td th:text="${blog.getStatus()}"></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    <button onclick="showModal()" type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#editModal">
                                         Edit
                                     </button>
@@ -73,9 +73,31 @@
         </footer>
     </div>
 </div>
+<div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Admin common js -->
 <th:block th:insert="components/header_footer.html :: admin-common-script">
 </th:block>
 <!-- -->
+<script>
+    function showModal(){
+        $("#messageModal").modal("show");
+    }
+</script>
 </body>
 </html>

@@ -64,7 +64,10 @@ public class AccountController {
     public String forgotPasswordPage(Model model) {
         return Constants.PAGE_FORGOT_PASSWORD;
     }
-
+    @GetMapping("/testho")
+    public String testt(Model model) {
+        return "cuu";
+    }
     /**
      * Process Forgot Password Function by sending User the Password Reset Token
      *
