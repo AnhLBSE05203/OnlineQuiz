@@ -1,6 +1,5 @@
 package com.fpt.OnlineQuiz.controller;
 
-import com.fpt.OnlineQuiz.dao.BlogRepository;
 import com.fpt.OnlineQuiz.model.Blog;
 import com.fpt.OnlineQuiz.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;

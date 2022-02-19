@@ -2,9 +2,13 @@ package com.fpt.OnlineQuiz.dao;
 
 
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
+import com.fpt.OnlineQuiz.dto.paging.Column;
+import com.fpt.OnlineQuiz.dto.paging.Order;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -60,6 +64,61 @@ public class SubjectRepository {
             return (List<Subject>) query.getResultList();
         } catch (NoResultException | IOException e) {
             return null;
+        }
+    }
+    public List<Subject> getByPagingRequest(PagingRequest pagingRequest) {
+        try {
+            BufferedReader buffer  = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_SUBJECTS)));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while((line = buffer.readLine()) !=null){
+                sb.append(" ").append(line);
+            }
+            // append filtering
+            if (pagingRequest.getSearch() != null
+                    && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
+                String key = "%" + pagingRequest.getSearch().getValue() + "%";
+                sb.append(" AND s.image.src LIKE " + key);
+                sb.append(" OR s.name LIKE " + key);
+            }
+            // append sorting
+            Order order = pagingRequest.getOrder().get(0);
+            int columnIndex = order.getColumn();
+            Column column = pagingRequest.getColumns().get(columnIndex);
+            sb.append(" ORDER BY " + "s." + column.getData() + " " + order.getDir());
+
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Subject.class);
+            query.setFirstResult(pagingRequest.getStart());
+            query.setMaxResults(pagingRequest.getLength());
+            return (List<Subject>) query.getResultList();
+        } catch (NoResultException | IOException e) {
+            return null;
+        }
+    }
+    public long getSubjectCountByPagingRequest(PagingRequest pagingRequest) {
+        try {
+            BufferedReader buffer  = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_SUBJECT_COUNT)));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while((line = buffer.readLine()) !=null){
+                sb.append(" ").append(line);
+            }
+            // append filtering
+            if (pagingRequest.getSearch() != null
+                    && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
+                String key = "%" + pagingRequest.getSearch().getValue() + "%";
+                sb.append(" AND s.image.src LIKE " + key);
+                sb.append(" OR s.name LIKE " + key);
+            }
+
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Long.class);
+            return (long) query.getSingleResult();
+        } catch (NoResultException | IOException e) {
+            return 0;
         }
     }
     public Subject getSubjectById(int id) {
