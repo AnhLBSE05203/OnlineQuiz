@@ -99,7 +99,73 @@
             </div>
         </div>
     </section>
-    <!-- Courses area start -->
+
+    <div class="shopping-cart">
+        <div class="px-4 px-lg-0">
+            <div class="pb-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                            <!-- Shopping cart table -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="p-2 px-3 text-uppercase">Course</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Price</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Remove</div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+<!--                                    <c:forEach items="${list}" var="o">-->
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="p-2">
+                                                    <img src="${o.image}" alt="Image" width="70" class="img-fluid rounded shadow-sm">
+                                                    <div class="ml-3 d-inline-block align-middle">
+                                                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">Ten</a></h5><span class="text-muted font-weight-normal font-italic"></span>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td class="align-middle"><strong>Gia</strong></td>
+                                            <td class="align-middle"><a href="#" class="text-dark">
+                                                <button type="button" class="btn btn-danger">Delete</button>
+                                            </a>
+                                            </td>
+                                        </tr>
+<!--                                    </c:forEach>-->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- End -->
+                        </div>
+                    </div>
+
+                    <div class="row py-5 p-4 bg-white rounded shadow-sm">
+                        <div class="col-lg-6">
+                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Payment</div>
+                            <div class="p-4">
+                                <ul class="list-unstyled mb-4">
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Price Total</strong><strong>100 $</strong></li>
+                                    <!--<li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Phí vận chuyển</strong><strong>Free ship</strong></li>-->
+                                    <!--<li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">VAT</strong><strong>10 $</strong></li>-->
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                                        <h5 class="font-weight-bold">110 $</h5>
+                                    </li>
+                                </ul><a href="buy" class="btn btn-dark rounded-pill py-2 btn-block">Buy</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
     <div class="services-area services-area2 section-padding40">
         <div class="container">

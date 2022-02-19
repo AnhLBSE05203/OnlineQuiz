@@ -22,6 +22,7 @@ public interface SubjectService {
 
     Subject getSubjectById(int id);
 
-    void update(Subject subject);
+    void updateSubject(Subject subject);
 
+    void addSubject(Subject subject);
 }
