@@ -15,6 +15,7 @@ public class LessonServiceImpl implements LessonService {
     @Autowired
     private CRUDLessonRepository CRUDLessonRepository;
 
+
     @Override
     public List<Lesson> getAllLesson(int subjectId) {
         return (List<Lesson>) CRUDLessonRepository.findBySubId(subjectId);
@@ -22,6 +23,6 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public Optional<Lesson> getLessonById(int id) {
-        return lessonRepository.findById(id);
+        return CRUDLessonRepository.findById(id);
     }
 }
