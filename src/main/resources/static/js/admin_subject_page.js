@@ -1,9 +1,15 @@
 $(document).ready(function() {
 		$('#SubjectDatatable').DataTable({
+		"serverSide": true,
 		pageLength : 5,
         			ajax : {
         				url : '/admin/getSubjects',
-        				dataSrc : ''
+        				"type": "POST",
+                        "dataType": "json",
+                        "contentType": "application/json",
+                        "data": function (d) {
+                              return JSON.stringify(d);
+                        }
         			},
         			columns : [ {
         				title : 'Id',

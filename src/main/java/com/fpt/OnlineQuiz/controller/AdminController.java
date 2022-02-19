@@ -1,6 +1,8 @@
 package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
+import com.fpt.OnlineQuiz.dto.paging.Page;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Blog;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.BlogService;
@@ -90,10 +92,18 @@ public class AdminController {
         return "redirect:/admin/subject";
     }
 
-    @GetMapping(value = "/getSubjects", produces = MediaType.APPLICATION_JSON_VALUE)
+//    @GetMapping(value = "/getSubjects", produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public List<SubjectAdminDTO> getSubjects() {
+//        List<SubjectAdminDTO> listSubjectDTO = subjectService.getAllSubjectAdminDTO();
+//
+//        return listSubjectDTO;
+//    }
+
+    @PostMapping(value = "/getSubjects", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<SubjectAdminDTO> getSubjects() {
-        List<SubjectAdminDTO> listSubjectDTO = subjectService.getAllSubjectAdminDTO();
+    public Page<SubjectAdminDTO> getSubjectsByPage(@RequestBody PagingRequest pagingRequest) {
+        Page<SubjectAdminDTO> listSubjectDTO = subjectService.getByPagingRequest(pagingRequest);
 
         return listSubjectDTO;
     }

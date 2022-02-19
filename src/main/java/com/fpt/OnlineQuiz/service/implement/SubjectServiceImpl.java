@@ -4,6 +4,8 @@ import com.fpt.OnlineQuiz.dao.CourseRepository;
 import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDSubjectRepository;
 import com.fpt.OnlineQuiz.dao.SubjectRepository;
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
+import com.fpt.OnlineQuiz.dto.paging.Page;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.SubjectService;
@@ -61,6 +63,25 @@ public class SubjectServiceImpl implements SubjectService {
             listSubjectDTO.add(subjectAdminDTO);
         }
         return listSubjectDTO;
+    }
+
+    @Override
+    public Page<SubjectAdminDTO> getByPagingRequest(PagingRequest pagingRequest) {
+        List<Subject> subjects = subjectRepository.getByPagingRequest(pagingRequest);
+        long count = subjectRepository.getSubjectCountByPagingRequest(pagingRequest);
+        List<SubjectAdminDTO> subjectAdminDTOs = new ArrayList<>();
+        // convert Subject to SubjectAdminDTO
+        for(Subject subject : subjects) {
+            SubjectAdminDTO subjectAdminDTO = subject.toSubjectAdminDTO();
+            subjectAdminDTOs.add(subjectAdminDTO);
+        }
+        // convert List to Page
+        Page<SubjectAdminDTO> page = new Page<>(subjectAdminDTOs);
+        page.setRecordsFiltered((int) count);
+        page.setRecordsTotal((int) count);
+        page.setDraw(pagingRequest.getDraw());
+
+        return page;
     }
 
     @Override
