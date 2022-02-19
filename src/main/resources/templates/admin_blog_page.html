@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
     <title>Blog management</title>
     <!-- Admin common css -->
     <div th:replace="components/header_footer.html :: admin-common-style">
     </div>
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"/>
 </head>
 <body class="sb-nav-fixed">
 <!-- Admin header -->
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" th:replace="components/header_footer.html :: admin-header">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"
+     th:replace="components/header_footer.html :: admin-header">
 </nav>
 <!-- -->
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <!-- Admin side nav -->
-        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" th:replace="components/header_footer.html :: admin-side-nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion"
+             th:replace="components/header_footer.html :: admin-side-nav">
         </nav>
         <!-- -->
     </div>
@@ -34,6 +37,9 @@
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
                         List Blog
+                        <button style="float: right" id="addSubjectButton" type="button" class="btn btn-primary"
+                                data-toggle="modal" data-target="#createModal" onclick="showModal()">Add Blog
+                        </button>
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple">
@@ -53,7 +59,8 @@
                                 <td th:text="${#strings.abbreviate(blog.content,100)} "></td>
                                 <td th:text="${blog.getStatus()}"></td>
                                 <td>
-                                    <button onclick="showModal()" type="button" class="btn btn-primary" data-toggle="modal"
+                                    <button onclick="showModal()" type="button" class="btn btn-primary"
+                                            data-toggle="modal"
                                             data-target="#editModal">
                                         Edit
                                     </button>
@@ -73,20 +80,21 @@
         </footer>
     </div>
 </div>
-<div id="editModal" class="modal fade" role="dialog">
+<!-- Edit Subject Modal -->
+<div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-                <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            <a>This is edit modal</a>
+        </div>
+    </div>
+</div>
+<!-- Create Subject Modal -->
+<div class="modal fade" id="createModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <a>This is create modal</a>
         </div>
     </div>
 </div>
@@ -95,7 +103,7 @@
 </th:block>
 <!-- -->
 <script>
-    function showModal(){
+    function showModal() {
         $("#messageModal").modal("show");
     }
 </script>
