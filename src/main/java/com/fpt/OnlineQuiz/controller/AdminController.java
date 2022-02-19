@@ -10,7 +10,9 @@ import com.fpt.OnlineQuiz.service.CourseService;
 import com.fpt.OnlineQuiz.service.SubjectService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,8 @@ import java.util.List;
 @RequestMapping("/admin")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class AdminController {
     @Autowired
     private BlogService blogService;
@@ -61,62 +65,5 @@ public class AdminController {
         modelMap.addAttribute("detailBlog", blog);
         return blog;
     }
-    @GetMapping("/subject")
-    public String subjectPage(Model model) {
-        model.addAttribute("subjectEditDTO", new SubjectAdminDTO());
-        model.addAttribute("subjectAddDTO", new SubjectAdminDTO());
-        model.addAttribute("statusMap", Constants.subjectStatusConversion);
-        return "admin_subject_page";
-    }
 
-    @PostMapping("/subject/edit")
-    public String editSubject(@ModelAttribute("subjectEditDTO") SubjectAdminDTO subjectAdminDTO) {
-        Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
-        subject.setName(subjectAdminDTO.getName());
-        //set img - to do: image upload
-        subject.setStatus(subjectAdminDTO.getStatus());
-
-        subjectService.updateSubject(subject);
-        return "redirect:/admin/subject";
-    }
-
-    @PostMapping("/subject/add")
-    public String addSubject(@ModelAttribute("subjectAddDTO") SubjectAdminDTO subjectAdminDTO) {
-        //to do - add form to page
-        Subject subject = new Subject();
-        subject.setName(subjectAdminDTO.getName());
-        //set img - to do: image upload
-        subject.setStatus(subjectAdminDTO.getStatus());
-
-        subjectService.addSubject(subject);
-        return "redirect:/admin/subject";
-    }
-
-    @PostMapping(value = "/getSubjectsByPage", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Page<SubjectAdminDTO> getSubjectsByPage(@RequestBody PagingRequest pagingRequest) {
-        Page<SubjectAdminDTO> listSubjectDTO = subjectService.getByPagingRequest(pagingRequest);
-
-        return listSubjectDTO;
-    }
-    @GetMapping(value = "/subject/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public SubjectAdminDTO getSubjectDetails(@PathVariable Integer id) {
-        SubjectAdminDTO subjectDTO = subjectService.getSubjectAdminDTOById(id);
-        return subjectDTO;
-    }
-    @GetMapping(value="/subject/delete/{id}")
-    public String deleteSubject(@PathVariable Integer id) {
-        Subject subject = subjectService.getSubjectById(id);
-        subject.setStatus(Constants.STATUS_SUBJECT_DELETED);
-        subjectService.updateSubject(subject);
-        return "redirect:/admin/subject";
-    }
-    @GetMapping(value="/subject/recover/{id}")
-    public String recoverSubject(@PathVariable Integer id) {
-        Subject subject = subjectService.getSubjectById(id);
-        subject.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
-        subjectService.updateSubject(subject);
-        return "redirect:/admin/subject";
-    }
 }
