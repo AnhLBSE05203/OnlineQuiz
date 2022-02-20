@@ -188,7 +188,7 @@
                             <td><i class="fa fa-play-circle"></i></td>
                             <td>
                                 <a class="le-titile"
-                                   href="https://learnplus.trendingtemplates.com/lessons/lesson-one-how-is-custom-item-prize-design/"
+                                   th:href="@{/lesson/detail(lesId=${l.id},subId=${subId})}"
                                    th:text="${l.name}"></a></td>
                             <td>2m</td>
                             <td><i class="fa fa-close"></i></td>
@@ -479,7 +479,6 @@
         </div>
         <!-- Footer End-->
     </div>
-    //done
 </footer>
 <!-- Scroll Up -->
 <div id="back-top">

@@ -1,0 +1,12 @@
+body {
+    min-height: 100vh
+}
+
+.text-gray {
+    color: #aaa
+}
+
+img ml-lg-5 {
+    height: auto;
+    width: auto;
+}

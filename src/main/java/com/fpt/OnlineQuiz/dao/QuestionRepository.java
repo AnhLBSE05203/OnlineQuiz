@@ -31,4 +31,15 @@ public class QuestionRepository {
             return null;
         }
     }
+
+    public void addQuestion(Question question, int subject_id){
+        //TODO add question with subjectId
+
+    }
+
+    public void updateQuestion(Question question){
+        //TODO update question
+//        em.merge(question);
+//        em.flush();
+    }
 }

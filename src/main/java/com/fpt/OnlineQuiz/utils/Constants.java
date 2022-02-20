@@ -8,7 +8,7 @@ public class Constants {
 
     public static final String STRING_EMPTY = "";
     public static final int NUMBER_ZERO = 0;
-
+    public static final String REMEMBER_ME_KEY = "uniqueAndSecret";
     //account constants
     public static final int STATUS_ACCOUNT_CONFIRMED = 1;
     public static final int STATUS_ACCOUNT_UNCONFIRMED = 2;
@@ -21,13 +21,17 @@ public class Constants {
     //db record common constants
     public static final int STATUS_DELETED = 0;
     public static final int STATUS_DEFAULT = 1;
-
+    public static final int DEFAULT_CREATED_USER_ID = 1;
+    public static final int DEFAULT_UPDATED_USER_ID = 1;
     //subject constants
     public static final Map<Integer, String> subjectStatusConversion = initSubjectStatusMap();
     public static final int STATUS_SUBJECT_DELETED = 0;
     public static final int STATUS_SUBJECT_ACTIVE = 1;
     public static final int STATUS_SUBJECT_INACTIVE = 2;
 
+    //image constants
+    public static final int DEFAULT_SUBJECT_IMAGE_ID = 1;
+    public static final String DEFAULT_SUBJECT_IMAGE_SRC = "/img/gallery/featured1.png";
     //messages
     public static final String MESSAGE_INVALID_TOKEN = "Invalid Token!";
     public static final String MESSAGE_REGISTER_SUCCESS = "Register successful! Check email for confirmation link!";
@@ -36,8 +40,8 @@ public class Constants {
     public static final String MESSAGE_CHANGE_PASSWORD_SUCCESS = "You have successfully changed your password.";
     public static final String MESSAGE_ACCOUNT_NOT_FOUND = "Account not found!";
     public static final String MESSAGE_PASSWORD_INVALID = "Invalid Password! " +
-                                                            "Password need at least 1 upper case, " +
-                                                            "1 special character & length >= 8";
+            "Password need at least 1 upper case, " +
+            "1 special character & length >= 8";
     public static final String MESSAGE_EMAIL_INVALID = "Invalid Email Input!";
     //token types
     public static final String TOKEN_TYPE_RESET_PASSWORD = "TOKEN_RESET_PASSWORD";
@@ -117,8 +121,10 @@ public class Constants {
     public static final String SQL_PATH_GET_DETAIL_BLOG = "/static/sql/findBlogById.sql";
     public static final String SQL_PATH_GET_FEATURED_COURSES = "/static/sql/getFeaturedCourses.sql";
     public static final String SQL_PATH_GET_ALL_SUBJECTS = "/static/sql/getAllSubjects.sql";
+    public static final String SQL_PATH_GET_SUBJECT_COUNT = "/static/sql/getSubjectCount.sql";
     public static final String SQL_PATH_GET_FEATURED_EXPERTS = "/static/sql/getFeaturedExperts.sql";
     public static final String SQL_PATH_FIND_SUBJECT_BY_ID = "/static/sql/findSubjectById.sql";
+    public static final String SQL_PATH_GET_IMAGE_BY_ID = "/static/sql/getImageById.sql";
     //home page constants
     public static final int HOME_PAGE_COURSE_NUMBER = 4;
     public static final int HOME_PAGE_EXPERT_NUMBER = 3;
@@ -148,6 +154,7 @@ public class Constants {
                 + "or you have not made the request.</p>";
         return content;
     }
+
     public static String getConfirmRegistrationMailTemplate(String link) {
         String content = "<p>Hello,</p>"
                 + "<p>An account was registered with this email</p>"

@@ -1,6 +1,8 @@
 package com.fpt.OnlineQuiz.service;
 
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
+import com.fpt.OnlineQuiz.dto.paging.Page;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Subject;
 
 import java.util.List;
@@ -17,6 +19,8 @@ public interface SubjectService {
     List<Subject> findAllSubjects();
 
     List<SubjectAdminDTO> getAllSubjectAdminDTO();
+
+    Page<SubjectAdminDTO> getByPagingRequest(PagingRequest pagingRequest);
 
     SubjectAdminDTO getSubjectAdminDTOById(int id);
 

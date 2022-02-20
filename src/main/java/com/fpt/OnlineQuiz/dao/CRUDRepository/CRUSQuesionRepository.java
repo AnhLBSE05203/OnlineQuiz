@@ -1,17 +1,16 @@
 package com.fpt.OnlineQuiz.dao.CRUDRepository;
 
 import com.fpt.OnlineQuiz.model.Lesson;
+import com.fpt.OnlineQuiz.model.Question;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-//DaiNT -r
-//Spring Data JPA CRUD Repository,thêm,sửa,xóa lesson
 @Repository
-public interface CRUDLessonRepository extends CrudRepository<Lesson, Integer> {
+public interface CRUSQuesionRepository extends CrudRepository<Question,Integer> {
 
-    @Query("select l from Lesson l where l.subject.id = ?1")
-    List<Lesson> findBySubId(int subId);
+    @Query("select q from Question q where q.subject.id = ?1")
+    List<Question> findBySubId(int subId);
 }

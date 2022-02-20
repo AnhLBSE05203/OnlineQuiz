@@ -2,8 +2,8 @@ package com.fpt.OnlineQuiz.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,7 +11,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -24,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "Account")
 @Where(clause = "status != 0")
-@JsonIgnoreProperties(value= {"purchaseHistories", "quizHistories", "courses","tokens","reviews"})
+@JsonIgnoreProperties(value = {"purchaseHistories", "quizHistories", "courses", "tokens", "reviews"})
 public class Account implements UserDetails {
 
     private static final long serialVersionUID = -3164082858501464263L;

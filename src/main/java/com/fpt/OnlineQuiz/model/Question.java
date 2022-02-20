@@ -21,6 +21,10 @@ public class Question {
     private int id;
     @Column(name = "question")
     private String question;
+    @Column(name="explanation")
+    private String explain;
+    @Column(name="answer")
+    private String answer;
 
     @ManyToOne
     @JoinColumn(name = "subjectId")

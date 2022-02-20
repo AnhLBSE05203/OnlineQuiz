@@ -124,16 +124,16 @@
                                     </thead>
                                     <tbody>
 <!--                                    <c:forEach items="${list}" var="o">-->
-                                        <tr>
+                                        <tr th:each="course: ${course}">
                                             <th scope="row">
                                                 <div class="p-2">
-                                                    <img src="${o.image}" alt="Image" width="70" class="img-fluid rounded shadow-sm">
+                                                    <img src="${course.image}" alt="Image" width="70" class="img-fluid rounded shadow-sm">
                                                     <div class="ml-3 d-inline-block align-middle">
-                                                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">Ten</a></h5><span class="text-muted font-weight-normal font-italic"></span>
+                                                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block" th:text="${course.name}"></a></h5><span class="text-muted font-weight-normal font-italic"></span>
                                                     </div>
                                                 </div>
                                             </th>
-                                            <td class="align-middle"><strong>Gia</strong></td>
+                                            <td class="align-middle" th:text="${course.price}"><strong>Price</strong></td>
                                             <td class="align-middle"><a href="#" class="text-dark">
                                                 <button type="button" class="btn btn-danger">Delete</button>
                                             </a>
@@ -152,9 +152,7 @@
                             <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Payment</div>
                             <div class="p-4">
                                 <ul class="list-unstyled mb-4">
-                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Price Total</strong><strong>100 $</strong></li>
-                                    <!--<li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Phí vận chuyển</strong><strong>Free ship</strong></li>-->
-                                    <!--<li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">VAT</strong><strong>10 $</strong></li>-->
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Price</strong><strong>100 $</strong></li>
                                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
                                         <h5 class="font-weight-bold">110 $</h5>
                                     </li>
