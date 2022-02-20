@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dto.QuestionDTO;
 import com.fpt.OnlineQuiz.model.Answer;
 import com.fpt.OnlineQuiz.model.Question;
 import com.fpt.OnlineQuiz.model.Subject;
@@ -31,7 +32,7 @@ public class QuestionController {
     private SubjectService subjectService;
 
     @GetMapping(path = "/create")
-    String showCreateQuestionPage(ModelMap modelMap){
+    String showCreateQuestionPage(ModelMap modelMap) {
         modelMap.addAttribute("questionDTO", new QuestionDTO());
 
 //        modelMap.addAttribute("subject", )
@@ -39,7 +40,7 @@ public class QuestionController {
     }
 
     @PostMapping(path = "/addquestion")
-    public String processCreateQuestion(ModelMap modelMap, HttpServletRequest request){
+    public String processCreateQuestion(ModelMap modelMap, HttpServletRequest request) {
         Question q = new Question();
         q.setQuestion(request.getParameter("question").trim());
         int number = Integer.parseInt(request.getParameter("isAnswer"));
@@ -53,13 +54,13 @@ public class QuestionController {
         answerList.add(answer3);
         answerList.add(answer4);
         List<Answer> answers = new ArrayList<>();
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             Answer a = new Answer();
             a.setAnswer(answerList.get(i));
-            if(number == (i + 1)){
+            if (number == (i + 1)) {
                 q.setAnswer(a.getAnswer());
                 a.setCorrect(true);
-            }else{
+            } else {
                 a.setCorrect(false);
             }
             a.setQuestion(q);
@@ -77,7 +78,7 @@ public class QuestionController {
     }
 
     @GetMapping(path = "/edit")
-    String showEditQuestionPage(ModelMap modelMap){
+    String showEditQuestionPage(ModelMap modelMap) {
         //TODO Code Edit Question
         Question q = questionService.getQuestionByQuestionId(1);
         modelMap.addAttribute("questionDTO", new QuestionDTO());
@@ -86,7 +87,7 @@ public class QuestionController {
     }
 
     @PostMapping(path = "/editquestion")
-    public String processEditQuestion(@ModelAttribute QuestionDTO questionDTO, ModelMap modelMap, @RequestParam int ques_id){
+    public String processEditQuestion(@ModelAttribute QuestionDTO questionDTO, ModelMap modelMap, @RequestParam int ques_id) {
         Question q = new Question();
         Subject subject = subjectService.getSubjectById(1);
         q.setQuestion(questionDTO.getQuestion());
@@ -103,8 +104,8 @@ public class QuestionController {
     String showListQuestionPage(@Param(value = "subId") int subId, Model model, HttpServletRequest request) {
         List<Question> questionList = questionService.getQuesitonBySubjectId(1);
         Subject subject = subjectService.getSubjectById(subId);
-        model.addAttribute("ques",questionList);
-        model.addAttribute("sub",subject);
+        model.addAttribute("ques", questionList);
+        model.addAttribute("sub", subject);
         return "question_list_page";
     }
 
