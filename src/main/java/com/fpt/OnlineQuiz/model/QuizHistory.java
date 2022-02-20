@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -20,6 +21,8 @@ public class QuizHistory {
     @Column(name = "quizHistoryId")
     private int id;
 
+    @Column(name = "createdTime")
+    private Date createdTime;
     @ManyToOne
     @JoinColumn(name = "accountId")
     private Account account;
