@@ -280,7 +280,7 @@ public class AccountController {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_PROFILE + "?email=");
+            sb.append(Constants.LINK_PROFILE);
             sb.append(email);
             return sb.toString();
         } else {
@@ -288,7 +288,7 @@ public class AccountController {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_CHANGE_PASSWORD + "?email=");
+            sb.append(Constants.LINK_CHANGE_PASSWORD);
             sb.append(email);
             return sb.toString();
         }
@@ -299,12 +299,22 @@ public class AccountController {
      * Display Profile Page
      *
      * @param model spring's model class
-     * @param email user's email
      * @return
      */
     @GetMapping(Constants.LINK_PROFILE)
-    public String showProfilePage(@Param(value = "email") String email, Model model) {
-        Account account = accountService.findAccountByEmail(email);
+    public String showProfilePage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Account account = null;
+        String email = "";
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            account = (Account) authentication.getPrincipal();
+            email = account.getEmail();
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_HOME);
+            return sb.toString();
+        }
         model.addAttribute("email", email);
         model.addAttribute("name", account.getFullName());
         model.addAttribute("phone", account.getPhone());
@@ -316,12 +326,22 @@ public class AccountController {
      * Display Profile Page
      *
      * @param model spring's model class
-     * @param email user's email
      * @return
      */
     @GetMapping(Constants.LINK_EDIT_PROFILE)
-    public String showEditProfilePage(@Param(value = "email") String email, Model model) {
-        Account account = accountService.findAccountByEmail(email);
+    public String showEditProfilePage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Account account = null;
+        String email = "";
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            account = (Account) authentication.getPrincipal();
+            email = account.getEmail();
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_HOME);
+            return sb.toString();
+        }
         model.addAttribute("email", email);
         model.addAttribute("registerDTO", new RegisterDTO());
         model.addAttribute("name", account.getFullName());
@@ -346,7 +366,7 @@ public class AccountController {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_EDIT_PROFILE + "?email=");
+            sb.append(Constants.LINK_EDIT_PROFILE);
             sb.append(account.getEmail());
             return sb.toString();
         } else {
@@ -358,7 +378,7 @@ public class AccountController {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_PROFILE + "?email=");
+            sb.append(Constants.LINK_PROFILE);
             sb.append(account.getEmail());
             return sb.toString();
         }
