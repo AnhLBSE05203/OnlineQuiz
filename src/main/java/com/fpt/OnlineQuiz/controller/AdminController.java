@@ -47,16 +47,20 @@ public class AdminController {
     }
 
     @GetMapping("/blog")
-    public String blogPage(ModelMap modelMap) {
-        ArrayList<Blog> listBlog = blogService.getAllBlog();
-        modelMap.addAttribute("listBlog",listBlog);
+    public String blogPage() {
         return "admin_blog_page";
     }
 
+    @GetMapping(value = "/blog/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Blog> getAllBlog() {
+        List<Blog> listBlog = blogService.getAllBlogAdmin();
+        return listBlog;
+    }
+
     @GetMapping("/blog/{id}")
-    public Blog detailBlogPage(ModelMap modelMap, @PathVariable Integer id) {
+    public Blog detailBlogPage(@PathVariable Integer id) {
         Blog blog = blogService.getDetailBlog(id);
-        modelMap.addAttribute("detailBlog", blog);
         return blog;
     }
     @GetMapping("/subject")
@@ -94,7 +98,6 @@ public class AdminController {
     @ResponseBody
     public List<SubjectAdminDTO> getSubjects() {
         List<SubjectAdminDTO> listSubjectDTO = subjectService.getAllSubjectAdminDTO();
-
         return listSubjectDTO;
     }
     @GetMapping(value = "/subject/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
