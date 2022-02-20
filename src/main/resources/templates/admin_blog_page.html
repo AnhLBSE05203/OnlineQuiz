@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Blog management</title>
+    <title>Blog Management</title>
     <!-- Admin common css -->
     <div th:replace="components/header_footer.html :: admin-common-style">
     </div>
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/admin_blog_page.css}" rel="stylesheet"/>
 </head>
 <body class="sb-nav-fixed">
 <!-- Admin header -->
@@ -31,46 +32,19 @@
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Blog</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Blog management</li>
+                    <li class="breadcrumb-item active">Blog Management
+                    </li>
                 </ol>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
                         List Blog
-                        <button style="float: right" id="addSubjectButton" type="button" class="btn btn-primary"
-                                data-toggle="modal" data-target="#createModal" onclick="showModal()">Add Blog
+                        <button id="addSubjectButton" type="button" class="btn btn-primary"
+                                onclick="showSubjectAddModal()">Add Blog
                         </button>
                     </div>
                     <div class="card-body">
-                        <table id="datatablesSimple">
-                            <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Title</th>
-                                <th>Content</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody th:each="blog : ${listBlog}">
-                            <tr>
-                                <td th:text="${blog.getId()}"></td>
-                                <td th:text="${blog.getTitle()}"></td>
-                                <td th:text="${#strings.abbreviate(blog.content,100)} "></td>
-                                <td th:text="${blog.getStatus()}"></td>
-                                <td>
-                                    <button onclick="showModal()" type="button" class="btn btn-primary"
-                                            data-toggle="modal"
-                                            data-target="#editModal">
-                                        Edit
-                                    </button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
+                        <table id="BlogDatatable" style="width:100%;">
                         </table>
                     </div>
                 </div>
@@ -80,32 +54,13 @@
         </footer>
     </div>
 </div>
-<!-- Edit Subject Modal -->
-<div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <a>This is edit modal</a>
-        </div>
-    </div>
-</div>
-<!-- Create Subject Modal -->
-<div class="modal fade" id="createModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <a>This is create modal</a>
-        </div>
-    </div>
-</div>
+<!-- placeholder for modal -->
 <!-- Admin common js -->
 <th:block th:insert="components/header_footer.html :: admin-common-script">
 </th:block>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script th:src="@{/js/admin_blog_page.js}"></script>
 <!-- -->
-<script>
-    function showModal() {
-        $("#messageModal").modal("show");
-    }
-</script>
 </body>
 </html>

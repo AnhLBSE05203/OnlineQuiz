@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -18,6 +19,11 @@ public class BlogServiceImpl implements BlogService {
     public ArrayList<Blog> getAllBlog() {
         ArrayList<Blog> listBlog = blogRepository.getAllBlog();
         return listBlog;
+    }
+
+    @Override
+    public List<Blog> getAllBlogAdmin() {
+        return blogRepository.getAllBlogAdmin();
     }
 
     @Override

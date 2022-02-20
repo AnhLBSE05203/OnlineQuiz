@@ -1,0 +1,11 @@
+.subject-img{
+  width: 100px;
+}
+#addSubjectButton{
+    float: right;
+}
+.formTable{
+    border: none;
+    border-collapse: separate;
+    border-spacing: 10px 10px;
+}

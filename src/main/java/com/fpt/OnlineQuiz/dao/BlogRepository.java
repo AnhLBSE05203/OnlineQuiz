@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -38,6 +39,27 @@ public class BlogRepository{
         }
         return null;
     }
+
+    public List<Blog> getAllBlogAdmin() {
+        try {
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_BLOG_LIST)));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while ((line = buffer.readLine()) != null) {
+                sb.append(" ").append(line);
+            }
+            String sql = sb.toString();
+            //String sql = "SELECT a FROM Blog a";
+            Query query = em.createQuery(sql, Blog.class);
+            List<Blog> blogList = query.getResultList();
+            return blogList;
+        } catch (NoResultException | IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public ArrayList<Blog> getBlogByIndexPage(int pageindex){
         try {
             String sql = "Select b From Blog b";
