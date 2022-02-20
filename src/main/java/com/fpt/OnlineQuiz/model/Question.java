@@ -16,14 +16,14 @@ import java.util.List;
 @Table(name = "Question")
 public class Question {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "questionId")
     private int id;
     @Column(name = "question")
     private String question;
-    @Column(name = "explanation")
+    @Column(name="explanation")
     private String explain;
-    @Column(name = "answer")
+    @Column(name="answer")
     private String answer;
 
     @ManyToOne
