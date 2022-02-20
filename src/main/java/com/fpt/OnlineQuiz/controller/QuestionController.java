@@ -32,15 +32,25 @@ public class QuestionController {
     private SubjectService subjectService;
 
     @GetMapping(path = "/create")
-    String showCreateQuestionPage(ModelMap modelMap) {
-        modelMap.addAttribute("questionDTO", new QuestionDTO());
-
-//        modelMap.addAttribute("subject", )
+    String showCreateQuestionPage(ModelMap modelMap, HttpServletRequest request) {
+//        modelMap.addAttribute("questionDTO", new QuestionDTO());
+//        String subjectIdStr = request.getParameter("subjectId");
+        int subjectId = 1;
+//        if (subjectIdStr != null && subjectIdStr.trim() != "") {
+//            try{
+//                subjectId = Integer.parseInt(subjectIdStr);
+//            } catch (NumberFormatException e) {
+//                //fail to parse, redirect back to wherever
+//                return "redirect:/home";
+//            }
+//        }
+        modelMap.addAttribute("subjectId", subjectId);
         return "create_question_page";
     }
 
     @PostMapping(path = "/addquestion")
     public String processCreateQuestion(ModelMap modelMap, HttpServletRequest request) {
+        int subjectId = Integer.parseInt(request.getParameter("subjectId"));
         Question q = new Question();
         q.setQuestion(request.getParameter("question").trim());
         int number = Integer.parseInt(request.getParameter("isAnswer"));
@@ -68,7 +78,12 @@ public class QuestionController {
         }
         q.setAnswers(answers);
         q.setExplain(request.getParameter("explain"));
-        Subject subject = subjectService.getSubjectById(1);
+        Subject subject = subjectService.getSubjectById(subjectId);
+        if (subject == null) {
+            //redirect to wherever if subject doesn't exist
+            //use RedirectAttributes if wanting to pass an error message, maybe
+            return "redirect:/home";
+        }
         q.setSubject(subject);
         questionService.addQuestion(q);
 
