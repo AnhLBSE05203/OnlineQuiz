@@ -8,9 +8,7 @@ $(document).ready(function(){
                 success: function (data){
                     principal = data;
                     if(principal != ""){
-                        $("#login-button").attr("href", "/account/logout");
-                        $("#login-button").html("Logout");
-                        $("#register-button").parent().css('visibility','hidden');
+                        updateMenuAfterLogin();
                     };
                     updateMobileMenu();
                 },
@@ -29,3 +27,9 @@ function updateMobileMenu(){
         });
     };
 };
+function updateMenuAfterLogin(){
+    $("#login-button").attr("href", "/account/logout");
+    $("#login-button").html("Logout");
+    $("#register-button").parent().css('visibility','hidden');
+    $("#profile-button").parent().css('display', 'inline-block');
+}
