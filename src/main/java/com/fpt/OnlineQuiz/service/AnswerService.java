@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AnswerService {
     void addAnswers(List<Answer> answers);
+
+    List<Answer> getAnswers(int question_id);
 }
