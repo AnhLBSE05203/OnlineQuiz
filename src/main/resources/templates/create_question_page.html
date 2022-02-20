@@ -100,12 +100,12 @@
         <div class="container">
                 <div class="col-lg-12">
                     <div style = "color: red" th:text = "${message}"></div>
-                    <form th:action="@{/question/addquestion(subId=${subject.id})}" method="post" th:object="${questionDTO}">
+                    <form th:action="@{/question/addquestion}" method="post">
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3 w-100">
                                     <label class="form-label" for="question"><strong>Question</strong></label>
-                                    <textarea class="form-control" style="resize: none" rows="10" type="text" id="question" placeholder="Question" name="question" required th:field="*{question}"></textarea>
+                                    <textarea class="form-control" style="resize: none" rows="10" type="text" id="question" placeholder="Question" name="question" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -113,20 +113,37 @@
                             <div class="col-3">
                                 <div class="row-cols-1">
                                     <div class="mb-3">
-                                        <label class="form-label" for="answer"><strong>Answer</strong></label>
-                                        <input class="form-control" type="text" id="answer" placeholder="Answer" name="answer" required th:field="*{answer}">
+                                        <label class="form-label" for="answer1"><strong>Answer1</strong></label>
+                                        <input class="form-control" type="text" id="answer1" placeholder="Answer" name="answer1" required>
+                                        <input type="radio" value="1" name="isAnswer">Is Answer</br>
+
+                                        <label class="form-label" for="answer2"><strong>Answer2</strong></label>
+                                        <input class="form-control" type="text" id="answer2" placeholder="Answer" name="answer2" required>
+                                        <input type="radio" value="2" name="isAnswer">Is Answer</br>
+
+                                        <label class="form-label" for="answer3"><strong>Answer3</strong></label>
+                                        <input class="form-control" type="text" id="answer3" placeholder="Answer" name="answer3" required>
+                                        <input type="radio" value="3" name="isAnswer">Is Answer</br>
+
+                                        <label class="form-label" for="answer4"><strong>Answer4</strong></label>
+                                        <input class="form-control" type="text" id="answer4" placeholder="Answer" name="answer4" required>
+                                        <input type="radio" value="4" name="isAnswer">Is Answer</br>
                                     </div>
                                 </div>
-                                <div class="row-cols-1">
-                                    <div class="mb-3 w-100">
-                                        <button class="btn btn-primary btn-sm" type="submit">Save</button>
-                                    </div>
-                                </div>
-                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-9">
                                 <div class="mb-3">
                                     <label class="form-label" for="explain"><strong>Explain</strong></label>
-                                    <textarea class="form-control" style="resize: none" rows="10" type="text" id="explain" placeholder="Explain" name="explain" required th:field="*{explain}"></textarea>
+                                    <textarea class="form-control" style="resize: none" rows="10" type="text" id="explain" placeholder="Explain" name="explain" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row-cols-1">
+                                <div class="mb-3 w-100">
+                                    <button class="btn btn-primary btn-sm" onclick="submit()" type="submit">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -314,5 +331,32 @@
 <!-- Jquery Plugins, main Jquery -->
 <script th:src="@{/js/plugins.js}"></script>
 <script th:src="@{/js/main.js}"></script>
+<script>
+    function submit(){
+        var answer1 = document.getElementById("answer1").value;
+        var answer2 = document.getElementById("answer2");
+        var answer3 = document.getElementById("answer3");
+        var answer4 = document.getElementById("answer4");
+        var isAnswer = document.getElementsByName("isAnswer").values();
+        var question = document.getElementById("question");
+        var explain = document.getElementById("explain");
+        $.ajax({
+            url:"/question/addquestion",
+            type:"post",
+            data:{
+                question : question,
+                answer1 : answer1,
+                answer2 : answer2,
+                answer3 : answer3,
+                answer4 : answer4,
+                isAnswer : isAnswer,
+                explain : explain
+            },
+            success: function (){
+
+            }
+        })
+    }
+</script>
 </body>
 </html>
