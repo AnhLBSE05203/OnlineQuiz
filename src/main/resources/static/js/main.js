@@ -29,18 +29,7 @@
       }, 800);
       return false;
     });
-  
 
-/* 3. slick Nav */
-// mobile_menu
-    var menu = $('ul#navigation');
-    if(menu.length){
-      menu.slicknav({
-        prependTo: ".mobile_menu",
-        closedSymbol: '+',
-        openedSymbol:'-'
-      });
-    };
 
 
 /* 4. MainSlider-1 */

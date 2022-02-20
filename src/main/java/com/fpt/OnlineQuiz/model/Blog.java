@@ -1,4 +1,3 @@
-
 package com.fpt.OnlineQuiz.model;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +18,7 @@ import java.util.Date;
 @Where(clause = "status != 0")
 public class Blog {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "blogId")
     private int id;
     @Column(name = "title")

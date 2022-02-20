@@ -79,7 +79,7 @@ public class SubjectRepository {
             // append filtering
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
-                String key = "'%" + pagingRequest.getSearch().getValue() + "%'";
+                String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
                 sb.append(" AND lower(s.image.src) LIKE " + key);
                 sb.append(" OR lower(s.name) LIKE " + key);
             }
@@ -111,7 +111,7 @@ public class SubjectRepository {
             // append filtering
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
-                String key = "'%" + pagingRequest.getSearch().getValue() + "%'";
+                String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
                 sb.append(" AND lower(s.image.src) LIKE " + key);
                 sb.append(" OR lower(s.name) LIKE " + key);
             }

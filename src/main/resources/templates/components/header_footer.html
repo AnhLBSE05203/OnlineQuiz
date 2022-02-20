@@ -41,6 +41,7 @@
             <link rel="stylesheet" th:href="@{/css/slick.css}">
             <link rel="stylesheet" th:href="@{/css/nice-select.css}">
             <link rel="stylesheet" th:href="@{/css/style.css}">
+            <link rel="stylesheet" th:href="@{/css/user_header_footer.css}">
         </div>
         <!-- Admin style -->
         <div th:fragment="admin-common-style" th:remove="tag">
@@ -91,6 +92,9 @@
                                         <nav>
                                             <ul id="navigation">
                                                 <li class="active"><a href="/">Home</a></li>
+                                                <li class="active" id="profile-button-contain"><a
+                                                        href="/account/profile" id="profile-button">My
+                                                    Profile</a></li>
                                                 <li><a href="">Courses</a></li>
                                                 <li><a href="">About</a></li>
                                                 <li><a href="#">Blog</a>
@@ -100,11 +104,11 @@
                                                 </li>
                                                 <li><a href="contact.html">Contact</a></li>
                                                 <!-- Button -->
-                                                <li class="button-header margin-left "><a href="account/register"
+                                                <li class="button-header margin-left "><a href="/account/register"
                                                                                           class="btn"
                                                                                           id="register-button">Join</a>
                                                 </li>
-                                                <li class="button-header"><a href="account/login" class="btn btn3"
+                                                <li class="button-header"><a href="/account/login" class="btn btn3"
                                                                              id="login-button">Log in</a></li>
                                             </ul>
                                         </nav>

@@ -14,6 +14,9 @@ import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,10 +67,7 @@ public class AccountController {
     public String forgotPasswordPage(Model model) {
         return Constants.PAGE_FORGOT_PASSWORD;
     }
-    @GetMapping("/testho")
-    public String testt(Model model) {
-        return "cuu";
-    }
+
     /**
      * Process Forgot Password Function by sending User the Password Reset Token
      *
@@ -230,13 +230,23 @@ public class AccountController {
      * Display Change Password Page
      *
      * @param model spring's model class
-     * @param email user's email
      * @return
      */
     @GetMapping(Constants.LINK_CHANGE_PASSWORD)
-    public String showChangePasswordPage(@Param(value = "email") String email, Model model) {
-        Account account = accountService.findAccountByEmail(email);
-        model.addAttribute("email", email);
+    public String showChangePasswordPage(Model model) {
+        //get logged in user
+        String email = "";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Account account = null;
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            account = (Account) authentication.getPrincipal();
+            email = account.getEmail();
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_HOME);
+            return sb.toString();
+        }
         return Constants.PAGE_CHANGE_PASSWORD;
     }
 
@@ -249,8 +259,18 @@ public class AccountController {
      */
     @PostMapping(Constants.LINK_CHANGE_PASSWORD)
     public String processChangePassword(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        String email = request.getParameter("mail");
-        Account account = accountService.findAccountByEmail(email);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Account account = null;
+        String email = "";
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            account = (Account) authentication.getPrincipal();
+            email = account.getEmail();
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_HOME);
+            return sb.toString();
+        }
         String oldPass = account.getPassword();
         String oldPassInput = request.getParameter("oldpass");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -260,16 +280,14 @@ public class AccountController {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_PROFILE+"?email=");
-            sb.append(email);
+            sb.append(Constants.LINK_PROFILE);
             return sb.toString();
         } else {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, "Password is wrong.Please try again");
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_CHANGE_PASSWORD+"?email=");
-            sb.append(email);
+            sb.append(Constants.LINK_CHANGE_PASSWORD);
             return sb.toString();
         }
 
@@ -279,12 +297,22 @@ public class AccountController {
      * Display Profile Page
      *
      * @param model spring's model class
-     * @param email user's email
      * @return
      */
     @GetMapping(Constants.LINK_PROFILE)
-    public String showProfilePage(@Param(value = "email") String email, Model model) {
-        Account account = accountService.findAccountByEmail(email);
+    public String showProfilePage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Account account = null;
+        String email = "";
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            account = (Account) authentication.getPrincipal();
+            email = account.getEmail();
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_HOME);
+            return sb.toString();
+        }
         model.addAttribute("email", email);
         model.addAttribute("name", account.getFullName());
         model.addAttribute("phone", account.getPhone());
@@ -296,12 +324,22 @@ public class AccountController {
      * Display Profile Page
      *
      * @param model spring's model class
-     * @param email user's email
      * @return
      */
     @GetMapping(Constants.LINK_EDIT_PROFILE)
-    public String showEditProfilePage(@Param(value = "email") String email, Model model) {
-        Account account = accountService.findAccountByEmail(email);
+    public String showEditProfilePage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Account account = null;
+        String email = "";
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            account = (Account) authentication.getPrincipal();
+            email = account.getEmail();
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_HOME);
+            return sb.toString();
+        }
         model.addAttribute("email", email);
         model.addAttribute("registerDTO", new RegisterDTO());
         model.addAttribute("name", account.getFullName());
@@ -313,7 +351,7 @@ public class AccountController {
     /**
      * Display Profile Page
      *
-     * @param model spring's model class
+     * @param model       spring's model class
      * @param registerDTO user's input gender
      * @return
      */
@@ -326,8 +364,7 @@ public class AccountController {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_EDIT_PROFILE + "?email=");
-            sb.append(account.getEmail());
+            sb.append(Constants.LINK_EDIT_PROFILE);
             return sb.toString();
         } else {
             account.setEmail(request.getParameter("emailI"));
@@ -338,11 +375,11 @@ public class AccountController {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_PROFILE + "?email=");
-            sb.append(account.getEmail());
+            sb.append(Constants.LINK_PROFILE);
             return sb.toString();
         }
     }
+
     /**
      * Process Registration Confirm
      *

@@ -56,7 +56,7 @@ public class AdminSubjectController {
         }
         subject.setImage(defaultImg);
         //
-        subject.setStatus(subjectAdminDTO.getStatus());
+        subject.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
         subjectService.addSubject(subject);
         return "redirect:/admin/subject";
     }
