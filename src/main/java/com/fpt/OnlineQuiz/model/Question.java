@@ -22,7 +22,7 @@ public class Question {
     @Column(name = "question")
     private String question;
     @Column(name="explanation")
-    private String explan;
+    private String explain;
     @Column(name="answer")
     private String answer;
 
