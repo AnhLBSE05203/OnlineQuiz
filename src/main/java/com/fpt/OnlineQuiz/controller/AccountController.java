@@ -281,7 +281,6 @@ public class AccountController {
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
             sb.append(Constants.LINK_PROFILE);
-            sb.append(email);
             return sb.toString();
         } else {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, "Password is wrong.Please try again");
@@ -289,7 +288,6 @@ public class AccountController {
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
             sb.append(Constants.LINK_CHANGE_PASSWORD);
-            sb.append(email);
             return sb.toString();
         }
 
@@ -367,7 +365,6 @@ public class AccountController {
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
             sb.append(Constants.LINK_EDIT_PROFILE);
-            sb.append(account.getEmail());
             return sb.toString();
         } else {
             account.setEmail(request.getParameter("emailI"));
@@ -379,7 +376,6 @@ public class AccountController {
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
             sb.append(Constants.LINK_PROFILE);
-            sb.append(account.getEmail());
             return sb.toString();
         }
     }
