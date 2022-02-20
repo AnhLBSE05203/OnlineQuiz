@@ -2,33 +2,22 @@ package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.model.Blog;
 import com.fpt.OnlineQuiz.service.BlogService;
-import com.fpt.OnlineQuiz.service.CourseService;
-import com.fpt.OnlineQuiz.service.SubjectService;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
-@NoArgsConstructor
-@AllArgsConstructor
-public class AdminController {
+public class AdminBlogController {
     @Autowired
     private BlogService blogService;
-    @Autowired
-    private SubjectService subjectService;
-    @Autowired
-    private CourseService courseService;
 
     @GetMapping("/login")
     public String loginPage(Model model) {
