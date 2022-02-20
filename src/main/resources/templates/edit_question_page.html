@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Question | Edit</title>
@@ -99,40 +99,53 @@
     <div class="courses-area section-padding40 fix">
         <div class="container">
             <div class="col-lg-12">
-                <form>
-<!--                    <div class="row">-->
-<!--                        <div class="col">-->
-<!--                            <div class="mb-3"><label class="form-label" for="subjectname"><strong>Subject Name</strong></label><input class="form-control" type="text" id="subjectname" placeholder="Subject Name" name="subjectname""></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                <div style = "color: red" th:text = "${message}"></div>
+                <form th:action="@{/question/editquestion}" method="post">
                     <div class="row">
                         <div class="col">
-                            <div class="mb-3 w-100"><label class="form-label" for="question"><strong>Question</strong></label><textarea class="form-control" style="resize: none" rows="10" type="text" id="question" placeholder="Question" name="question" th:text="${question.question}"></textarea></div>
+                            <div class="mb-3 w-100">
+                                <label class="form-label" for="question"><strong>Question</strong></label>
+                                <textarea class="form-control" style="resize: none" rows="10" type="text" id="question" placeholder="Question" name="question" required th:text="${question.question}"></textarea>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3">
-                            <div class="row-cols-1">
-                                <div class="mb-3"><label class="form-label" for="answer"><strong>Answer</strong></label><input class="form-control" type="text" id="answer" placeholder="Answer" name="answer" th:text="${question.answer}"></div>
+                            <div class="row-cols-1" th:each="ans : ${question.answer.toString()}" th:value="${ans}">
+                                <div class="mb-3" th:case="1">
+                                    <label class="form-label" for="answer1"><strong>Answer1</strong></label>
+                                    <input class="form-control" type="text" id="answer1" placeholder="Answer" name="answer1" required th:text="${question.}">
+                                    <input type="radio" value="1" name="isAnswer" th:selected="(${ans} == '0')">Is Answer</br>
+
+                                    <label class="form-label" for="answer2"><strong>Answer2</strong></label>
+                                    <input class="form-control" type="text" id="answer2" placeholder="Answer" name="answer2" required>
+                                    <input type="radio" value="2" name="isAnswer" th:selected="(${ans} == '1')">Is Answer</br>
+
+                                    <label class="form-label" for="answer3"><strong>Answer3</strong></label>
+                                    <input class="form-control" type="text" id="answer3" placeholder="Answer" name="answer3" required>
+                                    <input type="radio" value="3" name="isAnswer" th:selected="(${ans} == '2')">Is Answer</br>
+
+                                    <label class="form-label" for="answer4"><strong>Answer4</strong></label>
+                                    <input class="form-control" type="text" id="answer4" placeholder="Answer" name="answer4" required>
+                                    <input type="radio" value="4" name="isAnswer" th:selected="(${ans} == '3')">Is Answer</br>
+                                </div>
                             </div>
-<<<<<<< HEAD:src/main/resources/templates/my_subject_page.html
-                            <div class="properties__caption">
-                                <p th:text="${subject.name}"></p>
-                                <h3><a href="#">Fundamental of UX for Application design</a></h3>
-                                <p>The automated process all your website tasks. Discover tools and techniques to engage effectively with vulnerable children and young people.
-                                </p>
-                           <!--     <input type="hidden" name="subId" th:value="${subject.name}"/>-->
-                                <a th:href="@{/lesson/list(subId=${subject.id})}" class="border-btn border-btn2">Go to course</a>
-=======
-                            <div class="row-cols-1">
-                                <div class="mb-3 w-100"><button class="btn btn-primary btn-sm" type="submit">Save</button></div>
->>>>>>> main:src/main/resources/templates/edit_question_page.html
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <div class="mb-3"><label class="form-label" for="explain"><strong>Explain</strong></label><textarea class="form-control" style="resize: none" rows="10" type="text" id="explain" placeholder="Explain" name="explain" th:text="${question.explain}"></textarea></div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="mb-3">
+                                <label class="form-label" for="explain"><strong>Explain</strong></label>
+                                <textarea class="form-control" style="resize: none" rows="10" type="text" id="explain" placeholder="Explain" name="explain" required th:text="${question.explain}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row-cols-1">
+                            <div class="mb-3 w-100">
+                                <button class="btn btn-primary btn-sm" onclick="submit()" type="submit">Save</button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -318,5 +331,32 @@
 <!-- Jquery Plugins, main Jquery -->
 <script th:src="@{/js/plugins.js}"></script>
 <script th:src="@{/js/main.js}"></script>
+<script>
+    function submit(){
+        var answer1 = document.getElementById("answer1").value;
+        var answer2 = document.getElementById("answer2");
+        var answer3 = document.getElementById("answer3");
+        var answer4 = document.getElementById("answer4");
+        var isAnswer = document.getElementsByName("isAnswer").values();
+        var question = document.getElementById("question");
+        var explain = document.getElementById("explain");
+        $.ajax({
+            url:"/question/addquestion",
+            type:"post",
+            data:{
+                question : question,
+                answer1 : answer1,
+                answer2 : answer2,
+                answer3 : answer3,
+                answer4 : answer4,
+                isAnswer : isAnswer,
+                explain : explain
+            },
+            success: function (){
+
+            }
+        })
+    }
+</script>
 </body>
 </html>
