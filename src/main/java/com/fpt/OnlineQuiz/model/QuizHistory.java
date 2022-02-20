@@ -27,6 +27,6 @@ public class QuizHistory {
     @JoinColumn(name = "accountId")
     private Account account;
 
-    @OneToMany(mappedBy = "quizHistory")
+    @OneToMany(mappedBy = "quizHistory", cascade = CascadeType.ALL)
     private List<QuizHistoryQuestion> quizHistoryQuestions;
 }

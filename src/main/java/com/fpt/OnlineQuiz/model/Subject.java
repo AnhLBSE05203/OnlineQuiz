@@ -25,20 +25,20 @@ public class Subject {
     private String name;
     @Column(name = "status")
     private int status;
-    @OneToMany(mappedBy = "subject")
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Course> courses;
 
-    @OneToMany(mappedBy = "subject")
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Question> questions;
 
-    @OneToMany(mappedBy = "subject")
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Review> reviews;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "imageId")
     private Image image;
 
-    @OneToMany(mappedBy = "subject")
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Lesson> lessons;
     @ManyToMany(mappedBy = "subjects")
     private List<Expert> experts;
@@ -48,15 +48,15 @@ public class Subject {
         expert.getSubjects().add(this);
     }
 
-    public SubjectAdminDTO toSubjectAdminDTO(){
+    public SubjectAdminDTO toSubjectAdminDTO() {
         SubjectAdminDTO subjectAdminDTO = new SubjectAdminDTO();
         subjectAdminDTO.setId(this.getId());
-        if(this.getImage() != null) {
-        subjectAdminDTO.setImgSrc(this.getImage().getSrc());
+        if (this.getImage() != null) {
+            subjectAdminDTO.setImgSrc(this.getImage().getSrc());
         }
         subjectAdminDTO.setName(this.getName());
-        if(this.getCourses() != null){
-        subjectAdminDTO.setTotalCourse(this.getCourses().size());
+        if (this.getCourses() != null) {
+            subjectAdminDTO.setTotalCourse(this.getCourses().size());
         }
         String statusStr = Constants.subjectStatusConversion.get(this.getStatus());
         subjectAdminDTO.setStatusStr(statusStr);
