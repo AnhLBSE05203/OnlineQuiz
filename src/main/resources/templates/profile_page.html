@@ -6,7 +6,6 @@
         <title>Profile</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="manifest" href="site.webmanifest">
         <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
 
         <!-- CSS here -->
@@ -400,7 +399,6 @@
 
 
 
-
         </style>
     </head>
     <body>
@@ -455,28 +453,6 @@
                         </div>
                     </div>
                     <div class="profile-info col-md-9">
-                        <!--      <div class="panel">
-                                  <form>
-                                      <textarea placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area"></textarea>
-                                  </form>
-                                  <footer class="panel-footer">
-                                      <button class="btn btn-warning pull-right">Post</button>
-                                      <ul class="nav nav-pills">
-                                          <li>
-                                              <a href="#"><i class="fa fa-map-marker"></i></a>
-                                          </li>
-                                          <li>
-                                              <a href="#"><i class="fa fa-camera"></i></a>
-                                          </li>
-                                          <li>
-                                              <a href="#"><i class=" fa fa-film"></i></a>
-                                          </li>
-                                          <li>
-                                              <a href="#"><i class="fa fa-microphone"></i></a>
-                                          </li>
-                                      </ul>
-                                  </footer>
-                              </div>-->
                         <div class="panel">
                             <div class="bio-graph-heading">
                                 Empty your mind, be formless. Shapeless, like water. If you put water into a
@@ -543,17 +519,12 @@
 
         <th:block th:insert="components/header_footer.html :: common-script">
         </th:block>
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script>
          if (document.getElementById("gender").innerText = 1) {
               document.getElementById("gender").innerText = "Female";
          }else {
               document.getElementById("gender").innerText = "Male";
          }
-
-
-
 
 
         </script>
