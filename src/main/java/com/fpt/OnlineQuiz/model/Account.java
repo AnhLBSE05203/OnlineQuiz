@@ -30,7 +30,7 @@ public class Account implements UserDetails {
 
     @Id
     @Column(name = "accountId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "fullName")
