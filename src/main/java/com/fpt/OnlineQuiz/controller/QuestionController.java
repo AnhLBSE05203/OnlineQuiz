@@ -11,7 +11,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -31,7 +33,6 @@ public class QuestionController {
     private SubjectService subjectService;
 
     @GetMapping(path = "/create")
-    String showCreateQuestionPage(ModelMap modelMap){
     String showCreateQuestionPage(ModelMap modelMap, HttpServletRequest request) {
 //        modelMap.addAttribute("questionDTO", new QuestionDTO());
 //        String subjectIdStr = request.getParameter("subjectId");
@@ -64,13 +65,13 @@ public class QuestionController {
         answerList.add(answer3);
         answerList.add(answer4);
         List<Answer> answers = new ArrayList<>();
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             Answer a = new Answer();
             a.setAnswer(answerList.get(i));
-            if(number == (i + 1)){
+            if (number == (i + 1)) {
                 q.setAnswer(a.getAnswer());
                 a.setCorrect(true);
-            }else{
+            } else {
                 a.setCorrect(false);
             }
             a.setQuestion(q);
@@ -103,7 +104,7 @@ public class QuestionController {
     }
 
     @PostMapping(path = "/editquestion")
-    public String processEditQuestion(ModelMap modelMap, HttpServletRequest request){
+    public String processEditQuestion(ModelMap modelMap, HttpServletRequest request) {
         Question q = new Question();
         q.setQuestion(request.getParameter("question").trim());
         int number = Integer.parseInt(request.getParameter("isAnswer"));
@@ -117,13 +118,13 @@ public class QuestionController {
         answerList.add(answer3);
         answerList.add(answer4);
         List<Answer> answers = new ArrayList<>();
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             Answer a = new Answer();
             a.setAnswer(answerList.get(i));
-            if(number == (i + 1)){
+            if (number == (i + 1)) {
                 q.setAnswer(a.getAnswer());
                 a.setCorrect(true);
-            }else{
+            } else {
                 a.setCorrect(false);
             }
             a.setQuestion(q);
@@ -144,8 +145,8 @@ public class QuestionController {
     String showListQuestionPage(@Param(value = "subId") int subId, Model model, HttpServletRequest request) {
         List<Question> questionList = questionService.getQuesitonBySubjectId(1);
         Subject subject = subjectService.getSubjectById(subId);
-        model.addAttribute("ques",questionList);
-        model.addAttribute("sub",subject);
+        model.addAttribute("ques", questionList);
+        model.addAttribute("sub", subject);
         return "question_list_page";
     }
 
