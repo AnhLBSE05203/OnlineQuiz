@@ -28,7 +28,7 @@ public class LessonRepository {
     public List<Lesson> getByPagingRequest(PagingRequest pagingRequest) {
         try {
             BufferedReader buffer = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("SELECT l FROM lesson s\n" +
+                    this.getClass().getResourceAsStream("SELECT l FROM Lesson l\n" +
                             "WHERE 1 = 1\n")));
             StringBuilder sb = new StringBuilder();
             String line = "";
@@ -39,14 +39,14 @@ public class LessonRepository {
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
-                sb.append(" AND lower(s.image.src) LIKE " + key);
-                sb.append(" OR lower(s.name) LIKE " + key);
+                sb.append(" AND lower(l.image.src) LIKE " + key);
+                sb.append(" OR lower(l.name) LIKE " + key);
             }
             // append sorting
             Order order = pagingRequest.getOrder().get(0);
             int columnIndex = order.getColumn();
             Column column = pagingRequest.getColumns().get(columnIndex);
-            sb.append(" ORDER BY " + "s." + column.getData() + " " + order.getDir());
+            sb.append(" ORDER BY " + "l." + column.getData() + " " + order.getDir());
 
             String sql = sb.toString();
             Query query = em.createQuery(sql, Subject.class);
@@ -60,7 +60,7 @@ public class LessonRepository {
     public long getLessonCountByPagingRequest(PagingRequest pagingRequest) {
         try {
             BufferedReader buffer = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("SELECT count(l) FROM lesson l\n" +
+                    this.getClass().getResourceAsStream("SELECT count(l) FROM Lesson l\n" +
                             "WHERE 1 = 1")));
             StringBuilder sb = new StringBuilder();
             String line = "";
@@ -71,8 +71,8 @@ public class LessonRepository {
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
-                sb.append(" AND lower(s.image.src) LIKE " + key);
-                sb.append(" OR lower(s.name) LIKE " + key);
+                sb.append(" AND lower(l.image.src) LIKE " + key);
+                sb.append(" OR lower(l.name) LIKE " + key);
             }
 
             String sql = sb.toString();
