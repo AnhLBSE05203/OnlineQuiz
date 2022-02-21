@@ -61,7 +61,7 @@ public class AdminLessonController {
         return "redirect:/admin/lesson";
     }
 
-    @PostMapping(value = "/getSubjectsByPage", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/getLessonByPage", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Page<SubjectAdminDTO> getSubjectsByPage(@RequestBody PagingRequest pagingRequest) {
         Page<SubjectAdminDTO> listSubjectDTO = subjectService.getByPagingRequest(pagingRequest);

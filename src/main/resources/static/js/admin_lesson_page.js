@@ -3,7 +3,7 @@ $(document).ready(function() {
         "serverSide": true,
         pageLength : 5,
         ajax : {
-            url : '/admin/subject/getSubjectsByPage',
+            url : '/admin/lesson/getLessonByPage',
             "type": "POST",
             "dataType": "json",
             "contentType": "application/json",
@@ -32,7 +32,7 @@ $(document).ready(function() {
             render: function(data, type, row, meta) {
                 var html = "";
                 if(data != "" && data != null){
-                    html += '<img src="' + data +'" class="subject-img" />';
+                    html += '<img src="' + data +'" class="lesson-img" />';
                 }
                 return html;
             }
@@ -40,13 +40,13 @@ $(document).ready(function() {
             title : 'Action',
             data : 'status',
             render: function(data, type, row, meta) {
-                var html = '<button type="button" class="btn btn-primary" onclick="showSubjectEditModal('+ row['id'] + ')">'
+                var html = '<button type="button" class="btn btn-primary" onclick="showLessonEditModal('+ row['id'] + ')">'
                     + 'Edit</button>&nbsp';
                 if (data == 0) {
-                    html += '<button type="button" class="btn btn-primary" onclick="recoverSubject('+ row['id'] +')">'
+                    html += '<button type="button" class="btn btn-primary" onclick="recoverLesson('+ row['id'] +')">'
                         + 'Recover</button>&nbsp';
                 } else {
-                    html += '<button type="button" class="btn btn-primary" onclick="deleteSubject('+ row['id'] +')">'
+                    html += '<button type="button" class="btn btn-primary" onclick="deleteLesson('+ row['id'] +')">'
                         + 'Delete</button>&nbsp';
                 }
                 return html;
@@ -54,14 +54,14 @@ $(document).ready(function() {
         } ]
     });
 });
-function recoverSubject(id){
-    window.location.replace("/admin/subject/recover/" + id);
+function recoverLesson(id){
+    window.location.replace("/admin/lesson/recover/" + id);
 }
-function deleteSubject(id){
-    window.location.replace("/admin/subject/delete/" + id);
+function deleteLesson(id){
+    window.location.replace("/admin/lesson/delete/" + id);
 }
-function showSubjectEditModal(id) {
-    var link = "/admin/subject/" + id;
+function showLessonEditModal(id) {
+    var link = "/admin/lesson/" + id;
     var subject = "";
     $.ajax({
         url: link,
@@ -71,30 +71,30 @@ function showSubjectEditModal(id) {
         success: function (data){
             subject = data;
             if(subject != ""){
-                $("#editSubjectId").val(subject.id);
-                $("#editSubjectName").val(subject.name);
-                $("#editSubjectTotalCourse").val(subject.totalCourse);
-                $("#editSubjectImg").attr("src", subject.imgSrc);
-                $("#editSubjectStatus").val(subject.status).change();
+                $("#editLessonId").val(subject.id);
+                $("#editLessonName").val(subject.name);
+                $("#editLessonTotalCourse").val(subject.totalCourse);
+                $("#editLessonImg").attr("src", subject.imgSrc);
+                $("#editLessonStatus").val(subject.status).change();
 
             }
         }
     });
-    $('#subjectEditModal').modal('show');
+    $('#lessonEditModal').modal('show');
 };
-$('#subjectEditModal').on('hidden.bs.modal', function () {
+$('#lessonEditModal').on('hidden.bs.modal', function () {
     alert('close');
 });
-$('#subjectEditModal').on('shown.bs.modal', function (e) {
+$('#lessonEditModal').on('shown.bs.modal', function (e) {
     // do something...
 });
 
 function showLessonAddModal(id) {
-    $('#subjectAddModal').modal('show');
+    $('#lessonAddModal').modal('show');
 };
-$('#subjectAddModal').on('hidden.bs.modal', function () {
+$('#lessonAddModal').on('hidden.bs.modal', function () {
     alert('close');
 });
-$('#subjectAddModal').on('shown.bs.modal', function (e) {
+$('#lessonAddModal').on('shown.bs.modal', function (e) {
     // do something...
 });

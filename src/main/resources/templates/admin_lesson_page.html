@@ -11,7 +11,7 @@
     <div th:replace="components/header_footer.html :: admin-common-style">
     </div>
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"/>
-    <link th:href="@{/css/admin_subject_page.css}" rel="stylesheet"/>
+    <link th:href="@{/css/admin_lesson_page.css}" rel="stylesheet"/>
 </head>
 <body class="sb-nav-fixed">
 <!-- Admin header -->
@@ -39,7 +39,7 @@
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
                         List Lesson
-                        <button id="addSubjectButton" type="button" class="btn btn-primary"
+                        <button id="addLessonButton" type="button" class="btn btn-primary"
                                 onclick="showLessonAddModal()">Add Lesson
                         </button>
                     </div>
@@ -55,37 +55,37 @@
     </div>
 </div>
 <!-- placeholder for modal -->
-<!-- Edit Subject Modal -->
-<div class="modal fade" id="subjectEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<!-- Edit Lesson Modal -->
+<div class="modal fade" id="lessonEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="subjectEditForm" th:object="${subjectEditDTO}"
-                  th:action="@{/admin/subject/edit}" method="POST">
+            <form id="lessonEditForm" th:object="${subjectEditDTO}"
+                  th:action="@{/admin/lesson/edit}" method="POST">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Subject Detail</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Lesson Detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img id="editSubjectImg"><br>
-                    <input type="hidden" id="editSubjectImgSrc" th:name="imgSrc">
-                    <input type="hidden" id="editSubjectStatusStr" th:name="statusStr" value="">
+                    <img id="editLessonImg"><br>
+                    <input type="hidden" id="editLessonImgSrc" th:name="imgSrc">
+                    <input type="hidden" id="editLessonStatusStr" th:name="statusStr" value="">
                     <table class="formTable" cellspacing="0" cellpadding="0">
                         <tr>
                             <td>Id:</td>
-                            <td><input type="text" id="editSubjectId" th:name="id" readonly></td>
+                            <td><input type="text" id="editLessonId" th:name="id" readonly></td>
                         </tr>
                         <tr>
                             <td>Total no. of Courses:</td>
-                            <td><input type="text" id="editSubjectTotalCourse"
+                            <td><input type="text" id="editLessonTotalCourse"
                                        th:field="*{totalCourse}" readonly></td>
                         </tr>
                         <tr>
                             <td>Name:</td>
-                            <td><input type="text" id="editSubjectName" th:name="name" required></td>
+                            <td><input type="text" id="editLessonName" th:name="name" required></td>
                         </tr>
                         <td>Status:</td>
-                        <td><select id="editSubjectStatus" th:name="status">
+                        <td><select id="editLessonStatus" th:name="status">
                             <option th:each="status : ${statusMap}" th:value="${status.key}"
                                     th:text="${status.value}">
                             </option>
@@ -101,26 +101,26 @@
         </div>
     </div>
 </div>
-<!-- End Edit Subject Modal -->
-<!-- Create Subject Modal -->
-<div class="modal fade" id="subjectAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<!-- End Edit Lesson Modal -->
+<!-- Create Lesson Modal -->
+<div class="modal fade" id="lessonAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="subjectAddForm" th:object="${subjectAddDTO}"
-                  th:action="@{/admin/subject/add}" method="POST">
+            <form id="lessonAddForm" th:object="${subjectAddDTO}"
+                  th:action="@{/admin/lesson/add}" method="POST">
                 <div class="modal-header">
-                    <h5 class="modal-title">Subject Detail</h5>
+                    <h5 class="modal-title">Lesson Detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="addSubjectId" th:name="id" value="0">
-                    <input type="hidden" id="addSubjectImgSrc" th:name="imgSrc">
-                    <input type="hidden" id="addSubjectStatusStr" th:name="statusStr" value="">
-                    <input type="hidden" id="addSubjectStatus" th:name="status" value="1">
+                    <input type="hidden" id="addLessonId" th:name="id" value="0">
+                    <input type="hidden" id="addLessonImgSrc" th:name="imgSrc">
+                    <input type="hidden" id="addLessonStatusStr" th:name="statusStr" value="">
+                    <input type="hidden" id="addLessonStatus" th:name="status" value="1">
                     <table class="formTable" cellspacing="0" cellpadding="0">
                         <td>Name:</td>
-                        <td><input type="text" id="addSubjectName" th:name="name" required></td>
+                        <td><input type="text" id="addLessonName" th:name="name" required></td>
                     </table>
                 </div>
                 <div class="modal-footer">
@@ -131,7 +131,7 @@
         </div>
     </div>
 </div>
-<!-- End Create Subject Modal -->
+<!-- End Create Lesson Modal -->
 <!-- Admin common js -->
 <th:block th:insert="components/header_footer.html :: admin-common-script">
 </th:block>
