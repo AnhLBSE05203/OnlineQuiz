@@ -1,9 +1,15 @@
 $(document).ready(function() {
 		$('#BlogDatatable').DataTable({
+		"serverSide": true,
 		pageLength : 5,
         			ajax : {
-        				url : '/admin/blog/all',
-        				dataSrc : ''
+						url : '/admin/blog/all',
+						"type": "POST",
+						"dataType": "json",
+						"contentType": "application/json",
+						"data": function (d) {
+							return JSON.stringify(d);
+						}
         			},
         			columns : [ {
         				title : 'Id',
