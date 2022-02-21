@@ -1,1 +1,2 @@
-SELECT s FROM Subject s
+select s from Subject s
+where 1 = 1
