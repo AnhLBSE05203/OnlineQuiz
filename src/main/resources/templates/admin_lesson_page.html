@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Subject Management</title>
+    <title>Lesson Management</title>
     <!-- Admin common css -->
     <div th:replace="components/header_footer.html :: admin-common-style">
     </div>
@@ -40,11 +40,11 @@
                         <i class="fas fa-table me-1"></i>
                         List Lesson
                         <button id="addSubjectButton" type="button" class="btn btn-primary"
-                                onclick="showSubjectAddModal()">Add Lesson
+                                onclick="showLessonAddModal()">Add Lesson
                         </button>
                     </div>
                     <div class="card-body">
-                        <table id="SubjectDatatable" style="width:100%;">
+                        <table id="LessonDatatable" style="width:100%;">
                         </table>
                     </div>
                 </div>
@@ -56,20 +56,20 @@
 </div>
 <!-- placeholder for modal -->
 <!-- Edit Subject Modal -->
-<div class="modal fade" id="lessonEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="subjectEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="lessonEditForm" th:object="${subjectEditDTO}"
-                  th:action="@{/admin/lesson/edit}" method="POST">
+            <form id="subjectEditForm" th:object="${subjectEditDTO}"
+                  th:action="@{/admin/subject/edit}" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Subject Detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <img id="editSubjectImg"><br>
-                    <input type="hidden" id="editLessonImgSrc" th:name="imgSrc">
-<!--                    <input type="hidden" id="editLessonStatusStr" th:name="statusStr" value="">-->
+                    <input type="hidden" id="editSubjectImgSrc" th:name="imgSrc">
+                    <input type="hidden" id="editSubjectStatusStr" th:name="statusStr" value="">
                     <table class="formTable" cellspacing="0" cellpadding="0">
                         <tr>
                             <td>Id:</td>
@@ -108,15 +108,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form id="subjectAddForm" th:object="${subjectAddDTO}"
-                  th:action="@{/admin/lesson/add}" method="POST">
+                  th:action="@{/admin/subject/add}" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title">Subject Detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="addLessonId" th:name="id" value="0">
-<!--                    <input type="hidden" id="addSubjectImgSrc" th:name="imgSrc">-->
-<!--                    <input type="hidden" id="addSubjectStatusStr" th:name="statusStr" value="">-->
+                    <input type="hidden" id="addSubjectId" th:name="id" value="0">
+                    <input type="hidden" id="addSubjectImgSrc" th:name="imgSrc">
+                    <input type="hidden" id="addSubjectStatusStr" th:name="statusStr" value="">
                     <input type="hidden" id="addSubjectStatus" th:name="status" value="1">
                     <table class="formTable" cellspacing="0" cellpadding="0">
                         <td>Name:</td>
@@ -137,7 +137,7 @@
 </th:block>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script th:src="@{/js/admin_subject_page.js}"></script>
+<script th:src="@{/js/admin_lesson_page.js}"></script>
 <!-- -->
 </body>
 </html>
