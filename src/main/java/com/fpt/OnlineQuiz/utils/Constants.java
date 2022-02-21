@@ -119,6 +119,7 @@ public class Constants {
     public static final String SQL_PATH_FIND_ROLE_BY_NAME = "/static/sql/findRoleByName.sql";
     public static final String SQL_PATH_GET_ALL_BLOG_LIST = "/static/sql/findAllBlog.sql";
     public static final String SQL_PATH_GET_DETAIL_BLOG = "/static/sql/findBlogById.sql";
+    public static final String SQL_PATH_GET_BLOG_COUNT = "/static/sql/getBlogCount.sql";
     public static final String SQL_PATH_GET_FEATURED_COURSES = "/static/sql/getFeaturedCourses.sql";
     public static final String SQL_PATH_GET_ALL_SUBJECTS = "/static/sql/getAllSubjects.sql";
     public static final String SQL_PATH_GET_SUBJECT_COUNT = "/static/sql/getSubjectCount.sql";
