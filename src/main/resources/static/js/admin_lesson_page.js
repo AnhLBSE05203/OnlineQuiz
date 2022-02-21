@@ -32,7 +32,22 @@ $(document).ready(function() {
         },{
             title : 'Time',
             data : 'time',
-        }]
+        }, {
+            title : 'Action',
+            data : 'status',
+            render: function(data, type, row, meta) {
+                var html = '<button type="button" class="btn btn-primary" onclick="showLessonEditModal('+ row['id'] + ')">'
+                    + 'Edit</button>&nbsp';
+                if (data == 0) {
+                    html += '<button type="button" class="btn btn-primary" onclick="recoverLesson('+ row['id'] +')">'
+                        + 'Recover</button>&nbsp';
+                } else {
+                    html += '<button type="button" class="btn btn-primary" onclick="deleteLesson('+ row['id'] +')">'
+                        + 'Delete</button>&nbsp';
+                }
+                return html;
+            }
+        } ]
     });
 });
 function recoverLesson(id){
