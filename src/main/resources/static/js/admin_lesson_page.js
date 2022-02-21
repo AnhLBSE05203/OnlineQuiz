@@ -12,19 +12,25 @@ $(document).ready(function() {
             }
         },
         columns : [ {
-            title : 'Id',
+            title : 'Lesson Id',
             data : 'id'
         }, {
-            title : 'Name',
+            title : 'Lesson Name',
             data : 'name'
         }, {
-            title : 'ImgSrc',
+            title : 'Type',
             data : 'imgSrc',
         }, {
-            title : 'Total Courses',
+            title : 'Subject',
             data : 'totalCourse',
         }, {
+            title : 'Content',
+            data : 'statusStr',
+        },{
             title : 'Status',
+            data : 'statusStr',
+        },{
+            title : 'Time',
             data : 'statusStr',
         }, {
             title : 'Img',
