@@ -30,17 +30,17 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Subject</h1>
+                <h1 class="mt-4">Lesson</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Subject Management
+                    <li class="breadcrumb-item active">Lesson Management
                     </li>
                 </ol>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        List Subject
+                        List Lesson
                         <button id="addSubjectButton" type="button" class="btn btn-primary"
-                                onclick="showSubjectAddModal()">Add Subject
+                                onclick="showSubjectAddModal()">Add Lesson
                         </button>
                     </div>
                     <div class="card-body">
@@ -56,20 +56,20 @@
 </div>
 <!-- placeholder for modal -->
 <!-- Edit Subject Modal -->
-<div class="modal fade" id="subjectEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="lessonEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="subjectEditForm" th:object="${subjectEditDTO}"
-                  th:action="@{/admin/subject/edit}" method="POST">
+            <form id="lessonEditForm" th:object="${subjectEditDTO}"
+                  th:action="@{/admin/lesson/edit}" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Subject Detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <img id="editSubjectImg"><br>
-                    <input type="hidden" id="editSubjectImgSrc" th:name="imgSrc">
-                    <input type="hidden" id="editSubjectStatusStr" th:name="statusStr" value="">
+                    <input type="hidden" id="editLessonImgSrc" th:name="imgSrc">
+<!--                    <input type="hidden" id="editLessonStatusStr" th:name="statusStr" value="">-->
                     <table class="formTable" cellspacing="0" cellpadding="0">
                         <tr>
                             <td>Id:</td>
@@ -108,15 +108,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form id="subjectAddForm" th:object="${subjectAddDTO}"
-                  th:action="@{/admin/subject/add}" method="POST">
+                  th:action="@{/admin/lesson/add}" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title">Subject Detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="addSubjectId" th:name="id" value="0">
-                    <input type="hidden" id="addSubjectImgSrc" th:name="imgSrc">
-                    <input type="hidden" id="addSubjectStatusStr" th:name="statusStr" value="">
+                    <input type="hidden" id="addLessonId" th:name="id" value="0">
+<!--                    <input type="hidden" id="addSubjectImgSrc" th:name="imgSrc">-->
+<!--                    <input type="hidden" id="addSubjectStatusStr" th:name="statusStr" value="">-->
                     <input type="hidden" id="addSubjectStatus" th:name="status" value="1">
                     <table class="formTable" cellspacing="0" cellpadding="0">
                         <td>Name:</td>
