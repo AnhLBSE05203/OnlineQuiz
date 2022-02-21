@@ -15,13 +15,11 @@ import java.util.List;
 @Getter
 public class Answer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "answerId")
     private int id;
     @Column(name = "answer")
     private String answer;
-    @Column(name = "explanation")
-    private String explanation;
 
     @Column(name = "isCorrect")
     private boolean isCorrect;

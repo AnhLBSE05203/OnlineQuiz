@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -16,14 +17,16 @@ import java.util.List;
 @Table(name = "QuizHistory")
 public class QuizHistory {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "quizHistoryId")
     private int id;
 
+    @Column(name = "createdTime")
+    private Date createdTime;
     @ManyToOne
     @JoinColumn(name = "accountId")
     private Account account;
 
-    @OneToMany(mappedBy = "quizHistory")
+    @OneToMany(mappedBy = "quizHistory", cascade = CascadeType.ALL)
     private List<QuizHistoryQuestion> quizHistoryQuestions;
 }

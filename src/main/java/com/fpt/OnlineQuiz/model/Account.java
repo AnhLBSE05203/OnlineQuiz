@@ -30,7 +30,7 @@ public class Account implements UserDetails {
 
     @Id
     @Column(name = "accountId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "fullName")
@@ -59,13 +59,13 @@ public class Account implements UserDetails {
     private Image profileImage;
     @ManyToMany(mappedBy = "accounts")
     private List<Course> courses;
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Token> tokens;
     @OneToMany(mappedBy = "account")
     private List<Review> reviews;
     @OneToMany(mappedBy = "account")
     private List<QuizHistory> quizHistories;
-    @OneToOne(mappedBy = "account")
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private Expert expert;
     @Column(name = "status")
     private int status;

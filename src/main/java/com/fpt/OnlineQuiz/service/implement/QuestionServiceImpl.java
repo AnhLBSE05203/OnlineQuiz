@@ -20,12 +20,17 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void addQuestion(Question question, int subject_id) {
-        questionRepository.addQuestion(question, subject_id);
+    public Question getQuestionByQuestionId(int question_id) {
+        return questionRepository.getQuestionByQuestionId(question_id);
     }
 
     @Override
-    public void updateQuestion(Question question, int subject_id) {
+    public void addQuestion(Question question) {
+        questionRepository.addQuestion(question);
+    }
+
+    @Override
+    public void updateQuestion(Question question) {
         questionRepository.updateQuestion(question);
     }
 }

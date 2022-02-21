@@ -21,7 +21,7 @@ import java.util.List;
 public class Image {
     @Id
     @Column(name = "imageId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "src")

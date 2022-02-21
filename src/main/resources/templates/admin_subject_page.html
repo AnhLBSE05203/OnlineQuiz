@@ -117,16 +117,10 @@
                             <input type="hidden" id="addSubjectId" th:name="id" value="0">
                             <input type="hidden" id="addSubjectImgSrc" th:name="imgSrc">
                             <input type="hidden" id="addSubjectStatusStr" th:name="statusStr" value="">
+                            <input type="hidden" id="addSubjectStatus" th:name="status" value="1">
                             <table class="formTable" cellspacing="0" cellpadding="0">
                                 <td>Name:</td>
                                 <td><input type="text" id="addSubjectName" th:name="name" required></td>
-                                <td>Status:</td>
-                                <td><select id="addSubjectStatus" th:name="status">
-                                    <option th:each="status : ${statusMap}" th:value="${status.key}"
-                                            th:text="${status.value}"
-                                            th:selected="${status.key == 1}">
-                                    </option>
-                                </select></td>
                             </table>
                         </div>
                         <div class="modal-footer">

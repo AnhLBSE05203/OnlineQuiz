@@ -1,117 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Profile</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Profile</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
 
-    <!-- CSS here -->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/slicknav.css}">
-    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
-    <link rel="stylesheet" th:href="@{/css/progressbar_barfiller.css}">
-    <link rel="stylesheet" th:href="@{/css/gijgo.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animated-headline.css}">
-    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
-    <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
-    <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
-    <link rel="stylesheet" th:href="@{/css/slick.css}">
-    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <link rel="stylesheet" th:href="@{/css/forgot_password_page.css}">
-
-</head>
-
-<body>
-<!-- ? Preloader Start -->
-<div id="preloader-active">
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-            <div class="preloader-circle"></div>
-            <div class="preloader-img pere-text">
-                <img th:src="@{/img/logo/loder.png}" alt="">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Preloader Start -->
-<!-- Header Start -->
-<div class="header-area header-transparent">
-    <div class="main-header ">
-        <div class="header-bottom  header-sticky">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <!-- Logo -->
-                    <div class="col-xl-2 col-lg-2">
-                        <div class="logo">
-                            <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-10 col-lg-10">
-                        <div class="menu-wrapper d-flex align-items-center justify-content-end">
-                            <!-- Main-menu -->
-                            <div class="main-menu d-none d-lg-block">
-                                <nav>
-                                    <ul id="navigation">
-                                        <li class="active"><a href="index.html">Home</a></li>
-                                        <li><a href="listLesson_page.html">Courses</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="#">Blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog_details.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Element</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <!-- Button -->
-                                        <li class="button-header margin-left "><a href="#" class="btn">Join</a></li>
-                                        <li class="button-header"><a href="login.html" class="btn btn3">Log in</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Mobile Menu -->
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-lg-none"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Header End -->
-<main>
-    <!--? slider Area Start-->
-    <section class="slider-area slider-area2">
-        <div class="slider-active">
-            <!-- Single Slider -->
-            <div class="single-slider slider-height2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-8 col-lg-11 col-md-12">
-                            <div class="hero__caption hero__caption2">
-                                <h1 data-animation="bounceIn" data-delay="0.2s">Profile</h1>
-
-                                <!-- breadcrumb End -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Courses area start -->
-
-    <html lang="en" th:fragment="profile">
-    <style type="text/css">
+        <!-- CSS here -->
+        <div th:replace="components/header_footer.html :: common-style"></div>
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+              rel="stylesheet">
+        <link rel="stylesheet" th:href="@{/css/forgot_password_page.css}">
+        <style type="text/css">
         body {
             color: #797979;
             background: #f1f2f7;
@@ -493,116 +396,111 @@
         .activity-desk .album a:last-child {
             margin-right: 0px;
         }
-    </style>
-    <div th:fragment="">
-        <head>
-            <meta charset="utf-8">
-            <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
-            <!--  All snippets are MIT license http://bootdey.com/license -->
-            <title>user profile bio graph and total sales - Bootdey.com</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-            <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-            <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        </head>
-        <body>
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-        <div class="container bootstrap snippets bootdey">
-            <div class="row">
-                <div class="profile-nav col-md-3">
-                    <div class="panel">
-                        <div class="user-heading round">
-                            <a href="#">
-                                <img src="https://pbs.twimg.com/profile_images/534863086276988928/bX3juDCC_400x400.jpeg"
-                                     alt="">
-                            </a>
-                            <h1 name="name" th:text="${name}">Bruce Lee</h1>
-                            <p name="email" th:text="${email}">brucelee@gmail.com</p>
-                        </div>
 
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-                            <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span
-                                    class="label label-warning pull-right r-activity">9</span></a></li>
-                            <li><a th:href="@{/account/changePassword(email=${email})}"> <i class="fa fa-key"></i> Change Password</a></li>
-                            <li><a th:href="@{/account/edit-profile(email=${email})}"> <i class="fa fa-edit"></i> Edit Profile</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="profile-info col-md-9">
-                    <!--      <div class="panel">
-                              <form>
-                                  <textarea placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area"></textarea>
-                              </form>
-                              <footer class="panel-footer">
-                                  <button class="btn btn-warning pull-right">Post</button>
-                                  <ul class="nav nav-pills">
-                                      <li>
-                                          <a href="#"><i class="fa fa-map-marker"></i></a>
-                                      </li>
-                                      <li>
-                                          <a href="#"><i class="fa fa-camera"></i></a>
-                                      </li>
-                                      <li>
-                                          <a href="#"><i class=" fa fa-film"></i></a>
-                                      </li>
-                                      <li>
-                                          <a href="#"><i class="fa fa-microphone"></i></a>
-                                      </li>
-                                  </ul>
-                              </footer>
-                          </div>-->
-                    <div class="panel">
-                        <div class="bio-graph-heading">
-                            Empty your mind, be formless. Shapeless, like water. If you put water into a cup, it becomes
-                            the cup.
-                            You put water into a bottle and it becomes the bottle. You put it in a teapot, it becomes
-                            the teapot.
-                            Now, water can flow or it can crash. Be water, my friend.
-                        </div>
-                        <div class="panel-body bio-graph-info">
-                            <h1>Bio Graph</h1>
+
+
+        </style>
+    </head>
+    <body>
+        <!-- ? Preloader Start -->
+        <div th:replace="components/header_footer.html :: user-preload"></div>
+        <!-- Preloader Start -->
+        <!-- Header Start -->
+        <div th:replace="components/header_footer.html :: user-header"></div>
+        <!-- Header End -->
+        <main>
+            <!--? slider Area Start-->
+            <section class="slider-area slider-area2">
+                <div class="slider-active">
+                    <!-- Single Slider -->
+                    <div class="single-slider slider-height2">
+                        <div class="container">
                             <div class="row">
-                                <div class="bio-row">
-                                    Full Name: <p name="name" th:text="${name}"><span></span></p>
-                                </div>
-                                <div class="bio-row">
-                                    Gender:
-                                    <p name="gender" id="gender" th:text="${gender}"><span></span></p>
-                                    <script>
-                                        if (document.getElementById("gender").innerText = 1) {
-                                            document.getElementById("gender").innerText = "Female";
-                                        }else {
-                                            document.getElementById("gender").innerText = "Male";
-                                        }
-                                    </script>
-                                </div>
-                                <div class="bio-row">
-                                    Email: <p name="email" th:text="${email}"><span></span></p>
-                                </div>
-                                <div class="bio-row">
-                                    Phone: <p name="phone" th:text="${phone}"><span></span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="panel">
-                                    <div class="panel-body">
-                                        <h2><a href="#">
-                                            Registration
-                                        </a></h2>
+                                <div class="col-xl-8 col-lg-11 col-md-12">
+                                    <div class="hero__caption hero__caption2">
+                                        <h1 data-animation="bounceIn" data-delay="0.2s">Profile</h1>
+                                        <!-- breadcrumb End -->
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="panel">
-                                    <div class="panel-body">
-                                        <h2><a href="#">
-                                            My Subject
-                                        </a></h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Courses area start -->
+            <div class="container bootstrap snippets bootdey">
+                <div class="row">
+                    <div class="profile-nav col-md-3">
+                        <div class="panel">
+                            <div class="user-heading round">
+                                <a href="#">
+                                    <img src="https://pbs.twimg.com/profile_images/534863086276988928/bX3juDCC_400x400.jpeg"
+                                         alt="">
+                                </a>
+                                <h1 name="name" th:text="${name}">Bruce Lee</h1>
+                                <p name="email" th:text="${email}">brucelee@gmail.com</p>
+                            </div>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+                                <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span
+                                        class="label label-warning pull-right r-activity">9</span></a></li>
+                                <li><a th:href="@{/account/changePassword}"> <i class="fa fa-key"></i> Change
+                                    Password</a></li>
+                                <li><a th:href="@{/account/edit-profile}"> <i class="fa fa-edit"></i> Edit
+                                    Profile</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="profile-info col-md-9">
+                        <div class="panel">
+                            <div class="bio-graph-heading">
+                                Empty your mind, be formless. Shapeless, like water. If you put water into a
+                                cup, it becomes
+                                the cup.
+                                You put water into a bottle and it becomes the bottle. You put it in a teapot,
+                                it becomes
+                                the teapot.
+                                Now, water can flow or it can crash. Be water, my friend.
+                            </div>
+                            <div class="panel-body bio-graph-info">
+                                <h1>Bio Graph</h1>
+                                <div class="row">
+                                    <div class="bio-row">
+                                        Full Name: <p name="name" th:text="${name}"><span></span></p>
+                                    </div>
+                                    <div class="bio-row">
+                                        Gender:
+                                        <p name="gender" id="gender" th:text="${gender}"><span></span></p>
+
+                                    </div>
+                                    <div class="bio-row">
+                                        Email: <p name="email" th:text="${email}"><span></span></p>
+                                    </div>
+                                    <div class="bio-row">
+                                        Phone: <p name="phone" th:text="${phone}"><span></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <h2><a href="#">
+                                                Registration
+                                            </a></h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <h2><a href="#">
+                                                My Subject
+                                            </a></h2>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -610,200 +508,25 @@
                     </div>
                 </div>
             </div>
+            <!-- top subjects End -->
+            <!-- ? services-area -->
+        </main>
+        <footer th:replace="components/header_footer.html :: user-footer">
+        </footer>
+        <!-- Scroll Up -->
+        <div th:insert="components/header_footer.html :: scroll-up">
         </div>
 
+        <th:block th:insert="components/header_footer.html :: common-script">
+        </th:block>
+        <script>
+         if (document.getElementById("gender").innerText = 1) {
+              document.getElementById("gender").innerText = "Female";
+         }else {
+              document.getElementById("gender").innerText = "Male";
+         }
 
-        <script type="text/javascript">
 
         </script>
-        </body>
-    </html>
-
-    <!-- top subjects End -->
-    <!-- ? services-area -->
-    <div class="services-area services-area2 section-padding40">
-        <div class="container">
-            <div class="row justify-content-sm-center">
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img src="assets/img/icon/icon1.svg" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>60+ UX courses</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img src="assets/img/icon/icon2.svg" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>Expert instructors</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img src="assets/img/icon/icon3.svg" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>Life time access</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
-<footer>
-    <div class="footer-wrappper footer-bg">
-        <!-- Footer Start-->
-        <div class="footer-area footer-padding">
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-xl-4 col-lg-5 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="single-footer-caption mb-30">
-                                <!-- logo -->
-                                <div class="footer-logo mb-25">
-                                    <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                                </div>
-                                <div class="footer-tittle">
-                                    <div class="footer-pera">
-                                        <p>The automated process starts as soon as your clothes go into the machine.</p>
-                                    </div>
-                                </div>
-                                <!-- social -->
-                                <div class="footer-social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Our solutions</h4>
-                                <ul>
-                                    <li><a href="#">Design & creatives</a></li>
-                                    <li><a href="#">Telecommunication</a></li>
-                                    <li><a href="#">Restaurant</a></li>
-                                    <li><a href="#">Programing</a></li>
-                                    <li><a href="#">Architecture</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Support</h4>
-                                <ul>
-                                    <li><a href="#">Design & creatives</a></li>
-                                    <li><a href="#">Telecommunication</a></li>
-                                    <li><a href="#">Restaurant</a></li>
-                                    <li><a href="#">Programing</a></li>
-                                    <li><a href="#">Architecture</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Company</h4>
-                                <ul>
-                                    <li><a href="#">Design & creatives</a></li>
-                                    <li><a href="#">Telecommunication</a></li>
-                                    <li><a href="#">Restaurant</a></li>
-                                    <li><a href="#">Programing</a></li>
-                                    <li><a href="#">Architecture</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- footer-bottom area -->
-        <div class="footer-bottom-area">
-            <div class="container">
-                <div class="footer-border">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-xl-12 ">
-                            <div class="footer-copy-right text-center">
-                                <p>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                                    All rights reserved | This template is made with <i class="fa fa-heart"
-                                                                                        aria-hidden="true"></i> by <a
-                                        href="https://colorlib.com" target="_blank">Colorlib</a>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End-->
-    </div>
-</footer>
-<!-- Scroll Up -->
-<div id="back-top">
-    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
-</div>
-
-<script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
-<!-- Jquery, Popper, Bootstrap -->
-<script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
-<script th:src="@{/js/popper.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<!-- Jquery Mobile Menu -->
-<script th:src="@{/js/jquery.slicknav.min.js}"></script>
-
-<!-- Video bg -->
-<script th:src="@{/js/jquery.vide.js}"></script>
-
-<!-- Jquery Slick , Owl-Carousel Plugins -->
-<script th:src="@{/js/owl.carousel.min.js}"></script>
-<script th:src="@{/js/slick.min.js}"></script>
-<!-- One Page, Animated-HeadLin -->
-<script th:src="@{/js/wow.min.js}"></script>
-<script th:src="@{/js/animated.headline.js}"></script>
-<script th:src="@{/js/jquery.magnific-popup.js}"></script>
-
-<!-- Date Picker -->
-<script th:src="@{/js/gijgo.min.js}"></script>
-<!-- Nice-select, sticky -->
-<script th:src="@{/js/jquery.nice-select.min.js}"></script>
-<script th:src="@{/js/jquery.sticky.js}"></script>
-<!-- Progress -->
-<script th:src="@{/js/jquery.barfiller.js}"></script>
-
-<!-- counter , waypoint,Hover Direction -->
-<script th:src="@{/js/jquery.counterup.min.js}"></script>
-<script th:src="@{/js/waypoints.min.js}"></script>
-<script th:src="@{/js/jquery.countdown.min.js}"></script>
-<script th:src="@{/js/hover-direction-snake.min.js}"></script>
-
-<!-- contact js -->
-<script th:src="@{/js/contact.js}"></script>
-<script th:src="@{/js/jquery.form.js}"></script>
-<script th:src="@{/js/jquery.validate.min.js}"></script>
-<script th:src="@{/js/mail-script.js}"></script>
-<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
-
-<!-- Jquery Plugins, main Jquery -->
-<script th:src="@{/js/plugins.js}"></script>
-<script th:src="@{/js/main.js}"></script>
-</body>
+    </body>
 </html>

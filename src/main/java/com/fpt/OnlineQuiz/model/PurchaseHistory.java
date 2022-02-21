@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Table(name = "PurchaseHistory")
 public class PurchaseHistory {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "purchaseId")
     private int id;
     @ManyToOne
