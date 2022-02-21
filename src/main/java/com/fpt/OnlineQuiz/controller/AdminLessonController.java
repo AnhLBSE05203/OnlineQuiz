@@ -1,11 +1,13 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dto.LessonAdminDTO;
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Image;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.ImageService;
+import com.fpt.OnlineQuiz.service.LessonService;
 import com.fpt.OnlineQuiz.service.SubjectService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 public class AdminLessonController {
     @Autowired
     private SubjectService subjectService;
+    @Autowired
+    private LessonService lessonService;
     @Autowired
     private ImageService imageService;
 
@@ -63,9 +67,9 @@ public class AdminLessonController {
 
     @PostMapping(value = "/getLessonByPage", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Page<SubjectAdminDTO> getSubjectsByPage(@RequestBody PagingRequest pagingRequest) {
-        Page<SubjectAdminDTO> listSubjectDTO = subjectService.getByPagingRequest(pagingRequest);
-        return listSubjectDTO;
+    public Page<LessonAdminDTO> getLessonByPage(@RequestBody PagingRequest pagingRequest) {
+        Page<LessonAdminDTO> lessonAdminDTOPage = lessonService.getByPagingRequest(pagingRequest);
+        return lessonAdminDTOPage;
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
