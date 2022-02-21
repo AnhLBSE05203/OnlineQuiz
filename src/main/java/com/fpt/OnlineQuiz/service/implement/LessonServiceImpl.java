@@ -42,7 +42,7 @@ public class LessonServiceImpl implements LessonService {
         List<LessonAdminDTO> LessonAdminDTO = new ArrayList<>();
         // convert Subject to SubjectAdminDTO
         for(Lesson lesson : lessons) {
-            LessonAdminDTO lessonAdminDTO = lesson.toSubjectAdminDTO();
+            LessonAdminDTO lessonAdminDTO = lesson.toLessonAdminDTO();
             LessonAdminDTO.add(lessonAdminDTO);
         }
         // convert List to Page

@@ -13,35 +13,25 @@ $(document).ready(function() {
         },
         columns : [ {
             title : 'Lesson Id',
-            data : 'id'
+            data : 'lesId'
         }, {
             title : 'Lesson Name',
             data : 'name'
         }, {
             title : 'Type',
-            data : 'imgSrc',
+            data : 'lessonType',
         }, {
             title : 'Subject',
-            data : 'totalCourse',
+            data : 'subjects',
         }, {
             title : 'Content',
-            data : 'statusStr',
+            data : 'content',
         },{
             title : 'Status',
-            data : 'statusStr',
+            data : 'status',
         },{
             title : 'Time',
-            data : 'statusStr',
-        }, {
-            title : 'Img',
-            data : 'imgSrc',
-            render: function(data, type, row, meta) {
-                var html = "";
-                if(data != "" && data != null){
-                    html += '<img src="' + data +'" class="lesson-img" />';
-                }
-                return html;
-            }
+            data : 'time',
         }, {
             title : 'Action',
             data : 'status',
@@ -68,20 +58,20 @@ function deleteLesson(id){
 }
 function showLessonEditModal(id) {
     var link = "/admin/lesson/" + id;
-    var subject = "";
+    var lesson = "";
     $.ajax({
         url: link,
         type:"get",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data){
-            subject = data;
+            lesson = data;
             if(subject != ""){
-                $("#editLessonId").val(subject.id);
-                $("#editLessonName").val(subject.name);
-                $("#editLessonTotalCourse").val(subject.totalCourse);
-                $("#editLessonImg").attr("src", subject.imgSrc);
-                $("#editLessonStatus").val(subject.status).change();
+                $("#editLessonId").val(lesson.id);
+                $("#editLessonName").val(lesson.name);
+                $("#editLessonTotalCourse").val(lesson.totalCourse);
+                $("#editLessonImg").attr("src", lesson.imgSrc);
+                $("#editLessonStatus").val(lesson.status).change();
 
             }
         }

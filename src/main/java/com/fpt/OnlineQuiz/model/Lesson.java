@@ -1,8 +1,6 @@
 package com.fpt.OnlineQuiz.model;
 
 import com.fpt.OnlineQuiz.dto.LessonAdminDTO;
-import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
-import com.fpt.OnlineQuiz.utils.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,9 +42,11 @@ public class Lesson {
         LessonAdminDTO lessonAdminDTO = new LessonAdminDTO();
         lessonAdminDTO.setLesId(this.getId());
         lessonAdminDTO.setName(this.getName());
-        lessonAdminDTO.setLessonType(this.lessonType);
-        lessonAdminDTO.setStatusStr(statusStr);
-        subjectAdminDTO.setStatus(this.getStatus());
-        return subjectAdminDTO;
+        lessonAdminDTO.setLessonType(this.lessonType.getName());
+        lessonAdminDTO.setSubjects(this.subject.getName());
+        lessonAdminDTO.setContent(this.getContent());
+        lessonAdminDTO.setStatus(this.getStatus());
+        lessonAdminDTO.setTime(this.getTime());
+        return lessonAdminDTO;
     }
 }
