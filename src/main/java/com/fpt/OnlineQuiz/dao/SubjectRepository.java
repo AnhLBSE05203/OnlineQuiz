@@ -4,6 +4,7 @@ package com.fpt.OnlineQuiz.dao;
 import com.fpt.OnlineQuiz.dto.paging.Column;
 import com.fpt.OnlineQuiz.dto.paging.Order;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
+import com.fpt.OnlineQuiz.model.Blog;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,7 @@ import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -64,6 +66,36 @@ public class SubjectRepository {
             return (List<Subject>) query.getResultList();
         } catch (NoResultException | IOException e) {
             return null;
+        }
+    }
+
+    public List<Subject> findAllSubjectsByPaging(int pageindex) {
+        try {
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_SUBJECTS)));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while ((line = buffer.readLine()) != null) {
+                sb.append(" ").append(line);
+            }
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Subject.class);
+            int pageSize = 6;
+            query.setFirstResult((pageindex - 1) * pageSize);
+            query.setMaxResults(pageSize);
+            List<Subject> subjectList = (List<Subject>) query.getResultList();
+            return (List<Subject>) query.getResultList();
+        } catch (NoResultException | IOException e) {
+            return null;
+        }
+    }
+    public Long countSubject(){
+        try {
+            String sql = "Select COUNT(a) FROM Subject a";
+            Query query = em.createQuery(sql,Long.class);
+            return (Long) query.getSingleResult();
+        }catch (NoResultException e){
+            return 0l;
         }
     }
 
