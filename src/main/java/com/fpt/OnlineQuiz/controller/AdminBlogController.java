@@ -1,15 +1,15 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dto.BlogAdminDto;
+import com.fpt.OnlineQuiz.dto.paging.Page;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Blog;
 import com.fpt.OnlineQuiz.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,10 +39,10 @@ public class AdminBlogController {
         return "admin_blog_page";
     }
 
-    @GetMapping(value = "/blog/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/blog/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Blog> getAllBlog() {
-        List<Blog> listBlog = blogService.getAllBlogAdmin();
+    public Page<BlogAdminDto> getAllBlog(@RequestBody PagingRequest pagingRequest) {
+        Page<BlogAdminDto> listBlog = blogService.getAllBlogAdmin(pagingRequest);
         return listBlog;
     }
 

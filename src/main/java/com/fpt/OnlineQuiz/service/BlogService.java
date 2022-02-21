@@ -1,5 +1,8 @@
 package com.fpt.OnlineQuiz.service;
 
+import com.fpt.OnlineQuiz.dto.BlogAdminDto;
+import com.fpt.OnlineQuiz.dto.paging.Page;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Blog;
 
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ public interface BlogService {
      * @return
      */
     ArrayList<Blog> getAllBlog();
-    List<Blog> getAllBlogAdmin();
+    Page<BlogAdminDto> getAllBlogAdmin(PagingRequest pagingRequest);
     ArrayList<Blog> getBlogByIndexPage(int indexPage);
     Long countBlog();
     Blog getDetailBlog(Integer blogId);

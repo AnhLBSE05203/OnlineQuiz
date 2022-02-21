@@ -65,7 +65,6 @@ public class AdminSubjectController {
     @ResponseBody
     public Page<SubjectAdminDTO> getSubjectsByPage(@RequestBody PagingRequest pagingRequest) {
         Page<SubjectAdminDTO> listSubjectDTO = subjectService.getByPagingRequest(pagingRequest);
-
         return listSubjectDTO;
     }
 
