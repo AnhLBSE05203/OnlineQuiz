@@ -59,7 +59,7 @@ function recoverLesson(id){
 }
 function deleteLesson(id){
     window.location.replace("/admin/lesson/delete/" + id);
-}//2
+}//23
 function showLessonEditModal(id) {
     var link = "/admin/lesson/" + id;
     var subject = "";
