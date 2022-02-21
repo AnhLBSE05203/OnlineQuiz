@@ -295,6 +295,19 @@
                             <a class="nav-link" th:href="@{/admin/subject}">List Subject</a>
                         </nav>
                     </div>
+<!--lesson-->
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLesson"
+                       aria-expanded="false" aria-controls="collapseLesson">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Lesson
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLesson" aria-labelledby="headingOne"
+                         data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" th:href="@{/admin/lesson}">List Lesson</a>
+                        </nav>
+                    </div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                        aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>

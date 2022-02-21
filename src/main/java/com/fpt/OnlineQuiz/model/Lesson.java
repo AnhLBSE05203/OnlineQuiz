@@ -22,6 +22,11 @@ public class Lesson {
     private String name;
     @Column(name = "content")
     private String content;
+    @Column(name = "status")
+    private String status;
+    @Column(name = "time")
+    private String time;
+
 
     @ManyToOne
     @JoinColumn(name = "typeId")

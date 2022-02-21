@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Subject Management</title>
+    <!-- Admin common css -->
+    <div th:replace="components/header_footer.html :: admin-common-style">
+    </div>
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/admin_subject_page.css}" rel="stylesheet"/>
+</head>
+<body class="sb-nav-fixed">
+<!-- Admin header -->
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"
+     th:replace="components/header_footer.html :: admin-header">
+</nav>
+<!-- -->
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <!-- Admin side nav -->
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion"
+             th:replace="components/header_footer.html :: admin-side-nav">
+        </nav>
+        <!-- -->
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Subject</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Subject Management
+                    </li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        List Subject
+                        <button id="addSubjectButton" type="button" class="btn btn-primary"
+                                onclick="showSubjectAddModal()">Add Subject
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <table id="SubjectDatatable" style="width:100%;">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="components/header_footer.html :: admin-footer">
+        </footer>
+    </div>
+</div>
+<!-- placeholder for modal -->
+<!-- Edit Subject Modal -->
+<div class="modal fade" id="subjectEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="subjectEditForm" th:object="${subjectEditDTO}"
+                  th:action="@{/admin/subject/edit}" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Subject Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="editSubjectImg"><br>
+                    <input type="hidden" id="editSubjectImgSrc" th:name="imgSrc">
+                    <input type="hidden" id="editSubjectStatusStr" th:name="statusStr" value="">
+                    <table class="formTable" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td>Id:</td>
+                            <td><input type="text" id="editSubjectId" th:name="id" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>Total no. of Courses:</td>
+                            <td><input type="text" id="editSubjectTotalCourse"
+                                       th:field="*{totalCourse}" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td><input type="text" id="editSubjectName" th:name="name" required></td>
+                        </tr>
+                        <td>Status:</td>
+                        <td><select id="editSubjectStatus" th:name="status">
+                            <option th:each="status : ${statusMap}" th:value="${status.key}"
+                                    th:text="${status.value}">
+                            </option>
+                        </select>
+                        </td>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Edit Subject Modal -->
+<!-- Create Subject Modal -->
+<div class="modal fade" id="subjectAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="subjectAddForm" th:object="${subjectAddDTO}"
+                  th:action="@{/admin/subject/add}" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title">Subject Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="addSubjectId" th:name="id" value="0">
+                    <input type="hidden" id="addSubjectImgSrc" th:name="imgSrc">
+                    <input type="hidden" id="addSubjectStatusStr" th:name="statusStr" value="">
+                    <input type="hidden" id="addSubjectStatus" th:name="status" value="1">
+                    <table class="formTable" cellspacing="0" cellpadding="0">
+                        <td>Name:</td>
+                        <td><input type="text" id="addSubjectName" th:name="name" required></td>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Add">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Create Subject Modal -->
+<!-- Admin common js -->
+<th:block th:insert="components/header_footer.html :: admin-common-script">
+</th:block>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script th:src="@{/js/admin_subject_page.js}"></script>
+<!-- -->
+</body>
+</html>
