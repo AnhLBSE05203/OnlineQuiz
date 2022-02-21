@@ -24,8 +24,14 @@ public class SubjectServiceImpl implements SubjectService {
     private SubjectRepository subjectRepository;
     @Autowired
     private CRUDSubjectRepository CRUDSubjectRepository;
+
     @Override
-    public List<Subject> getAllMySubject(int account_id) {
+    public List<Subject> findAllSubject() {
+        return subjectRepository.findAllSubjects();
+    }
+
+    @Override
+    public List<Subject> getAllSubject(int account_id) {
         List<Course> list_course = courseRepository.getTop3Courses(account_id);
         List<Subject> list_subject = new ArrayList<>();
         for (int i = 0; i < list_course.size(); i++){
@@ -104,6 +110,11 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public void addSubject(Subject subject) {
         subjectRepository.addSubject(subject);
+    }
+
+    @Override
+    public List<Subject> findAllSubjectsByPaging(int pageindex) {
+        return subjectRepository.findAllSubjectsByPaging(pageindex);
     }
 
     //get specific subject by subjectId
