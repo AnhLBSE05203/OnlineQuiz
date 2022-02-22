@@ -18,6 +18,7 @@ public interface SubjectService {
     List<Subject> getFeaturedSubjects(int number);
 
     Optional<Subject> getSubject(int id);
+
     List<Subject> findAllSubjects();
 
     List<SubjectAdminDTO> getAllSubjectAdminDTO();
@@ -31,5 +32,6 @@ public interface SubjectService {
     void updateSubject(Subject subject);
 
     void addSubject(Subject subject);
-    List<Subject> findAllSubjectsByPaging(int pageindex);
+
+    List<Subject> findAllSubjectsByPaging(int pageindex, int pageSize);
 }
