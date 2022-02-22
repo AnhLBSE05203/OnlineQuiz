@@ -106,11 +106,21 @@ public class Constants {
     public static final String LINK_ADMIN_DASHBOARD = "/admin/dashboard";
     public static final String LINK_ADMIN_LOGOUT = "/admin/logout";
 
+    //links admin subject
+    public static final String LINK_ADMIN_SUBJECT_CONTROLLER = "/admin/subject";
+    public static final String LINK_ADMIN_SUBJECT_LIST = "/";
+    public static final String LINK_ADMIN_SUBJECT_DETAIL = "/{id}";
+    public static final String LINK_ADMIN_SUBJECT_ADD = "/add";
+    public static final String LINK_ADMIN_SUBJECT_DELETE = "/delete/{id}";
+    public static final String LINK_ADMIN_SUBJECT_RECOVER = "/recover/{id}";
+    public static final String LINK_ADMIN_SUBJECT_PROCESS_EDIT = "/edit";
+    public static final String LINK_ADMIN_SUBJECT_GET_BY_PAGE = "/getSubjectsByPage";
+
     //pages admin
     public static final String PAGE_DASHBOARD = "admin_dashboard";
     public static final String PAGE_ADMIN_LOGIN = "admin_login_page";
     public static final String PAGE_ADMIN_FORGET_PASSWORD = "admin_forget_password";
-
+    public static final String PAGE_ADMIN_SUBJECT_PAGE = "admin_subject_page";
     //sql path
     public static final String SQL_PATH_FIND_ACCOUNT_BY_TOKEN = "/static/sql/findAccountByToken.sql";
     public static final String SQL_PATH_FIND_ACCOUNT_BY_EMAIL = "/static/sql/findAccountByEmail.sql";
