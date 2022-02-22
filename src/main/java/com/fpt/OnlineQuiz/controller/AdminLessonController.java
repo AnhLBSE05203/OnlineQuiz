@@ -28,8 +28,8 @@ public class AdminLessonController {
 
     @GetMapping(value = {"", "/"})
     public String subjectPage(Model model) {
-        model.addAttribute("subjectEditDTO", new SubjectAdminDTO());
-        model.addAttribute("subjectAddDTO", new SubjectAdminDTO());
+        model.addAttribute("lessonEditDTO", new LessonAdminDTO());
+        model.addAttribute("lessonAddDTO", new LessonAdminDTO());
         model.addAttribute("statusMap", Constants.subjectStatusConversion);
         return "admin_lesson_page";
     }
