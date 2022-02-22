@@ -1,6 +1,6 @@
 package com.fpt.OnlineQuiz.controller;
 
-import com.fpt.OnlineQuiz.dto.BlogAdminDto;
+import com.fpt.OnlineQuiz.dto.BlogAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Blog;
@@ -10,8 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -41,8 +39,8 @@ public class AdminBlogController {
 
     @PostMapping(value = "/blog/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Page<BlogAdminDto> getAllBlog(@RequestBody PagingRequest pagingRequest) {
-        Page<BlogAdminDto> listBlog = blogService.getAllBlogAdmin(pagingRequest);
+    public Page<BlogAdminDTO> getAllBlog(@RequestBody PagingRequest pagingRequest) {
+        Page<BlogAdminDTO> listBlog = blogService.getAllBlogAdmin(pagingRequest);
         return listBlog;
     }
 

@@ -1,7 +1,7 @@
 package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.BlogRepository;
-import com.fpt.OnlineQuiz.dto.BlogAdminDto;
+import com.fpt.OnlineQuiz.dto.BlogAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Blog;
@@ -26,16 +26,16 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Page<BlogAdminDto> getAllBlogAdmin(PagingRequest pagingRequest) {
+    public Page<BlogAdminDTO> getAllBlogAdmin(PagingRequest pagingRequest) {
         List<Blog> listBlog = blogRepository.getAllBlogAdmin(pagingRequest);
         long count = blogRepository.getAllBlogAdminCountTotalRecord(pagingRequest);
-        List<BlogAdminDto> listBlogAdminDTO = new ArrayList<>();
-        for (Blog blog: listBlog) {
-            BlogAdminDto blogAdminDto = new BlogAdminDto();
+        List<BlogAdminDTO> listBlogAdminDTO = new ArrayList<>();
+        for (Blog blog : listBlog) {
+            BlogAdminDTO blogAdminDto = new BlogAdminDTO();
             Utils.copyNonNullProperties(blog, blogAdminDto);
             listBlogAdminDTO.add(blogAdminDto);
         }
-        Page<BlogAdminDto> page = new Page<>(listBlogAdminDTO);
+        Page<BlogAdminDTO> page = new Page<>(listBlogAdminDTO);
         page.setRecordsFiltered((int) count);
         page.setRecordsTotal((int) count);
         page.setDraw(pagingRequest.getDraw());
