@@ -24,14 +24,14 @@ public class AdminSubjectController {
 
     @GetMapping(value = {Constants.STRING_EMPTY, Constants.LINK_ADMIN_SUBJECT_LIST})
     public String subjectPage(Model model) {
-        model.addAttribute("subjectEditDTO", new SubjectAdminDTO());
-        model.addAttribute("subjectAddDTO", new SubjectAdminDTO());
-        model.addAttribute("statusMap", Constants.subjectStatusConversion);
+        model.addAttribute(Constants.ATTRIBUTE_SUBJECT_EDIT_DTO, new SubjectAdminDTO());
+        model.addAttribute(Constants.ATTRIBUTE_SUBJECT_ADD_DTO, new SubjectAdminDTO());
+        model.addAttribute(Constants.ATTRIBUTE_SUBJECT_STATUS_MAP, Constants.subjectStatusConversion);
         return Constants.PAGE_ADMIN_SUBJECT_PAGE;
     }
 
     @PostMapping(Constants.LINK_ADMIN_SUBJECT_PROCESS_EDIT)
-    public String editSubject(@ModelAttribute("subjectEditDTO") SubjectAdminDTO subjectAdminDTO) {
+    public String editSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_EDIT_DTO) SubjectAdminDTO subjectAdminDTO) {
         Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
         subject.setName(subjectAdminDTO.getName());
         //set img - to do: image upload
@@ -42,7 +42,7 @@ public class AdminSubjectController {
     }
 
     @PostMapping(Constants.LINK_ADMIN_SUBJECT_ADD)
-    public String addSubject(@ModelAttribute("subjectAddDTO") SubjectAdminDTO subjectAdminDTO) {
+    public String addSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_ADD_DTO) SubjectAdminDTO subjectAdminDTO) {
         //to do - add form to page
         Subject subject = new Subject();
         subject.setName(subjectAdminDTO.getName());
