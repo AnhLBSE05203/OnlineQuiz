@@ -86,8 +86,7 @@ $(document).ready(function() {
 // $('#lessonEditModal').on('shown.bs.modal', function (e) {
 //     // do something...
 // });
-//
-<<<<<<< HEAD
+
 function showLessonAddModal(id) {
     $('#lessonAddModal').modal('show');
 };
@@ -97,14 +96,4 @@ $('#lessonAddModal').on('hidden.bs.modal', function () {
 $('#lessonAddModal').on('shown.bs.modal', function (e) {
     // do something...
 });
-=======
-// function showLessonAddModal(id) {
-//     $('#lessonAddModal').modal('show');
-// };
-// $('#lessonAddModal').on('hidden.bs.modal', function () {
-//     alert('close');
-// });
-// $('#lessonAddModal').on('shown.bs.modal', function (e) {
-//     // do something...
-// });
->>>>>>> ead36b6ec3aba2bf538480069934cbbd580a75e4
+

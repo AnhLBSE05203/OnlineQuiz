@@ -33,7 +33,7 @@ public class AdminLessonController {
     private ImageService imageService;
 
     @GetMapping(value = {"", "/"})
-    public String subjectPage(Model model) {
+    public String lessonPage(Model model) {
         List<Subject> subjectList = subjectService.findAllSubjects();
         model.addAttribute("subjectList", subjectList);
         model.addAttribute("lessonEditDTO", new LessonAdminDTO());

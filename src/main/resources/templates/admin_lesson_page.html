@@ -132,16 +132,16 @@
                         </tr>
                         <tr>
                             <td>Choose Subjects:</td>
-                            <select id="sub" name="sub" th:each="s : ${subjectList}">
-                                <option value="learn" th:="${s.name}"></option>
-                            </select>
+                            <td><select id="sub" name="sub" th:each="s : ${subjectList}">
+                                <option value="learn" th:text="${s.name}"></option>
+                            </select></td>
                         </tr>
                         <tr>
                             <td>Lesson Content:</td>
                             <td><textarea id="addLessonContent" th:name="name" required> </textarea>
                             </td>
                         </tr>
-                        <tr>s
+                        <tr>
                             <td>Lesson Status:</td>
                             <td><input type="text" id="addLessonStatus" th:name="name" required></td>
                         </tr>
