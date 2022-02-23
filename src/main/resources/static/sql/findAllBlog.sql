@@ -1,1 +1,2 @@
-SELECT a FROM Blog a
+select a from Blog a
+where 1 = 1

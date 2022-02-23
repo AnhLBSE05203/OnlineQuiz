@@ -5,22 +5,23 @@ import com.fpt.OnlineQuiz.dto.paging.Order;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Blog;
 import com.fpt.OnlineQuiz.utils.Constants;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @Transactional
-public class BlogRepository{
+public class BlogRepository {
     @PersistenceContext//create object when session run
     private EntityManager em;
 
@@ -57,8 +58,9 @@ public class BlogRepository{
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue() + "%'";
-                sb.append(" AND lower(s.image.src) LIKE " + key);
-                sb.append(" OR lower(s.name) LIKE " + key);
+                sb.append(" AND lower(a.thumbnail.src) LIKE " + key);
+                sb.append(" AND lower(a.content) LIKE " + key);
+                sb.append(" OR lower(a.title) LIKE " + key);
             }
             // append sorting
             Order order = pagingRequest.getOrder().get(0);
@@ -91,8 +93,9 @@ public class BlogRepository{
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue() + "%'";
-                sb.append(" AND lower(s.image.src) LIKE " + key);
-                sb.append(" OR lower(s.name) LIKE " + key);
+                sb.append(" AND lower(a.thumbnail.src) LIKE " + key);
+                sb.append(" AND lower(a.content) LIKE " + key);
+                sb.append(" OR lower(a.title) LIKE " + key);
             }
 
             String sql = sb.toString();
@@ -104,25 +107,39 @@ public class BlogRepository{
         }
     }
 
-    public ArrayList<Blog> getBlogByIndexPage(int pageindex){
+    public ArrayList<Blog> getBlogByIndexPage(int pageIndex, int pageSize) {
         try {
-            String sql = "Select b From Blog b";
-            Query query = em.createQuery(sql,Blog.class);
-            int pageSize = 2;
-            query.setFirstResult((pageindex - 1) * pageSize);
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_BLOG_LIST)));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while ((line = buffer.readLine()) != null) {
+                sb.append(" ").append(line);
+            }
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Blog.class);
+            query.setFirstResult((pageIndex - 1) * pageSize);
             query.setMaxResults(pageSize);
             ArrayList<Blog> blogList = (ArrayList<Blog>) query.getResultList();
             return blogList;
-        } catch (NoResultException e) {
+        } catch (NoResultException | IOException e) {
             return null;
         }
     }
-    public Long countBlog(){
+
+    public Long countBlog() {
         try {
-            String sql = "Select COUNT(a) FROM Blog a";
-            Query query = em.createQuery(sql,Long.class);
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_BLOG_COUNT)));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while ((line = buffer.readLine()) != null) {
+                sb.append(" ").append(line);
+            }
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Long.class);
             return (Long) query.getSingleResult();
-        }catch (NoResultException e){
+        } catch (NoResultException | IOException e) {
             return 0l;
         }
     }
