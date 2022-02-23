@@ -114,20 +114,20 @@
                             <div class="row-cols-1" th:each="ans : ${question.answer.toString()}" th:value="${ans}">
                                 <div class="mb-3" th:case="1">
                                     <label class="form-label" for="answer1"><strong>Answer1</strong></label>
-                                    <input class="form-control" type="text" id="answer1" placeholder="Answer" name="answer1" required th:text="${question.}">
-                                    <input type="radio" value="1" name="isAnswer" th:selected="(${ans} == '0')">Is Answer</br>
+                                    <input class="form-control" type="text" id="answer1" placeholder="Answer" name="answer1" required th:text="${answer.get(0).answer}">
+                                    <input type="radio" value="1" name="isAnswer" th:selected="(${ans} == ${answer.get(0).answer})">Is Answer</br>
 
                                     <label class="form-label" for="answer2"><strong>Answer2</strong></label>
-                                    <input class="form-control" type="text" id="answer2" placeholder="Answer" name="answer2" required>
-                                    <input type="radio" value="2" name="isAnswer" th:selected="(${ans} == '1')">Is Answer</br>
+                                    <input class="form-control" type="text" id="answer2" placeholder="Answer" name="answer2" required th:text="${answer.get(1).answer}">
+                                    <input type="radio" value="2" name="isAnswer" th:selected="(${ans} == ${answer.get(1).answer})">Is Answer</br>
 
                                     <label class="form-label" for="answer3"><strong>Answer3</strong></label>
-                                    <input class="form-control" type="text" id="answer3" placeholder="Answer" name="answer3" required>
-                                    <input type="radio" value="3" name="isAnswer" th:selected="(${ans} == '2')">Is Answer</br>
+                                    <input class="form-control" type="text" id="answer3" placeholder="Answer" name="answer3" required th:text="${answer.get(2).answer}">
+                                    <input type="radio" value="3" name="isAnswer" th:selected="(${ans} == ${answer.get(2).answer})">Is Answer</br>
 
                                     <label class="form-label" for="answer4"><strong>Answer4</strong></label>
-                                    <input class="form-control" type="text" id="answer4" placeholder="Answer" name="answer4" required>
-                                    <input type="radio" value="4" name="isAnswer" th:selected="(${ans} == '3')">Is Answer</br>
+                                    <input class="form-control" type="text" id="answer4" placeholder="Answer" name="answer4" required th:text="${answer.get(3).answer}">
+                                    <input type="radio" value="4" name="isAnswer" th:selected="(${ans} == ${answer.get(3).answer})">Is Answer</br>
                                 </div>
                             </div>
                         </div>

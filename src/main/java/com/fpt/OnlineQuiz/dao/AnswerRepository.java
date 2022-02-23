@@ -23,8 +23,8 @@ public class AnswerRepository {
         }
     }
     public List<Answer> getAnswersByQuestionId(int question_id){
+        //TODO fix SQL
         try {
-            //TODO fix SQL
             StringBuilder sb = new StringBuilder();
             sb.append("select a from answer a where a.question.id =:id");
             Query query = em.createQuery(sb.toString(), Answer.class);
