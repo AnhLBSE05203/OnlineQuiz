@@ -13,7 +13,7 @@ $(document).ready(function() {
         },
         columns : [ {
             title : 'Lesson Id',
-            data : 'lesId'
+            data : 'id'
         }, {
             title : 'Lesson Name',
             data : 'name'
@@ -32,58 +32,60 @@ $(document).ready(function() {
         },{
             title : 'Time',
             data : 'time',
-        }, {
-            title : 'Action',
-            data : 'status',
-            render: function(data, type, row, meta) {
-                var html = '<button type="button" class="btn btn-primary" onclick="showLessonEditModal('+ row['id'] + ')">'
-                    + 'Edit</button>&nbsp';
-                if (data == 0) {
-                    html += '<button type="button" class="btn btn-primary" onclick="recoverLesson('+ row['id'] +')">'
-                        + 'Recover</button>&nbsp';
-                } else {
-                    html += '<button type="button" class="btn btn-primary" onclick="deleteLesson('+ row['id'] +')">'
-                        + 'Delete</button>&nbsp';
-                }
-                return html;
-            }
-        } ]
-    });
-});
-function recoverLesson(id){
-    window.location.replace("/admin/lesson/recover/" + id);
-}
-function deleteLesson(id){
-    window.location.replace("/admin/lesson/delete/" + id);
-}
-function showLessonEditModal(id) {
-    var link = "/admin/lesson/" + id;
-    var lesson = "";
-    $.ajax({
-        url: link,
-        type:"get",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data){
-            lesson = data;
-            if(subject != ""){
-                $("#editLessonId").val(lesson.id);
-                $("#editLessonName").val(lesson.name);
-                $("#editLessonTotalCourse").val(lesson.totalCourse);
-                $("#editLessonImg").attr("src", lesson.imgSrc);
-                $("#editLessonStatus").val(lesson.status).change();
-
-            }
         }
+        // , {
+        //     title : 'Action',
+        //     data : 'status',
+        //     render: function(data, type, row, meta) {
+        //         var html = '<button type="button" class="btn btn-primary" onclick="showLessonEditModal('+ row['id'] + ')">'
+        //             + 'Edit</button>&nbsp';
+        //         if (data == 0) {
+        //             html += '<button type="button" class="btn btn-primary" onclick="recoverLesson('+ row['id'] +')">'
+        //                 + 'Recover</button>&nbsp';
+        //         } else {
+        //             html += '<button type="button" class="btn btn-primary" onclick="deleteLesson('+ row['id'] +')">'
+        //                 + 'Delete</button>&nbsp';
+        //         }
+        //         return html;
+        //     }
+        // }
+        ]
     });
-    $('#lessonEditModal').modal('show');
-};
-$('#lessonEditModal').on('hidden.bs.modal', function () {
-    alert('close');
 });
-$('#lessonEditModal').on('shown.bs.modal', function (e) {
-    // do something...
-});
+// function recoverLesson(id){
+//     window.location.replace("/admin/lesson/recover/" + id);
+// }
+// function deleteLesson(id){
+//     window.location.replace("/admin/lesson/delete/" + id);
+// }
+// function showLessonEditModal(id) {
+//     var link = "/admin/lesson/" + id;
+//     var lesson = "";
+//     $.ajax({
+//         url: link,
+//         type:"get",
+//         contentType: "application/json; charset=utf-8",
+//         dataType: "json",
+//         success: function (data){
+//             lesson = data;
+//             if(subject != ""){
+//                 $("#editLessonId").val(lesson.id);
+//                 $("#editLessonName").val(lesson.name);
+//                 $("#editLessonTotalCourse").val(lesson.totalCourse);
+//                 $("#editLessonImg").attr("src", lesson.imgSrc);
+//                 $("#editLessonStatus").val(lesson.status).change();
+//
+//             }
+//         }
+//     });
+//     $('#lessonEditModal').modal('show');
+// };
+// $('#lessonEditModal').on('hidden.bs.modal', function () {
+//     alert('close');
+// });
+// $('#lessonEditModal').on('shown.bs.modal', function (e) {
+//     // do something...
+// });
 
 function showLessonAddModal(id) {
     $('#lessonAddModal').modal('show');
@@ -94,3 +96,4 @@ $('#lessonAddModal').on('hidden.bs.modal', function () {
 $('#lessonAddModal').on('shown.bs.modal', function (e) {
     // do something...
 });
+

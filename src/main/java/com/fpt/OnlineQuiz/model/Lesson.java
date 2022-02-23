@@ -40,7 +40,7 @@ public class Lesson {
 
     public LessonAdminDTO toLessonAdminDTO() {
         LessonAdminDTO lessonAdminDTO = new LessonAdminDTO();
-        lessonAdminDTO.setLesId(this.getId());
+        lessonAdminDTO.setId(this.getId());
         lessonAdminDTO.setName(this.getName());
         lessonAdminDTO.setLessonType(this.lessonType.getName());
         lessonAdminDTO.setSubjects(this.subject.getName());

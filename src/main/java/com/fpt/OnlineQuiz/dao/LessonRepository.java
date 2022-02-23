@@ -28,8 +28,7 @@ public class LessonRepository {
     public List<Lesson> getByPagingRequest(PagingRequest pagingRequest) {
         try {
             BufferedReader buffer = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("SELECT l FROM Lesson l\n" +
-                            "WHERE 1 = 1\n")));
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_Lessons)));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while ((line = buffer.readLine()) != null) {
@@ -49,7 +48,7 @@ public class LessonRepository {
             sb.append(" ORDER BY " + "l." + column.getData() + " " + order.getDir());
 
             String sql = sb.toString();
-            Query query = em.createQuery(sql, Subject.class);
+            Query query = em.createQuery(sql, Lesson.class);
             query.setFirstResult(pagingRequest.getStart());
             query.setMaxResults(pagingRequest.getLength());
             return (List<Lesson>) query.getResultList();
@@ -60,8 +59,7 @@ public class LessonRepository {
     public long getLessonCountByPagingRequest(PagingRequest pagingRequest) {
         try {
             BufferedReader buffer = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream("SELECT count(l) FROM Lesson l\n" +
-                            "WHERE 1 = 1")));
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_LESSON_COUNT)));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while ((line = buffer.readLine()) != null) {
@@ -81,5 +79,8 @@ public class LessonRepository {
         } catch (NoResultException | IOException e) {
             return 0;
         }
+    }
+    public void addLesson(Lesson lesson) {
+        em.persist(lesson);
     }
 }

@@ -9,3 +9,8 @@
     border-collapse: separate;
     border-spacing: 10px 10px;
 }
+
+textarea {
+    width: 340px;
+    height: 200px;
+}

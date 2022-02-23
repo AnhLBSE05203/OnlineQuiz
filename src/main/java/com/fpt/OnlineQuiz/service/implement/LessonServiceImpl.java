@@ -9,6 +9,7 @@ import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Lesson;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.LessonService;
+import com.fpt.OnlineQuiz.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +53,10 @@ public class LessonServiceImpl implements LessonService {
         page.setDraw(pagingRequest.getDraw());
 
         return page;
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        lessonRepository.addLesson(lesson);
     }
 }
