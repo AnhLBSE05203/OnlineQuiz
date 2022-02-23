@@ -13,7 +13,7 @@ public interface SubjectService {
 
     List<Subject> getAllSubject(int account_id);
 
-    List<Subject> getNext3Subject(int account_id, int amount);
+    List<Subject> getNext3Subject(int account_id, int start);
 
     List<Subject> getFeaturedSubjects(int number);
 

@@ -5,7 +5,10 @@ import com.fpt.OnlineQuiz.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +28,7 @@ public class CourseController {
         modelMap.addAttribute("my_course_list", courseList);
         return "my_courses_page";
     }
+
     @GetMapping(path = "/registration")
     public String showRegistrationPage(ModelMap modelMap) {
 //        List<Course> courseList = courseService.getTop3Courses(3);
@@ -33,13 +37,13 @@ public class CourseController {
     }
 
 
-
     @GetMapping(path = "/loadmorecourse")
-    public @ResponseBody void loadMore(
-            @RequestParam("amount") String amount, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public @ResponseBody
+    void loadMore(
+            @RequestParam("start") String startStr, HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
-        int iamount = Integer.parseInt(amount);
-        List<Course> courses = courseService.getNext3Courses(3, iamount);
+        int start = Integer.parseInt(startStr);
+        List<Course> courses = courseService.getNext3Courses(3, start);
         if (courses.size() != 0) {
             for (Course c : courses) {
                 out.println("<div class=\"col-lg-4 course\">\n" +
@@ -49,8 +53,8 @@ public class CourseController {
                         "                                <a href=\"#\"><img src=\"/img/gallery/featured2.png\" alt=\"\"></a>\n" +
                         "                            </div>\n" +
                         "                            <div class=\"properties__caption\">\n" +
-                        "                                <h3><a>"+c.getName()+"</a></h3>\n" +
-                        "                                <p>"+c.getDescription()+"</p>\n" +
+                        "                                <h3><a>" + c.getName() + "</a></h3>\n" +
+                        "                                <p>" + c.getDescription() + "</p>\n" +
                         "                                <a href=\"#\" class=\"border-btn border-btn2\">Go to Course</a>\n" +
                         "                            </div>\n" +
                         "                        </div>\n" +

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -57,14 +58,16 @@ public class SubjectController {
     @GetMapping(path = "/loadmoresubject")
     public @ResponseBody
     void loadMore(
-            @RequestParam("amount") String amount, HttpServletRequest request, HttpServletResponse response) throws IOException {
+            @RequestParam("start") String startStr, HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
-        int iamount = Integer.parseInt(amount);
-        System.out.println(iamount);
-        List<Subject> subjects = subjectService.getNext3Subject(3, iamount);
+        int start = Integer.parseInt(startStr);
+        System.out.println(start);
+        List<Subject> subjects = subjectService.getNext3Subject(3, start);
+        List<String> subjectNames = new ArrayList<>();
         if (subjects.size() != 0) {
             System.out.println("list size: " + subjects.size());
             for (Subject s : subjects) {
+                subjectNames.add(s.getName());
                 out.println("<div class=\"col-lg-4 subject\">\n" +
                         "                    <div class=\"properties properties2 mb-30\">\n" +
                         "                        <div class=\"properties__card\">\n" +
