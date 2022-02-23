@@ -24,10 +24,10 @@ public class BlogController {
     public String getAllBlog(ModelMap modelMap, HttpServletRequest request) {
         //data send to html:ModelMap
         String page = request.getParameter("page");
+        int pageSize = 2;
         System.out.println(page);
         if (page == null) {
             page = "1";
-            int pageSize = 2;
             int pageIndex = Integer.parseInt(page);
             ArrayList<Blog> listBlogByIndex = blogService.getBlogByIndexPage(pageIndex, pageSize);
             long totalRecord = blogService.countBlog();
@@ -38,7 +38,6 @@ public class BlogController {
             modelMap.addAttribute("listBlog", listBlogByIndex);
         } else {
             page = request.getParameter("page");
-            int pageSize = 2;
             int pageIndex = Integer.parseInt(page);
             ArrayList<Blog> listBlog = blogService.getBlogByIndexPage(pageIndex, pageSize);
             long totalRecord = blogService.countBlog();
