@@ -1,10 +1,12 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDSubjectRepository;
 import com.fpt.OnlineQuiz.dto.LessonAdminDTO;
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Image;
+import com.fpt.OnlineQuiz.model.Lesson;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.ImageService;
 import com.fpt.OnlineQuiz.service.LessonService;
@@ -16,11 +18,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/admin/lesson")
 public class AdminLessonController {
     @Autowired
     private SubjectService subjectService;
+    @Autowired
+    private CRUDSubjectRepository crudSubjectRepository;
     @Autowired
     private LessonService lessonService;
     @Autowired
@@ -28,28 +34,30 @@ public class AdminLessonController {
 
     @GetMapping(value = {"", "/"})
     public String subjectPage(Model model) {
+        List<Subject> subjectList = subjectService.findAllSubjects();
+        model.addAttribute("subjectList", subjectList);
         model.addAttribute("lessonEditDTO", new LessonAdminDTO());
         model.addAttribute("lessonAddDTO", new LessonAdminDTO());
         model.addAttribute("statusMap", Constants.subjectStatusConversion);
         return "admin_lesson_page";
     }
 
-    @PostMapping("/edit")
-    public String editSubject(@ModelAttribute("subjectEditDTO") SubjectAdminDTO subjectAdminDTO) {
-        Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
-        subject.setName(subjectAdminDTO.getName());
-        //set img - to do: image upload
-        subject.setStatus(subjectAdminDTO.getStatus());
-
-        subjectService.updateSubject(subject);
-        return "redirect:/admin/lesson";
-    }
+//    @PostMapping("/edit")
+//    public String editSubject(@ModelAttribute("subjectEditDTO") SubjectAdminDTO subjectAdminDTO) {
+//        Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
+//        subject.setName(subjectAdminDTO.getName());
+//        //set img - to do: image upload
+//        subject.setStatus(subjectAdminDTO.getStatus());
+//
+//        subjectService.updateSubject(subject);
+//        return "redirect:/admin/lesson";
+//    }
 
     @PostMapping("/add")
-    public String addSubject(@ModelAttribute("subjectAddDTO") SubjectAdminDTO subjectAdminDTO) {
+    public String addSubject(@ModelAttribute("lessonAddDTO") LessonAdminDTO lessonAdminDTO) {
         //to do - add form to page
-        Subject subject = new Subject();
-        subject.setName(subjectAdminDTO.getName());
+        Lesson lesson = new Lesson();
+        lesson.setName(lessonAdminDTO.getName());
         //set img - to do: image upload
         //set default img - temporary
         Image defaultImg = imageService.getById(Constants.DEFAULT_SUBJECT_IMAGE_ID);
@@ -58,10 +66,10 @@ public class AdminLessonController {
             defaultImg.setDefaultImg();
             imageService.addImage(defaultImg);
         }
-        subject.setImage(defaultImg);
-        //
-        subject.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
-        subjectService.addSubject(subject);
+//        lesson.setImage(defaultImg);
+//        //
+//        lesson.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
+//        subjectService.addSubject(lesson);
         return "redirect:/admin/lesson";
     }
 
@@ -72,26 +80,26 @@ public class AdminLessonController {
         return lessonAdminDTOPage;
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public SubjectAdminDTO getSubjectDetails(@PathVariable Integer id) {
-        SubjectAdminDTO subjectDTO = subjectService.getSubjectAdminDTOById(id);
-        return subjectDTO;
-    }
+//    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public SubjectAdminDTO getSubjectDetails(@PathVariable Integer id) {
+//        SubjectAdminDTO subjectDTO = subjectService.getSubjectAdminDTOById(id);
+//        return subjectDTO;
+//    }
 
-    @GetMapping(value = "/delete/{id}")
-    public String deleteSubject(@PathVariable Integer id) {
-        Subject subject = subjectService.getSubjectById(id);
-        subject.setStatus(Constants.STATUS_SUBJECT_DELETED);
-        subjectService.updateSubject(subject);
-        return "redirect:/admin/lesson";
-    }
+//    @GetMapping(value = "/delete/{id}")
+//    public String deleteSubject(@PathVariable Integer id) {
+//        Subject subject = subjectService.getSubjectById(id);
+//        subject.setStatus(Constants.STATUS_SUBJECT_DELETED);
+//        subjectService.updateSubject(subject);
+//        return "redirect:/admin/lesson";
+//    }
 
-    @GetMapping(value = "/recover/{id}")
-    public String recoverSubject(@PathVariable Integer id) {
-        Subject subject = subjectService.getSubjectById(id);
-        subject.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
-        subjectService.updateSubject(subject);
-        return "redirect:/admin/lesson";
-    }
+//    @GetMapping(value = "/recover/{id}")
+//    public String recoverSubject(@PathVariable Integer id) {
+//        Subject subject = subjectService.getSubjectById(id);
+//        subject.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
+//        subjectService.updateSubject(subject);
+//        return "redirect:/admin/lesson";
+//    }
 }

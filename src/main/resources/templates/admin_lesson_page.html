@@ -102,36 +102,64 @@
 <!--    </div>-->
 <!--</div>-->
 <!--&lt;!&ndash; End Edit Lesson Modal &ndash;&gt;-->
-<!--&lt;!&ndash; Create Lesson Modal &ndash;&gt;-->
-<!--<div class="modal fade" id="lessonAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"-->
-<!--     aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
-<!--    <div class="modal-dialog">-->
-<!--        <div class="modal-content">-->
-<!--            <form id="lessonAddForm" th:object="${lessonAddDTO}"-->
-<!--                  th:action="@{/admin/lesson/add}" method="POST">-->
-<!--                <div class="modal-header">-->
-<!--                    <h5 class="modal-title">Lesson Detail</h5>-->
-<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <input type="hidden" id="addLessonId" th:name="id" value="0">-->
-<!--                    <input type="hidden" id="addLessonImgSrc" th:name="imgSrc">-->
-<!--                    <input type="hidden" id="addLessonStatusStr" th:name="statusStr" value="">-->
-<!--                    <input type="hidden" id="addLessonStatus" th:name="status" value="1">-->
-<!--                    <table class="formTable" cellspacing="0" cellpadding="0">-->
-<!--                        <td>Name:</td>-->
-<!--                        <td><input type="text" id="addLessonName" th:name="name" required></td>-->
-<!--                    </table>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-<!--                    <input type="submit" class="btn btn-primary" value="Add">-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!-- End Create Lesson Modal -->
+<!-- Create Lesson Modal -->
+<div class="modal fade" id="lessonAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="lessonAddForm" th:object="${lessonAddDTO}"
+                  th:action="@{/admin/lesson/add}" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title">Lesson Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="addLessonId" th:name="id" value="0">
+                    <input type="hidden" id="addLessonImgSrc" th:name="imgSrc">
+                    <input type="hidden" id="addLessonStatusStr" th:name="statusStr" value="">
+                    <!--                    <input type="hidden" id="addLessonStatus" th:name="status" value="1">-->
+                    <table class="formTable" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td>Name:</td>
+                            <td><input type="text" id="addLessonName" th:name="name" required></td>
+                        </tr>
+                        <tr>
+                            <td for="types">Lesson Type:</td>
+                            <td><select id="types" name="types">
+                                <option value="learn">Learn</option>
+                                <option value="quiz">Quiz</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>Choose Subjects:</td>
+                            <select id="sub" name="sub" th:each="s : ${subjectList}">
+                                <option value="learn" th:="${s.name}"></option>
+                            </select>
+                        </tr>
+                        <tr>
+                            <td>Lesson Content:</td>
+                            <td><textarea id="addLessonContent" th:name="name" required> </textarea>
+                            </td>
+                        </tr>
+                        <tr>s
+                            <td>Lesson Status:</td>
+                            <td><input type="text" id="addLessonStatus" th:name="name" required></td>
+                        </tr>
+                        <tr>
+                            <td>Lesson Time:</td>
+                            <td><input type="text" id="addLessonTime" th:name="name" required></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Add">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+End Create Lesson Modal
 <!-- Admin common js -->
 <th:block th:insert="components/header_footer.html :: admin-common-script">
 </th:block>
