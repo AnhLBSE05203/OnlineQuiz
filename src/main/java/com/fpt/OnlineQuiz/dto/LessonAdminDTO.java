@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LessonAdminDTO {
-    private int lesId;
+    private int lessonId;
     private String name;
     private String lessonType;
     private String subjects;
