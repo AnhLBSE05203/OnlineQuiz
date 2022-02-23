@@ -65,11 +65,9 @@ public class AdminLessonController {
         lesson.setName(lessonAdminDTO.getName());
 
         LessonType lessonType = lessonTypeService.getByName(lessonAdminDTO.getLessonType());
-
         lesson.setLessonType(lessonType);
-
-        lessonAdminDTO.getSubjects();
-        lesson.setSubject(new Subject());
+        Subject subject = subjectService.findSubByName(lessonAdminDTO.getSubjects());
+        lesson.setSubject(subject);
         lesson.setContent(lessonAdminDTO.getContent());
         lesson.setStatus("Not Start");
         lesson.setTime(lessonAdminDTO.getTime());

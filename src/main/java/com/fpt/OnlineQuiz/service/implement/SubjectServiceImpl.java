@@ -118,6 +118,12 @@ public class SubjectServiceImpl implements SubjectService {
         return subjectRepository.findAllSubjectsByPaging(pageIndex, pageSize);
     }
 
+    //get specific subject by subName
+    @Override
+    public Subject findSubByName(String name) {
+        return CRUDSubjectRepository.findByName(name);
+    }
+
     //get specific subject by subjectId
     @Override
     public Optional<Subject> getSubject(int id) {
