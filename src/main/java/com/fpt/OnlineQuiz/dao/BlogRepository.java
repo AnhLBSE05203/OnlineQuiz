@@ -58,18 +58,18 @@ public class BlogRepository {
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue() + "%'";
-                sb.append(" AND lower(a.thumbnail.src) LIKE " + key);
-                sb.append(" AND lower(a.content) LIKE " + key);
-                sb.append(" OR lower(a.title) LIKE " + key);
+                sb.append(" AND lower(b.thumbnail.src) LIKE " + key);
+                sb.append(" AND lower(b.content) LIKE " + key);
+                sb.append(" OR lower(b.title) LIKE " + key);
             }
             // append sorting
             Order order = pagingRequest.getOrder().get(0);
             int columnIndex = order.getColumn();
             Column column = pagingRequest.getColumns().get(columnIndex);
-            sb.append(" ORDER BY " + "a." + column.getData() + " " + order.getDir());
+            sb.append(" ORDER BY " + "b." + column.getData() + " " + order.getDir());
 
             String sql = sb.toString();
-            //String sql = "SELECT a FROM Blog a";
+            //String sql = "SELECT b FROM Blog b";
             Query query = em.createQuery(sql, Blog.class);
             query.setFirstResult(pagingRequest.getStart());
             query.setMaxResults(pagingRequest.getLength());
@@ -93,13 +93,13 @@ public class BlogRepository {
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue() + "%'";
-                sb.append(" AND lower(a.thumbnail.src) LIKE " + key);
-                sb.append(" AND lower(a.content) LIKE " + key);
-                sb.append(" OR lower(a.title) LIKE " + key);
+                sb.append(" AND lower(b.thumbnail.src) LIKE " + key);
+                sb.append(" AND lower(b.content) LIKE " + key);
+                sb.append(" OR lower(b.title) LIKE " + key);
             }
 
             String sql = sb.toString();
-            //String sql = "SELECT a FROM Blog a";
+            //String sql = "SELECT count(b) FROM Blog b";
             Query query = em.createQuery(sql, Long.class);
             return (long) query.getSingleResult();
         } catch (NoResultException | IOException e) {

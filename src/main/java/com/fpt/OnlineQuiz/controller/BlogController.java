@@ -5,6 +5,7 @@ import com.fpt.OnlineQuiz.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -53,8 +54,17 @@ public class BlogController {
     @RequestMapping(value = "/blogdetail", method = RequestMethod.GET)
     public String getBlogDetail(ModelMap modelMap, HttpServletRequest request) {
         //data send to html:ModelMap
-        int blogid = Integer.parseInt(request.getParameter("blogid"));
-        Blog blog = blogService.getDetailBlog(blogid);
+        String blogIdStr = request.getParameter("blogid");
+        int blogId;
+        if (blogIdStr == null || !StringUtils.hasLength(blogIdStr)) {
+            return "redirect:/blogcontroller";
+        }
+        try {
+            blogId = Integer.parseInt(request.getParameter("blogid"));
+        } catch (NumberFormatException e) {
+            return "redirect:/blogcontroller";
+        }
+        Blog blog = blogService.getDetailBlog(blogId);
         modelMap.addAttribute("blogdetail", blog);
         return "blog_details";
     }

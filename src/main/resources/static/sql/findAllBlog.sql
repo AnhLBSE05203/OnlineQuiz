@@ -1,2 +1,2 @@
-select a from Blog a
+select b from Blog b
 where 1 = 1
