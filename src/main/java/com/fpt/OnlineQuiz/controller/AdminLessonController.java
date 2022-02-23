@@ -7,6 +7,7 @@ import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Image;
 import com.fpt.OnlineQuiz.model.Lesson;
+import com.fpt.OnlineQuiz.model.LessonType;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.ImageService;
 import com.fpt.OnlineQuiz.service.LessonService;
@@ -58,18 +59,23 @@ public class AdminLessonController {
         //to do - add form to page
         Lesson lesson = new Lesson();
         lesson.setName(lessonAdminDTO.getName());
+        lesson.setLessonType(new LessonType());
+        lesson.setSubject(new Subject());
+        lesson.setContent(lessonAdminDTO.getContent());
+        lesson.setStatus("Not Start");
+        lesson.setTime(lessonAdminDTO.getTime());
         //set img - to do: image upload
         //set default img - temporary
-        Image defaultImg = imageService.getById(Constants.DEFAULT_SUBJECT_IMAGE_ID);
-        if (defaultImg == null) {
-            defaultImg = new Image();
-            defaultImg.setDefaultImg();
-            imageService.addImage(defaultImg);
-        }
+//        Image defaultImg = imageService.getById(Constants.DEFAULT_SUBJECT_IMAGE_ID);
+//        if (defaultImg == null) {
+//            defaultImg = new Image();
+//            defaultImg.setDefaultImg();
+//            imageService.addImage(defaultImg);
+//        }
 //        lesson.setImage(defaultImg);
 //        //
 //        lesson.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
-//        subjectService.addSubject(lesson);
+        lessonService.addLesson(lesson);
         return "redirect:/admin/lesson";
     }
 

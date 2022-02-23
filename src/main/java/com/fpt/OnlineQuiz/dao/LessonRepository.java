@@ -80,4 +80,7 @@ public class LessonRepository {
             return 0;
         }
     }
+    public void addLesson(Lesson lesson) {
+        em.persist(lesson);
+    }
 }

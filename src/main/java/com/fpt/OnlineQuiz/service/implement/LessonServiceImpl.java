@@ -54,4 +54,9 @@ public class LessonServiceImpl implements LessonService {
 
         return page;
     }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        lessonRepository.addLesson(lesson);
+    }
 }
