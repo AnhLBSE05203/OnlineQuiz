@@ -1,14 +1,18 @@
 package com.fpt.OnlineQuiz.dao.CRUDRepository;
 
+import com.fpt.OnlineQuiz.model.Lesson;
 import com.fpt.OnlineQuiz.model.LessonType;
-import com.fpt.OnlineQuiz.model.Subject;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface CRUDSubjectRepository extends CrudRepository<Subject,Integer> {
+import java.util.List;
 
-    @Query("select s from Subject s where s.name = ?1")
-    Subject findByName(String name);
+@Repository
+public interface CRUDLessonTypeRepository extends CrudRepository<LessonType,String> {
+
+
+    @Query("select l from LessonType l where l.name = ?1")
+    LessonType findByName(String name);
+
 }
