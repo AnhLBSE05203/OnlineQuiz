@@ -1,11 +1,17 @@
 package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.QuestionRepository;
+import com.fpt.OnlineQuiz.dto.QuestionAdminDTO;
+import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
+import com.fpt.OnlineQuiz.dto.paging.Page;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Question;
+import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +28,25 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Question getQuestionByQuestionId(int question_id) {
         return questionRepository.getQuestionByQuestionId(question_id);
+    }
+
+    @Override
+    public Page<QuestionAdminDTO> getByPagingRequest(PagingRequest pagingRequest) {
+        List<Question> questions = questionRepository.getByPagingRequest(pagingRequest);
+        long count = questionRepository.getQuestionCountByPagingRequest(pagingRequest);
+        List<QuestionAdminDTO> questionAdminDTOs = new ArrayList<>();
+        // convert Subject to SubjectAdminDTO
+        for(Question question : questions) {
+            QuestionAdminDTO questionAdminDTO = question.toQuestionAdminDTO();
+            questionAdminDTOs.add(questionAdminDTO);
+        }
+        // convert List to Page
+        Page<QuestionAdminDTO> page = new Page<>(questionAdminDTOs);
+        page.setRecordsFiltered((int) count);
+        page.setRecordsTotal((int) count);
+        page.setDraw(pagingRequest.getDraw());
+
+        return page;
     }
 
     @Override

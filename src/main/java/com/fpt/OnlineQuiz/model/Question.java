@@ -1,5 +1,8 @@
 package com.fpt.OnlineQuiz.model;
 
+import com.fpt.OnlineQuiz.dto.QuestionAdminDTO;
+import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
+import com.fpt.OnlineQuiz.utils.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,4 +36,13 @@ public class Question {
     private List<QuizHistoryQuestion> quizHistoryQuestions;
     @OneToMany(mappedBy = "question")
     private List<Answer> answers;
+
+    public QuestionAdminDTO toQuestionAdminDTO() {
+        QuestionAdminDTO questionAdminDTO = new QuestionAdminDTO();
+        questionAdminDTO.setId(this.getId());
+        questionAdminDTO.setQuestion(this.getQuestion());
+        questionAdminDTO.setAnswer(this.getAnswer());
+        questionAdminDTO.setExplain(this.getExplain());
+        return questionAdminDTO;
+    }
 }

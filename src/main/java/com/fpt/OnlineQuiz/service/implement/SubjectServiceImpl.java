@@ -1,7 +1,7 @@
 package com.fpt.OnlineQuiz.service.implement;
 
-import com.fpt.OnlineQuiz.dao.CourseRepository;
 import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDSubjectRepository;
+import com.fpt.OnlineQuiz.dao.CourseRepository;
 import com.fpt.OnlineQuiz.dao.SubjectRepository;
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
@@ -11,6 +11,7 @@ import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +25,18 @@ public class SubjectServiceImpl implements SubjectService {
     private SubjectRepository subjectRepository;
     @Autowired
     private CRUDSubjectRepository CRUDSubjectRepository;
+
     @Override
-    public List<Subject> getAllMySubject(int account_id) {
+    public List<Subject> findAllSubject() {
+        return subjectRepository.findAllSubjects();
+    }
+
+    @Override
+    public List<Subject> getAllSubject(int account_id) {
         List<Course> list_course = courseRepository.getTop3Courses(account_id);
         List<Subject> list_subject = new ArrayList<>();
-        for (int i = 0; i < list_course.size(); i++){
-             list_subject.add(list_course.get(i).getSubject());
+        for (int i = 0; i < list_course.size(); i++) {
+            list_subject.add(list_course.get(i).getSubject());
         }
         return list_subject;
     }
@@ -38,7 +45,7 @@ public class SubjectServiceImpl implements SubjectService {
     public List<Subject> getNext3Subject(int account_id, int amount) {
         List<Course> list_course = courseRepository.getNext3Courses(account_id, amount);
         List<Subject> list_subject = new ArrayList<>();
-        for (int i = 0; i < list_course.size(); i++){
+        for (int i = 0; i < list_course.size(); i++) {
             list_subject.add(list_course.get(i).getSubject());
         }
         return list_subject;
@@ -58,7 +65,7 @@ public class SubjectServiceImpl implements SubjectService {
     public List<SubjectAdminDTO> getAllSubjectAdminDTO() {
         List<Subject> listSubjects = subjectRepository.findAllSubjects();
         List<SubjectAdminDTO> listSubjectDTO = new ArrayList<>();
-        for(Subject subject : listSubjects) {
+        for (Subject subject : listSubjects) {
             SubjectAdminDTO subjectAdminDTO = subject.toSubjectAdminDTO();
             listSubjectDTO.add(subjectAdminDTO);
         }
@@ -71,7 +78,7 @@ public class SubjectServiceImpl implements SubjectService {
         long count = subjectRepository.getSubjectCountByPagingRequest(pagingRequest);
         List<SubjectAdminDTO> subjectAdminDTOs = new ArrayList<>();
         // convert Subject to SubjectAdminDTO
-        for(Subject subject : subjects) {
+        for (Subject subject : subjects) {
             SubjectAdminDTO subjectAdminDTO = subject.toSubjectAdminDTO();
             subjectAdminDTOs.add(subjectAdminDTO);
         }
@@ -106,9 +113,14 @@ public class SubjectServiceImpl implements SubjectService {
         subjectRepository.addSubject(subject);
     }
 
+    @Override
+    public List<Subject> findAllSubjectsByPaging(int pageIndex, int pageSize) {
+        return subjectRepository.findAllSubjectsByPaging(pageIndex, pageSize);
+    }
+
     //get specific subject by subjectId
     @Override
-    public Optional<Subject> getSubject(int id){
+    public Optional<Subject> getSubject(int id) {
         return CRUDSubjectRepository.findById(id);
     }
 }

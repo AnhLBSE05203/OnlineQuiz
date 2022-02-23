@@ -67,6 +67,43 @@ public class SubjectRepository {
         }
     }
 
+    public List<Subject> findAllSubjectsByPaging(int pageIndex, int pageSize) {
+        try {
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_SUBJECTS)));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while ((line = buffer.readLine()) != null) {
+                sb.append(" ").append(line);
+            }
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Subject.class);
+            query.setFirstResult((pageIndex - 1) * pageSize);
+            query.setMaxResults(pageSize);
+            List<Subject> subjectList = (List<Subject>) query.getResultList();
+            return (List<Subject>) query.getResultList();
+        } catch (NoResultException | IOException e) {
+            return null;
+        }
+    }
+
+    public Long countSubject() {
+        try {
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_SUBJECT_COUNT)));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while ((line = buffer.readLine()) != null) {
+                sb.append(" ").append(line);
+            }
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Long.class);
+            return (Long) query.getSingleResult();
+        } catch (NoResultException | IOException e) {
+            return 0l;
+        }
+    }
+
     public List<Subject> getByPagingRequest(PagingRequest pagingRequest) {
         try {
             BufferedReader buffer = new BufferedReader(new InputStreamReader(
