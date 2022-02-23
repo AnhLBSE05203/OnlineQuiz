@@ -70,7 +70,7 @@ public class AdminLessonController {
         lesson.setSubject(subject);
         lesson.setContent(lessonAdminDTO.getContent());
         lesson.setStatus("Not Start");
-        lesson.setTime(lessonAdminDTO.getTime());
+        lesson.setTime(lessonAdminDTO.getTime()+" m");
         //set img - to do: image upload
         //set default img - temporary
 //        Image defaultImg = imageService.getById(Constants.DEFAULT_SUBJECT_IMAGE_ID);
