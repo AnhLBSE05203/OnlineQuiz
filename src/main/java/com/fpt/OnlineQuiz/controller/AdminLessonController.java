@@ -59,7 +59,7 @@ public class AdminLessonController {
         //to do - add form to page
         Lesson lesson = new Lesson();
         lesson.setName(lessonAdminDTO.getName());
-        lesson.setLessonType(new LessonType());
+//        lesson.setLessonType(lessonAdminDTO.getLessonType());
         lesson.setSubject(new Subject());
         lesson.setContent(lessonAdminDTO.getContent());
         lesson.setStatus("Not Start");
