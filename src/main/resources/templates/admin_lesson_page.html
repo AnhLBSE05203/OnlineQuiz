@@ -124,16 +124,16 @@
                             <td><input type="text" id="addLessonName" th:name="name" required></td>
                         </tr>
                         <tr>
-                            <td for="types">Lesson Type:</td>
-                            <td><select id="types" name="types">
-                                <option value="learn" th:name="lessonType">Learn</option>
-                                <option value="quiz">Quiz</option>
+                            <td>Lesson Type:</td>
+                            <td><select th:field="*{lessonType}">
+                                <option value="learn" >learn</option>
+                                <option value="quiz">quiz</option>
                             </select></td>
                         </tr>
                         <tr>
                             <td>Choose Subjects:</td>
-                            <td><select name="sub" th:field="*{id}">
-                                <option th:each="s : ${subjectList}" th:name="subjects" th:value="${s.id}" th:utext="${s.name}"></option>
+                            <td><select  th:field="*{subjects}"   >
+                                <option th:each="s : ${subjectList}"  th:value="${s.name}" th:utext="${s.name}"></option>
                             </select></td>
                         </tr>
                         <tr>

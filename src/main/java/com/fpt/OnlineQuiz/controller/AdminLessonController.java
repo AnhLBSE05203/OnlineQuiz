@@ -11,6 +11,7 @@ import com.fpt.OnlineQuiz.model.LessonType;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.ImageService;
 import com.fpt.OnlineQuiz.service.LessonService;
+import com.fpt.OnlineQuiz.service.LessonTypeService;
 import com.fpt.OnlineQuiz.service.SubjectService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class AdminLessonController {
     private LessonService lessonService;
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    private LessonTypeService lessonTypeService;
 
     @GetMapping(value = {"", "/"})
     public String lessonPage(Model model) {
@@ -59,8 +63,11 @@ public class AdminLessonController {
         //to do - add form to page
         Lesson lesson = new Lesson();
         lesson.setName(lessonAdminDTO.getName());
-//        lesson.setLessonType(lessonAdminDTO.getLessonType());
-        lesson.setSubject(new Subject());
+
+        LessonType lessonType = lessonTypeService.getByName(lessonAdminDTO.getLessonType());
+        lesson.setLessonType(lessonType);
+        Subject subject = subjectService.findSubByName(lessonAdminDTO.getSubjects());
+        lesson.setSubject(subject);
         lesson.setContent(lessonAdminDTO.getContent());
         lesson.setStatus("Not Start");
         lesson.setTime(lessonAdminDTO.getTime());
