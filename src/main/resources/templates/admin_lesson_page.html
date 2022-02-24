@@ -54,54 +54,54 @@
         </footer>
     </div>
 </div>
-<!-- placeholder for modal -->
-<!-- Edit Lesson Modal -->
-<!--<div class="modal fade" id="lessonEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"-->
-<!--     aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
-<!--    <div class="modal-dialog">-->
-<!--        <div class="modal-content">-->
-<!--            <form id="lessonEditForm" th:object="${lessonEditDTO}"-->
-<!--                  th:action="@{/admin/lesson/edit}" method="POST">-->
-<!--                <div class="modal-header">-->
-<!--                    <h5 class="modal-title" id="staticBackdropLabel">Lesson Detail</h5>-->
-<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <img id="editLessonImg"><br>-->
-<!--                    <input type="hidden" id="editLessonImgSrc" th:name="imgSrc">-->
-<!--                    <input type="hidden" id="editLessonStatusStr" th:name="statusStr" value="">-->
-<!--                    <table class="formTable" cellspacing="0" cellpadding="0">-->
-<!--                        <tr>-->
-<!--                            <td>Id:</td>-->
-<!--                            <td><input type="text" id="editLessonId" th:name="id" readonly></td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Total no. of Courses:</td>-->
-<!--                            <td><input type="text" id="editLessonTotalCourse"-->
-<!--                                       th:field="*{totalCourse}" readonly></td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Name:</td>-->
-<!--                            <td><input type="text" id="editLessonName" th:name="name" required></td>-->
-<!--                        </tr>-->
-<!--                        <td>Status:</td>-->
-<!--                        <td><select id="editLessonStatus" th:name="status">-->
-<!--                            <option th:each="status : ${statusMap}" th:value="${status.key}"-->
-<!--                                    th:text="${status.value}">-->
-<!--                            </option>-->
-<!--                        </select>-->
-<!--                        </td>-->
-<!--                    </table>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-<!--                    <input type="submit" class="btn btn-primary" value="Save">-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--&lt;!&ndash; End Edit Lesson Modal &ndash;&gt;-->
+ placeholder for modal
+ Edit Lesson Modal
+<div class="modal fade" id="lessonEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="lessonEditForm" th:object="${lessonEditDTO}"
+                  th:action="@{/admin/lesson/edit}" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Lesson Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="editLessonImg"><br>
+                    <input type="hidden" id="editLessonImgSrc" th:name="imgSrc">
+                    <input type="hidden" id="editLessonStatusStr" th:name="statusStr" value="">
+                    <table class="formTable" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td>Id:</td>
+                            <td><input type="text" id="editLessonId" th:name="id" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>Total no. of Courses:</td>
+                            <td><input type="text" id="editLessonTotalCourse">
+                                      <!-- th:field="*{totalCourse}" -->readonly></td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td><input type="text" id="editLessonName" th:name="name" required></td>
+                        </tr>
+                        <td>Status:</td>
+                        <td><select id="editLessonStatus" th:name="status">
+                            <option th:each="status : ${statusMap}" th:value="${status.key}"
+                                    th:text="${status.value}">
+                            </option>
+                        </select>
+                        </td>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Edit Lesson Modal -->
 <!-- Create Lesson Modal -->
 <div class="modal fade" id="lessonAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -120,7 +120,7 @@
                     <!--                    <input type="hidden" id="addLessonStatus" th:name="status" value="1">-->
                     <table class="formTable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td>Name:</td>
+                            <td>Lesson Name:</td>
                             <td><input type="text" id="addLessonName" th:name="name" required></td>
                         </tr>
                         <tr>
