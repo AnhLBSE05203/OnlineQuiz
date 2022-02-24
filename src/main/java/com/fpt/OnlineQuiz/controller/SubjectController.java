@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dao.SubjectRepository;
+import com.fpt.OnlineQuiz.model.Blog;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,9 @@ public class SubjectController {
     @GetMapping(path = {"", "/listsubject"})
     public String showMySubjectPage(ModelMap modelMap, HttpServletRequest request) {
         String page = request.getParameter("page");
-        int pageSize = 6;
         if (page == null) {
             page = "1";
+            int pageSize = 6;
             int pageIndex = Integer.parseInt(page);
             List<Subject> listsubject = subjectService.findAllSubjectsByPaging(pageIndex, pageSize);
             long totalRecord = subjectRepository.countSubject();
@@ -43,6 +44,7 @@ public class SubjectController {
             modelMap.addAttribute("listsubject", listsubject);
         } else {
             page = request.getParameter("page");
+            int pageSize = 6;
             int pageIndex = Integer.parseInt(page);
             List<Subject> listSubject = subjectService.findAllSubjectsByPaging(pageIndex, pageSize);
             long totalRecord = subjectRepository.countSubject();
@@ -58,16 +60,14 @@ public class SubjectController {
     @GetMapping(path = "/loadmoresubject")
     public @ResponseBody
     void loadMore(
-            @RequestParam("start") String startStr, HttpServletRequest request, HttpServletResponse response) throws IOException {
+            @RequestParam("amount") String amount, HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
-        int start = Integer.parseInt(startStr);
-        System.out.println(start);
-        List<Subject> subjects = subjectService.getNext3Subject(3, start);
-        List<String> subjectNames = new ArrayList<>();
+        int iamount = Integer.parseInt(amount);
+        System.out.println(iamount);
+        List<Subject> subjects = subjectService.getNext3Subject(3, iamount);
         if (subjects.size() != 0) {
             System.out.println("list size: " + subjects.size());
             for (Subject s : subjects) {
-                subjectNames.add(s.getName());
                 out.println("<div class=\"col-lg-4 subject\">\n" +
                         "                    <div class=\"properties properties2 mb-30\">\n" +
                         "                        <div class=\"properties__card\">\n" +
