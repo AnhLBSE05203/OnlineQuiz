@@ -57,7 +57,7 @@ public class BlogRepository {
             //append filtering
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
-                String key = "'%" + pagingRequest.getSearch().getValue() + "%'";
+                String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
                 sb.append(" AND lower(b.thumbnail.src) LIKE " + key);
                 sb.append(" AND lower(b.content) LIKE " + key);
                 sb.append(" OR lower(b.title) LIKE " + key);
@@ -92,7 +92,7 @@ public class BlogRepository {
             //append filtering
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
-                String key = "'%" + pagingRequest.getSearch().getValue() + "%'";
+                String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
                 sb.append(" AND lower(b.thumbnail.src) LIKE " + key);
                 sb.append(" AND lower(b.content) LIKE " + key);
                 sb.append(" OR lower(b.title) LIKE " + key);
