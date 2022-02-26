@@ -27,8 +27,8 @@ $(document).ready(function() {
             title : 'Action',
             // data : 'status',
             render: function(data, type, row, meta) {
-                var html = '<button type="button" class="btn btn-primary" onclick="showQuestionEdit('+ row['id'] + ')">'
-                    + 'Edit</button>&nbsp';
+                var html = '<a href="/question/detailQuestion?questionId='+row['id']+'">'
+                    + 'Detail</a>&nbsp';
 
                     html += '<button type="button" class="btn btn-primary" onclick="deleteQuestion('+ row['id'] +')">'
                         + 'Delete</button>&nbsp';
@@ -40,9 +40,11 @@ $(document).ready(function() {
 function deleteQuestion(id){
     alert("delete question id=  " + id);
 }
-function showQuestionEdit(id){
-    alert("edit question id =  " + id);
-}
-function showQuestionAdd(){
-    alert("Add question");
-}
+// function showQuestion(id){
+//     alert("show question id = " + id);
+//     $.ajax({
+//         url:"/question/showDetailQuestion?questionId=" + id,
+//         type:"GET",
+//         success:function (){}
+//     })
+// }
