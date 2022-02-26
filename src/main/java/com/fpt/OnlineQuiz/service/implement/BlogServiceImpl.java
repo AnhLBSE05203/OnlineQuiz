@@ -6,6 +6,7 @@ import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Blog;
 import com.fpt.OnlineQuiz.service.BlogService;
+import com.fpt.OnlineQuiz.utils.Constants;
 import com.fpt.OnlineQuiz.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,8 @@ public class BlogServiceImpl implements BlogService {
         for (Blog blog: listBlog) {
             BlogAdminDto blogAdminDto = new BlogAdminDto();
             Utils.copyNonNullProperties(blog, blogAdminDto);
+            blogAdminDto.setContent(blogAdminDto.getContent().substring(0, 100));
+            blogAdminDto.setStatusStr("Published");
             listBlogAdminDTO.add(blogAdminDto);
         }
         Page<BlogAdminDto> page = new Page<>(listBlogAdminDTO);
