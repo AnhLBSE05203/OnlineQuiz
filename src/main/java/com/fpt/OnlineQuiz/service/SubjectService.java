@@ -9,13 +9,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SubjectService {
-    List<Subject> getAllMySubject(int account_id);
+    List<Subject> findAllSubject();
 
-    List<Subject> getNext3Subject(int account_id, int amount);
+    List<Subject> getAllSubject(int account_id);
+
+    List<Subject> getNext3Subject(int account_id, int start);
 
     List<Subject> getFeaturedSubjects(int number);
 
     Optional<Subject> getSubject(int id);
+
     List<Subject> findAllSubjects();
 
     List<SubjectAdminDTO> getAllSubjectAdminDTO();
@@ -29,4 +32,8 @@ public interface SubjectService {
     void updateSubject(Subject subject);
 
     void addSubject(Subject subject);
+
+    List<Subject> findAllSubjectsByPaging(int pageindex, int pageSize);
+
+    Subject findSubByName(String name);
 }

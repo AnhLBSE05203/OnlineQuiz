@@ -1,186 +1,188 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>My Courses</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>My Courses</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
 
-    <!-- CSS here -->
-    <div th:replace="components/header_footer.html :: common-style"></div>
-    <!-- page-specific css -->
-</head>
-<body>
-<!-- ? Preloader Start -->
-<div th:replace="components/header_footer.html :: user-preload"></div>
-<!-- Preloader Start -->
-<!-- Header Start -->
-<div class="header-area header-transparent">
-    <div class="main-header ">
-        <div class="header-bottom  header-sticky">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <!-- Logo -->
-                    <div class="col-xl-2 col-lg-2">
-                        <div class="logo">
-                            <a href="index.html"><img th:src="@{/img/logo/logo.png}" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-10 col-lg-10">
-                        <div class="menu-wrapper d-flex align-items-center justify-content-end">
-                            <!-- Main-menu -->
-                            <div class="main-menu d-none d-lg-block">
-                                <nav>
-                                    <ul id="navigation">
-                                        <li class="active" ><a href="index.html">Home</a></li>
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="#">Blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog_details.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Element</a></li>
+        <!-- CSS here -->
+        <div th:replace="components/header_footer.html :: common-style"></div>
+        <!-- page-specific css -->
+    </head>
+    <body>
+        <!-- ? Preloader Start -->
+        <div th:replace="components/header_footer.html :: user-preload"></div>
+        <!-- Preloader Start -->
+        <!-- Header Start -->
+        <div class="header-area header-transparent">
+            <div class="main-header ">
+                <div class="header-bottom  header-sticky">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <!-- Logo -->
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="logo">
+                                    <a href="index.html"><img th:src="@{/img/logo/logo.png}" alt=""></a>
+                                </div>
+                            </div>
+                            <div class="col-xl-10 col-lg-10">
+                                <div class="menu-wrapper d-flex align-items-center justify-content-end">
+                                    <!-- Main-menu -->
+                                    <div class="main-menu d-none d-lg-block">
+                                        <nav>
+                                            <ul id="navigation">
+                                                <li class="active"><a href="index.html">Home</a></li>
+                                                <li><a href="courses.html">Courses</a></li>
+                                                <li><a href="about.html">About</a></li>
+                                                <li><a href="#">Blog</a>
+                                                    <ul class="submenu">
+                                                        <li><a href="blog.html">Blog</a></li>
+                                                        <li><a href="blog_details.html">Blog Details</a></li>
+                                                        <li><a href="elements.html">Element</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="contact.html">Contact</a></li>
+                                                <!-- Button -->
+                                                <li class="button-header margin-left "><a href="#" class="btn">Join</a>
+                                                </li>
+                                                <li class="button-header"><a href="login.html" class="btn btn3">Log
+                                                    in</a></li>
                                             </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <!-- Button -->
-                                        <li class="button-header margin-left "><a href="#" class="btn">Join</a></li>
-                                        <li class="button-header"><a href="login.html" class="btn btn3">Log in</a></li>
-                                    </ul>
-                                </nav>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Mobile Menu -->
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Mobile Menu -->
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-lg-none"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- Header End -->
-<main>
-    <!--? slider Area Start-->
-    <section class="slider-area slider-area2">
-        <div class="slider-active">
-            <!-- Single Slider -->
-            <div class="single-slider slider-height2">
+        <!-- Header End -->
+        <main>
+            <!--? slider Area Start-->
+            <section class="slider-area slider-area2">
+                <div class="slider-active">
+                    <!-- Single Slider -->
+                    <div class="single-slider slider-height2">
+                        <div class="container">
+                            <div class="row" id="content">
+                                <div class="col-xl-8 col-lg-11 col-md-12">
+                                    <div class="hero__caption hero__caption2">
+                                        <h1 data-animation="bounceIn" data-delay="0.2s">My Courses</h1>
+                                        <!-- breadcrumb Start-->
+                                        <nav aria-label="breadcrumb">
+                                            <ol class="breadcrumb">
+                                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                                <li class="breadcrumb-item"><a href="#">User Profile</a></li>
+                                                <li class="breadcrumb-item"><a href="#">My Courses</a></li>
+                                            </ol>
+                                        </nav>
+                                        <!-- breadcrumb End -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Courses area start -->
+            <div class="courses-area section-padding40 fix">
                 <div class="container">
-                    <div class="row" id="content">
-                        <div class="col-xl-8 col-lg-11 col-md-12">
-                            <div class="hero__caption hero__caption2">
-                                <h1 data-animation="bounceIn" data-delay="0.2s">My Courses</h1>
-                                <!-- breadcrumb Start-->
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="#">User Profile</a></li>
-                                        <li class="breadcrumb-item"><a href="#">My Courses</a></li>
-                                    </ol>
-                                </nav>
-                                <!-- breadcrumb End -->
+                    <div class="row" id="listcourse">
+                        <div class="col-lg-4 course" th:each="course : ${my_course_list}">
+                            <div class="properties properties2 mb-30">
+                                <div class="properties__card">
+                                    <div class="properties__img overlay1">
+                                        <a href="#"><img th:src="@{/img/gallery/featured2.png}" alt=""></a>
+                                    </div>
+                                    <div class="properties__caption">
+                                        <!--                                <p th:text="${course.name}"></p>-->
+                                        <h3><a href="#" th:text="${course.name}"></a></h3>
+                                        <p th:text="${course.description}"></p>
+                                        <a href="#" class="border-btn border-btn2">Go to Course</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xl-7 col-lg-8">
+                            <div class="section-tittle text-center mt-40">
+                                <a class="border-btn" onclick="load()">Load More</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Courses area start -->
-    <div class="courses-area section-padding40 fix">
-        <div class="container">
-            <div class="row" id="listcourse">
-                <div class="col-lg-4 course" th:each="course : ${my_course_list}">
-                    <div class="properties properties2 mb-30">
-                        <div class="properties__card">
-                            <div class="properties__img overlay1">
-                                <a href="#"><img th:src="@{/img/gallery/featured2.png}" alt=""></a>
-                            </div>
-                            <div class="properties__caption">
-<!--                                <p th:text="${course.name}"></p>-->
-                                 <h3><a href="#" th:text="${course.name}"></a></h3>
-                                <p th:text="${course.description}"></p>
-                                <a href="#" class="border-btn border-btn2">Go to Course</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-7 col-lg-8">
-                    <div class="section-tittle text-center mt-40">
-                        <a class="border-btn" onclick="load()">Load More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- ? services-area -->
-    <div class="services-area services-area2 section-padding40">
-        <div class="container">
-            <div class="row justify-content-sm-center">
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img th:src="@{/img/icon/icon1.svg}" alt="">
+            <!-- ? services-area -->
+            <div class="services-area services-area2 section-padding40">
+                <div class="container">
+                    <div class="row justify-content-sm-center">
+                        <div class="col-lg-4 col-md-6 col-sm-8">
+                            <div class="single-services mb-30">
+                                <div class="features-icon">
+                                    <img th:src="@{/img/icon/icon1.svg}" alt="">
+                                </div>
+                                <div class="features-caption">
+                                    <h3>60+ UX courses</h3>
+                                    <p>The automated process all your website tasks.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="features-caption">
-                            <h3>60+ UX courses</h3>
-                            <p>The automated process all your website tasks.</p>
+                        <div class="col-lg-4 col-md-6 col-sm-8">
+                            <div class="single-services mb-30">
+                                <div class="features-icon">
+                                    <img th:src="@{/img/icon/icon2.svg}" alt="">
+                                </div>
+                                <div class="features-caption">
+                                    <h3>Expert instructors</h3>
+                                    <p>The automated process all your website tasks.</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img th:src="@{/img/icon/icon2.svg}" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>Expert instructors</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img th:src="@{/img/icon/icon3.svg}" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>Life time access</h3>
-                            <p>The automated process all your website tasks.</p>
+                        <div class="col-lg-4 col-md-6 col-sm-8">
+                            <div class="single-services mb-30">
+                                <div class="features-icon">
+                                    <img th:src="@{/img/icon/icon3.svg}" alt="">
+                                </div>
+                                <div class="features-caption">
+                                    <h3>Life time access</h3>
+                                    <p>The automated process all your website tasks.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </main>
+        <footer th:replace="components/header_footer.html :: user-footer">
+        </footer>
+        <!-- Scroll Up -->
+        <div th:insert="components/header_footer.html :: scroll-up">
         </div>
-    </div>
-</main>
-<footer th:replace="components/header_footer.html :: user-footer">
-</footer>
-<!-- Scroll Up -->
-<div th:insert="components/header_footer.html :: scroll-up">
-</div>
 
-<!-- JS here -->
-<th:block th:insert="components/header_footer.html :: common-script">
-</th:block>
-<!-- page-specific js -->
-<script>
+        <!-- JS here -->
+        <th:block th:insert="components/header_footer.html :: common-script">
+        </th:block>
+        <!-- page-specific js -->
+        <script>
 
     function load(){
-        var amount = document.getElementsByClassName("course").length;
+        var start = document.getElementsByClassName("course").length;
         $.ajax({
             url:"/user/loadmorecourse",
             type:"get",
             data:{
-                amount: amount
+                start: start
             },
             success: function (data){
                 if(data != ""){
@@ -191,6 +193,9 @@
         })
     }
 
-</script>
-</body>
+
+
+
+        </script>
+    </body>
 </html>

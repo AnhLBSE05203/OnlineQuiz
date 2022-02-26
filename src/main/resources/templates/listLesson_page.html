@@ -190,8 +190,8 @@
                                 <a class="le-titile"
                                    th:href="@{/lesson/detail(lesId=${l.id},subId=${subId})}"
                                    th:text="${l.name}"></a></td>
-                            <td>2m</td>
-                            <td><i class="fa fa-close"></i></td>
+                            <td th:text="${l.time}"></td>
+                            <td th:text="${l.status}"><i class="fa fa-close"></i></td>
                         </tr>
                         <!--                        <tr>-->
                         <!--                            <td><i class="fa fa-play-circle"></i></td>-->

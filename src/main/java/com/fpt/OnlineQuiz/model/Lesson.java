@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.model;
 
+import com.fpt.OnlineQuiz.dto.LessonAdminDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,11 @@ public class Lesson {
     private String name;
     @Column(name = "content")
     private String content;
+    @Column(name = "status")
+    private String status;
+    @Column(name = "time")
+    private String time;
+
 
     @ManyToOne
     @JoinColumn(name = "typeId")
@@ -31,4 +37,16 @@ public class Lesson {
     @JoinColumn(name = "subjectId")
     private Subject subject;
 
+
+    public LessonAdminDTO toLessonAdminDTO() {
+        LessonAdminDTO lessonAdminDTO = new LessonAdminDTO();
+        lessonAdminDTO.setId(this.getId());
+        lessonAdminDTO.setName(this.getName());
+        lessonAdminDTO.setLessonType(this.lessonType.getName());
+        lessonAdminDTO.setSubjects(this.subject.getName());
+        lessonAdminDTO.setContent(this.getContent());
+        lessonAdminDTO.setStatus(this.getStatus());
+        lessonAdminDTO.setTime(this.getTime());
+        return lessonAdminDTO;
+    }
 }

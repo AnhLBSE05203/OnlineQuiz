@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Question Management</title>
+    <!-- Admin common css -->
+    <div th:replace="components/header_footer.html :: admin-common-style">
+    </div>
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/admin_subject_page.css}" rel="stylesheet"/>
+</head>
+<body>
+    <!-- Admin header -->
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"
+         th:replace="components/header_footer.html :: admin-header">
+    </nav>
+    <!-- -->
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <!-- Admin side nav -->
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion"
+                 th:replace="components/header_footer.html :: admin-side-nav">
+            </nav>
+            <!-- -->
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4" th:text="${sub.getName()}"></h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Question Management
+                        </li>
+                    </ol>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            List Question
+                            <button id="addSubjectButton" type="button" class="btn btn-primary" href="/question/create">
+                                Add Question
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <table id="QuestionDatatable" style="width:100%;">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer th:replace="components/header_footer.html :: admin-footer">
+            </footer>
+        </div>
+    </div>
+    <!-- placeholder for modal -->
+    </div>
+    <!-- Admin common js -->
+    <th:block th:insert="components/header_footer.html :: admin-common-script">
+    </th:block>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script th:src="@{/js/list_question_page.js}"></script>
+    <!-- -->
+</body>
+</html>

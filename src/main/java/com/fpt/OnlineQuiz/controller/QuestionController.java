@@ -1,5 +1,8 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dto.QuestionAdminDTO;
+import com.fpt.OnlineQuiz.dto.paging.Page;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Answer;
 import com.fpt.OnlineQuiz.model.Question;
 import com.fpt.OnlineQuiz.model.Subject;
@@ -8,12 +11,11 @@ import com.fpt.OnlineQuiz.service.QuestionService;
 import com.fpt.OnlineQuiz.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -87,7 +89,6 @@ public class QuestionController {
         }
         q.setSubject(subject);
         questionService.addQuestion(q);
-
         answerService.addAnswers(answers);
         modelMap.addAttribute("message", "Add successful!");
         return "create_question_page";
@@ -96,11 +97,19 @@ public class QuestionController {
     @GetMapping(path = "/edit")
     String showEditQuestionPage(ModelMap modelMap) {
         //TODO Code Edit Question
-        Question q = questionService.getQuestionByQuestionId(1);
+        Question q = questionService.getQuestionByQuestionId(31);
         modelMap.addAttribute("question", q);
-        List<Answer> answers = answerService.getAnswers(1);
+        List<Answer> answers = answerService.getAnswers(31);
         modelMap.addAttribute("answer", answers);
         return "edit_question_page";
+    }
+    @GetMapping(path = "/detailQuestion")
+    String showDetailQuestion(HttpServletRequest request, ModelMap modelMap){
+        int question_id = Integer.parseInt(request.getParameter("questionId").trim());
+        System.out.println("In detail question method");
+        Question q = questionService.getQuestionByQuestionId(question_id);
+        modelMap.addAttribute("detailQuestion", q);
+        return "question_detail_page";
     }
 
     @PostMapping(path = "/editquestion")
@@ -141,13 +150,18 @@ public class QuestionController {
         return "edit_question_page";
     }
 
-    @GetMapping(path = "/listquestion")
-    String showListQuestionPage(@Param(value = "subId") int subId, Model model, HttpServletRequest request) {
+    @GetMapping(path = "/list")
+    String showQuestionListPage(ModelMap model){
         List<Question> questionList = questionService.getQuesitonBySubjectId(1);
-        Subject subject = subjectService.getSubjectById(subId);
-        model.addAttribute("ques", questionList);
+        Subject subject = subjectService.getSubjectById(1);
+        model.addAttribute("question_list", questionList);
         model.addAttribute("sub", subject);
-        return "question_list_page";
+        return "admin_list_question_page";
     }
-
+    @PostMapping(value = "/getQuestionsByPage", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Page<QuestionAdminDTO> getQuestionsByPage(@RequestBody PagingRequest pagingRequest) {
+        Page<QuestionAdminDTO> listQuestionDTO = questionService.getByPagingRequest(pagingRequest);
+        return listQuestionDTO;
+    }
 }

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BlogAdminDto {
+public class BlogAdminDTO {
     private Integer id;
     private String title;
     private String content;

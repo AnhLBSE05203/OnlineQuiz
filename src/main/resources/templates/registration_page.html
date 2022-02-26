@@ -1,358 +1,377 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Courses | Education</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" th:src="@{/img/favicon.ico}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Courses | Education</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="shortcut icon" type="image/x-icon" th:src="@{/img/favicon.ico}">
 
-    <!-- CSS here -->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/css/slicknav.css}">
-    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
-    <link rel="stylesheet" th:href="@{/css/progressbar_barfiller.css}">
-    <link rel="stylesheet" th:href="@{/css/gijgo.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animated-headline.css}">
-    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
-    <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
-    <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
-    <link rel="stylesheet" th:href="@{/css/slick.css}">
-    <link rel="stylesheet" th:href="@{/css/nice-select.css}">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-<body>
-<div class="header-area header-transparent">
-    <div class="main-header ">
-        <div class="header-bottom  header-sticky">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <!-- Logo -->
-                    <div class="col-xl-2 col-lg-2">
-                        <div class="logo">
-                            <a href="index.html"><img th:src="@{/img/logo/logo.png}" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-10 col-lg-10">
-                        <div class="menu-wrapper d-flex align-items-center justify-content-end">
-                            <!-- Main-menu -->
-                            <div class="main-menu d-none d-lg-block">
-                                <nav>
-                                    <ul id="navigation">
-                                        <li class="active" ><a href="index.html">Home</a></li>
-                                        <li><a href="listLesson_page.html">Courses</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="#">Blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog_details.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Element</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <!-- Button -->
-                                        <li class="button-header margin-left "><a href="#" class="btn">Join</a></li>
-                                        <li class="button-header"><a href="login.html" class="btn btn3">Log in</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Mobile Menu -->
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-lg-none"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Header End -->
-<main>
-    <!--? slider Area Start-->
-    <section class="slider-area slider-area2">
-        <div class="slider-active">
-            <!-- Single Slider -->
-            <div class="single-slider slider-height2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-8 col-lg-11 col-md-12">
-                            <div class="hero__caption hero__caption2">
-                                <h1 data-animation="bounceIn" data-delay="0.2s">Registration</h1>
-                                <!-- breadcrumb Start-->
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="#">User Profile</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Registration</a></li>
-                                    </ol>
-                                </nav>
-                                <!-- breadcrumb End -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="shopping-cart">
-        <div class="px-4 px-lg-0">
-            <div class="pb-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
-                            <!-- Shopping cart table -->
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="p-2 px-3 text-uppercase">Course</div>
-                                        </th>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Price</div>
-                                        </th>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Remove</div>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-<!--                                    <c:forEach items="${list}" var="o">-->
-                                        <tr th:each="course: ${course}">
-                                            <th scope="row">
-                                                <div class="p-2">
-                                                    <img src="${course.image}" alt="Image" width="70" class="img-fluid rounded shadow-sm">
-                                                    <div class="ml-3 d-inline-block align-middle">
-                                                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block" th:text="${course.name}"></a></h5><span class="text-muted font-weight-normal font-italic"></span>
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <td class="align-middle" th:text="${course.price}"><strong>Price</strong></td>
-                                            <td class="align-middle"><a href="#" class="text-dark">
-                                                <button type="button" class="btn btn-danger">Delete</button>
-                                            </a>
-                                            </td>
-                                        </tr>
-<!--                                    </c:forEach>-->
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- End -->
-                        </div>
-                    </div>
-
-                    <div class="row py-5 p-4 bg-white rounded shadow-sm">
-                        <div class="col-lg-6">
-                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Payment</div>
-                            <div class="p-4">
-                                <ul class="list-unstyled mb-4">
-                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Price</strong><strong>100 $</strong></li>
-                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                                        <h5 class="font-weight-bold">110 $</h5>
-                                    </li>
-                                </ul><a href="buy" class="btn btn-dark rounded-pill py-2 btn-block">Buy</a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    <div class="services-area services-area2 section-padding40">
-        <div class="container">
-            <div class="row justify-content-sm-center">
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img th:src="@{/img/icon/icon1.svg}" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>60+ UX courses</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img th:src="@{/img/icon/icon2.svg}" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>Expert instructors</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img th:src="@{/img/icon/icon3.svg}" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>Life time access</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
-<footer>
-    <div class="footer-wrappper footer-bg">
-        <!-- Footer Start-->
-        <div class="footer-area footer-padding">
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-xl-4 col-lg-5 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="single-footer-caption mb-30">
-                                <!-- logo -->
-                                <div class="footer-logo mb-25">
-                                    <a href="index.html"><img th:src="@{/img/logo/logo2_footer.png}"  alt=""></a>
+        <!-- CSS here -->
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+        <link rel="stylesheet" th:href="@{/css/slicknav.css}">
+        <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+        <link rel="stylesheet" th:href="@{/css/progressbar_barfiller.css}">
+        <link rel="stylesheet" th:href="@{/css/gijgo.css}">
+        <link rel="stylesheet" th:href="@{/css/animate.min.css}">
+        <link rel="stylesheet" th:href="@{/css/animated-headline.css}">
+        <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+        <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
+        <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
+        <link rel="stylesheet" th:href="@{/css/slick.css}">
+        <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+    <body>
+        <div class="header-area header-transparent">
+            <div class="main-header ">
+                <div class="header-bottom  header-sticky">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <!-- Logo -->
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="logo">
+                                    <a href="index.html"><img th:src="@{/img/logo/logo.png}" alt=""></a>
                                 </div>
-                                <div class="footer-tittle">
-                                    <div class="footer-pera">
-                                        <p>The automated process starts as soon as your clothes go into the machine.</p>
+                            </div>
+                            <div class="col-xl-10 col-lg-10">
+                                <div class="menu-wrapper d-flex align-items-center justify-content-end">
+                                    <!-- Main-menu -->
+                                    <div class="main-menu d-none d-lg-block">
+                                        <nav>
+                                            <ul id="navigation">
+                                                <li class="active"><a href="index.html">Home</a></li>
+                                                <li><a href="listLesson_page.html">Courses</a></li>
+                                                <li><a href="about.html">About</a></li>
+                                                <li><a href="#">Blog</a>
+                                                    <ul class="submenu">
+                                                        <li><a href="blog.html">Blog</a></li>
+                                                        <li><a href="blog_details.html">Blog Details</a></li>
+                                                        <li><a href="elements.html">Element</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="contact.html">Contact</a></li>
+                                                <!-- Button -->
+                                                <li class="button-header margin-left "><a href="#" class="btn">Join</a>
+                                                </li>
+                                                <li class="button-header"><a href="login.html" class="btn btn3">Log
+                                                    in</a></li>
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </div>
-                                <!-- social -->
-                                <div class="footer-social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                            </div>
+                            <!-- Mobile Menu -->
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+        <main>
+            <!--? slider Area Start-->
+            <section class="slider-area slider-area2">
+                <div class="slider-active">
+                    <!-- Single Slider -->
+                    <div class="single-slider slider-height2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-8 col-lg-11 col-md-12">
+                                    <div class="hero__caption hero__caption2">
+                                        <h1 data-animation="bounceIn" data-delay="0.2s">Registration</h1>
+                                        <!-- breadcrumb Start-->
+                                        <nav aria-label="breadcrumb">
+                                            <ol class="breadcrumb">
+                                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                                <li class="breadcrumb-item"><a href="#">User Profile</a></li>
+                                                <li class="breadcrumb-item"><a href="#">Registration</a></li>
+                                            </ol>
+                                        </nav>
+                                        <!-- breadcrumb End -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Our solutions</h4>
-                                <ul>
-                                    <li><a href="#">Design & creatives</a></li>
-                                    <li><a href="#">Telecommunication</a></li>
-                                    <li><a href="#">Restaurant</a></li>
-                                    <li><a href="#">Programing</a></li>
-                                    <li><a href="#">Architecture</a></li>
-                                </ul>
+                </div>
+            </section>
+
+            <div class="shopping-cart">
+                <div class="px-4 px-lg-0">
+                    <div class="pb-5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                                    <!-- Shopping cart table -->
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="border-0 bg-light">
+                                                        <div class="p-2 px-3 text-uppercase">Course</div>
+                                                    </th>
+                                                    <th scope="col" class="border-0 bg-light">
+                                                        <div class="py-2 text-uppercase">Price</div>
+                                                    </th>
+                                                    <th scope="col" class="border-0 bg-light">
+                                                        <div class="py-2 text-uppercase">Remove</div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!--                                    <c:forEach items="${list}" var="o">-->
+                                                <tr th:each="course: ${course}">
+                                                    <th scope="row">
+                                                        <div class="p-2">
+                                                            <img src="${course.image}" alt="Image" width="70"
+                                                                 class="img-fluid rounded shadow-sm">
+                                                            <div class="ml-3 d-inline-block align-middle">
+                                                                <h5 class="mb-0"><a href="#"
+                                                                                    class="text-dark d-inline-block"
+                                                                                    th:text="${course.name}"></a></h5>
+                                                                <span class="text-muted font-weight-normal font-italic"></span>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <td class="align-middle" th:text="${course.price}">
+                                                        <strong>Price</strong></td>
+                                                    <td class="align-middle"><a href="#" class="text-dark">
+                                                        <button type="button" class="btn btn-danger">Delete</button>
+                                                    </a>
+                                                    </td>
+                                                </tr>
+                                                <!--                                    </c:forEach>-->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- End -->
+                                </div>
                             </div>
+
+                            <div class="row py-5 p-4 bg-white rounded shadow-sm">
+                                <div class="col-lg-6">
+                                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">
+                                        Payment
+                                    </div>
+                                    <div class="p-4">
+                                        <ul class="list-unstyled mb-4">
+                                            <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                                    class="text-muted">Price</strong><strong>100 $</strong></li>
+                                            <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                                    class="text-muted">Total</strong>
+                                                <h5 class="font-weight-bold">110 $</h5>
+                                            </li>
+                                        </ul>
+                                        <a href="buy" class="btn btn-dark rounded-pill py-2 btn-block">Buy</a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Support</h4>
-                                <ul>
-                                    <li><a href="#">Design & creatives</a></li>
-                                    <li><a href="#">Telecommunication</a></li>
-                                    <li><a href="#">Restaurant</a></li>
-                                    <li><a href="#">Programing</a></li>
-                                    <li><a href="#">Architecture</a></li>
-                                </ul>
+                </div>
+
+                <div class="services-area services-area2 section-padding40">
+                    <div class="container">
+                        <div class="row justify-content-sm-center">
+                            <div class="col-lg-4 col-md-6 col-sm-8">
+                                <div class="single-services mb-30">
+                                    <div class="features-icon">
+                                        <img th:src="@{/img/icon/icon1.svg}" alt="">
+                                    </div>
+                                    <div class="features-caption">
+                                        <h3>60+ UX courses</h3>
+                                        <p>The automated process all your website tasks.</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Company</h4>
-                                <ul>
-                                    <li><a href="#">Design & creatives</a></li>
-                                    <li><a href="#">Telecommunication</a></li>
-                                    <li><a href="#">Restaurant</a></li>
-                                    <li><a href="#">Programing</a></li>
-                                    <li><a href="#">Architecture</a></li>
-                                </ul>
+                            <div class="col-lg-4 col-md-6 col-sm-8">
+                                <div class="single-services mb-30">
+                                    <div class="features-icon">
+                                        <img th:src="@{/img/icon/icon2.svg}" alt="">
+                                    </div>
+                                    <div class="features-caption">
+                                        <h3>Expert instructors</h3>
+                                        <p>The automated process all your website tasks.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-8">
+                                <div class="single-services mb-30">
+                                    <div class="features-icon">
+                                        <img th:src="@{/img/icon/icon3.svg}" alt="">
+                                    </div>
+                                    <div class="features-caption">
+                                        <h3>Life time access</h3>
+                                        <p>The automated process all your website tasks.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- footer-bottom area -->
-        <div class="footer-bottom-area">
-            <div class="container">
-                <div class="footer-border">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-xl-12 ">
-                            <div class="footer-copy-right text-center">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+        </main>
+        <footer>
+            <div class="footer-wrappper footer-bg">
+                <!-- Footer Start-->
+                <div class="footer-area footer-padding">
+                    <div class="container">
+                        <div class="row justify-content-between">
+                            <div class="col-xl-4 col-lg-5 col-md-4 col-sm-6">
+                                <div class="single-footer-caption mb-50">
+                                    <div class="single-footer-caption mb-30">
+                                        <!-- logo -->
+                                        <div class="footer-logo mb-25">
+                                            <a href="index.html"><img th:src="@{/img/logo/logo2_footer.png}" alt=""></a>
+                                        </div>
+                                        <div class="footer-tittle">
+                                            <div class="footer-pera">
+                                                <p>The automated process starts as soon as your clothes go into the
+                                                    machine.</p>
+                                            </div>
+                                        </div>
+                                        <!-- social -->
+                                        <div class="footer-social">
+                                            <a href="#"><i class="fab fa-twitter"></i></a>
+                                            <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
+                                <div class="single-footer-caption mb-50">
+                                    <div class="footer-tittle">
+                                        <h4>Our solutions</h4>
+                                        <ul>
+                                            <li><a href="#">Design & creatives</a></li>
+                                            <li><a href="#">Telecommunication</a></li>
+                                            <li><a href="#">Restaurant</a></li>
+                                            <li><a href="#">Programing</a></li>
+                                            <li><a href="#">Architecture</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6">
+                                <div class="single-footer-caption mb-50">
+                                    <div class="footer-tittle">
+                                        <h4>Support</h4>
+                                        <ul>
+                                            <li><a href="#">Design & creatives</a></li>
+                                            <li><a href="#">Telecommunication</a></li>
+                                            <li><a href="#">Restaurant</a></li>
+                                            <li><a href="#">Programing</a></li>
+                                            <li><a href="#">Architecture</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                                <div class="single-footer-caption mb-50">
+                                    <div class="footer-tittle">
+                                        <h4>Company</h4>
+                                        <ul>
+                                            <li><a href="#">Design & creatives</a></li>
+                                            <li><a href="#">Telecommunication</a></li>
+                                            <li><a href="#">Restaurant</a></li>
+                                            <li><a href="#">Programing</a></li>
+                                            <li><a href="#">Architecture</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- footer-bottom area -->
+                <div class="footer-bottom-area">
+                    <div class="container">
+                        <div class="footer-border">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-xl-12 ">
+                                    <div class="footer-copy-right text-center">
+                                        <p>
+                                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                                            All rights reserved | This template is made with <i class="fa fa-heart"
+                                                                                                aria-hidden="true"></i>
+                                            by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer End-->
             </div>
+        </footer>
+        <!-- Scroll Up -->
+        <div id="back-top">
+            <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
         </div>
-        <!-- Footer End-->
-    </div>
-</footer>
-<!-- Scroll Up -->
-<div id="back-top" >
-    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
-</div>
 
-<!-- JS here -->
-<script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
-<!-- Jquery, Popper, Bootstrap -->
-<script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
-<script th:src="@{/js/popper.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<!-- Jquery Mobile Menu -->
-<script th:src="@{/js/jquery.slicknav.min.js}"></script>
+        <!-- JS here -->
+        <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
+        <!-- Jquery, Popper, Bootstrap -->
+        <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
+        <script th:src="@{/js/popper.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <!-- Jquery Mobile Menu -->
+        <script th:src="@{/js/jquery.slicknav.min.js}"></script>
 
-<!-- Video bg -->
-<script th:src="@{/js/jquery.vide.js}"></script>
+        <!-- Video bg -->
+        <script th:src="@{/js/jquery.vide.js}"></script>
 
-<!-- Jquery Slick , Owl-Carousel Plugins -->
-<script th:src="@{/js/owl.carousel.min.js}"></script>
-<script th:src="@{/js/slick.min.js}"></script>
-<!-- One Page, Animated-HeadLin -->
-<script th:src="@{/js/wow.min.js}"></script>
-<script th:src="@{/js/animated.headline.js}"></script>
-<script th:src="@{/js/jquery.magnific-popup.js}"></script>
+        <!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script th:src="@{/js/owl.carousel.min.js}"></script>
+        <script th:src="@{/js/slick.min.js}"></script>
+        <!-- One Page, Animated-HeadLin -->
+        <script th:src="@{/js/wow.min.js}"></script>
+        <script th:src="@{/js/animated.headline.js}"></script>
+        <script th:src="@{/js/jquery.magnific-popup.js}"></script>
 
-<!-- Date Picker -->
-<script th:src="@{/js/gijgo.min.js}"></script>
-<!-- Nice-select, sticky -->
-<script th:src="@{/js/jquery.nice-select.min.js}"></script>
-<script th:src="@{/js/jquery.sticky.js}"></script>
-<!-- Progress -->
-<script th:src="@{/js/jquery.barfiller.js}"></script>
+        <!-- Date Picker -->
+        <script th:src="@{/js/gijgo.min.js}"></script>
+        <!-- Nice-select, sticky -->
+        <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+        <script th:src="@{/js/jquery.sticky.js}"></script>
+        <!-- Progress -->
+        <script th:src="@{/js/jquery.barfiller.js}"></script>
 
-<!-- counter , waypoint,Hover Direction -->
-<script th:src="@{/js/jquery.counterup.min.js}"></script>
-<script th:src="@{/js/waypoints.min.js}"></script>
-<script th:src="@{/js/jquery.countdown.min.js}"></script>
-<script th:src="@{/js/hover-direction-snake.min.js}"></script>
+        <!-- counter , waypoint,Hover Direction -->
+        <script th:src="@{/js/jquery.counterup.min.js}"></script>
+        <script th:src="@{/js/waypoints.min.js}"></script>
+        <script th:src="@{/js/jquery.countdown.min.js}"></script>
+        <script th:src="@{/js/hover-direction-snake.min.js}"></script>
 
-<!-- contact js -->
-<script th:src="@{/js/contact.js}"></script>
-<script th:src="@{/js/jquery.form.js}"></script>
-<script th:src="@{/js/jquery.validate.min.js}"></script>
-<script th:src="@{/js/mail-script.js}"></script>
-<script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+        <!-- contact js -->
+        <script th:src="@{/js/contact.js}"></script>
+        <script th:src="@{/js/jquery.form.js}"></script>
+        <script th:src="@{/js/jquery.validate.min.js}"></script>
+        <script th:src="@{/js/mail-script.js}"></script>
+        <script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
 
-<!-- Jquery Plugins, main Jquery -->
-<script th:src="@{/js/plugins.js}"></script>
-<script th:src="@{/js/main.js}"></script>
-<script>
+        <!-- Jquery Plugins, main Jquery -->
+        <script th:src="@{/js/plugins.js}"></script>
+        <script th:src="@{/js/main.js}"></script>
+        <script>
     function load(){
-        var amount = document.getElementsByClassName("course").length;
+        var start = document.getElementsByClassName("course").length;
         $.ajax({
             url:"/user/loadmorecourse",
             type:"get",
             data:{
-                amount: amount
+                start: start
             },
             success: function (data){
                 if(data != ""){
@@ -362,6 +381,9 @@
             }
         })
     }
-</script>
-</body>
+
+
+
+        </script>
+    </body>
 </html>
