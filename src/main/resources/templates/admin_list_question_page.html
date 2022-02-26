@@ -41,34 +41,12 @@
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
                             List Question
-                            <button id="addSubjectButton" type="button" class="btn btn-primary"
-                                    onclick="showQuestionAdd()">
+                            <button id="addSubjectButton" type="button" class="btn btn-primary" href="/question/create">
                                 Add Question
                             </button>
                         </div>
                         <div class="card-body">
                             <table id="QuestionDatatable" style="width:100%;">
-<!--                                <thead>-->
-<!--                                    <tr>-->
-<!--                                        <th class="sorting" scope="col">ID</th>-->
-<!--                                        <th class="sorting" scope="col" style="width: 40px">Question</th>-->
-<!--                                        <th class="sorting" scope="col">Answer</th>-->
-<!--                                        <th class="sorting" scope="col">Explain</th>-->
-<!--                                        <th class="sorting" scope="col" colspan="2">Action</th>-->
-<!--                                    </tr>-->
-<!--                                </thead>-->
-<!--                                <tbody th:each="question : ${question_list}">-->
-<!--                                <tr>-->
-<!--                                    <th scope="row" th:text="${question.id}"></th>-->
-<!--                                    <td th:text="${question.question}" style="width: 40px;"></td>-->
-<!--                                    <td th:text="${question.answer}"></td>-->
-<!--                                    <td th:text="${question.explain}"></td>-->
-<!--                                    <td class="mx-auto">-->
-<!--                                        <button style="margin-right: 10px" type="button" class="btn btn-primary">Detail</button>-->
-<!--                                        <button type="button" class="btn btn-primary">Edit</button>-->
-<!--                                    </td>-->
-<!--                                </tr>-->
-<!--                                </tbody>-->
                             </table>
                         </div>
                     </div>
