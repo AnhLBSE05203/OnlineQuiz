@@ -89,7 +89,6 @@ public class QuestionController {
         }
         q.setSubject(subject);
         questionService.addQuestion(q);
-
         answerService.addAnswers(answers);
         modelMap.addAttribute("message", "Add successful!");
         return "create_question_page";
@@ -103,6 +102,14 @@ public class QuestionController {
         List<Answer> answers = answerService.getAnswers(31);
         modelMap.addAttribute("answer", answers);
         return "edit_question_page";
+    }
+    @GetMapping(path = "/detailQuestion")
+    String showDetailQuestion(HttpServletRequest request, ModelMap modelMap){
+        int question_id = Integer.parseInt(request.getParameter("questionId").trim());
+        System.out.println("In detail question method");
+        Question q = questionService.getQuestionByQuestionId(question_id);
+        modelMap.addAttribute("detailQuestion", q);
+        return "question_detail_page";
     }
 
     @PostMapping(path = "/editquestion")
@@ -142,15 +149,6 @@ public class QuestionController {
         modelMap.addAttribute("message", "Edit successful!");
         return "edit_question_page";
     }
-
-//    @GetMapping(path = "/listquestion")
-//    String showListQuestionPage(@Param(value = "subId") int subId, Model model, HttpServletRequest request) {
-//        List<Question> questionList = questionService.getQuesitonBySubjectId(1);
-//        Subject subject = subjectService.getSubjectById(subId);
-//        model.addAttribute("ques", questionList);
-//        model.addAttribute("sub", subject);
-//        return "question_list_page";
-//    }
 
     @GetMapping(path = "/list")
     String showQuestionListPage(ModelMap model){
