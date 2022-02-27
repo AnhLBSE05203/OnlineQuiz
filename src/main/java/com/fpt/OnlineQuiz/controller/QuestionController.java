@@ -135,6 +135,7 @@ public class QuestionController {
     public String processEditQuestion(ModelMap modelMap, HttpServletRequest request) {
         Question q = new Question();
         q.setQuestion(request.getParameter("question").trim());
+        q.setId(Integer.parseInt(request.getParameter("questionId")));
         int number = Integer.parseInt(request.getParameter("isAnswer"));
         String answer1 = request.getParameter("answer1").trim();
         String answer2 = request.getParameter("answer2").trim();
@@ -160,13 +161,16 @@ public class QuestionController {
         }
         q.setAnswers(answers);
         q.setExplain(request.getParameter("explain"));
-        Subject subject = subjectService.getSubjectById(1);
+        Subject subject = subjectService.getSubjectById(Integer.parseInt(request.getParameter("subjectId")));
         q.setSubject(subject);
-        questionService.addQuestion(q);
+        questionService.updateQuestion(q);
 
-        answerService.addAnswers(answers);
+        answerService.updateAnswers(answers);
         modelMap.addAttribute("message", "Edit successful!");
-        return "edit_question_page";
+        List<Question> questionList = questionService.getQuesitonBySubjectId(1);
+        modelMap.addAttribute("question_list", questionList);
+        modelMap.addAttribute("sub", subject);
+        return "admin_list_question_page";
     }
 
     @GetMapping(path = "/list")
