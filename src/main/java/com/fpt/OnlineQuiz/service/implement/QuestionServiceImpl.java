@@ -58,4 +58,11 @@ public class QuestionServiceImpl implements QuestionService {
     public void updateQuestion(Question question) {
         questionRepository.updateQuestion(question);
     }
+
+    @Override
+    public QuestionAdminDTO getQuestionDTOById(int id) {
+        Question question = questionRepository.getQuestionByQuestionId(id);
+        QuestionAdminDTO questionAdminDTO = question.toQuestionAdminDTO();
+        return questionAdminDTO;
+    }
 }

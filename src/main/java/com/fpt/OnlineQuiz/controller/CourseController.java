@@ -37,7 +37,7 @@ public class CourseController {
     }
 
 
-    @GetMapping(path = "/loadmorecourse")
+    @GetMapping(path = "/loadMoreCourse")
     public @ResponseBody
     void loadMore(
             @RequestParam("start") String startStr, HttpServletRequest request, HttpServletResponse response) throws IOException {

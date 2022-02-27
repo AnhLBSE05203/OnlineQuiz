@@ -11,9 +11,9 @@ import java.util.Optional;
 public interface SubjectService {
     List<Subject> findAllSubject();
 
-    List<Subject> getAllSubject(int account_id);
+    List<Subject> getAllSubject(int accountId);
 
-    List<Subject> getNext3Subject(int account_id, int start);
+    List<Subject> getNext3Subject(int accountId, int start);
 
     List<Subject> getFeaturedSubjects(int number);
 
@@ -33,7 +33,7 @@ public interface SubjectService {
 
     void addSubject(Subject subject);
 
-    List<Subject> findAllSubjectsByPaging(int pageindex, int pageSize);
+    List<Subject> findAllSubjectsByPaging(int pageIndex, int pageSize);
 
     Subject findSubByName(String name);
 }
