@@ -97,21 +97,38 @@ public class QuestionController {
     }
 
     @GetMapping(path = "/edit")
-    String showEditQuestionPage(ModelMap modelMap) {
-        //TODO Code Edit Question
-        Question q = questionService.getQuestionByQuestionId(31);
+    String showEditQuestionPage(ModelMap modelMap, HttpServletRequest request) {
+        String questionId = request.getParameter("questionId");
+        String subjectId = request.getParameter("subjectId");
+        Question q = questionService.getQuestionByQuestionId(Integer.parseInt(questionId));
         modelMap.addAttribute("question", q);
-        List<Answer> answers = answerService.getAnswers(31);
+        modelMap.addAttribute("subjectId", subjectId);
+        List<Answer> answers = new ArrayList<>();
+        Answer answer1 = new Answer();
+        answer1.setAnswer("1");
+        answer1.setCorrect(false);
+        answer1.setQuestion(q);
+        Answer answer2 = new Answer();
+        answer2.setAnswer("2");
+        answer2.setCorrect(false);
+        answer2.setQuestion(q);
+        Answer answer3 = new Answer();
+        answer3.setAnswer("10");
+        answer3.setCorrect(true);
+        answer3.setQuestion(q);
+        Answer answer4 = new Answer();
+        answer4.setAnswer("4");
+        answer4.setCorrect(false);
+        answer4.setQuestion(q);
+        answers.add(answer1);
+        answers.add(answer2);
+        answers.add(answer3);
+        answers.add(answer4);
+
+//        List<Answer> answers = answerService.getAnswers(31);
+//        System.out.println("Size of Answer: " + answers.size());
         modelMap.addAttribute("answer", answers);
         return "edit_question_page";
-    }
-    @GetMapping(path = "/detailQuestion")
-    String showDetailQuestion(HttpServletRequest request, ModelMap modelMap){
-        int question_id = Integer.parseInt(request.getParameter("questionId").trim());
-        System.out.println("In detail question method");
-        Question q = questionService.getQuestionByQuestionId(question_id);
-        modelMap.addAttribute("detailQuestion", q);
-        return "question_detail_page";
     }
 
     @PostMapping(path = "/editquestion")
