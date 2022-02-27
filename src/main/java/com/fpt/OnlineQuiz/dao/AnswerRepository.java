@@ -34,4 +34,10 @@ public class AnswerRepository {
             return null;
         }
     }
+    public void updateAnswers(List<Answer> answers){
+        for (Answer a: answers) {
+            em.merge(a);
+            em.flush();
+        }
+    }
 }
