@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -23,10 +24,9 @@ public class AnswerRepository {
         }
     }
     public List<Answer> getAnswersByQuestionId(int question_id){
-        //TODO fix SQL
         try {
             StringBuilder sb = new StringBuilder();
-            sb.append("select a from answer a where a.question.id =:id");
+            sb.append("select a from answer a where a.question_id =:id");
             Query query = em.createQuery(sb.toString(), Answer.class);
             query.setParameter("id", question_id);
             return (List<Answer>) query.getResultList();
