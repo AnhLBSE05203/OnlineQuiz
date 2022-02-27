@@ -22,4 +22,9 @@ public class AnswerServiceImpl implements AnswerService {
     public List<Answer> getAnswers(int question_id) {
         return (List<Answer>) answerRepository.getAnswersByQuestionId(question_id);
     }
+
+    @Override
+    public void updateAnswers(List<Answer> answers) {
+        answerRepository.updateAnswers(answers);
+    }
 }
