@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dto.QuestionAdminDTO;
+import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Answer;
@@ -9,6 +10,7 @@ import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.AnswerService;
 import com.fpt.OnlineQuiz.service.QuestionService;
 import com.fpt.OnlineQuiz.service.SubjectService;
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
@@ -163,5 +165,11 @@ public class QuestionController {
     public Page<QuestionAdminDTO> getQuestionsByPage(@RequestBody PagingRequest pagingRequest) {
         Page<QuestionAdminDTO> listQuestionDTO = questionService.getByPagingRequest(pagingRequest);
         return listQuestionDTO;
+    }
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public QuestionAdminDTO getSubjectDetails(@PathVariable Integer id) {
+        QuestionAdminDTO questionDTO = questionService.getQuestionDTOById(id);
+        return questionDTO;
     }
 }
