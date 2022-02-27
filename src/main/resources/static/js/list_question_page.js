@@ -43,17 +43,7 @@ function deleteQuestion(id){
 function edit(){
     var ques_id = document.getElementById('questionId').value;
     var sub_id = document.getElementById('subjectId').value;
-    alert('question id = ' + ques_id + ' subject id =' + sub_id);
-    $.ajax({
-        url: "/question/edit",
-        type:"get",
-        data:{
-            questionId : ques_id,
-            subjectId : sub_id
-        },
-        success:function (){
-        }
-    })
+    window.location = '/question/edit?questionId=' + ques_id + '&subjectId='+sub_id;
 }
 function showDetailQuestionModal(id) {
     var link = "/question/" + id;
@@ -78,3 +68,5 @@ function showDetailQuestionModal(id) {
 function closeModal(){
     $('#detailQuestionModal').modal('hide');
 }
+
+
