@@ -27,7 +27,7 @@ $(document).ready(function() {
             title : 'Action',
             // data : 'status',
             render: function(data, type, row, meta) {
-                var html = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailQuestionModal" onclick="showDetailQuestionModal('+ row['id'] + ')">'
+                var html = '<button type="button" class="btn btn-primary" onclick="showDetailQuestionModal('+ row['id'] + ')">'
                     + 'Detail</button>&nbsp';
 
                     html += '<button type="button" class="btn btn-primary" onclick="deleteQuestion('+ row['id'] +')">'
@@ -63,7 +63,7 @@ function showDetailQuestionModal(id) {
         }
     });
     $('#detailQuestionModal').modal('show');
-};
+}
 function closeModal(){
     $('#detailQuestionModal').modal('hide');
 }
