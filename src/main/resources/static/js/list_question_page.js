@@ -41,8 +41,19 @@ function deleteQuestion(id){
     alert("delete question id=  " + id);
 }
 function edit(){
-    var id = document.getElementById('questionId').val;
-    alert("Edit questionId = " + id);
+    var ques_id = document.getElementById('questionId').value;
+    var sub_id = document.getElementById('subjectId').value;
+    alert('question id = ' + ques_id + ' subject id =' + sub_id);
+    $.ajax({
+        url: "/question/edit",
+        type:"get",
+        data:{
+            questionId : ques_id,
+            subjectId : sub_id
+        },
+        success:function (){
+        }
+    })
 }
 function showDetailQuestionModal(id) {
     var link = "/question/" + id;

@@ -77,7 +77,7 @@
                             <div class="col-3">
                                 <div class="row-cols-1">
                                     <div class="mb-3">
-                                        <input type="hidden" name="subjectId" id="subjectId">
+                                        <input type="hidden" name="subjectId" id="subjectId" th:value="${sub.id}">
                                         <input type="hidden" name="questionId" id="questionId">
                                         <label class="form-label" for="answer"><strong>Answer</strong></label>
                                         <input class="form-control" style="width: 300px" type="text" id="answer" placeholder="Answer"
@@ -98,66 +98,13 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary btn-sm" onclick="edit()" type="submit">Edit</button>
+                    <a class="btn btn-primary btn-sm" onclick="edit()" id="btnEdit" type="submit">Edit</a>
                     <button type="button" class="btn btn-default" onclick="closeModal()">Close</button>
                 </div>
             </div>
 
         </div>
     </div>
-
-
-<!--    <div class="modal fade" id="detailQuestionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"-->
-<!--         aria-labelledby="staticBackdropLabel" aria-hidden="true" role="dialog">-->
-<!--        <div class="modal-dialog">-->
-<!--            <div class="modal-content" style="padding: 15px">-->
-<!--                <form>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col">-->
-<!--                            <div class="mb-3 w-100">-->
-<!--                                <label class="form-label" for="question"><strong>Question</strong></label>-->
-<!--                                <textarea class="form-control" style="resize: none" rows="5" type="text"-->
-<!--                                          id="question" placeholder="Question" name="question" readonly></textarea>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-3">-->
-<!--                            <div class="row-cols-1">-->
-<!--                                <div class="mb-3">-->
-<!--                                    <input type="hidden" name="subjectId" id="subjectId">-->
-<!--                                    <input type="hidden" name="questionId" id="questionId">-->
-<!--                                    <label class="form-label" for="answer"><strong>Answer</strong></label>-->
-<!--                                    <input class="form-control" style="width: 300px" type="text" id="answer" placeholder="Answer"-->
-<!--                                           name="answer" readonly>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-9">-->
-<!--                            <div class="mb-3">-->
-<!--                                <label class="form-label" for="explain"><strong>Explain</strong></label>-->
-<!--                                <textarea class="form-control" style="resize: none" rows="5" type="text"-->
-<!--                                          id="explain" placeholder="Explain" name="explain" readonly></textarea>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="row-cols-1">-->
-<!--                            <div class="mb-3 w-100">-->
-<!--                                <div class="modal-footer">-->
-<!--                                    <button class="btn btn-primary btn-sm" onclick="edit()" type="submit">Edit-->
-<!--                                    </button>-->
-<!--                                    <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
     <!-- placeholder for modal -->
     </div>
     <!-- Admin common js -->
@@ -166,7 +113,5 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script th:src="@{/js/list_question_page.js}"></script>
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-    <!-- -->
 </body>
 </html>
