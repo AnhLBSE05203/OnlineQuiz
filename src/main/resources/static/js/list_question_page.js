@@ -27,8 +27,8 @@ $(document).ready(function() {
             title : 'Action',
             // data : 'status',
             render: function(data, type, row, meta) {
-                var html = '<a href="/question/detailQuestion?questionId='+row['id']+'">'
-                    + 'Detail</a>&nbsp';
+                var html = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailQuestionModal" onclick="showDetailQuestionModal('+ row['id'] + ')">'
+                    + 'Detail</button>&nbsp';
 
                     html += '<button type="button" class="btn btn-primary" onclick="deleteQuestion('+ row['id'] +')">'
                         + 'Delete</button>&nbsp';
@@ -40,11 +40,30 @@ $(document).ready(function() {
 function deleteQuestion(id){
     alert("delete question id=  " + id);
 }
-// function showQuestion(id){
-//     alert("show question id = " + id);
-//     $.ajax({
-//         url:"/question/showDetailQuestion?questionId=" + id,
-//         type:"GET",
-//         success:function (){}
-//     })
-// }
+function edit(){
+    var id = document.getElementById('questionId').val;
+    alert("Edit questionId = " + id);
+}
+function showDetailQuestionModal(id) {
+    var link = "/question/" + id;
+    var question = "";
+    $.ajax({
+        url: link,
+        type:"get",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data){
+            question = data;
+            if(question != ""){
+                $("#questionId").val(question.id);
+                $("#question").val(question.question);
+                $("#answer").val(question.answer);
+                $("#explain").val(question.explain);
+            }
+        }
+    });
+    $('#detailQuestionModal').modal('show');
+};
+function closeModal(){
+    $('#detailQuestionModal').modal('hide');
+}
