@@ -36,10 +36,21 @@ public class AnswerRepository {
     }
     public void updateAnswers(List<Answer> answers){
 
-        //TODO Update Answers
         for (Answer a: answers) {
             em.merge(a);
-            em.flush();
+        }
+        em.flush();
+    }
+
+    public void deleteAnswersByQuestionId(int questionId) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("delete from Answer where question_id=:id");
+            Query query = em.createQuery(sb.toString());
+            query.setParameter("id", questionId);
+            query.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }
