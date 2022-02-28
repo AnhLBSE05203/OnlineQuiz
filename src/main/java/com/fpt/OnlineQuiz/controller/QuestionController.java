@@ -118,7 +118,11 @@ public class QuestionController {
         q.setId(Integer.parseInt(request.getParameter("questionId")));
         int number = Integer.parseInt(request.getParameter("isAnswer"));
         // either delete all Answers related to the Question then add new
-//        q.getAnswers().clear(); // orphanRemoval = true
+//        List<Answer> answers = q.getAnswers();
+//        answers.clear(); // orphanRemoval = true
+//        for(Answer answer :answers){
+//            answer.setQuestion(null);
+//        }
         // or edit the answers themselves
         String answer1 = request.getParameter("answer1").trim();
         String answer2 = request.getParameter("answer2").trim();
@@ -184,12 +188,12 @@ public class QuestionController {
     @GetMapping(path = "/delete")
     public String deleteQuestion(ModelMap modelMap, HttpServletRequest request) {
         int questionId = Integer.parseInt(request.getParameter("questionId"));
-        int subject_id = Integer.parseInt(request.getParameter("subjectId"));
+        int subjectId = Integer.parseInt(request.getParameter("subjectId"));
         answerService.deleteAnswerByQuestionId(questionId);
 
         questionService.deleteQuestion(questionId);
-        List<Question> questionList = questionService.getQuestionBySubjectId(subject_id);
-        Subject subject = subjectService.getSubjectById(subject_id);
+        List<Question> questionList = questionService.getQuestionBySubjectId(subjectId);
+        Subject subject = subjectService.getSubjectById(subjectId);
         modelMap.addAttribute("question_list", questionList);
         modelMap.addAttribute("sub", subject);
         modelMap.addAttribute("message", "Delete successful!");

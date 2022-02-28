@@ -65,7 +65,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void deleteQuestion(int question_id) {
-        questionRepository.deleteQuestion(question_id);
+    public void deleteQuestion(int questionId) {
+        questionRepository.deleteQuestion(questionId);
     }
 }

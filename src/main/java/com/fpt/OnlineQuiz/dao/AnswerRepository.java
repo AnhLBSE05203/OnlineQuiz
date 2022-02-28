@@ -7,8 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
-import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -18,25 +16,27 @@ public class AnswerRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public void addAnswers(List<Answer> answerList){
-        for (Answer answer : answerList){
+    public void addAnswers(List<Answer> answerList) {
+        for (Answer answer : answerList) {
             em.persist(answer);
         }
     }
-    public List<Answer> getAnswersByQuestionId(int question_id){
+
+    public List<Answer> getAnswersByQuestionId(int questionId) {
         try {
             StringBuilder sb = new StringBuilder();
             sb.append("select a from Answer a where question_id =:id");
             Query query = em.createQuery(sb.toString(), Answer.class);
-            query.setParameter("id", question_id);
+            query.setParameter("id", questionId);
             return (List<Answer>) query.getResultList();
-        }catch (Exception exception){
+        } catch (Exception exception) {
             return null;
         }
     }
-    public void updateAnswers(List<Answer> answers){
 
-        for (Answer a: answers) {
+    public void updateAnswers(List<Answer> answers) {
+
+        for (Answer a : answers) {
             em.merge(a);
         }
         em.flush();
@@ -49,7 +49,7 @@ public class AnswerRepository {
             Query query = em.createQuery(sb.toString());
             query.setParameter("id", questionId);
             query.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

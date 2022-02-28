@@ -43,16 +43,16 @@ public class CourseRepository {
     /**
      * Get a number of Course which user currently registers
      *
-     * @param account_id user's id
+     * @param accountId user's id
      * @return
      */
-    public List<Course> getTop3Courses(int account_id) {
+    public List<Course> getTop3Courses(int accountId) {
         try {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.SQL_GET_COURSES_BY_ACCOUNT);
             String sql = sb.toString();
             Query query = em.createQuery(sql, Collection.class);
-            query.setParameter("id", account_id);
+            query.setParameter("id", accountId);
             query.setMaxResults(3);
             return (List<Course>) query.getResultList();
         } catch (Exception ex) {
@@ -61,14 +61,14 @@ public class CourseRepository {
         return null;
     }
 
-    public List<Course> getNext3Courses(int account_id, int start) {
+    public List<Course> getNext3Courses(int accountId, int start) {
         try {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.SQL_GET_COURSES_BY_ACCOUNT);
             String sql = sb.toString();
             int size = 3;
             Query query = em.createQuery(sql, Collection.class);
-            query.setParameter("id", account_id);
+            query.setParameter("id", accountId);
             query.setFirstResult(start);
             query.setMaxResults(size);
             return (List<Course>) query.getResultList();
