@@ -77,4 +77,18 @@ public class CourseRepository {
         }
         return null;
     }
+
+    public Course getCourseById(int id) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.SQL_GET_COURSE_BY_ID);
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Course.class);
+            query.setParameter("id", id);
+            return (Course) query.getSingleResult();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

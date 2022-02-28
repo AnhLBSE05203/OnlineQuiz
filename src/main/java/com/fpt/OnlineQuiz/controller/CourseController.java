@@ -1,18 +1,17 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -73,5 +72,12 @@ public class CourseController {
                         "                </div>");
             }
         }
+    }
+
+    @GetMapping(value = "/getCourseUserDTO/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public CourseUserDTO getCourseUserDTO(@PathVariable Integer id) {
+        CourseUserDTO courseUserDTO = courseService.getCourseUserDTO(id);
+        return courseUserDTO;
     }
 }

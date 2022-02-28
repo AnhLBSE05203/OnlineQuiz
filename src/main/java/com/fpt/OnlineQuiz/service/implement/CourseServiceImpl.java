@@ -2,6 +2,7 @@ package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.CourseRepository;
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
+import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.service.CourseService;
 import com.fpt.OnlineQuiz.utils.Constants;
@@ -46,6 +47,13 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<Course> getCoursesRegistration(int accountId) {
         return courseRepository.getTop3Courses(accountId);
+    }
+
+    @Override
+    public CourseUserDTO getCourseUserDTO(int id) {
+        Course course = courseRepository.getCourseById(id);
+        CourseUserDTO courseUserDTO = course.toCourseUserDTO();
+        return courseUserDTO;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.model;
 
+import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,5 +49,19 @@ public class Course {
     public void removeAccount(Account account) {
         accounts.remove(account);
         account.getCourses().remove(this);
+    }
+
+    public CourseUserDTO toCourseUserDTO() {
+        CourseUserDTO courseUserDTO = new CourseUserDTO();
+        courseUserDTO.setId(this.getId());
+        if (this.getSubject().getImage() != null) {
+            courseUserDTO.setImgSrc(this.getSubject().getImage().getSrc());
+        }
+        courseUserDTO.setCourseName(this.getName());
+        courseUserDTO.setSubjectName(this.getSubject().getName());
+        courseUserDTO.setDescription(this.getDescription());
+        courseUserDTO.setPrice(this.getPrice());
+        courseUserDTO.setLessonTotal(this.getLessonTotal());
+        return courseUserDTO;
     }
 }

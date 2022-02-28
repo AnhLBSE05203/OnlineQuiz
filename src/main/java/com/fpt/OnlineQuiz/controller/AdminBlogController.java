@@ -8,43 +8,28 @@ import com.fpt.OnlineQuiz.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/blog")
 public class AdminBlogController {
+
     @Autowired
     private BlogService blogService;
 
-    @GetMapping("/login")
-    public String loginPage(Model model) {
-        return "admin_login_page";
-    }
-
-    @GetMapping("/forget_pass")
-    public String forgetPass() {
-        return "admin_forget_password";
-    }
-
-    @GetMapping("/dashboard")
-    public String dashboardPage() {
-        return "admin_dashboard";
-    }
-
-    @GetMapping("/blog")
+    @GetMapping(value = {"", "/"})
     public String blogPage() {
         return "admin_blog_page";
     }
 
-    @PostMapping(value = "/blog/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Page<BlogAdminDTO> getAllBlog(@RequestBody PagingRequest pagingRequest) {
         Page<BlogAdminDTO> listBlog = blogService.getAllBlogAdmin(pagingRequest);
         return listBlog;
     }
 
-    @GetMapping("/blog/{id}")
+    @GetMapping("/{id}")
     public Blog detailBlogPage(@PathVariable Integer id) {
         Blog blog = blogService.getDetailBlog(id);
         return blog;
