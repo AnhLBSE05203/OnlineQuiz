@@ -82,12 +82,12 @@ public class AdminLessonController {
         return lessonAdminDTOPage;
     }
 
-//    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public SubjectAdminDTO getSubjectDetails(@PathVariable Integer id) {
-//        SubjectAdminDTO subjectDTO = subjectService.getSubjectAdminDTOById(id);
-//        return subjectDTO;
-//    }
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public LessonAdminDTO getSubjectDetails(@PathVariable Integer id) {
+        LessonAdminDTO lessonAdminDTO = lessonService.getSubjectAdminDTOById(id);
+        return subjectDTO;
+    }
 
 //    @GetMapping(value = "/delete/{id}")
 //    public String deleteSubject(@PathVariable Integer id) {
