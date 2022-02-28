@@ -1,5 +1,8 @@
 package com.fpt.OnlineQuiz.service;
 
+import com.fpt.OnlineQuiz.dto.AccountAdminDTO;
+import com.fpt.OnlineQuiz.dto.paging.Page;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Token;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -51,9 +54,8 @@ public interface AccountService extends UserDetailsService {
      * @param account User's Account
      */
     void updatePassword(Account account, String newPassword);
-    /**
-     * Update Account
-     * @param account User's Account
-     */
 
+    Page<AccountAdminDTO> listAccountAdmin(PagingRequest pagingRequest);
+
+    Account detailAccount(Integer id);
 }
