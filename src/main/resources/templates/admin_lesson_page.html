@@ -54,8 +54,8 @@
         </footer>
     </div>
 </div>
- placeholder for modal
- Edit Lesson Modal
+<!-- placeholder for modal-->
+<!-- Edit Lesson Modal-->
 <div class="modal fade" id="lessonEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -72,25 +72,31 @@
                     <input type="hidden" id="editLessonStatusStr" th:name="statusStr" value="">
                     <table class="formTable" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td>Id:</td>
-                            <td><input type="text" id="editLessonId" th:name="id" readonly></td>
+                            <td>Lesson Name:</td>
+                            <td><input type="text" id="EditLessonName" th:name="name" required></td>
                         </tr>
                         <tr>
-                            <td>Total no. of Courses:</td>
-                            <td><input type="text" id="editLessonTotalCourse">
-                                      <!-- th:field="*{totalCourse}" -->readonly></td>
+                            <td>Lesson Type:</td>
+                            <td><select th:field="*{lessonType}">
+                                <option value="learn" >learn</option>
+                                <option value="quiz">quiz</option>
+                            </select></td>
                         </tr>
                         <tr>
-                            <td>Name:</td>
-                            <td><input type="text" id="editLessonName" th:name="name" required></td>
+                            <td>Choose Subjects:</td>
+                            <td><select  th:field="*{subjects}"   >
+                                <option th:each="s : ${subjectList}"  th:value="${s.name}" th:utext="${s.name}"></option>
+                            </select></td>
                         </tr>
-                        <td>Status:</td>
-                        <td><select id="editLessonStatus" th:name="status">
-                            <option th:each="status : ${statusMap}" th:value="${status.key}"
-                                    th:text="${status.value}">
-                            </option>
-                        </select>
-                        </td>
+                        <tr>
+                            <td>Lesson Content:</td>
+                            <td><textarea id="EditLessonContent" th:name="content" required> </textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lesson Time:</td>
+                            <td><input style="width: auto" type="text" id="addLessonTime" th:name="time" required placeholder="Input minutes ,ex:20"></td>
+                        </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
