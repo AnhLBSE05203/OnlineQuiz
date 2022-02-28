@@ -3,10 +3,13 @@ package com.fpt.OnlineQuiz.service.implement;
 import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDLessonRepository;
 import com.fpt.OnlineQuiz.dao.LessonRepository;
 import com.fpt.OnlineQuiz.dto.LessonAdminDTO;
+import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Lesson;
+import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.LessonService;
+import com.fpt.OnlineQuiz.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +61,8 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public Optional<Lesson> getLessonAdminDTOById(int id) {
-        return CRUDLessonRepository.findById(id);
+    public LessonAdminDTO getLessonAdminDTOById(int id) {
+        Optional<Lesson> lesson = CRUDLessonRepository.findById(id);
+        return lesson.get().toLessonAdminDTO();
     }
 }
