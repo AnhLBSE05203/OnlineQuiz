@@ -13,9 +13,28 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <table class="formTable" cellspacing="0" cellpadding="0">
-                            <td>Name:</td>
-                            <td><input type="text" id="addSubjectName" th:name="name" required></td>
+                        <img id="courseImg" alt="">
+                        <table class="courseDetailTable" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>Course Name:</td>
+                                <td><span id="courseName"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Subject Name:</td>
+                                <td><span id="courseSubjectName"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Description:</td>
+                                <td><p id="courseDescription"></td>
+                            </tr>
+                            <tr>
+                                <td>Price:</td>
+                                <td><span id="coursePrice"></span></td>
+                            </tr>
+                            <tr>
+                                <td>No. of Lesson:</td>
+                                <td><span id="courseLessonTotal"></span></td>
+                            </tr>
                         </table>
                     </div>
                     <div class="modal-footer">

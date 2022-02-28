@@ -1,5 +1,5 @@
 function showUserCourseDetailModal(id) {
-    var link = "/course/getCourseUserDTO/" + id;
+    var link = "/user/getCourseUserDTO/" + id;
     var course = "";
     $.ajax({
                     url: link,
@@ -8,15 +8,15 @@ function showUserCourseDetailModal(id) {
                     dataType: "json",
                     success: function (data){
                     course = data;
-                        if(subject != ""){
-                            $("#editSubjectId").val(subject.id);
-                            $("#editSubjectName").val(subject.name);
-                            $("#editSubjectTotalCourse").val(subject.totalCourse);
-                            $("#editSubjectImg").attr("src", subject.imgSrc);
-                            $("#editSubjectStatus").val(subject.status).change();
-
+                        if(course != ""){
+                            $("#courseName").text(course.courseName);
+                            $("#courseSubjectName").text(course.subjectName);
+                            $("#courseDescription").text(course.description);
+                            $("#courseImg").attr("src", course.imgSrc);
+                            $("#coursePrice").text(course.price);
+                            $("#courseLessonTotal").text(course.lessonTotal);
                         }
                     }
                 });
-    $('#subjectEditModal').modal('show');
+    $('#courseUserModal').modal('show');
 };

@@ -1,5 +1,6 @@
-.formTable{
+.courseDetailTable{
     border: none;
     border-collapse: separate;
     border-spacing: 10px 10px;
+    font-size: 16px;
 }
