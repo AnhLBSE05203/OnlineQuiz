@@ -27,4 +27,9 @@ public class AnswerServiceImpl implements AnswerService {
     public void updateAnswers(List<Answer> answers) {
         answerRepository.updateAnswers(answers);
     }
+
+    @Override
+    public void deleteAnswerByQuestionId(int questionId) {
+        answerRepository.deleteAnswersByQuestionId(questionId);
+    }
 }
