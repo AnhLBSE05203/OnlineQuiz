@@ -99,12 +99,14 @@
                         <div class="properties pb-20" th:each="course : ${courseFeatured}">
                             <div class="properties__card">
                                 <div class="properties__img overlay1">
-                                    <a href="#"><img th:src="@{${course.imgSrc}}" class="featured-course-img"
-                                                     alt=""></a>
+                                    <a th:attr="onclick=|showUserCourseDetailModal('${course.id}')|"><img
+                                            th:src="@{${course.imgSrc}}" class="featured-course-img"
+                                            alt=""></a>
                                 </div>
                                 <div class="properties__caption">
                                     <p th:text="${course.subjectName}"></p>
-                                    <h3><a href="#" th:text="${course.courseName}"></a></h3>
+                                    <h3><a th:attr="onclick=|showUserCourseDetailModal('${course.id}')|"
+                                           th:text="${course.courseName}"></a></h3>
                                     <p class="courseDescription" th:text="${course.description}"></p>
                                     <div class="properties__footer d-flex justify-content-between align-items-center">
                                         <div class="price">
