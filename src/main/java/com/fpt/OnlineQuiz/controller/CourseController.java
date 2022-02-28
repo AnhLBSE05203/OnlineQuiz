@@ -1,8 +1,12 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +28,14 @@ public class CourseController {
 
     @GetMapping(path = "/mycourses")
     public String showCoursePage(ModelMap modelMap) {
-        List<Course> courseList = courseService.getTop3Courses(3);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Account account = null;
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            account = (Account) authentication.getPrincipal();
+        } else {
+            return "redirect:/home";
+        }
+        List<Course> courseList = courseService.getTop3Courses(account.getId());
         modelMap.addAttribute("my_course_list", courseList);
         return "my_courses_page";
     }
