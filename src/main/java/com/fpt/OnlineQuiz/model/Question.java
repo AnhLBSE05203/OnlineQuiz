@@ -1,8 +1,6 @@
 package com.fpt.OnlineQuiz.model;
 
 import com.fpt.OnlineQuiz.dto.QuestionAdminDTO;
-import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
-import com.fpt.OnlineQuiz.utils.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,9 +22,9 @@ public class Question {
     private int id;
     @Column(name = "question")
     private String question;
-    @Column(name="explanation")
+    @Column(name = "explanation")
     private String explain;
-    @Column(name="answer")
+    @Column(name = "answer")
     private String answer;
 
     @ManyToOne
@@ -34,7 +32,7 @@ public class Question {
     private Subject subject;
     @OneToMany(mappedBy = "question")
     private List<QuizHistoryQuestion> quizHistoryQuestions;
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Answer> answers;
 
     public QuestionAdminDTO toQuestionAdminDTO() {

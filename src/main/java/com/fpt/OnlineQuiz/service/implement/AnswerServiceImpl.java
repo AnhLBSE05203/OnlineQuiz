@@ -20,6 +20,16 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public List<Answer> getAnswers(int question_id) {
-        return answerRepository.getAnswersByQuestionId(question_id);
+        return (List<Answer>) answerRepository.getAnswersByQuestionId(question_id);
+    }
+
+    @Override
+    public void updateAnswers(List<Answer> answers) {
+        answerRepository.updateAnswers(answers);
+    }
+
+    @Override
+    public void deleteAnswerByQuestionId(int questionId) {
+        answerRepository.deleteAnswersByQuestionId(questionId);
     }
 }

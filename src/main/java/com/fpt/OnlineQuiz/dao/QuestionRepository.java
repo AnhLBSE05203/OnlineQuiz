@@ -57,7 +57,7 @@ public class QuestionRepository {
             String sql = sb.toString();
             Query query = em.createQuery(sql, Question.class);
             query.setParameter("id", question_id);
-            query.setMaxResults(3);
+//            query.setMaxResults(3);
             return (Question) query.getSingleResult();
         }catch (NoResultException e){
             return null;
@@ -106,6 +106,18 @@ public class QuestionRepository {
             return (long) query.getSingleResult();
         } catch (NoResultException e) {
             return 0;
+        }
+    }
+
+    public void deleteQuestion(int question_id) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("delete from Question where id=:id");
+            Query query = em.createQuery(sb.toString());
+            query.setParameter("id", question_id);
+            query.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

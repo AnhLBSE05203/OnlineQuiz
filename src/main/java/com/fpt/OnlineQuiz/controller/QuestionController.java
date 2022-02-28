@@ -10,10 +10,8 @@ import com.fpt.OnlineQuiz.service.AnswerService;
 import com.fpt.OnlineQuiz.service.QuestionService;
 import com.fpt.OnlineQuiz.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +52,12 @@ public class QuestionController {
     @PostMapping(path = "/addquestion")
     public String processCreateQuestion(ModelMap modelMap, HttpServletRequest request) {
         int subjectId = Integer.parseInt(request.getParameter("subjectId"));
+        Subject subject = subjectService.getSubjectById(subjectId);
+        if (subject == null) {
+            //redirect to wherever if subject doesn't exist
+            //use RedirectAttributes if wanting to pass an error message, maybe
+            return "redirect:/home";
+        }
         Question q = new Question();
         q.setQuestion(request.getParameter("question").trim());
         int number = Integer.parseInt(request.getParameter("isAnswer"));
@@ -81,12 +85,7 @@ public class QuestionController {
         }
         q.setAnswers(answers);
         q.setExplain(request.getParameter("explain"));
-        Subject subject = subjectService.getSubjectById(subjectId);
-        if (subject == null) {
-            //redirect to wherever if subject doesn't exist
-            //use RedirectAttributes if wanting to pass an error message, maybe
-            return "redirect:/home";
-        }
+
         q.setSubject(subject);
         questionService.addQuestion(q);
         answerService.addAnswers(answers);
@@ -95,28 +94,33 @@ public class QuestionController {
     }
 
     @GetMapping(path = "/edit")
-    String showEditQuestionPage(ModelMap modelMap) {
-        //TODO Code Edit Question
-        Question q = questionService.getQuestionByQuestionId(31);
+    String showEditQuestionPage(ModelMap modelMap, HttpServletRequest request) {
+        String questionId = request.getParameter("questionId");
+
+        Question q = questionService.getQuestionByQuestionId(Integer.parseInt(questionId));
+        // get subjectId through question, not param
+        // then since subject is a proxy object (only contains Id), get subject through the id
+        int subjectId = q.getSubject().getId();
         modelMap.addAttribute("question", q);
-        List<Answer> answers = answerService.getAnswers(31);
+        modelMap.addAttribute("subjectId", subjectId);
+        // add FetchType.EAGER to Question.answers
+        List<Answer> answers = q.getAnswers();
         modelMap.addAttribute("answer", answers);
         return "edit_question_page";
-    }
-    @GetMapping(path = "/detailQuestion")
-    String showDetailQuestion(HttpServletRequest request, ModelMap modelMap){
-        int question_id = Integer.parseInt(request.getParameter("questionId").trim());
-        System.out.println("In detail question method");
-        Question q = questionService.getQuestionByQuestionId(question_id);
-        modelMap.addAttribute("detailQuestion", q);
-        return "question_detail_page";
     }
 
     @PostMapping(path = "/editquestion")
     public String processEditQuestion(ModelMap modelMap, HttpServletRequest request) {
+        // edit not add
         Question q = new Question();
+        //int questionId = Integer.parseInt(request.getParameter("questionId").trim());
+        //Question q = questionService.getQuestionByQuestionId(questionId);
         q.setQuestion(request.getParameter("question").trim());
+        q.setId(Integer.parseInt(request.getParameter("questionId")));
         int number = Integer.parseInt(request.getParameter("isAnswer"));
+        // either delete all Answers related to the Question then add new
+//        q.getAnswers().clear(); // orphanRemoval = true
+        // or edit the answers themselves
         String answer1 = request.getParameter("answer1").trim();
         String answer2 = request.getParameter("answer2").trim();
         String answer3 = request.getParameter("answer3").trim();
@@ -129,6 +133,7 @@ public class QuestionController {
         List<Answer> answers = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             Answer a = new Answer();
+            a.setId(Integer.parseInt(request.getParameter("answer" + (i + 1) + "Id")));
             a.setAnswer(answerList.get(i));
             if (number == (i + 1)) {
                 q.setAnswer(a.getAnswer());
@@ -141,27 +146,54 @@ public class QuestionController {
         }
         q.setAnswers(answers);
         q.setExplain(request.getParameter("explain"));
-        Subject subject = subjectService.getSubjectById(1);
+        // get subjectId through question instead
+        Subject subject = subjectService.getSubjectById(Integer.parseInt(request.getParameter("subjectId")));
         q.setSubject(subject);
-        questionService.addQuestion(q);
+        questionService.updateQuestion(q);
 
-        answerService.addAnswers(answers);
+        answerService.updateAnswers(answers);
         modelMap.addAttribute("message", "Edit successful!");
-        return "edit_question_page";
+        List<Question> questionList = questionService.getQuesitonBySubjectId(1);
+        modelMap.addAttribute("question_list", questionList);
+        modelMap.addAttribute("sub", subject);
+        return "admin_list_question_page";
     }
 
     @GetMapping(path = "/list")
-    String showQuestionListPage(ModelMap model){
+    String showQuestionListPage(ModelMap model) {
         List<Question> questionList = questionService.getQuesitonBySubjectId(1);
         Subject subject = subjectService.getSubjectById(1);
         model.addAttribute("question_list", questionList);
         model.addAttribute("sub", subject);
         return "admin_list_question_page";
     }
+
     @PostMapping(value = "/getQuestionsByPage", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Page<QuestionAdminDTO> getQuestionsByPage(@RequestBody PagingRequest pagingRequest) {
         Page<QuestionAdminDTO> listQuestionDTO = questionService.getByPagingRequest(pagingRequest);
         return listQuestionDTO;
+    }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public QuestionAdminDTO getSubjectDetails(@PathVariable Integer id) {
+        QuestionAdminDTO questionDTO = questionService.getQuestionDTOById(id);
+        return questionDTO;
+    }
+
+    @GetMapping(path = "/delete")
+    public String deleteQuestion(ModelMap modelMap, HttpServletRequest request) {
+        int questionId = Integer.parseInt(request.getParameter("questionId"));
+        int subject_id = Integer.parseInt(request.getParameter("subjectId"));
+        answerService.deleteAnswerByQuestionId(questionId);
+
+        questionService.deleteQuestion(questionId);
+        List<Question> questionList = questionService.getQuesitonBySubjectId(subject_id);
+        Subject subject = subjectService.getSubjectById(subject_id);
+        modelMap.addAttribute("question_list", questionList);
+        modelMap.addAttribute("sub", subject);
+        modelMap.addAttribute("message", "Delete successful!");
+        return "admin_list_question_page";
     }
 }

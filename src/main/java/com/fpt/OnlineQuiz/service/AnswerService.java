@@ -9,4 +9,8 @@ public interface AnswerService {
     void addAnswers(List<Answer> answers);
 
     List<Answer> getAnswers(int question_id);
+
+    void updateAnswers(List<Answer> answers);
+
+    void deleteAnswerByQuestionId(int questionId);
 }

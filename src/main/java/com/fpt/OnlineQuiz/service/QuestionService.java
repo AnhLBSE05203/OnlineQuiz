@@ -18,4 +18,8 @@ public interface QuestionService {
     void addQuestion(Question question);
 
     void updateQuestion(Question question);
+
+    QuestionAdminDTO getQuestionDTOById(int id);
+
+    void deleteQuestion(int question_id);
 }
