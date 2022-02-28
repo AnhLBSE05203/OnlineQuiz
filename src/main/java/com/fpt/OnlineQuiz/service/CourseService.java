@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.service;
 
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
+import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import com.fpt.OnlineQuiz.model.Course;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface CourseService {
     List<Course> getTop3Courses(int accountId);
 
     List<Course> getCoursesRegistration(int accountId);
+
+    CourseUserDTO getCourseUserDTO(int id);
 }

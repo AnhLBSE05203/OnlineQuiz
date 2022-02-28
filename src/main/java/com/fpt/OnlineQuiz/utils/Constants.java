@@ -145,7 +145,7 @@ public class Constants {
     public static final String SQL_PATH_GET_IMAGE_BY_ID = "/static/sql/getImageById.sql";
     //sql strings
     public static final String SQL_GET_COURSES_BY_ACCOUNT = "select a.courses from Account a where a.id =:id";
-
+    public static final String SQL_GET_COURSE_BY_ID = "SELECT c FROM Course c WHERE c.id = :id";
     //home page constants
     public static final int HOME_PAGE_COURSE_NUMBER = 4;
     public static final int HOME_PAGE_EXPERT_NUMBER = 3;
