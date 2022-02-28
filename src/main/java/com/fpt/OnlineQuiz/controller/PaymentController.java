@@ -1,6 +1,6 @@
-//package com.fpt.OnlineQuiz.controller;
-//
-//public class PaymentController {
+package com.fpt.OnlineQuiz.controller;
+
+public class PaymentController {
 //    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        String vnp_Version = "2.1.0";
 //        String vnp_Command = "pay";
@@ -106,4 +106,4 @@
 //    }
 //    //vui lòng tham khảo thêm tại code demo
 //
-//}
+}
