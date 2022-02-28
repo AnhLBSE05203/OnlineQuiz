@@ -26,7 +26,7 @@ public class AnswerRepository {
     public List<Answer> getAnswersByQuestionId(int question_id){
         try {
             StringBuilder sb = new StringBuilder();
-            sb.append("select a from answer a where a.question_id =:id");
+            sb.append("select a from Answer a where question_id =:id");
             Query query = em.createQuery(sb.toString(), Answer.class);
             query.setParameter("id", question_id);
             return (List<Answer>) query.getResultList();
