@@ -12,6 +12,7 @@
         <div th:replace="components/header_footer.html :: common-style"></div>
 
         <link rel="stylesheet" th:href="@{/css/home_page.css}">
+        <link rel="stylesheet" th:href="@{/css/user_course_detail_modal.css}">
     </head>
 
     <body>
@@ -110,13 +111,16 @@
                                             <span th:text="'$' + ${course.price}"></span>
                                         </div>
                                     </div>
-                                    <a href="#" class="border-btn border-btn2">Find out more</a>
+                                    <a th:attr="onclick=|showUserCourseDetailModal('${course.id}')|"
+                                       class="border-btn border-btn2">Find out more</a>
                                 </div>
                             </div>
                         </div>
                         <!-- Single -->
                     </div>
                 </div>
+            </div>
+            <div th:replace="components/user_course_detail_modal.html :: courseUserModal">
             </div>
             <!-- Courses area End -->
             <!--? About Area-1 Start -->
@@ -300,5 +304,6 @@
         </th:block>
         <!-- page-specific js -->
         <script th:src="@{/js/home_page.js}"></script>
+        <script th:src="@{/js/user_course_detail.js}"></script>
     </body>
 </html>
