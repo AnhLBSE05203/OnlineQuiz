@@ -5,6 +5,7 @@ import com.fpt.OnlineQuiz.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,12 +24,12 @@ public class BlogController {
     public String getAllBlog(ModelMap modelMap, HttpServletRequest request) {
         //data send to html:ModelMap
         String page = request.getParameter("page");
+        int pageSize = 2;
         System.out.println(page);
         if (page == null) {
             page = "1";
-            int pageSize = 2;
             int pageIndex = Integer.parseInt(page);
-            ArrayList<Blog> listBlogByIndex = blogService.getBlogByIndexPage(pageIndex);
+            ArrayList<Blog> listBlogByIndex = blogService.getBlogByIndexPage(pageIndex, pageSize);
             long totalRecord = blogService.countBlog();
             long totalPage = totalRecord % pageSize == 0 ? totalRecord / pageSize : (totalRecord / pageSize) + 1;
 
@@ -37,9 +38,8 @@ public class BlogController {
             modelMap.addAttribute("listBlog", listBlogByIndex);
         } else {
             page = request.getParameter("page");
-            int pageSize = 2;
             int pageIndex = Integer.parseInt(page);
-            ArrayList<Blog> listBlog = blogService.getBlogByIndexPage(pageIndex);
+            ArrayList<Blog> listBlog = blogService.getBlogByIndexPage(pageIndex, pageSize);
             long totalRecord = blogService.countBlog();
             long totalPage = totalRecord % pageSize == 0 ? totalRecord / pageSize : (totalRecord / pageSize) + 1;
 
@@ -53,8 +53,17 @@ public class BlogController {
     @RequestMapping(value = "/blogdetail", method = RequestMethod.GET)
     public String getBlogDetail(ModelMap modelMap, HttpServletRequest request) {
         //data send to html:ModelMap
-        int blogid = Integer.parseInt(request.getParameter("blogid"));
-        Blog blog = blogService.getDetailBlog(blogid);
+        String blogIdStr = request.getParameter("blogid");
+        int blogId;
+        if (blogIdStr == null || !StringUtils.hasLength(blogIdStr)) {
+            return "redirect:/blogcontroller";
+        }
+        try {
+            blogId = Integer.parseInt(request.getParameter("blogid"));
+        } catch (NumberFormatException e) {
+            return "redirect:/blogcontroller";
+        }
+        Blog blog = blogService.getDetailBlog(blogId);
         modelMap.addAttribute("blogdetail", blog);
         return "blog_details";
     }

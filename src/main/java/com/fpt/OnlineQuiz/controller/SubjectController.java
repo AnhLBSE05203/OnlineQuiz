@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
-@RequestMapping(path = "/subjectcontroller")
+@RequestMapping(path = "/subject")
 public class SubjectController {
 
     @Autowired
@@ -26,22 +26,12 @@ public class SubjectController {
     @Autowired
     private SubjectRepository subjectRepository;
 
-    @GetMapping(path = {"", "/listsubject"})
+    @GetMapping(path = {"", "/listSubject"})
     public String showMySubjectPage(ModelMap modelMap, HttpServletRequest request) {
         String page = request.getParameter("page");
-        int pageSize = 6;
         if (page == null) {
             page = "1";
-            int pageIndex = Integer.parseInt(page);
-            List<Subject> listsubject = subjectService.findAllSubjectsByPaging(pageIndex, pageSize);
-            long totalRecord = subjectRepository.countSubject();
-            long totalPage = totalRecord % pageSize == 0 ? totalRecord / pageSize : (totalRecord / pageSize) + 1;
-
-            modelMap.addAttribute("totalPage", totalPage);
-            modelMap.addAttribute("pageIndex", pageIndex);
-            modelMap.addAttribute("listsubject", listsubject);
-        } else {
-            page = request.getParameter("page");
+            int pageSize = 6;
             int pageIndex = Integer.parseInt(page);
             List<Subject> listSubject = subjectService.findAllSubjectsByPaging(pageIndex, pageSize);
             long totalRecord = subjectRepository.countSubject();
@@ -49,12 +39,23 @@ public class SubjectController {
 
             modelMap.addAttribute("totalPage", totalPage);
             modelMap.addAttribute("pageIndex", pageIndex);
-            modelMap.addAttribute("listBlog", listSubject);
+            modelMap.addAttribute("listSubject", listSubject);
+        } else {
+            page = request.getParameter("page");
+            int pageSize = 6;
+            int pageIndex = Integer.parseInt(page);
+            List<Subject> listSubject = subjectService.findAllSubjectsByPaging(pageIndex, pageSize);
+            long totalRecord = subjectRepository.countSubject();
+            long totalPage = totalRecord % pageSize == 0 ? totalRecord / pageSize : (totalRecord / pageSize) + 1;
+
+            modelMap.addAttribute("totalPage", totalPage);
+            modelMap.addAttribute("pageIndex", pageIndex);
+            modelMap.addAttribute("listSubject", listSubject);
         }
         return "listSubjectUser";
     }
 
-    @GetMapping(path = "/loadmoresubject")
+    @GetMapping(path = "/loadMoreSubject")
     public @ResponseBody
     void loadMore(
             @RequestParam("amount") String amount, HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -1,1 +1,1 @@
-SELECT a FROM Blog a WHERE a.id = :id
+SELECT b FROM Blog b WHERE b.id = :id

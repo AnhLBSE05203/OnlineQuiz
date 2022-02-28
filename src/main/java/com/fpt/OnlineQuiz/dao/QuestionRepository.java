@@ -57,7 +57,7 @@ public class QuestionRepository {
             String sql = sb.toString();
             Query query = em.createQuery(sql, Question.class);
             query.setParameter("id", question_id);
-            query.setMaxResults(3);
+//            query.setMaxResults(3);
             return (Question) query.getSingleResult();
         }catch (NoResultException e){
             return null;

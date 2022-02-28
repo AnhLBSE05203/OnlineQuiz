@@ -18,7 +18,7 @@ public interface BlogService {
 
     Page<BlogAdminDTO> getAllBlogAdmin(PagingRequest pagingRequest);
 
-    ArrayList<Blog> getBlogByIndexPage(int indexPage);
+    ArrayList<Blog> getBlogByIndexPage(int indexPage, int pageSize);
 
     Long countBlog();
 

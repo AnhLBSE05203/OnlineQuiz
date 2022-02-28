@@ -41,34 +41,13 @@
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
                             List Question
-                            <button id="addSubjectButton" type="button" class="btn btn-primary"
-                                    onclick="showQuestionAdd()">
+                            <button id="addSubjectButton" type="button" class="btn btn-primary" href="/question/create">
                                 Add Question
                             </button>
                         </div>
+                        <div style = "color: red" th:text = "${message}"></div>
                         <div class="card-body">
                             <table id="QuestionDatatable" style="width:100%;">
-<!--                                <thead>-->
-<!--                                    <tr>-->
-<!--                                        <th class="sorting" scope="col">ID</th>-->
-<!--                                        <th class="sorting" scope="col" style="width: 40px">Question</th>-->
-<!--                                        <th class="sorting" scope="col">Answer</th>-->
-<!--                                        <th class="sorting" scope="col">Explain</th>-->
-<!--                                        <th class="sorting" scope="col" colspan="2">Action</th>-->
-<!--                                    </tr>-->
-<!--                                </thead>-->
-<!--                                <tbody th:each="question : ${question_list}">-->
-<!--                                <tr>-->
-<!--                                    <th scope="row" th:text="${question.id}"></th>-->
-<!--                                    <td th:text="${question.question}" style="width: 40px;"></td>-->
-<!--                                    <td th:text="${question.answer}"></td>-->
-<!--                                    <td th:text="${question.explain}"></td>-->
-<!--                                    <td class="mx-auto">-->
-<!--                                        <button style="margin-right: 10px" type="button" class="btn btn-primary">Detail</button>-->
-<!--                                        <button type="button" class="btn btn-primary">Edit</button>-->
-<!--                                    </td>-->
-<!--                                </tr>-->
-<!--                                </tbody>-->
                             </table>
                         </div>
                     </div>
@@ -76,6 +55,55 @@
             </main>
             <footer th:replace="components/header_footer.html :: admin-footer">
             </footer>
+        </div>
+    </div>
+<!--    Detail modal-->
+    <!-- Modal -->
+    <div id="detailQuestionModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3 w-100">
+                                    <label class="form-label" for="question"><strong>Question</strong></label>
+                                    <textarea class="form-control" style="resize: none" rows="5" type="text"
+                                              id="question" placeholder="Question" name="question" readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="row-cols-1">
+                                    <div class="mb-3">
+                                        <input type="hidden" name="subjectId" id="subjectId" th:value="${sub.id}">
+                                        <input type="hidden" name="questionId" id="questionId">
+                                        <label class="form-label" for="answer"><strong>Answer</strong></label>
+                                        <input class="form-control" style="width: 300px" type="text" id="answer" placeholder="Answer"
+                                               name="answer" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="mb-3">
+                                    <label class="form-label" for="explain"><strong>Explain</strong></label>
+                                    <textarea class="form-control" style="resize: none" rows="5" type="text"
+                                              id="explain" placeholder="Explain" name="explain" readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary btn-sm" onclick="edit()" id="btnEdit" type="submit">Edit</a>
+                    <button type="button" class="btn btn-default" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+
         </div>
     </div>
     <!-- placeholder for modal -->
@@ -86,6 +114,5 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script th:src="@{/js/list_question_page.js}"></script>
-    <!-- -->
 </body>
 </html>
