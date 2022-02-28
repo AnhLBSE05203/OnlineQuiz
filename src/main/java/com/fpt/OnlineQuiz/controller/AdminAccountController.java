@@ -16,7 +16,7 @@ public class AdminAccountController {
     }
 
     @GetMapping("/account")
-    public String blogPage() {
+    public String accountPage() {
         return "admin_account_page";
     }
 
