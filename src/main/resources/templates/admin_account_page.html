@@ -33,7 +33,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        List Blog
+                        List Account
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple">
@@ -46,24 +46,6 @@
                                 <th>Action</th>
                             </tr>
                             </thead>
-                            <tbody th:each="blog : ${listBlog}">
-                            <tr>
-                                <td th:text="${blog.getId()}"></td>
-                                <td th:text="${blog.getTitle()}"></td>
-                                <td th:text="${#strings.abbreviate(blog.content,100)} "></td>
-                                <td th:text="${blog.getStatus()}"></td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#editModal">
-                                        Edit
-                                    </button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
                         </table>
                     </div>
                 </div>
