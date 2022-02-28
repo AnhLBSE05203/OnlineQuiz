@@ -1,6 +1,9 @@
 package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.TokenRepository;
+import com.fpt.OnlineQuiz.dto.AccountAdminDTO;
+import com.fpt.OnlineQuiz.dto.paging.Page;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -88,6 +91,16 @@ public class AccountServiceImpl implements AccountService {
 		String encodedPassword = passwordEncoder.encode(newPassword);
 		account.setPassword(encodedPassword);
 		accountRepository.updateAccount(account);
+	}
+
+	@Override
+	public Page<AccountAdminDTO> listAccountAdmin(PagingRequest pagingRequest) {
+		return null;
+	}
+
+	@Override
+	public Account detailAccount(Integer id) {
+		return null;
 	}
 
 }
