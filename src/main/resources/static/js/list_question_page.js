@@ -37,13 +37,18 @@ $(document).ready(function() {
         } ]
     });
 });
-function deleteQuestion(id){
-    alert("delete question id=  " + id);
+function deleteQuestion(ques_id){
+    var sub_id = document.getElementById('subjectId').value;
+    var confirmDelete = confirm("Are you sure to delete this question?");
+    if (confirmDelete == 1) {
+        window.location.replace('/question/delete?questionId=' + ques_id + '&subjectId='+sub_id);
+    }
 }
 function edit(){
     var ques_id = document.getElementById('questionId').value;
     var sub_id = document.getElementById('subjectId').value;
-    window.location = '/question/edit?questionId=' + ques_id + '&subjectId='+sub_id;
+    // window.location = '/question/edit?questionId=' + ques_id + '&subjectId='+sub_id;
+    window.location.replace('/question/edit?questionId=' + ques_id + '&subjectId='+sub_id);
 }
 function showDetailQuestionModal(id) {
     var link = "/question/" + id;
@@ -68,5 +73,6 @@ function showDetailQuestionModal(id) {
 function closeModal(){
     $('#detailQuestionModal').modal('hide');
 }
+
 
 
