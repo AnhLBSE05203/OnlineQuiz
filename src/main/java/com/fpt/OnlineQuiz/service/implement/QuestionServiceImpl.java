@@ -2,11 +2,9 @@ package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.QuestionRepository;
 import com.fpt.OnlineQuiz.dto.QuestionAdminDTO;
-import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Question;
-import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,13 +19,13 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionRepository questionRepository;
 
     @Override
-    public List<Question> getQuesitonBySubjectId(int subject_id) {
-        return questionRepository.getQuestionsBySubjectId(subject_id);
+    public List<Question> getQuestionBySubjectId(int subjectId) {
+        return questionRepository.getQuestionsBySubjectId(subjectId);
     }
 
     @Override
-    public Question getQuestionByQuestionId(int question_id) {
-        return questionRepository.getQuestionByQuestionId(question_id);
+    public Question getQuestionByQuestionId(int questionId) {
+        return questionRepository.getQuestionByQuestionId(questionId);
     }
 
     @Override
@@ -36,7 +34,7 @@ public class QuestionServiceImpl implements QuestionService {
         long count = questionRepository.getQuestionCountByPagingRequest(pagingRequest);
         List<QuestionAdminDTO> questionAdminDTOs = new ArrayList<>();
         // convert Subject to SubjectAdminDTO
-        for(Question question : questions) {
+        for (Question question : questions) {
             QuestionAdminDTO questionAdminDTO = question.toQuestionAdminDTO();
             questionAdminDTOs.add(questionAdminDTO);
         }

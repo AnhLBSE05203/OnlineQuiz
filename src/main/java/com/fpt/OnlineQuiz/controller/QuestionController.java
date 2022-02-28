@@ -103,8 +103,7 @@ public class QuestionController {
         int subjectId = q.getSubject().getId();
         modelMap.addAttribute("question", q);
         modelMap.addAttribute("subjectId", subjectId);
-        // add FetchType.EAGER to Question.answers
-        List<Answer> answers = q.getAnswers();
+        List<Answer> answers = answerService.getAnswers(Integer.parseInt(questionId));
         modelMap.addAttribute("answer", answers);
         return "edit_question_page";
     }
@@ -153,7 +152,7 @@ public class QuestionController {
 
         answerService.updateAnswers(answers);
         modelMap.addAttribute("message", "Edit successful!");
-        List<Question> questionList = questionService.getQuesitonBySubjectId(1);
+        List<Question> questionList = questionService.getQuestionBySubjectId(1);
         modelMap.addAttribute("question_list", questionList);
         modelMap.addAttribute("sub", subject);
         return "admin_list_question_page";
@@ -161,7 +160,7 @@ public class QuestionController {
 
     @GetMapping(path = "/list")
     String showQuestionListPage(ModelMap model) {
-        List<Question> questionList = questionService.getQuesitonBySubjectId(1);
+        List<Question> questionList = questionService.getQuestionBySubjectId(1);
         Subject subject = subjectService.getSubjectById(1);
         model.addAttribute("question_list", questionList);
         model.addAttribute("sub", subject);
@@ -189,7 +188,7 @@ public class QuestionController {
         answerService.deleteAnswerByQuestionId(questionId);
 
         questionService.deleteQuestion(questionId);
-        List<Question> questionList = questionService.getQuesitonBySubjectId(subject_id);
+        List<Question> questionList = questionService.getQuestionBySubjectId(subject_id);
         Subject subject = subjectService.getSubjectById(subject_id);
         modelMap.addAttribute("question_list", questionList);
         modelMap.addAttribute("sub", subject);
