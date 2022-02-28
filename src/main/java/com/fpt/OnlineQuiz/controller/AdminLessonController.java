@@ -85,8 +85,8 @@ public class AdminLessonController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public LessonAdminDTO getSubjectDetails(@PathVariable Integer id) {
-        LessonAdminDTO lessonAdminDTO = lessonService.getSubjectAdminDTOById(id);
-        return subjectDTO;
+        LessonAdminDTO lessonAdminDTO = lessonService.getLessonAdminDTOById(id);
+        return lessonAdminDTO;
     }
 
 //    @GetMapping(value = "/delete/{id}")
