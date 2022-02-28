@@ -32,7 +32,7 @@ public class Question {
     private Subject subject;
     @OneToMany(mappedBy = "question")
     private List<QuizHistoryQuestion> quizHistoryQuestions;
-    @OneToMany(mappedBy = "question", orphanRemoval = true)
+    @OneToMany(mappedBy = "question")
     private List<Answer> answers;
 
     public QuestionAdminDTO toQuestionAdminDTO() {

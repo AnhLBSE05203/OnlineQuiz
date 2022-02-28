@@ -118,11 +118,7 @@ public class QuestionController {
         q.setId(Integer.parseInt(request.getParameter("questionId")));
         int number = Integer.parseInt(request.getParameter("isAnswer"));
         // either delete all Answers related to the Question then add new
-//        List<Answer> answers = q.getAnswers();
-//        answers.clear(); // orphanRemoval = true
-//        for(Answer answer :answers){
-//            answer.setQuestion(null);
-//        }
+//        answerService.deleteAnswerByQuestionId(questionId);
         // or edit the answers themselves
         String answer1 = request.getParameter("answer1").trim();
         String answer2 = request.getParameter("answer2").trim();
