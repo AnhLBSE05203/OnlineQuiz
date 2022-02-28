@@ -35,7 +35,7 @@ public class BlogRepository {
                 sb.append(" ").append(line);
             }
             String sql = sb.toString();
-            //String sql = "SELECT a FROM Blog a";
+            //String sql = "SELECT b FROM Blog b";
             Query query = em.createQuery(sql, Blog.class);
             ArrayList<Blog> blogList = (ArrayList<Blog>) query.getResultList();
             return blogList;
@@ -59,7 +59,7 @@ public class BlogRepository {
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
                 sb.append(" AND lower(b.thumbnail.src) LIKE " + key);
-                sb.append(" AND lower(b.content) LIKE " + key);
+                sb.append(" OR lower(b.content) LIKE " + key);
                 sb.append(" OR lower(b.title) LIKE " + key);
             }
             // append sorting
@@ -94,7 +94,7 @@ public class BlogRepository {
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
                 sb.append(" AND lower(b.thumbnail.src) LIKE " + key);
-                sb.append(" AND lower(b.content) LIKE " + key);
+                sb.append(" OR lower(b.content) LIKE " + key);
                 sb.append(" OR lower(b.title) LIKE " + key);
             }
 
@@ -154,7 +154,7 @@ public class BlogRepository {
                 sb.append(" ").append(line);
             }
             String sql = sb.toString();
-            //String sql = "SELECT a FROM Blog a";
+            //String sql = "SELECT b FROM Blog b";
             Query query = em.createQuery(sql, Blog.class);
             query.setParameter("id", id);
             Blog blog = (Blog) query.getSingleResult();
