@@ -148,18 +148,22 @@
                                             <input type="hidden" name="subjectId" th:value="${subjectId}" id="subjectId">
                                             <input type="hidden" name="questionId" th:value="${question.id}" id="questionId">
                                             <label class="form-label" for="answer1"><strong>Answer1</strong></label>
+                                            <input type="hidden" name="answer1Id" th:value="${answer.get(0).id}" id="answer1Id">
                                             <input class="form-control" style="width: 830px" type="text" id="answer1" placeholder="Answer" name="answer1" required th:value="${answer.get(0).answer}">
                                             <input type="radio" value="1" name="isAnswer" th:checked="(${question.answer} == ${answer.get(0).answer})">Is Answer</br>
 
                                             <label class="form-label" for="answer2"><strong>Answer2</strong></label>
+                                            <input type="hidden" name="answer2Id" th:value="${answer.get(1).id}" id="answer2Id">
                                             <input class="form-control" style="width: 830px" type="text" id="answer2" placeholder="Answer" name="answer2" required th:value="${answer.get(1).answer}">
                                             <input type="radio" value="2" name="isAnswer" th:checked="(${question.answer} == ${answer.get(1).answer})">Is Answer</br>
 
                                             <label class="form-label" for="answer3"><strong>Answer3</strong></label>
+                                            <input type="hidden" name="answer3Id" th:value="${answer.get(2).id}" id="answer3Id">
                                             <input class="form-control" style="width: 830px" type="text" id="answer3" placeholder="Answer" name="answer3" required th:value="${answer.get(2).answer}">
                                             <input type="radio" value="3" name="isAnswer" th:checked="(${question.answer} == ${answer.get(2).answer})">Is Answer</br>
 
                                             <label class="form-label" for="answer4"><strong>Answer4</strong></label>
+                                            <input type="hidden" name="answer4Id" th:value="${answer.get(3).id}" id="answer4Id">
                                             <input class="form-control" style="width: 830px" type="text" id="answer4" placeholder="Answer" name="answer4" required th:value="${answer.get(3).answer}">
                                             <input type="radio" value="4" name="isAnswer" th:checked="(${question.answer} == ${answer.get(3).answer})">Is Answer</br>
                                         </div>
@@ -251,6 +255,10 @@
         var question = document.getElementById("question");
         var explain = document.getElementById("explain");
         var questionId = document.getElementById("questionId").value;
+        var answer1Id = document.getElementById("answer1Id");
+        var answer2Id = document.getElementById("answer2Id");
+        var answer3Id = document.getElementById("answer3Id");
+        var answer4Id = document.getElementById("answer4Id");
         $.ajax({
             url: "/question/editquestion",
             type: "post",
@@ -262,7 +270,11 @@
                 answer4: answer4,
                 isAnswer: isAnswer,
                 explain: explain,
-                questionId: questionId
+                questionId: questionId,
+                answer1Id: answer1Id,
+                answer2Id: answer2Id,
+                answer3Id:answer3Id,
+                answer4Id:answer4Id
             },
             success: function () {
 
