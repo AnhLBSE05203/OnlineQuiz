@@ -14,23 +14,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/admin")
 public class AdminBlogController {
+
     @Autowired
     private BlogService blogService;
-
-    @GetMapping("/login")
-    public String loginPage(Model model) {
-        return "admin_login_page";
-    }
-
-    @GetMapping("/forget_pass")
-    public String forgetPass() {
-        return "admin_forget_password";
-    }
-
-    @GetMapping("/dashboard")
-    public String dashboardPage() {
-        return "admin_dashboard";
-    }
 
     @GetMapping("/blog")
     public String blogPage() {
