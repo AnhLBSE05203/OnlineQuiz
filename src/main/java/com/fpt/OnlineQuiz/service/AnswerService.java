@@ -11,4 +11,6 @@ public interface AnswerService {
     List<Answer> getAnswers(int question_id);
 
     void updateAnswers(List<Answer> answers);
+
+    void deleteAnswerByQuestionId(int questionId);
 }
