@@ -65,4 +65,9 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionAdminDTO questionAdminDTO = question.toQuestionAdminDTO();
         return questionAdminDTO;
     }
+
+    @Override
+    public void deleteQuestion(int question_id) {
+        questionRepository.deleteQuestion(question_id);
+    }
 }
