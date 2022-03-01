@@ -19,7 +19,7 @@ public interface LessonService {
     void addLesson(Lesson lesson);
     LessonAdminDTO getLessonAdminDTOById(int id);
     void updateLesson(Lesson lesson);
-
+    void deleteLesson(Lesson lesson);
 
 
 }

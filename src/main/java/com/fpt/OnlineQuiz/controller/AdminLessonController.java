@@ -88,19 +88,18 @@ public class AdminLessonController {
         return lessonAdminDTO;
     }
 
-//    @GetMapping(value = "/delete/{id}")
-//    public String deleteSubject(@PathVariable Integer id) {
-//        Subject subject = subjectService.getSubjectById(id);
-//        subject.setStatus(Constants.STATUS_SUBJECT_DELETED);
-//        subjectService.updateSubject(subject);
-//        return "redirect:/admin/lesson";
-//    }
+    @GetMapping(value = "/delete/{id}")
+    public String deleteLesson(@PathVariable Integer id) {
+        Optional<Lesson> lesson = lessonService.getLessonById(id);
+        lessonService.
+        return "redirect:/admin/lesson";
+    }
 
-//    @GetMapping(value = "/recover/{id}")
-//    public String recoverSubject(@PathVariable Integer id) {
-//        Subject subject = subjectService.getSubjectById(id);
+    @GetMapping(value = "/recover/{id}")
+    public String recoverSubject(@PathVariable Integer id) {
+        Subject subject = subjectService.getSubjectById(id);
 //        subject.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
-//        subjectService.updateSubject(subject);
-//        return "redirect:/admin/lesson";
-//    }
+        subjectService.updateSubject(subject);
+        return "redirect:/admin/lesson";
+    }
 }

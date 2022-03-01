@@ -70,4 +70,9 @@ public class LessonServiceImpl implements LessonService {
     public void updateLesson(Lesson lesson) {
         lessonRepository.updateLesson(lesson);
     }
+
+    @Override
+    public void deleteLesson(Lesson lesson) {
+        CRUDLessonRepository.delete(lesson);
+    }
 }

@@ -84,7 +84,6 @@
                             <td><select th:name="lessonType" id="editLessonType">
                                 <option th:each="type : ${lessonType}" th:text="${type.name}" >
                                 </option>
-                                <!--                                <option value="quiz">quiz</option>-->
                             </select></td>
                         </tr>
                         <tr>
@@ -169,7 +168,7 @@
         </div>
     </div>
 </div>
-End Create Lesson Modal
+<!--End Create Lesson Modal-->
 <!-- Admin common js -->
 <th:block th:insert="components/header_footer.html :: admin-common-script">
 </th:block>
