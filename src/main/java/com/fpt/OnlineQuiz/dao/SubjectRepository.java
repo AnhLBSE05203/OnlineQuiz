@@ -179,6 +179,18 @@ public class SubjectRepository {
         }
     }
 
+    public Subject getSubjectByNameLower(String name) {
+        try {
+            StringBuilder sb = new StringBuilder("SELECT s FROM Subject s WHERE lower(s.name) = lower(:name)");
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Subject.class);
+            query.setParameter("name", name);
+            return (Subject) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
     public void updateSubject(Subject subject) {
         em.merge(subject);
         em.flush();

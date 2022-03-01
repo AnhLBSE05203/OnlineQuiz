@@ -36,4 +36,6 @@ public interface SubjectService {
     List<Subject> findAllSubjectsByPaging(int pageIndex, int pageSize);
 
     Subject findSubjectByName(String name);
+
+    Subject getSubjectByNameLower(String name);
 }

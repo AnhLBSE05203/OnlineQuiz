@@ -81,7 +81,7 @@ public class AdminSubjectController {
     @ResponseBody
     public SubjectAdminDTO getByName(HttpServletRequest request) {
         String name = request.getParameter("name");
-        Subject subject = subjectService.findSubjectByName(name);
+        Subject subject = subjectService.getSubjectByNameLower(name);
         SubjectAdminDTO subjectAdminDTO = subject.toSubjectAdminDTO();
         return subjectAdminDTO;
     }

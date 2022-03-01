@@ -73,6 +73,7 @@ function showSubjectEditModal(id) {
                         if(subject != ""){
                             $("#editSubjectId").val(subject.id);
                             $("#editSubjectName").val(subject.name);
+                            $("#editSubjectNameOriginal").val(subject.name);
                             $("#editSubjectTotalCourse").val(subject.totalCourse);
                             $("#editSubjectImg").attr("src", subject.imgSrc);
                             $("#editSubjectStatus").val(subject.status).change();
@@ -99,8 +100,8 @@ $('#subjectAddModal').on('shown.bs.modal', function (e) {
    // do something...
  });
 
-function submitSubject(nameFieldId, formId) {
-    var subjectName = $("#" + nameFieldId).val();
+function submitAddSubject() {
+    var subjectName = $("#addSubjectName").val();
     var link = "/admin/subject/getByName";
     var subject = "";
     $.ajax({
@@ -118,7 +119,35 @@ function submitSubject(nameFieldId, formId) {
             }
         },
         error: function (jqXHR, exception) {
-                $("#" + formId).submit();
+                $("#subjectAddForm").submit();
+        }
+    });
+}
+function submitEditSubject() {
+    var subjectNameOriginal = $("#editSubjectNameOriginal").val();
+    var subjectName = $("#editSubjectName").val();
+    var link = "/admin/subject/getByName";
+    var subject = "";
+    $.ajax({
+        url: link,
+        type:"get",
+        contentType: "application/json; charset=utf-8",
+        data:{
+            name : subjectName
+        },
+        dataType: "json",
+        success: function (data){
+        subject = data;
+            if(subject != ""){
+                if(subject.name != subjectNameOriginal){
+                    alert('There is already a Subject with that name');
+                } else {
+                    $("#subjectEditForm").submit();
+                }
+            }
+        },
+        error: function (jqXHR, exception) {
+                $("#subjectEditForm").submit();
         }
     });
 }

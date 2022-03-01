@@ -124,6 +124,11 @@ public class SubjectServiceImpl implements SubjectService {
         return CRUDSubjectRepository.findByName(name);
     }
 
+    @Override
+    public Subject getSubjectByNameLower(String name) {
+        return subjectRepository.getSubjectByNameLower(name);
+    }
+
     //get specific subject by subjectId
     @Override
     public Optional<Subject> getSubject(int id) {
