@@ -34,7 +34,7 @@ public class AdminLessonController {
     @Autowired
     private LessonTypeService lessonTypeService;
 
-
+//
     @GetMapping(value = {"", "/"})
     public String lessonPage(Model model) {
         List<Subject> subjectList = subjectService.findAllSubjects();
