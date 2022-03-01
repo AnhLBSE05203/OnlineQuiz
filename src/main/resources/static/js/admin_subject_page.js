@@ -99,8 +99,8 @@ $('#subjectAddModal').on('shown.bs.modal', function (e) {
    // do something...
  });
 
-function submitAddSubject() {
-    var subjectName = $("#addSubjectName").val();
+function submitSubject(nameFieldId, formId) {
+    var subjectName = $("#" + nameFieldId).val();
     var link = "/admin/subject/getByName";
     var subject = "";
     $.ajax({
@@ -118,30 +118,7 @@ function submitAddSubject() {
             }
         },
         error: function (jqXHR, exception) {
-                $("#subjectAddForm").submit();
-        }
-    });
-}
-function submitEditSubject() {
-    var subjectName = $("#editSubjectName").val();
-    var link = "/admin/subject/getByName";
-    var subject = "";
-    $.ajax({
-        url: link,
-        type:"get",
-        contentType: "application/json; charset=utf-8",
-        data:{
-            name : subjectName
-        },
-        dataType: "json",
-        success: function (data){
-        subject = data;
-            if(subject != ""){
-                alert('There is already a Subject with that name');
-            }
-        },
-        error: function (jqXHR, exception) {
-                $("#subjectEditForm").submit();
+                $("#" + formId).submit();
         }
     });
 }
