@@ -11,7 +11,6 @@ import com.fpt.OnlineQuiz.service.ImageService;
 import com.fpt.OnlineQuiz.service.LessonService;
 import com.fpt.OnlineQuiz.service.LessonTypeService;
 import com.fpt.OnlineQuiz.service.SubjectService;
-import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -19,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/lesson")
@@ -31,28 +31,29 @@ public class AdminLessonController {
     private LessonService lessonService;
     @Autowired
     private ImageService imageService;
-
     @Autowired
     private LessonTypeService lessonTypeService;
 
     @GetMapping(value = {"", "/"})
     public String lessonPage(Model model) {
         List<Subject> subjectList = subjectService.findAllSubjects();
+        List<LessonType> lessonTypes = lessonTypeService.getAllTypes();
         model.addAttribute("subjectList", subjectList);
         model.addAttribute("lessonEditDTO", new LessonAdminDTO());
         model.addAttribute("lessonAddDTO", new LessonAdminDTO());
-        model.addAttribute("statusMap", Constants.subjectStatusConversion);
+        model.addAttribute("lessonType", lessonTypes);
         return "admin_lesson_page";
     }
 
     @PostMapping("/edit")
     public String editSubject(@ModelAttribute("LessonEditDTO") LessonAdminDTO lessonAdminDTO) {
-//        Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
-//        subject.setName(subjectAdminDTO.getName());
-//        //set img - to do: image upload
-//        subject.setStatus(subjectAdminDTO.getStatus());
-
-//        subjectService.updateSubject(subject);
+        Optional<Lesson> lesson = lessonService.getLessonById(lessonAdminDTO.getId());
+        lesson.get().setName(lessonAdminDTO.getName());
+        lesson.get().setLessonType(lessonTypeService.getByName(lessonAdminDTO.getLessonType()));
+        lesson.get().setSubject(subjectService.findSubjectByName(lessonAdminDTO.getSubjects()));
+        lesson.get().setContent(lessonAdminDTO.getContent());
+        lesson.get().setTime(lessonAdminDTO.getTime());
+        lessonService.updateLesson(lesson.get());
         return "redirect:/admin/lesson";
     }
 
@@ -67,8 +68,7 @@ public class AdminLessonController {
         lesson.setSubject(subject);
         lesson.setContent(lessonAdminDTO.getContent());
         lesson.setStatus("Not Start");
-        lesson.setTime(lessonAdminDTO.getTime() + " m");
-
+        lesson.setTime(lessonAdminDTO.getTime());
         lessonService.addLesson(lesson);
         return "redirect:/admin/lesson";
     }
@@ -87,19 +87,18 @@ public class AdminLessonController {
         return lessonAdminDTO;
     }
 
-//    @GetMapping(value = "/delete/{id}")
-//    public String deleteSubject(@PathVariable Integer id) {
-//        Subject subject = subjectService.getSubjectById(id);
-//        subject.setStatus(Constants.STATUS_SUBJECT_DELETED);
-//        subjectService.updateSubject(subject);
-//        return "redirect:/admin/lesson";
-//    }
+    @GetMapping(value = "/delete/{id}")
+    public String deleteLesson(@PathVariable Integer id) {
+        Optional<Lesson> lesson = lessonService.getLessonById(id);
+        lessonService.deleteLesson(lesson.get());
+        return "redirect:/admin/lesson";
+    }
 
-//    @GetMapping(value = "/recover/{id}")
-//    public String recoverSubject(@PathVariable Integer id) {
-//        Subject subject = subjectService.getSubjectById(id);
+    @GetMapping(value = "/recover/{id}")
+    public String recoverSubject(@PathVariable Integer id) {
+        Subject subject = subjectService.getSubjectById(id);
 //        subject.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
-//        subjectService.updateSubject(subject);
-//        return "redirect:/admin/lesson";
-//    }
+        subjectService.updateSubject(subject);
+        return "redirect:/admin/lesson";
+    }
 }

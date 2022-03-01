@@ -42,7 +42,7 @@ public class LessonServiceImpl implements LessonService {
         long count = lessonRepository.getLessonCountByPagingRequest(pagingRequest);
         List<LessonAdminDTO> LessonAdminDTO = new ArrayList<>();
         // convert Subject to SubjectAdminDTO
-        for(Lesson lesson : lessons) {
+        for (Lesson lesson : lessons) {
             LessonAdminDTO lessonAdminDTO = lesson.toLessonAdminDTO();
             LessonAdminDTO.add(lessonAdminDTO);
         }
@@ -64,5 +64,15 @@ public class LessonServiceImpl implements LessonService {
     public LessonAdminDTO getLessonAdminDTOById(int id) {
         Optional<Lesson> lesson = CRUDLessonRepository.findById(id);
         return lesson.get().toLessonAdminDTO();
+    }
+
+    @Override
+    public void updateLesson(Lesson lesson) {
+        lessonRepository.updateLesson(lesson);
+    }
+
+    @Override
+    public void deleteLesson(Lesson lesson) {
+        CRUDLessonRepository.delete(lesson);
     }
 }

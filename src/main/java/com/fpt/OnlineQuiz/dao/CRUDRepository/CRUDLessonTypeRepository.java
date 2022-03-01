@@ -15,4 +15,6 @@ public interface CRUDLessonTypeRepository extends CrudRepository<LessonType,Stri
     @Query("select l from LessonType l where l.name = ?1")
     LessonType findByName(String name);
 
+    @Query("select l from LessonType l where l.id = ?1")
+    LessonType findByiId(int id);
 }

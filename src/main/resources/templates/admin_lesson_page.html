@@ -68,8 +68,8 @@
                 </div>
                 <div class="modal-body">
                     <img id="editLessonImg"><br>
-<!--                    <input type="hidden" id="editLessonImgSrc" th:name="imgSrc">-->
-<!--                    <input type="hidden" id="editLessonStatusStr" th:name="statusStr" value="">-->
+                    <!--                    <input type="hidden" id="editLessonImgSrc" th:name="imgSrc">-->
+                    <!--                    <input type="hidden" id="editLessonStatusStr" th:name="statusStr" value="">-->
                     <input type="hidden" id="editLessonId" th:name="id" value="0">
                     <!--                    <input type="hidden" id="addLessonImgSrc" th:name="imgSrc">-->
                     <input type="hidden" id="editLessonStatus" th:name="status" value="Not Started">
@@ -77,18 +77,20 @@
                         <tr>
                             <td>Lesson Name:</td>
                             <td><input type="text" id="editLessonName" th:name="name" required></td>
+
                         </tr>
-<!--                        <tr>-->
-<!--                            <td>Lesson Type:</td>-->
-<!--                            <td><select th:field="*{lessonType}" id="editLessonType">-->
-<!--                                <option value="learn" >learn</option>-->
-<!--                                <option value="quiz">quiz</option>-->
-<!--                            </select></td>-->
-<!--                        </tr>-->
                         <tr>
+                            <td>Lesson Type:</td>
+                            <td><select th:name="lessonType" id="editLessonType">
+                                <option th:each="type : ${lessonType}" th:text="${type.name}" >
+                                </option>
+                            </select></td>
+                        </tr>
+                        <tr>
+<!--                            id="editLessonSubject"-->
                             <td>Choose Subjects:</td>
-                            <td><select  th:field="*{subjects}"  id="editLessonSubject" >
-                                <option th:each="s : ${subjectList}"  th:value="${s.name}" th:utext="${s.name}"></option>
+                            <td><select  id="editLessonSubject" th:name="subjects" >
+                                <option th:each="s : ${subjectList}" th:value="${s.name}" th:utext="${s.name}"></option>
                             </select></td>
                         </tr>
                         <tr>
@@ -98,7 +100,8 @@
                         </tr>
                         <tr>
                             <td>Lesson Time:</td>
-                            <td><input style="width: auto" type="text" id="EditLessonTime" th:name="time" required placeholder="Input minutes ,ex:20"></td>
+                            <td><input style="width: auto" type="text" id="EditLessonTime" th:name="time" required
+                                       placeholder="Input minutes ,ex:20"></td>
                         </tr>
                     </table>
                 </div>
@@ -124,7 +127,7 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="addLessonId" th:name="id" value="0">
-<!--                    <input type="hidden" id="addLessonImgSrc" th:name="imgSrc">-->
+                    <!--                    <input type="hidden" id="addLessonImgSrc" th:name="imgSrc">-->
                     <input type="hidden" id="addLessonStatusStr" th:name="status" value="Not Started">
                     <!--                    <input type="hidden" id="addLessonStatus" th:name="status" value="1">-->
                     <table class="formTable" cellspacing="0" cellpadding="0">
@@ -135,14 +138,14 @@
                         <tr>
                             <td>Lesson Type:</td>
                             <td><select th:field="*{lessonType}">
-                                <option value="learn" >learn</option>
+                                <option value="learn">learn</option>
                                 <option value="quiz">quiz</option>
                             </select></td>
                         </tr>
                         <tr>
                             <td>Choose Subjects:</td>
-                            <td><select  th:field="*{subjects}"   >
-                                <option th:each="s : ${subjectList}"  th:value="${s.name}" th:utext="${s.name}"></option>
+                            <td><select th:field="*{subjects}">
+                                <option th:each="s : ${subjectList}" th:value="${s.name}" th:utext="${s.name}"></option>
                             </select></td>
                         </tr>
                         <tr>
@@ -152,7 +155,8 @@
                         </tr>
                         <tr>
                             <td>Lesson Time:</td>
-                            <td><input style="width: auto" type="text" id="addLessonTime" th:name="time" required placeholder="Input minutes ,ex:20"></td>
+                            <td><input style="width: auto" type="text" id="addLessonTime" th:name="time" required
+                                       placeholder="Input minutes ,ex:20 m"></td>
                         </tr>
                     </table>
                 </div>
@@ -164,7 +168,7 @@
         </div>
     </div>
 </div>
-End Create Lesson Modal
+<!--End Create Lesson Modal-->
 <!-- Admin common js -->
 <th:block th:insert="components/header_footer.html :: admin-common-script">
 </th:block>

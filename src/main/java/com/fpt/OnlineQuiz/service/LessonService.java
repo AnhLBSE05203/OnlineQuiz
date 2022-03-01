@@ -18,8 +18,8 @@ public interface LessonService {
     Page<LessonAdminDTO> getByPagingRequest(PagingRequest pagingRequest);
     void addLesson(Lesson lesson);
     LessonAdminDTO getLessonAdminDTOById(int id);
-
-
+    void updateLesson(Lesson lesson);
+    void deleteLesson(Lesson lesson);
 
 
 }
