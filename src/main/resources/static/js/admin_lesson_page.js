@@ -68,13 +68,13 @@ function showLessonEditModal(id) {
         dataType: "json",
         success: function (data){
             lesson = data;
-            if(subject != ""){
+            if(lesson != ""){
                 $("#editLessonId").val(lesson.id);
                 $("#editLessonName").val(lesson.name);
                 $("#editLessonStatus").val(lesson.status);
                 $("#editLessonSubject").val(lesson.subject);
                 $("#EditLessonContent").val(lesson.content);
-                $("#EditLessonContent").val(lesson.time);
+                $("#EditLessonTime").val(lesson.time);
                 // $("#editLessonStatus").val(lesson.status).change();
             }
         }

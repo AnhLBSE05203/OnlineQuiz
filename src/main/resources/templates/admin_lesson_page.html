@@ -78,13 +78,14 @@
                             <td>Lesson Name:</td>
                             <td><input type="text" id="editLessonName" th:name="name" required></td>
                         </tr>
-<!--                        <tr>-->
-<!--                            <td>Lesson Type:</td>-->
-<!--                            <td><select th:field="*{lessonType}" id="editLessonType">-->
-<!--                                <option value="learn" >learn</option>-->
+                        <tr>
+                            <td>Lesson Type:</td>
+                            <td><select th:name="lessonType" id="editLessonType">
+                                <option th:each="type : ${lessonType}" th:value="${status.key}"
+                                        th:text="${status.value}" >learn</option>
 <!--                                <option value="quiz">quiz</option>-->
-<!--                            </select></td>-->
-<!--                        </tr>-->
+                            </select></td>
+                        </tr>
                         <tr>
                             <td>Choose Subjects:</td>
                             <td><select  th:field="*{subjects}"  id="editLessonSubject" >
@@ -152,7 +153,7 @@
                         </tr>
                         <tr>
                             <td>Lesson Time:</td>
-                            <td><input style="width: auto" type="text" id="addLessonTime" th:name="time" required placeholder="Input minutes ,ex:20"></td>
+                            <td><input style="width: auto" type="text" id="addLessonTime" th:name="time" required placeholder="Input minutes ,ex:20 m"></td>
                         </tr>
                     </table>
                 </div>
