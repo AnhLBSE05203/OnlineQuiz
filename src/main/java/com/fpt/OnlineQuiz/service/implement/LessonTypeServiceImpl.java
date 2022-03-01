@@ -25,4 +25,9 @@ public class LessonTypeServiceImpl implements LessonTypeService {
     public List<Lesson> getAllType(int id) {
         return (List<Lesson>) crudLessonTypeRepository.findByiId(id);
     }
+
+    @Override
+    public List<LessonType> getAllTypes() {
+        return (List<LessonType>)crudLessonTypeRepository.findAll();
+    }
 }

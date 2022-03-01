@@ -10,4 +10,5 @@ import java.util.List;
 public interface LessonTypeService {
     LessonType getByName(String name);
     List<Lesson> getAllType(int id);
+    List<LessonType> getAllTypes();
 }

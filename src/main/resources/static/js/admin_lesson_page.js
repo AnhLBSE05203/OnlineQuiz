@@ -72,7 +72,8 @@ function showLessonEditModal(id) {
                 $("#editLessonId").val(lesson.id);
                 $("#editLessonName").val(lesson.name);
                 $("#editLessonStatus").val(lesson.status);
-                $("#editLessonSubject").val(lesson.subject);
+                // $("#editLessonType").val(lesson.type);
+                $("#editLessonSubject").val(lesson.subject).change();
                 $("#EditLessonContent").val(lesson.content);
                 $("#EditLessonTime").val(lesson.time);
                 // $("#editLessonStatus").val(lesson.status).change();

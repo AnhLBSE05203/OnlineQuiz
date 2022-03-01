@@ -38,18 +38,20 @@ public class AdminLessonController {
     @GetMapping(value = {"", "/"})
     public String lessonPage(Model model) {
         List<Subject> subjectList = subjectService.findAllSubjects();
-
+        List<LessonType> lessonTypes = lessonTypeService.getAllTypes();
         model.addAttribute("subjectList", subjectList);
         model.addAttribute("lessonEditDTO", new LessonAdminDTO());
         model.addAttribute("lessonAddDTO", new LessonAdminDTO());
-//        model.addAttribute("lessonType", Constants.subjectStatusConversion);
+        model.addAttribute("lessonType", lessonTypes);
         return "admin_lesson_page";
     }
 
     @PostMapping("/edit")
     public String editSubject(@ModelAttribute("LessonEditDTO") LessonAdminDTO lessonAdminDTO) {
         Optional<Lesson> lesson = lessonService.getLessonById(lessonAdminDTO.getId());
-//        subject.setName(subjectAdminDTO.getName());
+         lesson.get().setName(lessonAdminDTO.getName());
+//        lesson.get().setLessonType(lessonAdminDTO.getName());
+
 //        //set img - to do: image upload
 //        subject.setStatus(subjectAdminDTO.getStatus());
 
