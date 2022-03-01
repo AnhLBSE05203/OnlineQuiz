@@ -49,13 +49,12 @@ public class AdminLessonController {
     @PostMapping("/edit")
     public String editSubject(@ModelAttribute("LessonEditDTO") LessonAdminDTO lessonAdminDTO) {
         Optional<Lesson> lesson = lessonService.getLessonById(lessonAdminDTO.getId());
-         lesson.get().setName(lessonAdminDTO.getName());
-//        lesson.get().setLessonType(lessonAdminDTO.getName());
-
-//        //set img - to do: image upload
-//        subject.setStatus(subjectAdminDTO.getStatus());
-
-//        subjectService.updateSubject(subject);
+        lesson.get().setName(lessonAdminDTO.getName());
+        lesson.get().setLessonType(lessonTypeService.getByName(lessonAdminDTO.getLessonType()));
+        lesson.get().setSubject(subjectService.findSubByName(lessonAdminDTO.getSubjects()));
+        lesson.get().setContent(lessonAdminDTO.getContent());
+        lesson.get().setTime(lessonAdminDTO.getTime());
+        lessonService.updateLesson(lesson.get());
         return "redirect:/admin/lesson";
     }
 

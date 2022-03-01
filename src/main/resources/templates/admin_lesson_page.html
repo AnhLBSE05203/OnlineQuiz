@@ -77,19 +77,21 @@
                         <tr>
                             <td>Lesson Name:</td>
                             <td><input type="text" id="editLessonName" th:name="name" required></td>
+
                         </tr>
                         <tr>
                             <td>Lesson Type:</td>
                             <td><select th:name="lessonType" id="editLessonType">
-                                <option th:each="type : ${lessonType}" th:text="${type.name}" th:value="${}">
+                                <option th:each="type : ${lessonType}" th:text="${type.name}" >
                                 </option>
                                 <!--                                <option value="quiz">quiz</option>-->
                             </select></td>
                         </tr>
                         <tr>
+<!--                            id="editLessonSubject"-->
                             <td>Choose Subjects:</td>
-                            <td><select id="editLessonSubject">
-                                <option th:each="s : ${subjectList}" value="ghf" th:utext="${s.name}"></option>
+                            <td><select  id="editLessonSubject" th:name="subjects" >
+                                <option th:each="s : ${subjectList}" th:value="${s.name}" th:utext="${s.name}"></option>
                             </select></td>
                         </tr>
                         <tr>

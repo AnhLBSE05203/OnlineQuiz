@@ -83,4 +83,9 @@ public class LessonRepository {
     public void addLesson(Lesson lesson) {
         em.persist(lesson);
     }
+    public void updateLesson(Lesson lesson) {
+        em.merge(lesson);
+        em.flush();
+    }
+
 }
