@@ -2,10 +2,8 @@ package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDSubjectRepository;
 import com.fpt.OnlineQuiz.dto.LessonAdminDTO;
-import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
-import com.fpt.OnlineQuiz.model.Image;
 import com.fpt.OnlineQuiz.model.Lesson;
 import com.fpt.OnlineQuiz.model.LessonType;
 import com.fpt.OnlineQuiz.model.Subject;
@@ -65,11 +63,11 @@ public class AdminLessonController {
         lesson.setName(lessonAdminDTO.getName());
         LessonType lessonType = lessonTypeService.getByName(lessonAdminDTO.getLessonType());
         lesson.setLessonType(lessonType);
-        Subject subject = subjectService.findSubByName(lessonAdminDTO.getSubjects());
+        Subject subject = subjectService.findSubjectByName(lessonAdminDTO.getSubjects());
         lesson.setSubject(subject);
         lesson.setContent(lessonAdminDTO.getContent());
         lesson.setStatus("Not Start");
-        lesson.setTime(lessonAdminDTO.getTime()+" m");
+        lesson.setTime(lessonAdminDTO.getTime() + " m");
 
         lessonService.addLesson(lesson);
         return "redirect:/admin/lesson";

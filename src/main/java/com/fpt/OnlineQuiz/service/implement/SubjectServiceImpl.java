@@ -120,7 +120,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     //get specific subject by subName
     @Override
-    public Subject findSubByName(String name) {
+    public Subject findSubjectByName(String name) {
         return CRUDSubjectRepository.findByName(name);
     }
 

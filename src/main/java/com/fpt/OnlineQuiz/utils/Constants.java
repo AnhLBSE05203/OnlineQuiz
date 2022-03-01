@@ -110,6 +110,7 @@ public class Constants {
     public static final String LINK_ADMIN_SUBJECT_CONTROLLER = "/admin/subject";
     public static final String LINK_ADMIN_SUBJECT_LIST = "/";
     public static final String LINK_ADMIN_SUBJECT_DETAIL = "/{id}";
+    public static final String LINK_ADMIN_SUBJECT_GET_BY_NAME = "/getByName";
     public static final String LINK_ADMIN_SUBJECT_ADD = "/add";
     public static final String LINK_ADMIN_SUBJECT_DELETE = "/delete/{id}";
     public static final String LINK_ADMIN_SUBJECT_RECOVER = "/recover/{id}";

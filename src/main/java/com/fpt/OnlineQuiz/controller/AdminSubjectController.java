@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping(Constants.LINK_ADMIN_SUBJECT_CONTROLLER)
 public class AdminSubjectController {
@@ -73,6 +75,15 @@ public class AdminSubjectController {
     public SubjectAdminDTO getSubjectDetails(@PathVariable Integer id) {
         SubjectAdminDTO subjectDTO = subjectService.getSubjectAdminDTOById(id);
         return subjectDTO;
+    }
+
+    @GetMapping(value = Constants.LINK_ADMIN_SUBJECT_GET_BY_NAME, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public SubjectAdminDTO getByName(HttpServletRequest request) {
+        String name = request.getParameter("name");
+        Subject subject = subjectService.findSubjectByName(name);
+        SubjectAdminDTO subjectAdminDTO = subject.toSubjectAdminDTO();
+        return subjectAdminDTO;
     }
 
     @GetMapping(value = Constants.LINK_ADMIN_SUBJECT_DELETE)
