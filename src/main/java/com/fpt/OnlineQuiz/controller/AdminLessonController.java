@@ -47,23 +47,22 @@ public class AdminLessonController {
         return "admin_lesson_page";
     }
 
-//    @PostMapping("/edit")
-//    public String editSubject(@ModelAttribute("subjectEditDTO") SubjectAdminDTO subjectAdminDTO) {
+    @PostMapping("/edit")
+    public String editSubject(@ModelAttribute("LessonEditDTO") LessonAdminDTO lessonAdminDTO) {
 //        Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
 //        subject.setName(subjectAdminDTO.getName());
 //        //set img - to do: image upload
 //        subject.setStatus(subjectAdminDTO.getStatus());
-//
+
 //        subjectService.updateSubject(subject);
-//        return "redirect:/admin/lesson";
-//    }
+        return "redirect:/admin/lesson";
+    }
 
     @PostMapping("/add")
     public String addSubject(@ModelAttribute("lessonAddDTO") LessonAdminDTO lessonAdminDTO) {
         //to do - add form to page
         Lesson lesson = new Lesson();
         lesson.setName(lessonAdminDTO.getName());
-
         LessonType lessonType = lessonTypeService.getByName(lessonAdminDTO.getLessonType());
         lesson.setLessonType(lessonType);
         Subject subject = subjectService.findSubByName(lessonAdminDTO.getSubjects());
@@ -71,17 +70,7 @@ public class AdminLessonController {
         lesson.setContent(lessonAdminDTO.getContent());
         lesson.setStatus("Not Start");
         lesson.setTime(lessonAdminDTO.getTime()+" m");
-        //set img - to do: image upload
-        //set default img - temporary
-//        Image defaultImg = imageService.getById(Constants.DEFAULT_SUBJECT_IMAGE_ID);
-//        if (defaultImg == null) {
-//            defaultImg = new Image();
-//            defaultImg.setDefaultImg();
-//            imageService.addImage(defaultImg);
-//        }
-//        lesson.setImage(defaultImg);
-//        //
-//        lesson.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
+
         lessonService.addLesson(lesson);
         return "redirect:/admin/lesson";
     }
@@ -93,12 +82,12 @@ public class AdminLessonController {
         return lessonAdminDTOPage;
     }
 
-//    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public SubjectAdminDTO getSubjectDetails(@PathVariable Integer id) {
-//        SubjectAdminDTO subjectDTO = subjectService.getSubjectAdminDTOById(id);
-//        return subjectDTO;
-//    }
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public LessonAdminDTO getSubjectDetails(@PathVariable Integer id) {
+        LessonAdminDTO lessonAdminDTO = lessonService.getLessonAdminDTOById(id);
+        return lessonAdminDTO;
+    }
 
 //    @GetMapping(value = "/delete/{id}")
 //    public String deleteSubject(@PathVariable Integer id) {

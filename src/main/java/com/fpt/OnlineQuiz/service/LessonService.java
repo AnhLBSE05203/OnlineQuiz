@@ -17,6 +17,8 @@ public interface LessonService {
     public Optional<Lesson> getLessonById(int id);
     Page<LessonAdminDTO> getByPagingRequest(PagingRequest pagingRequest);
     void addLesson(Lesson lesson);
+    LessonAdminDTO getLessonAdminDTOById(int id);
+
 
 
 

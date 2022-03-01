@@ -59,4 +59,10 @@ public class LessonServiceImpl implements LessonService {
     public void addLesson(Lesson lesson) {
         lessonRepository.addLesson(lesson);
     }
+
+    @Override
+    public LessonAdminDTO getLessonAdminDTOById(int id) {
+        Optional<Lesson> lesson = CRUDLessonRepository.findById(id);
+        return lesson.get().toLessonAdminDTO();
+    }
 }
