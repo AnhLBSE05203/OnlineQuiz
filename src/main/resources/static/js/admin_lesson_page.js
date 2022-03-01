@@ -71,10 +71,11 @@ function showLessonEditModal(id) {
             if(subject != ""){
                 $("#editLessonId").val(lesson.id);
                 $("#editLessonName").val(lesson.name);
-                $("#editLessonTotalCourse").val(lesson.totalCourse);
-                $("#editLessonImg").attr("src", lesson.imgSrc);
-                $("#editLessonStatus").val(lesson.status).change();
-
+                $("#editLessonStatus").val(lesson.status);
+                $("#editLessonSubject").val(lesson.subject);
+                $("#EditLessonContent").val(lesson.content);
+                $("#EditLessonContent").val(lesson.time);
+                // $("#editLessonStatus").val(lesson.status).change();
             }
         }
     });
