@@ -2,6 +2,7 @@ package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.model.Quiz;
 import com.fpt.OnlineQuiz.model.QuizPackage;
 import com.fpt.OnlineQuiz.service.QuizPackageService;
 import com.fpt.OnlineQuiz.utils.Constants;
@@ -28,6 +29,8 @@ public class PracticeController {
         Account account = (Account) authentication.getPrincipal();
         //Get all quizPackage
         List<QuizPackage> quizPackageList = quizPackageService.finByAccountId(account.getId());
+
+        List<Quiz> quizList = quizPackageService.quizListByPackage()
         model.addAttribute("quizPackage", quizPackageList);
         return "practices_list_page";
     }
