@@ -71,7 +71,7 @@ public class Subject {
         return subjectAdminDTO;
     }
 
-    public void setToSubjectAdminDTO(SubjectAdminDTO subjectAdminDTO) {
+    public void setFromSubjectAdminDTO(SubjectAdminDTO subjectAdminDTO) {
         Utils.copyNonNullProperties(subjectAdminDTO, this);
         // this only includes (id, name, subjectInfo, learnAfter, status)
         // image needs to be handled separately

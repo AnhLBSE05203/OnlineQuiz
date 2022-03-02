@@ -35,7 +35,7 @@ public class AdminSubjectController {
     @PostMapping(Constants.LINK_ADMIN_SUBJECT_PROCESS_EDIT)
     public String editSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_EDIT_DTO) SubjectAdminDTO subjectAdminDTO) {
         Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
-        subject.setToSubjectAdminDTO(subjectAdminDTO);
+        subject.setFromSubjectAdminDTO(subjectAdminDTO);
         //todo: add image upload
 
         subjectService.updateSubject(subject);
@@ -46,7 +46,7 @@ public class AdminSubjectController {
     public String addSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_ADD_DTO) SubjectAdminDTO subjectAdminDTO) {
         //todo - add image upload
         Subject subject = new Subject();
-        subject.setToSubjectAdminDTO(subjectAdminDTO);
+        subject.setFromSubjectAdminDTO(subjectAdminDTO);
 
         //set default img - temporary
         Image defaultImg = imageService.getById(Constants.DEFAULT_SUBJECT_IMAGE_ID);
