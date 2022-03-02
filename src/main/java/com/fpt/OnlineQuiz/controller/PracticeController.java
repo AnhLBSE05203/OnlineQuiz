@@ -19,7 +19,7 @@ public class PracticeController {
 
     @Autowired
     QuizPackageService quizPackageService;
-    //
+
     @GetMapping(value = "")
     public String subjectPage(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
