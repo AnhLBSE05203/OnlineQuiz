@@ -34,6 +34,7 @@ public class QuestionController {
 
     @GetMapping(path = "/create")
     String showCreateQuestionPage(ModelMap modelMap, HttpServletRequest request) {
+        //todo - fix hardcode subjectId
 //        modelMap.addAttribute("questionDTO", new QuestionDTO());
 //        String subjectIdStr = request.getParameter("subjectId");
         int subjectId = 1;
@@ -110,16 +111,16 @@ public class QuestionController {
 
     @PostMapping(path = "/editquestion")
     public String processEditQuestion(ModelMap modelMap, HttpServletRequest request) {
-        // edit not add
+        //todo - edit not add
         Question q = new Question();
         //int questionId = Integer.parseInt(request.getParameter("questionId").trim());
         //Question q = questionService.getQuestionByQuestionId(questionId);
         q.setQuestion(request.getParameter("question").trim());
         q.setId(Integer.parseInt(request.getParameter("questionId")));
         int number = Integer.parseInt(request.getParameter("isAnswer"));
-        // either delete all Answers related to the Question then add new
+        //todo - either delete all Answers related to the Question then add new
 //        answerService.deleteAnswerByQuestionId(questionId);
-        // or edit the answers themselves
+        //todo - or edit the answers themselves
         String answer1 = request.getParameter("answer1").trim();
         String answer2 = request.getParameter("answer2").trim();
         String answer3 = request.getParameter("answer3").trim();
@@ -145,7 +146,8 @@ public class QuestionController {
         }
         q.setAnswers(answers);
         q.setExplain(request.getParameter("explain"));
-        // get subjectId through question instead
+        //todo - get subjectId through question instead
+        // what if the Subject in @param is not the one that owns the Question in @param?
         Subject subject = subjectService.getSubjectById(Integer.parseInt(request.getParameter("subjectId")));
         q.setSubject(subject);
         questionService.updateQuestion(q);
@@ -160,6 +162,7 @@ public class QuestionController {
 
     @GetMapping(path = "/list")
     String showQuestionListPage(ModelMap model) {
+        //todo - fix hardcode subjectId
         List<Question> questionList = questionService.getQuestionBySubjectId(1);
         Subject subject = subjectService.getSubjectById(1);
         model.addAttribute("question_list", questionList);
@@ -184,6 +187,8 @@ public class QuestionController {
     @GetMapping(path = "/delete")
     public String deleteQuestion(ModelMap modelMap, HttpServletRequest request) {
         int questionId = Integer.parseInt(request.getParameter("questionId"));
+        //todo - get subjectId through Question
+        // what if the Subject in @param is not the one that owns the Question in @param?
         int subjectId = Integer.parseInt(request.getParameter("subjectId"));
         answerService.deleteAnswerByQuestionId(questionId);
 
