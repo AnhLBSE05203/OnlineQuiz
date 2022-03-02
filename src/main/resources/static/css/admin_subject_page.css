@@ -9,3 +9,10 @@
     border-collapse: separate;
     border-spacing: 10px 10px;
 }
+.subject-action-button{
+    margin: 2px;
+}
+.subjectTextArea{
+    width: 300px;
+    height: 300px;
+}
