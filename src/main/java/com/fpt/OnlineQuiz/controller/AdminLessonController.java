@@ -46,7 +46,7 @@ public class AdminLessonController {
     }
 
     @PostMapping("/edit")
-    public String editSubject(@ModelAttribute("LessonEditDTO") LessonAdminDTO lessonAdminDTO) {
+    public String editLesson(@ModelAttribute("LessonEditDTO") LessonAdminDTO lessonAdminDTO) {
         Optional<Lesson> lesson = lessonService.getLessonById(lessonAdminDTO.getId());
         lesson.get().setName(lessonAdminDTO.getName());
         lesson.get().setLessonType(lessonTypeService.getByName(lessonAdminDTO.getLessonType()));
@@ -58,8 +58,8 @@ public class AdminLessonController {
     }
 
     @PostMapping("/add")
-    public String addSubject(@ModelAttribute("lessonAddDTO") LessonAdminDTO lessonAdminDTO) {
-        //to do - add form to page
+    public String addLesson(@ModelAttribute("lessonAddDTO") LessonAdminDTO lessonAdminDTO) {
+
         Lesson lesson = new Lesson();
         lesson.setName(lessonAdminDTO.getName());
         LessonType lessonType = lessonTypeService.getByName(lessonAdminDTO.getLessonType());
@@ -82,7 +82,7 @@ public class AdminLessonController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public LessonAdminDTO getSubjectDetails(@PathVariable Integer id) {
+    public LessonAdminDTO getLessonDetails(@PathVariable Integer id) {
         LessonAdminDTO lessonAdminDTO = lessonService.getLessonAdminDTOById(id);
         return lessonAdminDTO;
     }
@@ -95,7 +95,8 @@ public class AdminLessonController {
     }
 
     @GetMapping(value = "/recover/{id}")
-    public String recoverSubject(@PathVariable Integer id) {
+    public String recoverLesson(@PathVariable Integer id) {
+        //todo
         Subject subject = subjectService.getSubjectById(id);
 //        subject.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
         subjectService.updateSubject(subject);

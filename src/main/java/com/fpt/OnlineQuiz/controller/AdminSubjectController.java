@@ -24,6 +24,7 @@ public class AdminSubjectController {
     @Autowired
     private ImageService imageService;
 
+    //todo - Subject + 2 more attributes
     @GetMapping(value = {Constants.STRING_EMPTY, Constants.LINK_ADMIN_SUBJECT_LIST})
     public String subjectPage(Model model) {
         model.addAttribute(Constants.ATTRIBUTE_SUBJECT_EDIT_DTO, new SubjectAdminDTO());
@@ -36,7 +37,7 @@ public class AdminSubjectController {
     public String editSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_EDIT_DTO) SubjectAdminDTO subjectAdminDTO) {
         Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
         subject.setName(subjectAdminDTO.getName());
-        //set img - to do: image upload
+        //set img - todo: image upload
         subject.setStatus(subjectAdminDTO.getStatus());
 
         subjectService.updateSubject(subject);
@@ -45,7 +46,7 @@ public class AdminSubjectController {
 
     @PostMapping(Constants.LINK_ADMIN_SUBJECT_ADD)
     public String addSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_ADD_DTO) SubjectAdminDTO subjectAdminDTO) {
-        //to do - add form to page
+        //todo - add form to page
         Subject subject = new Subject();
         subject.setName(subjectAdminDTO.getName());
         //set img - to do: image upload

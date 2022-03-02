@@ -27,8 +27,7 @@ public class BlogController {
         int pageSize = 2;
         System.out.println(page);
         if (page == null) {
-            page = "1";
-            int pageIndex = Integer.parseInt(page);
+            int pageIndex = 1;
             ArrayList<Blog> listBlogByIndex = blogService.getBlogByIndexPage(pageIndex, pageSize);
             long totalRecord = blogService.countBlog();
             long totalPage = totalRecord % pageSize == 0 ? totalRecord / pageSize : (totalRecord / pageSize) + 1;
@@ -37,7 +36,6 @@ public class BlogController {
             modelMap.addAttribute("pageIndex", pageIndex);
             modelMap.addAttribute("listBlog", listBlogByIndex);
         } else {
-            page = request.getParameter("page");
             int pageIndex = Integer.parseInt(page);
             ArrayList<Blog> listBlog = blogService.getBlogByIndexPage(pageIndex, pageSize);
             long totalRecord = blogService.countBlog();

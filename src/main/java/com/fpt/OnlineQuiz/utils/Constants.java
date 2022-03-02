@@ -75,9 +75,8 @@ public class Constants {
     public static final String LINK_CHANGE_PASSWORD = "/changePassword";
     public static final String LINK_PROFILE = "/profile";
     public static final String LINK_EDIT_PROFILE = "/edit-profile";
-
-
     public static final String LINK_CONFIRM_REGISTRATION = "/confirmRegistration";
+
     //pages
     public static final String PAGE_LOGIN = "login_page";
     public static final String PAGE_REGISTER = "register_page";
@@ -156,6 +155,8 @@ public class Constants {
     public static final String HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED = "subjectFeatured";
     public static final int DESCRIPTION_TRIM_LENGTH = 147;
     public static final String DESCRIPTION_TRIM_TAIL = "...";
+    //user subject list constants
+    public static final int USER_SUBJECT_PAGE_SIZE = 6;
 
     private static Map<Integer, String> initSubjectStatusMap() {
         Map<Integer, String> map = new HashMap<>();
