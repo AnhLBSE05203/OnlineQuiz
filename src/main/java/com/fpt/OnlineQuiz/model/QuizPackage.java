@@ -33,6 +33,9 @@ public class QuizPackage {
     @Formula("(SELECT COUNT(*) FROM quiz q WHERE q.quiz_package_id = quiz_package_id)")
     private Long quizCount;
 
+    @Formula("(SELECT a.full_name FROM account a WHERE a.account_id = account_id)")
+    private String acountName;
+
     @ManyToOne
     @JoinColumn(name = "accountId")
     private Account account;
