@@ -75,7 +75,7 @@
                                 <a href="#"><img th:src="@{/img/gallery/featured1.png}" alt=""></a>
                             </div>
                             <div class="properties__caption">
-                                <p>User Experience</p>
+                                <p th:text="${quizPackage.get(0).getName()}"></p>
 <!--                                <h3><a href="#" th:text="${subject.get.name}"></a></h3>-->
                                 <p>The automated process all your website tasks. Discover tools and techniques to engage
                                     effectively with vulnerable children and young people.
