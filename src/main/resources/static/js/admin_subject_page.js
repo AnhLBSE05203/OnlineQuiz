@@ -20,12 +20,14 @@ $(document).ready(function() {
         			}, {
         				title : 'ImgSrc',
         				data : 'imgSrc',
+        				width: "10%",
         			}, {
         				title : 'Total Courses',
         				data : 'totalCourse',
         			}, {
                         title : 'Subject Info',
                         data : 'subjectInfo',
+                        width: "20%",
                         render: function(data, type, row, meta) {
                                     var html = "";
                                     if(data != "" && data != null){
@@ -37,6 +39,7 @@ $(document).ready(function() {
                     }, {
                         title : 'Learn After',
                         data : 'learnAfter',
+                        width: "20%",
                         render: function(data, type, row, meta) {
                                     var html = "";
                                     if(data != "" && data != null){
