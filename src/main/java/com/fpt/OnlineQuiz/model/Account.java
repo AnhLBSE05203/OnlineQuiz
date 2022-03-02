@@ -76,6 +76,9 @@ public class Account implements UserDetails {
     @Column(name = "updatedTime")
     Date updatedTime;
 
+    @Column(name = "introduce", length = 10000, nullable = true)
+    private String introduce;
+
     @Column(name = "createdUserId")
     private int createdUserId;
     @Column(name = "updatedUserId")

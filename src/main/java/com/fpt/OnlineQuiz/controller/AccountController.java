@@ -317,6 +317,8 @@ public class AccountController {
         model.addAttribute("name", account.getFullName());
         model.addAttribute("phone", account.getPhone());
         model.addAttribute("gender", account.getGender());
+        model.addAttribute("account", account);
+
         return Constants.PAGE_PROFILE;
     }
 
