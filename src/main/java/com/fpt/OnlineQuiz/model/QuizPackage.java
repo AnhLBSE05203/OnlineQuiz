@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
+import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -27,9 +29,9 @@ public class QuizPackage {
     @Column(name = "createdTime")
     private Date createdTime;
 
-    @OneToMany
-    @JoinColumn(name = "quizId")
-    private List<Quiz> quiz;
+    //() at the first and the end query is important
+    @Formula("(SELECT COUNT(*) FROM quiz q WHERE q.quiz_package_id = quiz_package_id)")
+    private Long quizCount;
 
     @ManyToOne
     @JoinColumn(name = "accountId")

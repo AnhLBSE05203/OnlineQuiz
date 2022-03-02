@@ -1,11 +1,8 @@
 package com.fpt.OnlineQuiz.controller;
 
-import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.model.Account;
-import com.fpt.OnlineQuiz.model.Quiz;
 import com.fpt.OnlineQuiz.model.QuizPackage;
 import com.fpt.OnlineQuiz.service.QuizPackageService;
-import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,8 +27,10 @@ public class PracticeController {
         //Get all quizPackage
         List<QuizPackage> quizPackageList = quizPackageService.finByAccountId(account.getId());
 
-        List<Quiz> quizList = quizPackageService.quizListByPackage()
+        Iterable<QuizPackage> quizList = quizPackageService.getAllQuiz();
         model.addAttribute("quizPackage", quizPackageList);
+        model.addAttribute("quizList", quizList);
+
         return "practices_list_page";
     }
 

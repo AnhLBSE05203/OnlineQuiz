@@ -10,4 +10,6 @@ import java.util.List;
 public interface QuizPackageService {
     List<QuizPackage> finByAccountId(int id);
     List<Quiz> quizListByPackage(int id);
+    Iterable<QuizPackage> getAllQuiz();
+
 }

@@ -25,5 +25,10 @@ public class QuizPackageImpl implements QuizPackageService {
         return quizPackage.listQuizByPackage(id);
     }
 
+    @Override
+    public Iterable<QuizPackage> getAllQuiz() {
+        return quizPackage.findAll();
+    }
+
 
 }
