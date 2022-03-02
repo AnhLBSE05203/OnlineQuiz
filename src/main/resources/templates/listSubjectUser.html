@@ -54,21 +54,14 @@
             <!--    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css}">-->
         </head>
         <style>
-    .modal-body {
-        height: 200px;
-    }
+    /*.modal-body {*/
+    /*    height: 200px;*/
+    /*}*/
 
     .modal-body span {
         font-size: large;
 
     }
-
-    .modal-footer {
-        height: 200px;
-    }
-
-
-
         </style>
         <body>
             <!--[if lte IE 9]>
@@ -196,7 +189,7 @@
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk
                                 of the
                                 card's content.</p>
-                            <a class="btn btn-primary" onclick="detailSubjectModal()">Detail</a>
+                            <a class="btn btn-primary" th:attr="onclick=|detailSubjectModal('${list.id}')|">Detail</a>
                             <!-- th:href="@{/subject/subjectdetail(subjectid=${list.id})}"-->
                         </div>
                     </div>
@@ -234,15 +227,16 @@
                         <div class="modal-body">
                             <span> <i class="bi bi-bookmark"></i> Thông tin môn học</span>
 
-                            <p>Some text in the modal.</p>
+                            <p id="subjectInfo">Some text in the modal.</p>
                         </div>
                         <div class="modal-body">
                             <!--                    <div class="learn-modal" style="float: left;font-size: larger;"><i class="bi bi-bookmark"></i>Bạn sẽ-->
                             <!--                        học được gì?-->
                             <!--                    </div>-->
                             <span> <i class="bi bi-bookmark"></i> Bạn sẽ học được gì?</span>
+                            <p id="subjectLearn"></p>
                             <button type="button" class="btn btn-default" data-dismiss="modal"
-                                    style="position: absolute;bottom: 24px;right: 22px;">
+                                    style="bottom: 4px;right: -716px;">
                                 Close
                             </button>
                         </div>
@@ -352,14 +346,14 @@
                     <!-- Footer End-->
                 </div>
             </footer>
-            <script>
-    function detailSubjectModal() {
-        $('#myModal').modal('show');
-    }
+<!--            <script>-->
+<!--     function detailSubjectModal() {-->
+<!--        $('#myModal').modal('show');-->
+<!--    }-->
 
 
 
-            </script>
+<!--            </script>-->
 
             <!-- JS here -->
             <script th:src="@{/js1/vendor/modernizr-3.5.0.min.js}"></script>
