@@ -1,16 +1,15 @@
 package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dao.SubjectRepository;
+import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.SubjectService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,6 +51,13 @@ public class SubjectController {
             modelMap.addAttribute("listSubject", listSubject);
         }
         return "listSubjectUser";
+    }
+
+    @GetMapping(value = Constants.LINK_USER_SUBJECT_DETAIL, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public SubjectAdminDTO getSubjectDetailById(@PathVariable Integer id) {
+        SubjectAdminDTO subject = subjectService.getSubjectAdminDTOById(id);
+        return subject;
     }
 
     @GetMapping(path = "/loadMoreSubject")
