@@ -1,3 +1,8 @@
+#SubjectDatatable tbody td{
+    word-break: break-word;
+    word-break: break-all;
+    white-space: normal;
+}
 .subject-img{
   width: 100px;
 }
@@ -8,4 +13,14 @@
     border: none;
     border-collapse: separate;
     border-spacing: 10px 10px;
+}
+.subject-action-button{
+    margin: 2px;
+}
+.subjectTextArea{
+    width: 300px;
+    height: 300px;
+}
+.formField{
+    width:15%;
 }

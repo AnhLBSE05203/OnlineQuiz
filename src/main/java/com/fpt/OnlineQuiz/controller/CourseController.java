@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,6 +40,7 @@ public class CourseController {
 
     @GetMapping(path = "/registration")
     public String showRegistrationPage(ModelMap modelMap) {
+        //todo?
 //        List<Course> courseList = courseService.getTop3Courses(3);
 //        modelMap.addAttribute("my_course_list", courseList);
         return "registration_page";
@@ -50,10 +50,13 @@ public class CourseController {
     @GetMapping(path = "/loadMoreCourse")
     public @ResponseBody
     void loadMore(
-            @RequestParam("start") String startStr, HttpServletRequest request, HttpServletResponse response) throws IOException {
+            @RequestParam("start") String startStr, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
         int start = Integer.parseInt(startStr);
-        List<Course> courses = courseService.getNext3Courses(3, start);
+        //todo - fix hardcode accountId
+        //Account account = ...
+        int accountId = 3; //...
+        List<Course> courses = courseService.getNext3Courses(accountId, start);
         if (courses.size() != 0) {
             for (Course c : courses) {
                 out.println("<div class=\"col-lg-4 course\">\n" +

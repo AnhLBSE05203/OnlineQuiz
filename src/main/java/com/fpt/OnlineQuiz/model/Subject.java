@@ -2,6 +2,7 @@ package com.fpt.OnlineQuiz.model;
 
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.utils.Constants;
+import com.fpt.OnlineQuiz.utils.Utils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,10 @@ public class Subject {
     private String name;
     @Column(name = "status")
     private int status;
+    @Column(name = "subjectInfo")
+    private String subjectInfo;
+    @Column(name = "learnAfter")
+    private String learnAfter;
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Course> courses;
 
@@ -61,6 +66,14 @@ public class Subject {
         String statusStr = Constants.subjectStatusConversion.get(this.getStatus());
         subjectAdminDTO.setStatusStr(statusStr);
         subjectAdminDTO.setStatus(this.getStatus());
+        subjectAdminDTO.setSubjectInfo(this.getSubjectInfo());
+        subjectAdminDTO.setLearnAfter(this.getLearnAfter());
         return subjectAdminDTO;
+    }
+
+    public void setFromSubjectAdminDTO(SubjectAdminDTO subjectAdminDTO) {
+        Utils.copyNonNullProperties(subjectAdminDTO, this);
+        // this only includes (id, name, subjectInfo, learnAfter, status)
+        // image needs to be handled separately
     }
 }

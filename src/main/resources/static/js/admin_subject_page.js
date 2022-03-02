@@ -20,10 +20,35 @@ $(document).ready(function() {
         			}, {
         				title : 'ImgSrc',
         				data : 'imgSrc',
+        				width: "10%",
         			}, {
         				title : 'Total Courses',
         				data : 'totalCourse',
         			}, {
+                        title : 'Subject Info',
+                        data : 'subjectInfo',
+                        width: "20%",
+                        render: function(data, type, row, meta) {
+                                    var html = "";
+                                    if(data != "" && data != null){
+                                        data = data.length > 100 ? (data.substring(0, 100) + '...') : data;
+                                        html += '<p>'+ data +'</p>';
+                                    }
+                                    return html;
+                                }
+                    }, {
+                        title : 'Learn After',
+                        data : 'learnAfter',
+                        width: "20%",
+                        render: function(data, type, row, meta) {
+                                    var html = "";
+                                    if(data != "" && data != null){
+                                        data = data.length > 100 ? (data.substring(0, 100) + '...') : data;
+                                        html += '<p>'+ data +'</p>';
+                                    }
+                                    return html;
+                                }
+                    }, {
         				title : 'Status',
         				data : 'statusStr',
         			}, {
@@ -40,14 +65,14 @@ $(document).ready(function() {
         			    title : 'Action',
                         data : 'status',
                         render: function(data, type, row, meta) {
-                            var html = '<button type="button" class="btn btn-primary" onclick="showSubjectEditModal('+ row['id'] + ')">'
-                            + 'Edit</button>&nbsp';
+                            var html = '<button type="button" class="btn btn-primary subject-action-button" onclick="showSubjectEditModal('+ row['id'] + ')">'
+                            + 'Edit</button>';
                             if (data == 0) {
-                                html += '<button type="button" class="btn btn-primary" onclick="recoverSubject('+ row['id'] +')">'
-                                + 'Recover</button>&nbsp';
+                                html += '<button type="button" class="btn btn-primary subject-action-button" onclick="recoverSubject('+ row['id'] +')">'
+                                + 'Recover</button>';
                             } else {
-                                html += '<button type="button" class="btn btn-primary" onclick="deleteSubject('+ row['id'] +')">'
-                                + 'Delete</button>&nbsp';
+                                html += '<button type="button" class="btn btn-primary subject-action-button" onclick="deleteSubject('+ row['id'] +')">'
+                                + 'Delete</button>';
                             }
                             return html;
                         }
@@ -77,7 +102,8 @@ function showSubjectEditModal(id) {
                             $("#editSubjectTotalCourse").val(subject.totalCourse);
                             $("#editSubjectImg").attr("src", subject.imgSrc);
                             $("#editSubjectStatus").val(subject.status).change();
-
+                            $("#editSubjectInfo").text(subject.subjectInfo);
+                            $("#editSubjectLearnAfter").text(subject.learnAfter);
                         }
                     }
                 });

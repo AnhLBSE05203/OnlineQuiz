@@ -35,9 +35,8 @@ public class AdminSubjectController {
     @PostMapping(Constants.LINK_ADMIN_SUBJECT_PROCESS_EDIT)
     public String editSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_EDIT_DTO) SubjectAdminDTO subjectAdminDTO) {
         Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
-        subject.setName(subjectAdminDTO.getName());
-        //set img - to do: image upload
-        subject.setStatus(subjectAdminDTO.getStatus());
+        subject.setFromSubjectAdminDTO(subjectAdminDTO);
+        //todo: add image upload
 
         subjectService.updateSubject(subject);
         return Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER;
@@ -45,10 +44,10 @@ public class AdminSubjectController {
 
     @PostMapping(Constants.LINK_ADMIN_SUBJECT_ADD)
     public String addSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_ADD_DTO) SubjectAdminDTO subjectAdminDTO) {
-        //to do - add form to page
+        //todo - add image upload
         Subject subject = new Subject();
-        subject.setName(subjectAdminDTO.getName());
-        //set img - to do: image upload
+        subject.setFromSubjectAdminDTO(subjectAdminDTO);
+
         //set default img - temporary
         Image defaultImg = imageService.getById(Constants.DEFAULT_SUBJECT_IMAGE_ID);
         if (defaultImg == null) {
@@ -58,7 +57,7 @@ public class AdminSubjectController {
         }
         subject.setImage(defaultImg);
         //
-        subject.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
+
         subjectService.addSubject(subject);
         return Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER;
     }

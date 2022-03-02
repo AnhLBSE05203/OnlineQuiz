@@ -1,15 +1,15 @@
 package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dao.SubjectRepository;
+import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.SubjectService;
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,9 +29,9 @@ public class SubjectController {
     @GetMapping(path = {"", "/listSubject"})
     public String showMySubjectPage(ModelMap modelMap, HttpServletRequest request) {
         String page = request.getParameter("page");
+        int pageSize = Constants.USER_SUBJECT_PAGE_SIZE;
         if (page == null) {
             page = "1";
-            int pageSize = 6;
             int pageIndex = Integer.parseInt(page);
             List<Subject> listSubject = subjectService.findAllSubjectsByPaging(pageIndex, pageSize);
             long totalRecord = subjectRepository.countSubject();
@@ -41,8 +41,6 @@ public class SubjectController {
             modelMap.addAttribute("pageIndex", pageIndex);
             modelMap.addAttribute("listSubject", listSubject);
         } else {
-            page = request.getParameter("page");
-            int pageSize = 6;
             int pageIndex = Integer.parseInt(page);
             List<Subject> listSubject = subjectService.findAllSubjectsByPaging(pageIndex, pageSize);
             long totalRecord = subjectRepository.countSubject();
@@ -55,14 +53,24 @@ public class SubjectController {
         return "listSubjectUser";
     }
 
+    @GetMapping(value = Constants.LINK_USER_SUBJECT_DETAIL, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public SubjectAdminDTO getSubjectDetailById(@PathVariable Integer id) {
+        SubjectAdminDTO subject = subjectService.getSubjectAdminDTOById(id);
+        return subject;
+    }
+
     @GetMapping(path = "/loadMoreSubject")
     public @ResponseBody
     void loadMore(
-            @RequestParam("amount") String amount, HttpServletRequest request, HttpServletResponse response) throws IOException {
+            @RequestParam("amount") String amount, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
-        int iamount = Integer.parseInt(amount);
-        System.out.println(iamount);
-        List<Subject> subjects = subjectService.getNext3Subject(3, iamount);
+        //todo - fix hardcode accountId
+        //Account account = ...
+        int accountId = 3; //...
+        int amountInt = Integer.parseInt(amount);
+        System.out.println(amountInt);
+        List<Subject> subjects = subjectService.getNext3Subject(accountId, amountInt);
         if (subjects.size() != 0) {
             System.out.println("list size: " + subjects.size());
             for (Subject s : subjects) {

@@ -16,4 +16,6 @@ public class SubjectAdminDTO {
     private int totalCourse;
     private String statusStr;
     private int status;
+    private String subjectInfo;
+    private String learnAfter;
 }

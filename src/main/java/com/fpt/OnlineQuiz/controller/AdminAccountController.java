@@ -1,11 +1,9 @@
 package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dto.AccountAdminDTO;
-import com.fpt.OnlineQuiz.dto.BlogAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Account;
-import com.fpt.OnlineQuiz.model.Blog;
 import com.fpt.OnlineQuiz.service.AccountService;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -34,7 +32,7 @@ public class AdminAccountController {
     }
 
     @GetMapping("/{id}")
-    public Account detailBlogPage(@PathVariable Integer id) {
+    public Account detailAccountPage(@PathVariable Integer id) {
         Account account = accountService.detailAccount(id);
         return account;
     }

@@ -25,23 +25,23 @@ public class LessonController {
     private SubjectService subjectService;
 
     @GetMapping("/list")
-    public String showlessionListPage(@Param(value = "subId") int subId,Model model, HttpServletRequest request){
+    public String showLessonListPage(@Param(value = "subId") int subId, Model model, HttpServletRequest request) {
         List<Lesson> list = lessonService.getAllLesson(subId);
         Optional<Subject> subject = subjectService.getSubject(subId);
 
-        model.addAttribute("subject",subject);
-        model.addAttribute("lessons",list);
+        model.addAttribute("subject", subject);
+        model.addAttribute("lessons", list);
         model.addAttribute("subId", subId);
         return "listLesson_page";
     }
 
     @GetMapping("/detail")
-    public String showlessionDetailPage(@Param(value = "lesId") int lesId,@Param(value = "subId") int subId,Model model, HttpServletRequest request){
+    public String showLessonDetailPage(@Param(value = "lesId") int lesId, @Param(value = "subId") int subId, Model model, HttpServletRequest request) {
         Optional<Lesson> lesson = lessonService.getLessonById(lesId);
         Optional<Subject> subject = subjectService.getSubject(subId);
 
-        model.addAttribute("subject",subject);
-        model.addAttribute("lesson",lesson);
+        model.addAttribute("subject", subject);
+        model.addAttribute("lesson", lesson);
         return "lessonDetail_page";
     }
 }

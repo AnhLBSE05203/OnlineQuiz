@@ -72,8 +72,9 @@
                             <input type="hidden" id="editSubjectStatusStr" th:name="statusStr" value="">
                             <table class="formTable" cellspacing="0" cellpadding="0">
                                 <tr>
-                                    <td>Id:</td>
-                                    <td><input type="text" id="editSubjectId" th:name="id" readonly></td>
+                                    <td class="formField">Id:</td>
+                                    <td class="formInput"><input type="text" id="editSubjectId" th:name="id" readonly>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Total no. of Courses:</td>
@@ -85,13 +86,26 @@
                                     <td><input type="text" id="editSubjectName" th:name="name" required></td>
                                     <input type="hidden" id="editSubjectNameOriginal">
                                 </tr>
-                                <td>Status:</td>
-                                <td><select id="editSubjectStatus" th:name="status">
-                                    <option th:each="status : ${statusMap}" th:value="${status.key}"
-                                            th:text="${status.value}">
-                                    </option>
-                                </select>
-                                </td>
+                                <tr>
+                                    <td>Status:</td>
+                                    <td><select id="editSubjectStatus" th:name="status">
+                                        <option th:each="status : ${statusMap}" th:value="${status.key}"
+                                                th:text="${status.value}">
+                                        </option>
+                                    </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Subject Info:</td>
+                                    <td><textarea class="subjectTextArea" form="subjectEditForm" id="editSubjectInfo"
+                                                  th:name="subjectInfo"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>Learn After:</td>
+                                    <td><textarea class="subjectTextArea" form="subjectEditForm"
+                                                  id="editSubjectLearnAfter"
+                                                  th:name="learnAfter"></textarea></td>
+                                </tr>
                             </table>
                         </div>
                         <div class="modal-footer">
@@ -122,8 +136,21 @@
                             <input type="hidden" id="addSubjectStatusStr" th:name="statusStr" value="">
                             <input type="hidden" id="addSubjectStatus" th:name="status" value="1">
                             <table class="formTable" cellspacing="0" cellpadding="0">
-                                <td>Name:</td>
-                                <td><input type="text" id="addSubjectName" th:name="name" required></td>
+                                <tr>
+                                    <td class="formField">Name:</td>
+                                    <td><input type="text" id="addSubjectName" th:name="name" required></td>
+                                </tr>
+                                <tr>
+                                    <td>Subject Info:</td>
+                                    <td><textarea class="subjectTextArea" form="subjectAddForm" id="addSubjectInfo"
+                                                  th:name="subjectInfo"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>Learn After:</td>
+                                    <td><textarea class="subjectTextArea" form="subjectAddForm"
+                                                  id="addSubjectLearnAfter"
+                                                  th:name="learnAfter"></textarea></td>
+                                </tr>
                             </table>
                         </div>
                         <div class="modal-footer">
