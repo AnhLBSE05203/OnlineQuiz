@@ -1,7 +1,16 @@
-.date22{
+.date22 {
     position: relative;
     background-color: #D769FF;
     border-radius: 10px 10px 0 0;
     align-content: center;
     text-align: center;
+}
+
+#created {
+    color: #3ccfcf;
+    font-weight: bold;
+}
+
+#created :hover {
+    color: #FFCD1F;
 }
