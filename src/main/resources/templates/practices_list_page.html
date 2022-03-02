@@ -1,122 +1,308 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Profile</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Courses | Education</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
 
-  <!-- CSS here -->
-  <div th:replace="components/header_footer.html :: common-style"></div>
-  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-        rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/css/forgot_password_page.css}">
-  <link rel="stylesheet" th:href="@{/css/profile_page.css}">
+    <div th:replace="components/header_footer.html :: common-style"></div>
 
 </head>
+
 <body>
 <!-- ? Preloader Start -->
-<div th:replace="components/header_footer.html :: user-preload"></div>
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img th:src="@{/img/logo/loder.png}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Preloader Start -->
 <!-- Header Start -->
-<div th:replace="components/header_footer.html :: user-header"></div>
+<div class="header-area header-transparent" th:replace="components/header_footer.html :: user-header">
+</div>
 <!-- Header End -->
 <main>
-  <!--? slider Area Start-->
-  <section class="slider-area slider-area2">
-    <div class="slider-active">
-      <!-- Single Slider -->
-      <div class="single-slider slider-height2">
+    <!--? slider Area Start-->
+    <section class="slider-area slider-area2">
+        <div class="slider-active">
+            <!-- Single Slider -->
+            <div class="single-slider slider-height2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-11 col-md-12">
+                            <div class="hero__caption hero__caption2">
+                                <!--                                <h1 data-animation="bounceIn" data-delay="0.2s"-->
+                                <!--                                    th:text="${subject.get().getName()}"></h1>-->
+                                <!-- breadcrumb Start-->
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Services</a></li>
+                                    </ol>
+                                </nav>
+                                <!-- breadcrumb End -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Courses area start -->
+    <div class="courses-area section-padding40 fix">
         <div class="container">
-          <div class="row">
-            <div class="col-xl-8 col-lg-11 col-md-12">
-              <div class="hero__caption hero__caption2">
-                <h1 data-animation="bounceIn" data-delay="0.2s">Profile</h1>
-                <!-- breadcrumb End -->
-              </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-8">
+                    <div class="section-tittle text-center mb-55">
+                        <h2>Lession List</h2>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Courses area start -->
-  <div class="container bootstrap snippets bootdey">
-    <div class="row">
-      <div class="profile-nav col-md-3" th:replace="components/header_footer.html :: user-profile">
-      </div>
-      <div class="profile-info col-md-9">
-        <div class="panel">
-          <div class="bio-graph-heading" th:text="${account.introduce}">
-
-          </div>
-          <div class="panel-body bio-graph-info">
-            <h1>Bio Graph</h1>
             <div class="row">
-              <div class="bio-row">
-                Full Name: <p name="name" th:text="${name}"><span></span></p>
-              </div>
-              <div class="bio-row">
-                Gender:
-                <p name="gender" id="gender" th:text="${gender}"><span></span></p>
+                <div class="col-lg-4">
+                    <div class="properties properties2 mb-30">
+                        <div class="properties__card">
+                            <div class="properties__img overlay1">
+                                <a href="#"><img th:src="@{/img/gallery/featured1.png}" alt=""></a>
+                            </div>
+                            <div class="properties__caption">
+                                <p>User Experience</p>
+                                <!--                                <h3><a href="#" th:text="${subject.get.name}"></a></h3>-->
+                                <p>The automated process all your website tasks. Discover tools and techniques to engage
+                                    effectively with vulnerable children and young people.
+                                </p>
+                                <div class="properties__footer d-flex justify-content-between align-items-center">
+                                    <div class="restaurant-name">
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half"></i>
+                                        </div>
+                                        <p><span>(4.5)</span> based on 120</p>
+                                    </div>
+                                    <div class="price">
+                                        <span>$135</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="border-btn border-btn2">Find out more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- list lesson-->
+                <div class="properties__caption">
+                    <p>User Experience</p>
+                    <!--                                <h3><a href="#" th:text="${subject.get.name}"></a></h3>-->
+                    <p>The automated process all your website tasks. Discover tools and techniques to engage
+                        effectively with vulnerable children and young people.
+                    </p>
+                    <div class="properties__footer d-flex justify-content-between align-items-center">
+                        <div class="restaurant-name">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half"></i>
+                            </div>
+                            <p><span>(4.5)</span> based on 120</p>
+                        </div>
+                        <div class="price">
+                            <span>$135</span>
+                        </div>
+                    </div>
+                    <a href="#" class="border-btn border-btn2">Find out more</a>
+                </div>
+            </div>
 
-              </div>
-              <div class="bio-row">
-                Email: <p name="email" th:text="${email}"><span></span></p>
-              </div>
-              <div class="bio-row">
-                Phone: <p name="phone" th:text="${phone}"><span></span></p>
-              </div>
-            </div>
-          </div>
+
+            <!--                <div class="row justify-content-center">-->
+            <!--                    <div class="col-xl-7 col-lg-8">-->
+            <!--                        <div class="section-tittle text-center mt-40">-->
+            <!--                            <a href="#" class="border-btn">Load More</a>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
         </div>
-        <div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="panel">
-                <div class="panel-body">
-                  <h2><a href="#">
-                    Registration
-                  </a></h2>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="panel">
-                <div class="panel-body">
-                  <h2><a href="#">
-                    My Subject
-                  </a></h2>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <!-- top subjects End -->
-  <!-- ? services-area -->
+    <!-- Courses area End -->
+    <!--? top subjects Area Start -->
+    <div class="topic-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-8">
+                    <div class="section-tittle text-center mb-55">
+                        <h2>Explore top subjects</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic1.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic2.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic3.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic4.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic5.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic6.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic7.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic8.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-12">
+                    <div class="section-tittle text-center mt-20">
+                        <a href="listLesson_page.html" class="border-btn">View More Subjects</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- top subjects End -->
+    <!-- ? services-area -->
+    <div class="services-area services-area2 section-padding40">
+        <div class="container">
+            <div class="row justify-content-sm-center">
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-services mb-30">
+                        <div class="features-icon">
+                            <img th:src="@{/img/icon/icon1.svg}" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <h3>60+ UX courses</h3>
+                            <p>The automated process all your website tasks.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-services mb-30">
+                        <div class="features-icon">
+                            <img th:src="@{/img/icon/icon2.svg}" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <h3>Expert instructors</h3>
+                            <p>The automated process all your website tasks.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-services mb-30">
+                        <div class="features-icon">
+                            <img th:src="@{/img/icon/icon3.svg}" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <h3>Life time access</h3>
+                            <p>The automated process all your website tasks.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <footer th:replace="components/header_footer.html :: user-footer">
 </footer>
 <!-- Scroll Up -->
-<div th:insert="components/header_footer.html :: scroll-up">
+<div id="back-top">
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
 
-<th:block th:insert="components/header_footer.html :: common-script">
-</th:block>
-<script>
-  if (document.getElementById("gender").innerText = 1) {
-    document.getElementById("gender").innerText = "Female";
-  }else {
-    document.getElementById("gender").innerText = "Male";
-  }
-
-
-</script>
+<div th:replace="components/header_footer.html :: common-script"></div>
 </body>
 </html>
