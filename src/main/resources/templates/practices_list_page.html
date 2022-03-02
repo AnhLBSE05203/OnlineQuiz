@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
-
     <div th:replace="components/header_footer.html :: common-style"></div>
+    <link rel="stylesheet" th:href="@{/css/practice_list.css}">
 
 </head>
 
@@ -71,8 +71,9 @@
                 <div class="col-lg-4">
                     <div class="properties properties2 mb-30">
                         <div class="properties__card">
-                            <div class="properties__img overlay1">
-                                <a href="#"><img th:src="@{/img/gallery/featured1.png}" alt=""></a>
+                            <div class="date22">
+                                <p >dsadas</p>
+
                             </div>
                             <div class="properties__caption">
                                 <p th:text="${quizPackage.get(0).getName()}"></p>
