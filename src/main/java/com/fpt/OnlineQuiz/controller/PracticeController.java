@@ -26,13 +26,10 @@ public class PracticeController {
         Account account = (Account) authentication.getPrincipal();
         //Get all quizPackage
         List<QuizPackage> quizPackageList = quizPackageService.finByAccountId(account.getId());
-        Account createdAccount;
-
         Iterable<QuizPackage> quizList = quizPackageService.getAllQuiz();
         model.addAttribute("quizPackage", quizPackageList);
         model.addAttribute("quizList", quizList);
         model.addAttribute("account", account);
-
 
         return "practices_list_page";
     }
