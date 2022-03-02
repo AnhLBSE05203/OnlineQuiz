@@ -115,6 +115,8 @@ public class Constants {
     public static final String LINK_ADMIN_SUBJECT_RECOVER = "/recover/{id}";
     public static final String LINK_ADMIN_SUBJECT_PROCESS_EDIT = "/edit";
     public static final String LINK_ADMIN_SUBJECT_GET_BY_PAGE = "/getSubjectsByPage";
+    //links user subject
+    public static final String LINK_USER_SUBJECT_DETAIL = "/detail/{id}";
     //admin subject page attributes
     public static final String ATTRIBUTE_SUBJECT_ADD_DTO = "subjectAddDTO";
     public static final String ATTRIBUTE_SUBJECT_EDIT_DTO = "subjectEditDTO";
