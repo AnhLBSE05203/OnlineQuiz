@@ -25,6 +25,10 @@ public class Subject {
     private String name;
     @Column(name = "status")
     private int status;
+    @Column(name = "subject_info")
+    private String subjectinfo;
+    @Column(name = "learn_after")
+    private String learnafter;
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Course> courses;
 
@@ -61,6 +65,8 @@ public class Subject {
         String statusStr = Constants.subjectStatusConversion.get(this.getStatus());
         subjectAdminDTO.setStatusStr(statusStr);
         subjectAdminDTO.setStatus(this.getStatus());
+        subjectAdminDTO.setSubjectInfo(this.getSubjectinfo());
+        subjectAdminDTO.setLearnAfter(this.getLearnafter());
         return subjectAdminDTO;
     }
 }
