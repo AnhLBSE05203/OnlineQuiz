@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -14,21 +13,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Quiz")
-public class Quiz {
+@Table(name = "QuizHistoryAccountAdd")
+public class QuizHistoryAccountAdd {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "QuizId")
+    @Column(name = "quizHistoryAccountAddId")
     private int id;
 
-    @Column(name = "quizQuestion")
-    private String question;
-
-    @Column(name = "quizAnswer")
-    private String answer;
+    @ManyToOne
+    @JoinColumn(name = "accountId")
+    private Account account;
 
     @ManyToOne
-    @JoinColumn(name = "quizPackageId")
-    private QuizPackage quizPackage;
-
+    @JoinColumn(name = "quizHistoryId")
+    private QuizHistory quizHistory;
 }

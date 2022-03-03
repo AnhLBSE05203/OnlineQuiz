@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
-import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,8 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "QuizPackage")
-public class QuizPackage {
+@Table(name = "QuizFolderHistory")
+public class QuizPackageHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "quizPackageId")
