@@ -88,7 +88,7 @@ public class AdminSubjectController {
     @GetMapping(value = Constants.LINK_ADMIN_SUBJECT_DELETE)
     public String deleteSubject(@PathVariable Integer id) {
         Subject subject = subjectService.getSubjectById(id);
-        subject.setStatus(Constants.STATUS_SUBJECT_DELETED);
+        subject.setStatus(Constants.STATUS_DELETED);
         subjectService.updateSubject(subject);
         return Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER;
     }
