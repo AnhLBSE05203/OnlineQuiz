@@ -184,12 +184,11 @@ public class AccountController {
         Date now = new Date();
         account.setCreatedTime(now);
         account.setUpdatedTime(now);
-        account.setCreatedUserId(1);
-        account.setUpdatedUserId(1);
+        account.setCreatedUserId(Constants.DEFAULT_CREATED_USER_ID);
+        account.setUpdatedUserId(Constants.DEFAULT_CREATED_USER_ID);
         account.setGender(registerDTO.getGender());
         account.setPhone(registerDTO.getPhone());
         account.setFullName(registerDTO.getFullName());
-        account.setCreatedUserId(1);
         account.setStatus(Constants.STATUS_ACCOUNT_UNCONFIRMED);
         Role role = roleService.findRoleByName(Constants.ROLE_USER);
         List<Role> roles = new ArrayList<>();
