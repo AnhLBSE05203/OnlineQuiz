@@ -8,8 +8,5 @@ import java.util.List;
 
 @Service
 public interface QuizHistoryService {
-    List<QuizHistory> finByAccountId(int id);
-    List<Question> questionListByPackage(int id);
-    Iterable<QuizHistory> getAllQuiz();
-
+      List<QuizHistory> getQuizByAccountAdd(int id);
 }

@@ -15,17 +15,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "QuizFolderHistory")
-public class QuizPackageHistory {
+@Table(name = "QuizFolder")
+public class QuizFolderHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "quizPackageId")
+    @Column(name = "quizFolderId")
     private int id;
 
-    @Column(name = "quizPackageName")
+    @Column(name = "quizFolderName")
     private String name;
 
-    @Column(name = "createdTime")
+    @Column(name = "folderCreatedTime")
     private Date createdTime;
 
     //() at the first and the end query is important
