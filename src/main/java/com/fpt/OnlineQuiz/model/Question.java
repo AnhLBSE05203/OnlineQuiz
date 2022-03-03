@@ -34,6 +34,9 @@ public class Question {
     private List<QuizHistoryQuestion> quizHistoryQuestions;
     @OneToMany(mappedBy = "question")
     private List<Answer> answers;
+    @ManyToOne
+    @JoinColumn(name = "quizHistoryId")
+    private QuizHistory quizHistory;
 
     public QuestionAdminDTO toQuestionAdminDTO() {
         QuestionAdminDTO questionAdminDTO = new QuestionAdminDTO();
