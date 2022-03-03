@@ -15,6 +15,8 @@ import java.util.List;
 @Entity
 @Table(name = "QuizHistoryAccountAdd")
 public class QuizHistoryAccountAdd {
+    /*This table is find Those QuizHistory(1 quizHistory contain multiple questions)
+    *existed in user account ,user add them to there practices list */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "quizHistoryAccountAddId")
