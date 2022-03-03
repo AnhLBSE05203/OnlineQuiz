@@ -32,7 +32,7 @@ public class QuizHistory {
     private Account account;
 
     //() at the first and the end query is important
-    @Formula("(SELECT COUNT(*) FROM question q WHERE q.quiz_package_id = quiz_package_id)")
+    @Formula("(SELECT COUNT(*) FROM question q WHERE q.quiz_history_id = quiz_history_id)")
     private Long quizCount;
 
     @Formula("(SELECT a.full_name FROM account a WHERE a.account_id = account_id)")

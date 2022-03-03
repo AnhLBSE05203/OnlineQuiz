@@ -30,7 +30,7 @@ public class PracticeController {
        */
         List<QuizHistory> quizHistories = quizHistoryService.getQuizByAccountAdd(account.getId());
 //        Iterable<QuizPackageHistory> quizList = quizPackageService.getAllQuiz();
-//        model.addAttribute("quizPackage", quizPackageHistoryList);
+        model.addAttribute("quizHistory", quizHistories);
 //        model.addAttribute("quizList", quizList);
 //        model.addAttribute("account", account);
 

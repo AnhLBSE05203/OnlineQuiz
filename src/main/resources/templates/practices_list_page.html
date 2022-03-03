@@ -68,18 +68,18 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4" th:each="qp : ${quizPackage}">
+                <div class="col-lg-4" th:each="qh : ${quizHistory}">
                     <div class="properties properties2 mb-30">
                         <div class="properties__card">
                             <div class="date22">
-                                <p><i th:text="${qp.createdTime.toLocaleString()}"></i></p>
+                                <p><i th:text="${qh.createdTime.toLocaleString()}"></i></p>
 
                             </div>
                             <div class="properties__caption">
-                                <h3><b th:text="${qp.name}"></b></h3>
-                                <p><b th:text="${qp.quizCount}+' Quizs'"></b></p>
+                                <h3><b th:text="${qh.name}"></b></h3>
+                                <p><b th:text="${qh.quizCount}+' Quizs'"></b></p>
                                 <p style="text-align: center">Created by <a href="#" id="created"
-                                                                            th:text="${qp.acountName}"></a></p>
+                                                                            th:text="${qh.acountName}"></a></p>
                                 <p style="text-align: center">
                                     <a href="#" class="border-btn">Details</a>
                                 </p>
