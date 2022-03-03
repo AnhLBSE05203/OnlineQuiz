@@ -35,7 +35,7 @@ public class BlogServiceImpl implements BlogService {
             BlogAdminDTO blogAdminDto = new BlogAdminDTO();
             Utils.copyNonNullProperties(blog, blogAdminDto);
             blogAdminDto.setContent(blogAdminDto.getContent().substring(0, 100));
-            blogAdminDto.setStatusStr("Published");
+            blogAdminDto.setStatusStr(Constants.blogStatusConversion.get(blogAdminDto.getStatus()));
             listBlogAdminDTO.add(blogAdminDto);
         }
         Page<BlogAdminDTO> page = new Page<>(listBlogAdminDTO);

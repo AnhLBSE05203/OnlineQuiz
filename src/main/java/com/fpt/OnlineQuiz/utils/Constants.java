@@ -23,15 +23,18 @@ public class Constants {
     public static final int STATUS_DEFAULT = 1;
     public static final int DEFAULT_CREATED_USER_ID = 1;
     public static final int DEFAULT_UPDATED_USER_ID = 1;
-    //subject constants
+    //subject status constants
     public static final Map<Integer, String> subjectStatusConversion = initSubjectStatusMap();
-    public static final int STATUS_SUBJECT_DELETED = 0;
     public static final int STATUS_SUBJECT_ACTIVE = 1;
     public static final int STATUS_SUBJECT_INACTIVE = 2;
+    //blog status constants
+    public static final Map<Integer, String> blogStatusConversion = initBlogStatusMap();
+    public static final int STATUS_BLOG_PUBLISHED = 1;
 
     //image constants
     public static final int DEFAULT_SUBJECT_IMAGE_ID = 1;
     public static final String DEFAULT_SUBJECT_IMAGE_SRC = "/img/gallery/featured1.png";
+
     //messages
     public static final String MESSAGE_INVALID_TOKEN = "Invalid Token!";
     public static final String MESSAGE_REGISTER_SUCCESS = "Register successful! Check email for confirmation link!";
@@ -162,9 +165,16 @@ public class Constants {
 
     private static Map<Integer, String> initSubjectStatusMap() {
         Map<Integer, String> map = new HashMap<>();
-        map.put(STATUS_SUBJECT_DELETED, "Deleted");
+        map.put(STATUS_DELETED, "Deleted");
         map.put(STATUS_SUBJECT_ACTIVE, "Active");
         map.put(STATUS_SUBJECT_INACTIVE, "Inactive");
+        return Collections.unmodifiableMap(map);
+    }
+
+    private static Map<Integer, String> initBlogStatusMap() {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(STATUS_DELETED, "Deleted");
+        map.put(STATUS_BLOG_PUBLISHED, "Published");
         return Collections.unmodifiableMap(map);
     }
 
