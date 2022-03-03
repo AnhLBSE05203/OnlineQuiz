@@ -185,7 +185,7 @@ public class AccountController {
         account.setCreatedTime(now);
         account.setUpdatedTime(now);
         account.setCreatedUserId(Constants.DEFAULT_CREATED_USER_ID);
-        account.setUpdatedUserId(Constants.DEFAULT_CREATED_USER_ID);
+        account.setUpdatedUserId(Constants.DEFAULT_UPDATED_USER_ID);
         account.setGender(registerDTO.getGender());
         account.setPhone(registerDTO.getPhone());
         account.setFullName(registerDTO.getFullName());
