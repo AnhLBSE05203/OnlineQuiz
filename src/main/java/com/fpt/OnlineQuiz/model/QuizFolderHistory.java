@@ -17,6 +17,9 @@ import java.util.List;
 @Entity
 @Table(name = "QuizFolder")
 public class QuizFolderHistory {
+    /* This table content multiple quizHistory(quizhistory là học phần,
+    * quizFolderHistory is folder contain those học phần đó)
+    */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "quizFolderId")
