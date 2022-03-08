@@ -119,6 +119,8 @@ public class SubjectRepository {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
                 sb.append(" AND lower(s.image.src) LIKE " + key);
                 sb.append(" OR lower(s.name) LIKE " + key);
+                sb.append(" OR lower(s.subjectInfo) LIKE " + key);
+                sb.append(" OR lower(s.learnAfter) LIKE " + key);
             }
             // append sorting
             Order order = pagingRequest.getOrder().get(0);
@@ -151,6 +153,8 @@ public class SubjectRepository {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
                 sb.append(" AND lower(s.image.src) LIKE " + key);
                 sb.append(" OR lower(s.name) LIKE " + key);
+                sb.append(" OR lower(s.subjectInfo) LIKE " + key);
+                sb.append(" OR lower(s.learnAfter) LIKE " + key);
             }
 
             String sql = sb.toString();
