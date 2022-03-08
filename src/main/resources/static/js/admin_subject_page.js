@@ -21,9 +21,11 @@ $(document).ready(function() {
         				title : 'ImgSrc',
         				data : 'imgSrc',
         				width: "10%",
+        				orderable: false
         			}, {
         				title : 'Total Courses',
         				data : 'totalCourse',
+        				orderable: false
         			}, {
                         title : 'Subject Info',
                         data : 'subjectInfo',
@@ -51,9 +53,11 @@ $(document).ready(function() {
                     }, {
         				title : 'Status',
         				data : 'statusStr',
+        				orderable: false
         			}, {
         				title : 'Img',
         				data : 'imgSrc',
+        				orderable: false,
         				render: function(data, type, row, meta) {
         				    var html = "";
         				    if(data != "" && data != null){
@@ -64,6 +68,7 @@ $(document).ready(function() {
         			}, {
         			    title : 'Action',
                         data : 'status',
+                        orderable: false,
                         render: function(data, type, row, meta) {
                             var html = '<button type="button" class="btn btn-primary subject-action-button" onclick="showSubjectEditModal('+ row['id'] + ')">'
                             + 'Edit</button>';
