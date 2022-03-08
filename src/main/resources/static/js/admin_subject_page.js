@@ -260,7 +260,7 @@ function showCourseSection(subjectId) {
 }
 //todo
 function showCourseEditModal(id){
-var link = "/admin/subject/" + id;
+var link = "/admin/course/" + id;
     var subject = "";
     $.ajax({
                     url: link,

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <!-- Edit Course Modal -->
+    <div class="modal fade" th:fragment="courseEditModal" id="courseEditModal" data-bs-backdrop="static"
+         data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="courseEditForm" th:object="${courseEditDTO}"
+                      th:action="@{/admin/course/edit}" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Course Detail</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="editCourseStatusStr" th:name="statusStr" value="">
+                        <table class="formTable" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="formField">Id:</td>
+                                <td class="formInput"><input type="text" id="editCourseId" th:name="id" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Name:</td>
+                                <td><input type="text" id="editCourseName" th:name="name" required></td>
+                                <input type="hidden" id="editCourseNameOriginal">
+                            </tr>
+                            <tr>
+                                <td>Total no. of Lesson:</td>
+                                <td><input type="text" id="editCourseLessonTotal"
+                                           th:field="*{lessonTotal}" required></td>
+                            </tr>
+                            <tr>
+                                <td>Price:</td>
+                                <td><input type="number" th:name="price" step="0.01" required></td>
+                            </tr>
+                            <tr>
+                                <td>Status:</td>
+                                <td><select id="editCourseStatus" th:name="status">
+                                    <option th:each="status : ${statusMap}" th:value="${status.key}"
+                                            th:text="${status.value}">
+                                    </option>
+                                </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Subject:</td>
+                                <td><select id="editCourseSubject" th:name="subjectId">
+                                    <option th:each="subject : ${subjectList}" th:value="${subject.key}"
+                                            th:text="${subject.value}">
+                                    </option>
+                                </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Description:</td>
+                                <td><textarea class="courseTextArea" form="courseEditForm" id="editCourseDescription"
+                                              th:name="description"></textarea></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" onclick="submitEditCourse()"
+                                class="btn btn-primary">Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Edit Course Modal -->
+    <!-- Create Course Modal -->
+    <div class="modal fade" th:fragment="courseAddModal" id="subjectAddModal" data-bs-backdrop="static"
+         data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="courseAddForm" th:object="${courseAddDTO}"
+                      th:action="@{/admin/course/add}" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Course Detail</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="addCourseId" th:name="id" value="0">
+                        <input type="hidden" id="addCourseStatusStr" th:name="statusStr" value="">
+                        <input type="hidden" id="addCourseStatus" th:name="status" value="1">
+                        <table class="formTable" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="formField">Name:</td>
+                                <td><input type="text" id="addCourseName" th:name="name" required></td>
+                            </tr>
+                            <tr>
+                                <td>Total no. of Lesson:</td>
+                                <td><input type="text" id="addCourseLessonTotal"
+                                           th:field="*{lessonTotal}" required></td>
+                            </tr>
+                            <tr>
+                                <td>Price:</td>
+                                <td><input type="number" th:name="price" step="0.01" required></td>
+                            </tr>
+                            <tr>
+                                <td>Subject:</td>
+                                <td><select id="addCourseSubject" th:name="subjectId">
+                                    <option th:each="subject : ${subjectList}" th:value="${subject.key}"
+                                            th:text="${subject.value}">
+                                    </option>
+                                </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Description:</td>
+                                <td><textarea class="courseTextArea" form="courseAddForm" id="addCourseDescription"
+                                              th:name="description"></textarea></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" onclick="submitAddSubject()"
+                                class="btn btn-primary">Add
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Create Course Modal -->
+</html>
+</doc>

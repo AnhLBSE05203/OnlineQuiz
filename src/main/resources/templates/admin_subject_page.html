@@ -75,7 +75,6 @@
                 </footer>
             </div>
         </div>
-        <!-- placeholder for modal -->
         <!-- Edit Subject Modal -->
         <div class="modal fade" id="subjectEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -185,6 +184,12 @@
             </div>
         </div>
         <!-- End Create Subject Modal -->
+
+        <!-- Course Modals -->
+        <div th:replace="components/admin_course_modal.html :: courseEditModal"></div>
+        <div th:replace="components/admin_course_modal.html :: courseAddModal"></div>
+        <!-- End Course Modals -->
+
         <!-- Admin common js -->
         <th:block th:insert="components/header_footer.html :: admin-common-script">
         </th:block>

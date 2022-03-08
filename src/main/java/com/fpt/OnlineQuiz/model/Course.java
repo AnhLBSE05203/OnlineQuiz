@@ -3,6 +3,7 @@ package com.fpt.OnlineQuiz.model;
 import com.fpt.OnlineQuiz.dto.CourseAdminDTO;
 import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import com.fpt.OnlineQuiz.utils.Constants;
+import com.fpt.OnlineQuiz.utils.Utils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -80,5 +81,10 @@ public class Course {
         courseAdminDTO.setStatusStr(statusStr);
         courseAdminDTO.setStatus(this.getStatus());
         return courseAdminDTO;
+    }
+
+    public void setFromSubjectAdminDTO(CourseAdminDTO courseAdminDTO) {
+        Utils.copyNonNullProperties(courseAdminDTO, this);
+        // this doesn't handle Subject fields
     }
 }
