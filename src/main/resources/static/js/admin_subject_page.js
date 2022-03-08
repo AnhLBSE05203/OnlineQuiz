@@ -196,7 +196,7 @@ function showCourseSection(subjectId) {
     		"serverSide": true,
     		pageLength : 5,
             			ajax : {
-            				url : '/admin/subject/courses',
+            				url : '/admin/course/coursesBySubject',
             				"type": "POST",
                             "dataType": "json",
                             "contentType": "application/json",

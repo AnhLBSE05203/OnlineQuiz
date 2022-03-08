@@ -1,6 +1,5 @@
 package com.fpt.OnlineQuiz.controller;
 
-import com.fpt.OnlineQuiz.dto.CourseAdminDTO;
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
@@ -103,14 +102,5 @@ public class AdminSubjectController {
         subject.setStatus(Constants.STATUS_SUBJECT_ACTIVE);
         subjectService.updateSubject(subject);
         return Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER;
-    }
-
-    @PostMapping(value = Constants.LINK_ADMIN_SUBJECT_GET_COURSES_BY_SUBJECT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Page<CourseAdminDTO> getCoursePageBySubject(HttpServletRequest request, @RequestBody PagingRequest pagingRequest) {
-        //int subjectId = Integer.parseInt(request.getParameter("subjectId"));
-        int subjectId = Integer.parseInt(pagingRequest.getPrefilter());
-        Page<CourseAdminDTO> courseAdminDTOs = courseService.getCourseAdminDTOByPagingRequest(subjectId, pagingRequest);
-        return courseAdminDTOs;
     }
 }

@@ -26,6 +26,11 @@ public class CourseRepository {
     @PersistenceContext
     EntityManager em;
 
+    public void updateCourse(Course course) {
+        em.merge(course);
+        em.flush();
+    }
+
     public List<CourseFeaturedDTO> getFeaturedCourses(int number) {
         try {
             BufferedReader buffer = new BufferedReader(new InputStreamReader(
@@ -134,6 +139,27 @@ public class CourseRepository {
                 sb.append(" AND lower(c.name) LIKE " + key);
                 sb.append(" OR lower(c.description) LIKE " + key);
 
+            }
+
+            Query query = em.createQuery(sql, Long.class);
+            query.setParameter("subjectId", subjectId);
+            return (long) query.getSingleResult();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0l;
+    }
+
+    public long getDuplicateCount(String name, int subjectId) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.SQL_GET_COURSE_COUNT_BY_SUBJECT_ID);
+            String sql = sb.toString();
+            // filter by name
+            if (name != null
+                    && StringUtils.hasLength(name)) {
+                String key = "'%" + name.toLowerCase() + "%'";
+                sb.append(" AND lower(c.name) LIKE " + key);
             }
 
             Query query = em.createQuery(sql, Long.class);

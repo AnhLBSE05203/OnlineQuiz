@@ -122,13 +122,27 @@ public class Constants {
     public static final String LINK_ADMIN_SUBJECT_RECOVER = "/recover/{id}";
     public static final String LINK_ADMIN_SUBJECT_PROCESS_EDIT = "/edit";
     public static final String LINK_ADMIN_SUBJECT_GET_BY_PAGE = "/getSubjectsByPage";
-    public static final String LINK_ADMIN_SUBJECT_GET_COURSES_BY_SUBJECT = "/courses";
+
+    //links admin course
+    public static final String LINK_ADMIN_COURSE_CONTROLLER = "/admin/course";
+    public static final String LINK_ADMIN_COURSE_GET_COURSES_BY_SUBJECT = "/coursesBySubject";
+    public static final String LINK_ADMIN_COURSE_DETAIL = "/{id}";
+    public static final String LINK_ADMIN_COURSE_GET_DUPLICATE = "/getDuplicate";
+    public static final String LINK_ADMIN_COURSE_ADD = "/add";
+    public static final String LINK_ADMIN_COURSE_DELETE = "/delete/{id}";
+    public static final String LINK_ADMIN_COURSE_RECOVER = "/recover/{id}";
+    public static final String LINK_ADMIN_COURSE_PROCESS_EDIT = "/edit";
     //links user subject
     public static final String LINK_USER_SUBJECT_DETAIL = "/detail/{id}";
+
     //admin subject page attributes
     public static final String ATTRIBUTE_SUBJECT_ADD_DTO = "subjectAddDTO";
     public static final String ATTRIBUTE_SUBJECT_EDIT_DTO = "subjectEditDTO";
     public static final String ATTRIBUTE_SUBJECT_STATUS_MAP = "statusMap";
+    //admin course page attributes
+    public static final String ATTRIBUTE_COURSE_ADD_DTO = "courseAddDTO";
+    public static final String ATTRIBUTE_COURSE_EDIT_DTO = "courseEditDTO";
+    public static final String ATTRIBUTE_COURSE_STATUS_MAP = "statusMap";
 
     //pages admin
     public static final String PAGE_DASHBOARD = "admin_dashboard";

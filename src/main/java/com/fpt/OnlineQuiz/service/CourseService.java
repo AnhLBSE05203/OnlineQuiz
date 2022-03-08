@@ -21,4 +21,13 @@ public interface CourseService {
     CourseUserDTO getCourseUserDTO(int id);
 
     Page<CourseAdminDTO> getCourseAdminDTOByPagingRequest(int subjectId, PagingRequest pagingRequest);
+
+    Course getById(int id);
+
+    void updateCourse(Course course);
+
+    CourseAdminDTO getCourseAdminDTOById(int id);
+
+    boolean isDuplicated(String name, int subjectId);
+
 }

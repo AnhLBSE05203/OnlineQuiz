@@ -77,4 +77,27 @@ public class CourseServiceImpl implements CourseService {
         return page;
     }
 
+    @Override
+    public Course getById(int id) {
+        return courseRepository.getCourseById(id);
+    }
+
+    @Override
+    public void updateCourse(Course course) {
+        courseRepository.updateCourse(course);
+    }
+
+    @Override
+    public CourseAdminDTO getCourseAdminDTOById(int id) {
+        Course course = courseRepository.getCourseById(id);
+        CourseAdminDTO courseAdminDTO = course.toCourseAdminDTO();
+        return courseAdminDTO;
+    }
+
+    @Override
+    public boolean isDuplicated(String name, int subjectId) {
+        long count = courseRepository.getDuplicateCount(name, subjectId);
+        return count > 0 ? true : false;
+    }
+
 }
