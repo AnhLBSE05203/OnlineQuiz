@@ -60,8 +60,7 @@ public class AdminCourseController {
 
     @PostMapping(value = Constants.LINK_ADMIN_COURSE_GET_COURSES_BY_SUBJECT, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Page<CourseAdminDTO> getCoursePageBySubject(HttpServletRequest request, @RequestBody PagingRequest pagingRequest) {
-        //int subjectId = Integer.parseInt(request.getParameter("subjectId"));
+    public Page<CourseAdminDTO> getCoursePageBySubject(@RequestBody PagingRequest pagingRequest) {
         int subjectId = Integer.parseInt(pagingRequest.getPrefilter());
         Page<CourseAdminDTO> courseAdminDTOs = courseService.getCourseAdminDTOByPagingRequest(subjectId, pagingRequest);
         return courseAdminDTOs;

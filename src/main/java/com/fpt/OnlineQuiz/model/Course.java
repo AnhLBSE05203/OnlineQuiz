@@ -70,16 +70,11 @@ public class Course {
 
     public CourseAdminDTO toCourseAdminDTO() {
         CourseAdminDTO courseAdminDTO = new CourseAdminDTO();
-        courseAdminDTO.setId(this.getId());
-        courseAdminDTO.setName(this.getName());
+        Utils.copyNonNullProperties(this, courseAdminDTO);
         courseAdminDTO.setSubjectName(this.getSubject().getName());
         courseAdminDTO.setSubjectId(this.getSubject().getId());
-        courseAdminDTO.setDescription(this.getDescription());
-        courseAdminDTO.setPrice(this.getPrice());
-        courseAdminDTO.setLessonTotal(this.getLessonTotal());
         String statusStr = Constants.courseStatusConversion.get(this.getStatus());
         courseAdminDTO.setStatusStr(statusStr);
-        courseAdminDTO.setStatus(this.getStatus());
         return courseAdminDTO;
     }
 

@@ -6,6 +6,7 @@ import com.fpt.OnlineQuiz.dto.paging.Order;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.utils.Constants;
+import com.fpt.OnlineQuiz.utils.Utils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -108,10 +109,16 @@ public class CourseRepository {
 
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
-                String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
+                String value = pagingRequest.getSearch().getValue();
+                String key = "'%" + value.toLowerCase() + "%'";
                 sb.append(" AND lower(c.name) LIKE " + key);
                 sb.append(" OR lower(c.description) LIKE " + key);
-
+                if (Utils.isNumeric(value)) {
+                    sb.append(" OR c.price = " + value);
+                    if (Utils.isInteger(value, 10)) {
+                        sb.append(" OR c.lessonTotal = " + value);
+                    }
+                }
             }
             // append sorting
             Order order = pagingRequest.getOrder().get(0);
@@ -137,10 +144,16 @@ public class CourseRepository {
 
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
-                String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
+                String value = pagingRequest.getSearch().getValue();
+                String key = "'%" + value.toLowerCase() + "%'";
                 sb.append(" AND lower(c.name) LIKE " + key);
                 sb.append(" OR lower(c.description) LIKE " + key);
-
+                if (Utils.isNumeric(value)) {
+                    sb.append(" OR c.price = " + value);
+                    if (Utils.isInteger(value, 10)) {
+                        sb.append(" OR c.lessonTotal = " + value);
+                    }
+                }
             }
             String sql = sb.toString();
             Query query = em.createQuery(sql, Long.class);
