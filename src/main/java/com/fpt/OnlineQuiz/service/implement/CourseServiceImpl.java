@@ -1,14 +1,18 @@
 package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.CourseRepository;
+import com.fpt.OnlineQuiz.dto.CourseAdminDTO;
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
 import com.fpt.OnlineQuiz.dto.CourseUserDTO;
+import com.fpt.OnlineQuiz.dto.paging.Page;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.service.CourseService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -54,6 +58,23 @@ public class CourseServiceImpl implements CourseService {
         Course course = courseRepository.getCourseById(id);
         CourseUserDTO courseUserDTO = course.toCourseUserDTO();
         return courseUserDTO;
+    }
+
+    @Override
+    public Page<CourseAdminDTO> getCourseAdminDTOByPagingRequest(int subjectId, PagingRequest pagingRequest) {
+        List<Course> courses = courseRepository.getCoursesByPagingRequest(subjectId, pagingRequest);
+        long count = courseRepository.getCoursesCountByPagingRequest(subjectId, pagingRequest);
+        List<CourseAdminDTO> courseAdminDTOList = new ArrayList<>();
+        for (Course course : courses) {
+            CourseAdminDTO courseAdminDTO = course.toCourseAdminDTO();
+            courseAdminDTOList.add(courseAdminDTO);
+        }
+        // convert List to Page
+        Page<CourseAdminDTO> page = new Page<>(courseAdminDTOList);
+        page.setRecordsFiltered((int) count);
+        page.setRecordsTotal((int) count);
+        page.setDraw(pagingRequest.getDraw());
+        return page;
     }
 
 }

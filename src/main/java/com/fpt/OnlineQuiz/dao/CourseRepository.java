@@ -1,9 +1,13 @@
 package com.fpt.OnlineQuiz.dao;
 
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
+import com.fpt.OnlineQuiz.dto.paging.Column;
+import com.fpt.OnlineQuiz.dto.paging.Order;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -90,5 +94,54 @@ public class CourseRepository {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public List<Course> getCoursesByPagingRequest(int subjectId, PagingRequest pagingRequest) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.SQL_GET_COURSE_BY_SUBJECT_ID);
+            String sql = sb.toString();
+            if (pagingRequest.getSearch() != null
+                    && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
+                String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
+                sb.append(" AND lower(c.name) LIKE " + key);
+                sb.append(" OR lower(c.description) LIKE " + key);
+
+            }
+            // append sorting
+            Order order = pagingRequest.getOrder().get(0);
+            int columnIndex = order.getColumn();
+            Column column = pagingRequest.getColumns().get(columnIndex);
+            sb.append(" ORDER BY " + "c." + column.getData() + " " + order.getDir());
+
+            Query query = em.createQuery(sql, Course.class);
+            query.setParameter("subjectId", subjectId);
+            return (List<Course>) query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public Long getCoursesCountByPagingRequest(int subjectId, PagingRequest pagingRequest) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.SQL_GET_COURSE_COUNT_BY_SUBJECT_ID);
+            String sql = sb.toString();
+            if (pagingRequest.getSearch() != null
+                    && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
+                String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
+                sb.append(" AND lower(c.name) LIKE " + key);
+                sb.append(" OR lower(c.description) LIKE " + key);
+
+            }
+
+            Query query = em.createQuery(sql, Long.class);
+            query.setParameter("subjectId", subjectId);
+            return (long) query.getSingleResult();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0l;
     }
 }

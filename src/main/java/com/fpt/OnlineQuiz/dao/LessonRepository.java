@@ -4,7 +4,6 @@ import com.fpt.OnlineQuiz.dto.paging.Column;
 import com.fpt.OnlineQuiz.dto.paging.Order;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Lesson;
-import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -28,7 +27,7 @@ public class LessonRepository {
     public List<Lesson> getByPagingRequest(PagingRequest pagingRequest) {
         try {
             BufferedReader buffer = new BufferedReader(new InputStreamReader(
-                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_Lessons)));
+                    this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_LESSONS)));
             StringBuilder sb = new StringBuilder();
             String line = "";
             while ((line = buffer.readLine()) != null) {
@@ -56,6 +55,7 @@ public class LessonRepository {
             return null;
         }
     }
+
     public long getLessonCountByPagingRequest(PagingRequest pagingRequest) {
         try {
             BufferedReader buffer = new BufferedReader(new InputStreamReader(
@@ -80,9 +80,11 @@ public class LessonRepository {
             return 0;
         }
     }
+
     public void addLesson(Lesson lesson) {
         em.persist(lesson);
     }
+
     public void updateLesson(Lesson lesson) {
         em.merge(lesson);
         em.flush();
