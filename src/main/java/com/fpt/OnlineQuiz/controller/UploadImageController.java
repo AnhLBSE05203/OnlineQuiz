@@ -28,6 +28,7 @@ public class UploadImageController {
     //todo:
     // 1. process edit/add for other fields (id, name, etc.) & create proxy Image object
     //    on other controller. e.g: admin/subject/edit or admin/subject/add
+    //    then forward to here (return forward:/imageMultipartFile)
     // 2. provide more @param on previous controller (request.addAttribute("...","..."))
     //       a. return link to redirect after file upload. e.g: "redirect:/admin/subject"
     //       b. created Image Id
