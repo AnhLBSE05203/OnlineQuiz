@@ -96,6 +96,7 @@ public class AdminCourseController {
         String name = request.getParameter("name");
         int subjectId = Integer.parseInt(request.getParameter("subjectId"));
         boolean isDuplicated = courseService.isDuplicated(name, subjectId);
+        System.out.println(isDuplicated);
         return isDuplicated;
     }
 }

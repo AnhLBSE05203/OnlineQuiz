@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dto.CourseAdminDTO;
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping(Constants.LINK_ADMIN_SUBJECT_CONTROLLER)
@@ -29,9 +31,21 @@ public class AdminSubjectController {
 
     @GetMapping(value = {Constants.STRING_EMPTY, Constants.LINK_ADMIN_SUBJECT_LIST})
     public String subjectPage(Model model) {
+        //subject + course modals form dtos
         model.addAttribute(Constants.ATTRIBUTE_SUBJECT_EDIT_DTO, new SubjectAdminDTO());
         model.addAttribute(Constants.ATTRIBUTE_SUBJECT_ADD_DTO, new SubjectAdminDTO());
+        model.addAttribute(Constants.ATTRIBUTE_COURSE_EDIT_DTO, new CourseAdminDTO());
+        model.addAttribute(Constants.ATTRIBUTE_COURSE_ADD_DTO, new CourseAdminDTO());
+
+        //subject status map for subject add/edit
         model.addAttribute(Constants.ATTRIBUTE_SUBJECT_STATUS_MAP, Constants.subjectStatusConversion);
+
+        //course status map for course add/edit
+        model.addAttribute(Constants.ATTRIBUTE_COURSE_STATUS_MAP, Constants.courseStatusConversion);
+
+        List<SubjectAdminDTO> subjectList = subjectService.getAllSubjectAdminDTO();
+        //subject list for course add/edit
+        model.addAttribute(Constants.ATTRIBUTE_SUBJECT_LIST, subjectList);
         return Constants.PAGE_ADMIN_SUBJECT_PAGE;
     }
 
@@ -84,7 +98,10 @@ public class AdminSubjectController {
     public SubjectAdminDTO getByName(HttpServletRequest request) {
         String name = request.getParameter("name");
         Subject subject = subjectService.getSubjectByNameLower(name);
-        SubjectAdminDTO subjectAdminDTO = subject.toSubjectAdminDTO();
+        SubjectAdminDTO subjectAdminDTO = null;
+        if (subject != null) {
+            subjectAdminDTO = subject.toSubjectAdminDTO();
+        }
         return subjectAdminDTO;
     }
 

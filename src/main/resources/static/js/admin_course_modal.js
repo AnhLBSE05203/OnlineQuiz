@@ -1,27 +1,27 @@
-//todo
 function showCourseEditModal(id){
-var link = "/admin/course/" + id;
-    var subject = "";
+var link = "/admin/course/view/" + id;
+    var course = "";
     $.ajax({
                     url: link,
                     type:"get",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data){
-                    subject = data;
-                        if(subject != ""){
-                            $("#editSubjectId").val(subject.id);
-                            $("#editSubjectName").val(subject.name);
-                            $("#editSubjectNameOriginal").val(subject.name);
-                            $("#editSubjectTotalCourse").val(subject.totalCourse);
-                            $("#editSubjectImg").attr("src", subject.imgSrc);
-                            $("#editSubjectStatus").val(subject.status).change();
-                            $("#editSubjectInfo").text(subject.subjectInfo);
-                            $("#editSubjectLearnAfter").text(subject.learnAfter);
+                    course = data;
+                        if(course != ""){
+                            $("#editCourseId").val(course.id);
+                            $("#editCourseName").val(course.name);
+                            $("#editCourseNameOriginal").val(course.name);
+                            $("#editCourseLessonTotal").val(course.lessonTotal);
+                            $("#editCourseStatus").val(course.status).change();
+                            $("#editCoursePrice").val(course.price);
+                            $("#editCourseSubject").val(course.subjectId).change();
+                            $("#editCourseOriginalSubjectId").val(course.subjectId);
+                            $("#editCourseDescription").text(course.description);
                         }
                     }
                 });
-    $('#subjectEditModal').modal('show');
+    $('#courseEditModal').modal('show');
 }
 function showCourseAddModal(){
     $('#courseAddModal').modal('show');
@@ -32,54 +32,62 @@ function recoverCourse(id){
 function deleteCourse(id){
     window.location.replace("/admin/course/delete/" + id);
 }
-function submitAddCourse() {
-    var subjectName = $("#addSubjectName").val();
-    var link = "/admin/subject/getByName";
-    var subject = "";
+
+function submitAddCourse(e) {
+    e.preventDefault();
+    var courseName = $("#addCourseName").val();
+    var subjectId = $("#addCourseSubject").val();
+    var link = "/admin/course/isDuplicated";
     $.ajax({
         url: link,
         type:"get",
         contentType: "application/json; charset=utf-8",
         data:{
-            name : subjectName
+            name : courseName,
+            subjectId : subjectId,
         },
         dataType: "json",
         success: function (data){
-        subject = data;
-            if(subject != ""){
-                alert('There is already a Subject with that name');
+            if(data === "true"){
+                alert('There is already a Course with that name for chosen Subject');
+            }else {
+                $("#courseAddForm")[0].submit();
             }
         },
         error: function (jqXHR, exception) {
-                $("#subjectAddForm").submit();
         }
     });
 }
-function submitEditCourse() {
-    var subjectNameOriginal = $("#editSubjectNameOriginal").val();
-    var subjectName = $("#editSubjectName").val();
-    var link = "/admin/subject/getByName";
-    var subject = "";
+
+function submitEditCourse(e) {
+    e.preventDefault();
+    var courseName = $("#editCourseName").val();
+    var courseNameOriginal = $("#editCourseNameOriginal").val();
+    var subjectId = $("#editCourseSubject").val();
+    var link = "/admin/course/isDuplicated";
+
     $.ajax({
         url: link,
         type:"get",
         contentType: "application/json; charset=utf-8",
         data:{
-            name : subjectName
+            name : courseName,
+            subjectId : subjectId,
         },
         dataType: "json",
         success: function (data){
-        subject = data;
-            if(subject != ""){
-                if(subject.name != subjectNameOriginal){
-                    alert('There is already a Subject with that name');
+            if(data){
+                if(courseName == courseNameOriginal) {
+                        $("#courseEditForm")[0].submit();
                 } else {
-                    $("#subjectEditForm").submit();
+                alert('There is already a Course with that name for chosen Subject');
                 }
+            }else{
+                $("#courseEditForm")[0].submit();
             }
         },
         error: function (jqXHR, exception) {
-                $("#subjectEditForm").submit();
         }
     });
+    return false;
 }

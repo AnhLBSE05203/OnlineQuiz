@@ -95,7 +95,7 @@ function deleteSubject(id){
     window.location.replace("/admin/subject/delete/" + id);
 }
 function showSubjectEditModal(id) {
-    var link = "/admin/subject/" + id;
+    var link = "/admin/subject/view/" + id;
     var subject = "";
     $.ajax({
                     url: link,
@@ -135,7 +135,8 @@ $('#subjectAddModal').on('shown.bs.modal', function (e) {
    // do something...
  });
 
-function submitAddSubject() {
+function submitAddSubject(e) {
+    e.preventDefault();
     var subjectName = $("#addSubjectName").val();
     var link = "/admin/subject/getByName";
     var subject = "";
@@ -151,14 +152,18 @@ function submitAddSubject() {
         subject = data;
             if(subject != ""){
                 alert('There is already a Subject with that name');
+            } else{
+                $("#subjectAddForm")[0].submit();
             }
         },
         error: function (jqXHR, exception) {
-                $("#subjectAddForm").submit();
+
         }
     });
+    return false;
 }
-function submitEditSubject() {
+function submitEditSubject(e) {
+    e.preventDefault();
     var subjectNameOriginal = $("#editSubjectNameOriginal").val();
     var subjectName = $("#editSubjectName").val();
     var link = "/admin/subject/getByName";
@@ -177,14 +182,14 @@ function submitEditSubject() {
                 if(subject.name != subjectNameOriginal){
                     alert('There is already a Subject with that name');
                 } else {
-                    $("#subjectEditForm").submit();
+                    $("#subjectEditForm")[0].submit();
                 }
             }
         },
         error: function (jqXHR, exception) {
-                $("#subjectEditForm").submit();
         }
     });
+    return false;
 }
 // course section
 function showCourseSection(subjectId) {

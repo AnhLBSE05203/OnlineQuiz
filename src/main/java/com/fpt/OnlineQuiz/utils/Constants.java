@@ -115,7 +115,7 @@ public class Constants {
     //links admin subject
     public static final String LINK_ADMIN_SUBJECT_CONTROLLER = "/admin/subject";
     public static final String LINK_ADMIN_SUBJECT_LIST = "/";
-    public static final String LINK_ADMIN_SUBJECT_DETAIL = "/{id}";
+    public static final String LINK_ADMIN_SUBJECT_DETAIL = "/view/{id}";
     public static final String LINK_ADMIN_SUBJECT_GET_BY_NAME = "/getByName";
     public static final String LINK_ADMIN_SUBJECT_ADD = "/add";
     public static final String LINK_ADMIN_SUBJECT_DELETE = "/delete/{id}";
@@ -126,8 +126,8 @@ public class Constants {
     //links admin course
     public static final String LINK_ADMIN_COURSE_CONTROLLER = "/admin/course";
     public static final String LINK_ADMIN_COURSE_GET_COURSES_BY_SUBJECT = "/coursesBySubject";
-    public static final String LINK_ADMIN_COURSE_DETAIL = "/{id}";
-    public static final String LINK_ADMIN_COURSE_GET_DUPLICATE = "/getDuplicate";
+    public static final String LINK_ADMIN_COURSE_DETAIL = "/view/{id}";
+    public static final String LINK_ADMIN_COURSE_GET_DUPLICATE = "/isDuplicated";
     public static final String LINK_ADMIN_COURSE_ADD = "/add";
     public static final String LINK_ADMIN_COURSE_DELETE = "/delete/{id}";
     public static final String LINK_ADMIN_COURSE_RECOVER = "/recover/{id}";
@@ -138,11 +138,13 @@ public class Constants {
     //admin subject page attributes
     public static final String ATTRIBUTE_SUBJECT_ADD_DTO = "subjectAddDTO";
     public static final String ATTRIBUTE_SUBJECT_EDIT_DTO = "subjectEditDTO";
-    public static final String ATTRIBUTE_SUBJECT_STATUS_MAP = "statusMap";
+    public static final String ATTRIBUTE_SUBJECT_STATUS_MAP = "subjectStatusMap";
+
     //admin course page attributes
     public static final String ATTRIBUTE_COURSE_ADD_DTO = "courseAddDTO";
     public static final String ATTRIBUTE_COURSE_EDIT_DTO = "courseEditDTO";
-    public static final String ATTRIBUTE_COURSE_STATUS_MAP = "statusMap";
+    public static final String ATTRIBUTE_COURSE_STATUS_MAP = "courseStatusMap";
+    public static final String ATTRIBUTE_SUBJECT_LIST = "subjectList";
 
     //pages admin
     public static final String PAGE_DASHBOARD = "admin_dashboard";
@@ -171,6 +173,7 @@ public class Constants {
     public static final String SQL_GET_COURSES_BY_ACCOUNT = "select a.courses from Account a where a.id =:id";
     public static final String SQL_GET_ALL_COURSES = "select c from Course c where 1 = 1";
     public static final String SQL_GET_COURSE_COUNT_BY_SUBJECT_ID = "select count(c) from Course c where c.subject.id = :subjectId";
+    public static final String SQL_GET_COURSE_COUNT = "select count(c) from Course c where 1 = 1";
     public static final String SQL_GET_COURSE_BY_ID = "SELECT c FROM Course c WHERE c.id = :id";
     public static final String SQL_GET_COURSE_BY_SUBJECT_ID = "SELECT c FROM Course c WHERE c.subject.id = :subjectId";
     //home page constants

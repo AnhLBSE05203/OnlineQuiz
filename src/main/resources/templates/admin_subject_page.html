@@ -12,6 +12,7 @@
         </div>
         <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"/>
         <link th:href="@{/css/admin_subject_page.css}" rel="stylesheet"/>
+        <link th:href="@{/css/admin_course_modal.css}" rel="stylesheet"/>
     </head>
     <body class="sb-nav-fixed">
         <!-- Admin header -->
@@ -80,7 +81,7 @@
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form id="subjectEditForm" th:object="${subjectEditDTO}"
+                    <form id="subjectEditForm" th:object="${subjectEditDTO}" onsubmit="return submitEditSubject(event);"
                           th:action="@{/admin/subject/edit}" method="POST">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel">Subject Detail</h5>
@@ -109,7 +110,7 @@
                                 <tr>
                                     <td>Status:</td>
                                     <td><select id="editSubjectStatus" th:name="status">
-                                        <option th:each="status : ${statusMap}" th:value="${status.key}"
+                                        <option th:each="status : ${subjectStatusMap}" th:value="${status.key}"
                                                 th:text="${status.value}">
                                         </option>
                                     </select>
@@ -130,9 +131,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" onclick="submitEditSubject()"
-                                    class="btn btn-primary">Save
-                            </button>
+                            <input type="submit" class="btn btn-primary" value="Save">
                         </div>
                     </form>
                 </div>
@@ -144,7 +143,7 @@
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form id="subjectAddForm" th:object="${subjectAddDTO}"
+                    <form id="subjectAddForm" th:object="${subjectAddDTO}" onsubmit="return submitAddSubject(event);"
                           th:action="@{/admin/subject/add}" method="POST">
                         <div class="modal-header">
                             <h5 class="modal-title">Subject Detail</h5>
@@ -175,9 +174,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" onclick="submitAddSubject()"
-                                    class="btn btn-primary">Add
-                            </button>
+                            <input type="submit" class="btn btn-primary" value="Add">
                         </div>
                     </form>
                 </div>

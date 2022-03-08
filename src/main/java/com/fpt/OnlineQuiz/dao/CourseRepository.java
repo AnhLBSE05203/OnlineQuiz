@@ -105,7 +105,7 @@ public class CourseRepository {
         try {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.SQL_GET_COURSE_BY_SUBJECT_ID);
-            String sql = sb.toString();
+
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
@@ -118,8 +118,10 @@ public class CourseRepository {
             int columnIndex = order.getColumn();
             Column column = pagingRequest.getColumns().get(columnIndex);
             sb.append(" ORDER BY " + "c." + column.getData() + " " + order.getDir());
-
+            String sql = sb.toString();
             Query query = em.createQuery(sql, Course.class);
+            query.setFirstResult(pagingRequest.getStart());
+            query.setMaxResults(pagingRequest.getLength());
             query.setParameter("subjectId", subjectId);
             return (List<Course>) query.getResultList();
         } catch (Exception ex) {
@@ -132,7 +134,7 @@ public class CourseRepository {
         try {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.SQL_GET_COURSE_COUNT_BY_SUBJECT_ID);
-            String sql = sb.toString();
+
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
@@ -140,7 +142,7 @@ public class CourseRepository {
                 sb.append(" OR lower(c.description) LIKE " + key);
 
             }
-
+            String sql = sb.toString();
             Query query = em.createQuery(sql, Long.class);
             query.setParameter("subjectId", subjectId);
             return (long) query.getSingleResult();
@@ -154,14 +156,14 @@ public class CourseRepository {
         try {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.SQL_GET_COURSE_COUNT_BY_SUBJECT_ID);
-            String sql = sb.toString();
+
             // filter by name
             if (name != null
                     && StringUtils.hasLength(name)) {
                 String key = "'%" + name.toLowerCase() + "%'";
                 sb.append(" AND lower(c.name) LIKE " + key);
             }
-
+            String sql = sb.toString();
             Query query = em.createQuery(sql, Long.class);
             query.setParameter("subjectId", subjectId);
             return (long) query.getSingleResult();
