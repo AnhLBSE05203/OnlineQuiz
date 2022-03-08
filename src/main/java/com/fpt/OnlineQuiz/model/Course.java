@@ -1,6 +1,8 @@
 package com.fpt.OnlineQuiz.model;
 
+import com.fpt.OnlineQuiz.dto.CourseAdminDTO;
 import com.fpt.OnlineQuiz.dto.CourseUserDTO;
+import com.fpt.OnlineQuiz.utils.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -63,5 +65,20 @@ public class Course {
         courseUserDTO.setPrice(this.getPrice());
         courseUserDTO.setLessonTotal(this.getLessonTotal());
         return courseUserDTO;
+    }
+
+    public CourseAdminDTO toCourseAdminDTO() {
+        CourseAdminDTO courseAdminDTO = new CourseAdminDTO();
+        courseAdminDTO.setId(this.getId());
+        courseAdminDTO.setName(this.getName());
+        courseAdminDTO.setSubjectName(this.getSubject().getName());
+        courseAdminDTO.setSubjectId(this.getSubject().getId());
+        courseAdminDTO.setDescription(this.getDescription());
+        courseAdminDTO.setPrice(this.getPrice());
+        courseAdminDTO.setLessonTotal(this.getLessonTotal());
+        String statusStr = Constants.courseStatusConversion.get(this.getStatus());
+        courseAdminDTO.setStatusStr(statusStr);
+        courseAdminDTO.setStatus(this.getStatus());
+        return courseAdminDTO;
     }
 }

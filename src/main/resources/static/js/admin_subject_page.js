@@ -70,8 +70,12 @@ $(document).ready(function() {
                         data : 'status',
                         orderable: false,
                         render: function(data, type, row, meta) {
+                            // edit modal button
                             var html = '<button type="button" class="btn btn-primary subject-action-button" onclick="showSubjectEditModal('+ row['id'] + ')">'
                             + 'Edit</button>';
+                            // show courses datatable by subject
+                                html += '<button type="button" class="btn btn-primary subject-action-button" onclick="showCourseSection('+ row['id'] + ')">'
+                                                                    + 'View Courses</button>';
                             if (data == 0) {
                                 html += '<button type="button" class="btn btn-primary subject-action-button" onclick="recoverSubject('+ row['id'] +')">'
                                 + 'Recover</button>';
@@ -181,4 +185,77 @@ function submitEditSubject() {
                 $("#subjectEditForm").submit();
         }
     });
+}
+function showCourseSection(subjectId) {
+    if ($.fn.dataTable.isDataTable('#CourseDatatable')) {
+            $('#CourseDatatable').DataTable().destroy();
+        }
+    $('#courseSection').show();
+    $('#CourseDatatable').DataTable({
+    		"serverSide": true,
+    		pageLength : 5,
+            			ajax : {
+            				url : '/admin/subject/courses',
+            				"type": "POST",
+                            "dataType": "json",
+                            "contentType": "application/json",
+                            "data": function (d) {
+                                d.prefilter = subjectId;
+                                alert(d);
+                                alert(d.prefilter);
+                                return JSON.stringify(d);
+                            },
+            			},
+            			columns : [ {
+            				title : 'Id',
+            				data : 'id'
+            			}, {
+            				title : 'Name',
+            				data : 'name'
+            			}, {
+            			    title : 'SubjectId',
+            			    data: 'subjectId',
+            			    visible: false,
+            			}, {
+            				title : 'Total Lessons',
+            				data : 'lessonTotal',
+            				orderable: false
+            			}, {
+                            title : 'Description',
+                            data : 'description',
+                            width: "20%",
+                            render: function(data, type, row, meta) {
+                                        var html = "";
+                                        if(data != "" && data != null){
+                                            data = data.length > 100 ? (data.substring(0, 100) + '...') : data;
+                                            html += '<p>'+ data +'</p>';
+                                        }
+                                        return html;
+                                    }
+                        },{
+                            title : 'Price',
+                            data : 'price',
+                        }, {
+            				title : 'Status',
+            				data : 'statusStr',
+            				orderable: false
+            			}, {
+            			    title : 'Action',
+                            data : 'status',
+                            orderable: false,
+                            render: function(data, type, row, meta) {
+                                // edit modal button
+                                var html = '<button type="button" class="btn btn-primary subject-action-button" onclick="showCourseEditModal('+ row['id'] + ')">'
+                                + 'Edit</button>';
+                                if (data == 0) {
+                                    html += '<button type="button" class="btn btn-primary subject-action-button" onclick="recoverCourse('+ row['id'] +')">'
+                                    + 'Recover</button>';
+                                } else {
+                                    html += '<button type="button" class="btn btn-primary subject-action-button" onclick="deleteCourse('+ row['id'] +')">'
+                                    + 'Delete</button>';
+                                }
+                                return html;
+                            }
+            			} ]
+    		});
 }

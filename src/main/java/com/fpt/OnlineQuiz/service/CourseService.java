@@ -1,7 +1,10 @@
 package com.fpt.OnlineQuiz.service;
 
+import com.fpt.OnlineQuiz.dto.CourseAdminDTO;
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
 import com.fpt.OnlineQuiz.dto.CourseUserDTO;
+import com.fpt.OnlineQuiz.dto.paging.Page;
+import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Course;
 
 import java.util.List;
@@ -16,4 +19,6 @@ public interface CourseService {
     List<Course> getCoursesRegistration(int accountId);
 
     CourseUserDTO getCourseUserDTO(int id);
+
+    Page<CourseAdminDTO> getCourseAdminDTOByPagingRequest(int subjectId, PagingRequest pagingRequest);
 }

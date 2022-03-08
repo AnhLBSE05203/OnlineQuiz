@@ -6,7 +6,7 @@
 .subject-img{
   width: 100px;
 }
-#addSubjectButton{
+.addButton{
     float: right;
 }
 .formTable{
@@ -23,4 +23,7 @@
 }
 .formField{
     width:15%;
+}
+#courseSection{
+    display: none;
 }

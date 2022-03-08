@@ -27,6 +27,10 @@ public class Constants {
     public static final Map<Integer, String> subjectStatusConversion = initSubjectStatusMap();
     public static final int STATUS_SUBJECT_ACTIVE = 1;
     public static final int STATUS_SUBJECT_INACTIVE = 2;
+    //course status constants
+    public static final Map<Integer, String> courseStatusConversion = initCourseStatusMap();
+    public static final int STATUS_COURSE_ACTIVE = 1;
+    public static final int STATUS_COURSE_INACTIVE = 2;
     //blog status constants
     public static final Map<Integer, String> blogStatusConversion = initBlogStatusMap();
     public static final int STATUS_BLOG_PUBLISHED = 1;
@@ -118,6 +122,7 @@ public class Constants {
     public static final String LINK_ADMIN_SUBJECT_RECOVER = "/recover/{id}";
     public static final String LINK_ADMIN_SUBJECT_PROCESS_EDIT = "/edit";
     public static final String LINK_ADMIN_SUBJECT_GET_BY_PAGE = "/getSubjectsByPage";
+    public static final String LINK_ADMIN_SUBJECT_GET_COURSES_BY_SUBJECT = "/courses";
     //links user subject
     public static final String LINK_USER_SUBJECT_DETAIL = "/detail/{id}";
     //admin subject page attributes
@@ -141,7 +146,7 @@ public class Constants {
     public static final String SQL_PATH_GET_BLOG_COUNT = "/static/sql/getBlogCount.sql";
     public static final String SQL_PATH_GET_FEATURED_COURSES = "/static/sql/getFeaturedCourses.sql";
     public static final String SQL_PATH_GET_ALL_SUBJECTS = "/static/sql/getAllSubjects.sql";
-    public static final String SQL_PATH_GET_ALL_Lessons = "/static/sql/getAllLessons.sql";
+    public static final String SQL_PATH_GET_ALL_LESSONS = "/static/sql/getAllLessons.sql";
     public static final String SQL_PATH_GET_SUBJECT_COUNT = "/static/sql/getSubjectCount.sql";
     public static final String SQL_PATH_GET_LESSON_COUNT = "/static/sql/getLessonCount.sql";
 
@@ -150,7 +155,10 @@ public class Constants {
     public static final String SQL_PATH_GET_IMAGE_BY_ID = "/static/sql/getImageById.sql";
     //sql strings
     public static final String SQL_GET_COURSES_BY_ACCOUNT = "select a.courses from Account a where a.id =:id";
+    public static final String SQL_GET_ALL_COURSES = "select c from Course c where 1 = 1";
+    public static final String SQL_GET_COURSE_COUNT_BY_SUBJECT_ID = "select count(c) from Course c where c.subject.id = :subjectId";
     public static final String SQL_GET_COURSE_BY_ID = "SELECT c FROM Course c WHERE c.id = :id";
+    public static final String SQL_GET_COURSE_BY_SUBJECT_ID = "SELECT c FROM Course c WHERE c.subject.id = :subjectId";
     //home page constants
     public static final int HOME_PAGE_COURSE_NUMBER = 4;
     public static final int HOME_PAGE_EXPERT_NUMBER = 3;
@@ -168,6 +176,14 @@ public class Constants {
         map.put(STATUS_DELETED, "Deleted");
         map.put(STATUS_SUBJECT_ACTIVE, "Active");
         map.put(STATUS_SUBJECT_INACTIVE, "Inactive");
+        return Collections.unmodifiableMap(map);
+    }
+
+    private static Map<Integer, String> initCourseStatusMap() {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(STATUS_DELETED, "Deleted");
+        map.put(STATUS_COURSE_ACTIVE, "Active");
+        map.put(STATUS_COURSE_INACTIVE, "Inactive");
         return Collections.unmodifiableMap(map);
     }
 

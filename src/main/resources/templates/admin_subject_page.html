@@ -31,6 +31,7 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Subject</h1>
+                        <!-- Subject Section -->
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Subject Management
                             </li>
@@ -39,13 +40,33 @@
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                 List Subject
-                                <button id="addSubjectButton" type="button" class="btn btn-primary"
+                                <button id="addSubjectButton" type="button" class="btn btn-primary addButton"
                                         onclick="showSubjectAddModal()">Add Subject
                                 </button>
                             </div>
                             <div class="card-body">
                                 <table id="SubjectDatatable" style="width:100%;">
                                 </table>
+                            </div>
+                        </div>
+                        <!-- Course Section -->
+                        <div id="courseSection">
+                            <ol class="breadcrumb mb-4">
+                                <li class="breadcrumb-item active">Course
+                                </li>
+                            </ol>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-table me-1"></i>
+                                    Courses
+                                    <button id="addCourseButton" type="button" class="btn btn-primary addButton"
+                                            onclick="showCourseAddModal()">Add Course
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <table id="CourseDatatable" style="width:100%;">
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

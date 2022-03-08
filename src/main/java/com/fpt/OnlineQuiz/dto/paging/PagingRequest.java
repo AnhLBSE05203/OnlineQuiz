@@ -16,6 +16,9 @@ public class PagingRequest {
     private int start;
     private int length;
     private int draw;
+    //additional datatable initiate filter
+    private String prefilter;
+    //
     private List<Order> order;
     private List<Column> columns;
     private Search search;
