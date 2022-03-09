@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+
+    <!-- CSS here -->
+    <div th:replace="components/header_footer.html :: common-style"></div>
+    <!-- page-specific css -->
+    <meta charset="UTF-8">
+    <title>Contact</title>
+
+    <link th:href='@{https://fonts.googleapis.com/css?family=Roboto:400,100,300,700}' rel='stylesheet' type='text/css'>
+    <!-- CSS here -->
+<!--    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/slicknav.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/flaticon.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/progressbar_barfiller.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/gijgo.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/animate.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/animated-headline.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/themify-icons.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/slick.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/nice-select.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/css/style.css}">-->
+    <link rel="stylesheet" th:href="@{/css/contact_page.css}"/>
+</head>
+<body>
+<!-- ? Preloader Start -->
+<!--<div th:replace="components/header_footer.html :: user-preload"></div>-->
+<!-- Preloader Start -->
+<!-- Header Start -->
+<div th:replace="components/header_footer.html :: user-header"></div>
+<!-- Header End -->
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section">Contact Form</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="wrapper">
+                    <div class="row no-gutters">
+                        <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
+                            <div class="contact-wrap w-100 p-md-5 p-4">
+                                <h3 class="mb-4">Get in touch</h3>
+                                <div id="form-message" class="mb-4" th:text="${msg}"></div>
+                                <div id="form-message-warning" class="mb-4"></div>
+                                <div id="form-message-success" class="mb-4">
+                                    Your message was sent, thank you!
+                                </div>
+                                <form th:action="@{/contact/save}" method="post" id="contactForm" name="contactForm" class="contactForm">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="label" for="name">Full Name</label>
+                                                <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="label" for="email">Email Address</label>
+                                                <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="label" for="topic">Topic</label>
+                                                <input type="text" class="form-control" name="topic" id="topic" placeholder="Topic">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="label" for="message">Message</label>
+                                                <textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Message"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="submit" value="Send Message" class="btn btn-primary">
+                                                <div class="submitting"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-5 d-flex align-items-stretch">
+                            <div class="info-wrap bg-primary w-100 p-md-5 p-4">
+                                <h3>Let's get in touch</h3>
+                                <p class="mb-4">We're open for any suggestion or just to have a chat</p>
+                                <div class="dbox w-100 d-flex align-items-start">
+                                    <div class="icon d-flex align-items-center justify-content-center">
+                                        <span class="fa fa-map-marker"></span>
+                                    </div>
+                                    <div class="text pl-3">
+                                        <p><span>Address:</span>Km29 Đường Cao Tốc 08, Thạch Hoà, Thạch Thất, Hà Nội 10000</p>
+                                    </div>
+                                </div>
+                                <div class="dbox w-100 d-flex align-items-center">
+                                    <div class="icon d-flex align-items-center justify-content-center">
+                                        <span class="fa fa-phone"></span>
+                                    </div>
+                                    <div class="text pl-3">
+                                        <p><span>Phone:</span> 0123123123</p>
+                                    </div>
+                                </div>
+                                <div class="dbox w-100 d-flex align-items-center">
+                                    <div class="icon d-flex align-items-center justify-content-center">
+                                        <span class="fa fa-paper-plane"></span>
+                                    </div>
+                                    <div class="text pl-3">
+                                        <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+                                    </div>
+                                </div>
+                                <div class="dbox w-100 d-flex align-items-center">
+                                    <div class="icon d-flex align-items-center justify-content-center">
+                                        <span class="fa fa-globe"></span>
+                                    </div>
+                                    <div class="text pl-3">
+                                        <p><span>Website</span> <a href="#">yoursite.com</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="components/header_footer.html :: user-footer">
+</footer>
+<!-- JS here -->
+<th:block th:replace="components/header_footer.html :: common-script">
+</th:block>
+<!-- page-specific js -->
+<script>
+    (function($) {
+
+        "use strict";
+
+        // Form
+        var contactForm = function() {
+            if ($('#contactForm').length > 0 ) {
+                $( "#contactForm" ).validate( {
+                    rules: {
+                        name: "required",
+                        topic: "required",
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        message: {
+                            required: true,
+                            minlength: 5
+                        }
+                    },
+                    messages: {
+                        name: "Please enter your name",
+                        topic: "Please enter your topic",
+                        email: "Please enter a valid email address",
+                        message: "Please enter a message"
+                    },
+                    /* submit via ajax */
+
+                    submitHandler: function(form) {
+                        var $submit = $('.submitting'),
+                            waitText = 'Submitting...';
+                        var name = document.getElementById("name");
+                        var email = document.getElementById("email");
+                        var topic = document.getElementById("topic");
+                        var message = document.getElementById("message");
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/contact/save",
+                            data: {
+                                name : name,
+                                email : email,
+                                topic : topic,
+                                message : message
+                            },
+
+                            beforeSend: function() {
+                                $submit.css('display', 'block').text(waitText);
+                            },
+                            success: function(msg) {
+                                if (msg == 'OK') {
+                                    $('#form-message-warning').hide();
+                                    setTimeout(function(){
+                                        $('#contactForm').fadeIn();
+                                    }, 1000);
+                                    setTimeout(function(){
+                                        $('#form-message-success').fadeIn();
+                                    }, 1400);
+
+                                    setTimeout(function(){
+                                        $('#form-message-success').fadeOut();
+                                    }, 8000);
+
+                                    setTimeout(function(){
+                                        $submit.css('display', 'none').text(waitText);
+                                    }, 1400);
+
+                                    setTimeout(function(){
+                                        $( '#contactForm' ).each(function(){
+                                            this.reset();
+                                        });
+                                    }, 1400);
+
+                                } else {
+                                    $('#form-message-warning').html(msg);
+                                    $('#form-message-warning').fadeIn();
+                                    $submit.css('display', 'none');
+                                }
+                            },
+                            error: function() {
+                                $('#form-message-warning').html("Something went wrong. Please try again.");
+                                $('#form-message-warning').fadeIn();
+                                $submit.css('display', 'none');
+                            }
+                        });
+                    } // end submitHandler
+
+                });
+            }
+        };
+        contactForm();
+
+    })(jQuery);
+</script>
+</body>
+</html>
