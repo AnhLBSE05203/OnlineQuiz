@@ -16,6 +16,22 @@
     <link th:href="@{/css/admin_subject_page.css}" rel="stylesheet"/>
 </head>
 <body>
+<style>
+    #hideMe {
+        -webkit-animation: cssAnimation 5s forwards;
+        animation: cssAnimation 5s forwards;
+    }
+    @keyframes cssAnimation {
+        0%   {opacity: 1;}
+        90%  {opacity: 1;}
+        100% {opacity: 0;}
+    }
+    @-webkit-keyframes cssAnimation {
+        0%   {opacity: 1;}
+        90%  {opacity: 1;}
+        100% {opacity: 0;}
+    }
+</style>
     <!-- Admin header -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"
          th:replace="components/header_footer.html :: admin-header">
@@ -32,7 +48,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" th:text="${sub.getName()}"></h1>
+                    <h1 class="mt-4" th:text="${question_list.get(0).getLesson().id}"></h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Question Management
                         </li>
@@ -41,11 +57,11 @@
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
                             List Question
-                            <button id="addSubjectButton" type="button" class="btn btn-primary" href="/question/create">
+                            <button id="addSubjectButton" type="button" class="btn btn-primary" style="float: right" onclick="createQuestion()">
                                 Add Question
                             </button>
                         </div>
-                        <div style = "color: red" th:text = "${message}"></div>
+                        <div style = "color: red; margin: 10px" th:text = "${message}" id="hideMe"></div>
                         <div class="card-body">
                             <table id="QuestionDatatable" style="width:100%;">
                             </table>
@@ -78,7 +94,7 @@
                             <div class="col-3">
                                 <div class="row-cols-1">
                                     <div class="mb-3">
-                                        <input type="hidden" name="subjectId" id="subjectId" th:value="${sub.id}">
+                                        <input type="hidden" name="lessonId" id="lessonId" th:value="${question_list.get(0).getLesson().getId()}">
                                         <input type="hidden" name="questionId" id="questionId">
                                         <label class="form-label" for="answer"><strong>Answer</strong></label>
                                         <input class="form-control" style="width: 300px" type="text" id="answer" placeholder="Answer"
