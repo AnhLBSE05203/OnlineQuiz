@@ -8,7 +8,7 @@ import com.fpt.OnlineQuiz.model.Question;
 import java.util.List;
 
 public interface QuestionService {
-    List<Question> getQuestionBySubjectId(int subjectId);
+    List<Question> getQuestionByLessonId(int lessonId);
 
     Question getQuestionByQuestionId(int questionId);
 
