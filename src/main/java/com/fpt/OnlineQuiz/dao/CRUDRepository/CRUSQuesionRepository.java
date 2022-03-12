@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface CRUSQuesionRepository extends CrudRepository<Question,Integer> {
 
-    @Query("select q from Question q where q.subject.id = ?1")
+    @Query("select q from Question q where q.lesson.id = ?1")
     List<Question> findBySubId(int subId);
 }
