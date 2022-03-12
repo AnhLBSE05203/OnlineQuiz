@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -89,5 +90,15 @@ public class LessonRepository {
         em.merge(lesson);
         em.flush();
     }
-
+    public Lesson getLessonByLessonId(int id){
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select l from Lesson l where lesson_id = :id");
+            Query query = em.createQuery(sb.toString());
+            query.setParameter("id", id);
+            return (Lesson)query.getSingleResult();
+        }catch (NoResultException exception){
+            return null;
+        }
+    }
 }
