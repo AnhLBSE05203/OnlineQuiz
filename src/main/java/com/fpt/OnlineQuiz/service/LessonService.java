@@ -20,6 +20,6 @@ public interface LessonService {
     LessonAdminDTO getLessonAdminDTOById(int id);
     void updateLesson(Lesson lesson);
     void deleteLesson(Lesson lesson);
-
+    Lesson getLessonByLessonId(int id);
 
 }
