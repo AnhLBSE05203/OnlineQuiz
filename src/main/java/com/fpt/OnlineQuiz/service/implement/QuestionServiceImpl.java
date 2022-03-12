@@ -19,8 +19,8 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionRepository questionRepository;
 
     @Override
-    public List<Question> getQuestionBySubjectId(int subjectId) {
-        return questionRepository.getQuestionsBySubjectId(subjectId);
+    public List<Question> getQuestionByLessonId(int lessonId) {
+        return questionRepository.getQuestionsByLessonId(lessonId);
     }
 
     @Override
