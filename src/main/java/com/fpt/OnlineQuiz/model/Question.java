@@ -28,8 +28,8 @@ public class Question {
     private String answer;
 
     @ManyToOne
-    @JoinColumn(name = "subjectId")
-    private Subject subject;
+    @JoinColumn(name = "lessonId")
+    private Lesson lesson;
     @OneToMany(mappedBy = "question")
     private List<QuizHistoryQuestion> quizHistoryQuestions;
     @OneToMany(mappedBy = "question")
