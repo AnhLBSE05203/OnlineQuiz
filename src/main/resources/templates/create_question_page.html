@@ -11,6 +11,22 @@
     <link th:href="@{/css/admin_subject_page.css}" rel="stylesheet"/>
 </head>
 <body>
+<style>
+    #hideMe {
+        -webkit-animation: cssAnimation 5s forwards;
+        animation: cssAnimation 5s forwards;
+    }
+    @keyframes cssAnimation {
+        0%   {opacity: 1;}
+        90%  {opacity: 1;}
+        100% {opacity: 0;}
+    }
+    @-webkit-keyframes cssAnimation {
+        0%   {opacity: 1;}
+        90%  {opacity: 1;}
+        100% {opacity: 0;}
+    }
+</style>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"
      th:replace="components/header_footer.html :: admin-header">
 </nav>
@@ -33,9 +49,12 @@
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
                         Create Question
+                        <button id="btnBack" type="button" class="btn btn-primary" style="float: right" onclick="returnToList()">
+                            Back
+                        </button>
                     </div>
                         <div class="col-lg-12 card-body" style="width: 70%">
-                            <div style = "color: red" th:text = "${message}"></div>
+                            <div style = "color: red; margin: 10px" th:text = "${message}" id="hideMe"></div>
                             <form th:action="@{/question/addquestion}" method="post">
                                 <div class="row">
                                     <div class="col">
@@ -49,10 +68,10 @@
                                     <div class="col-3">
                                         <div class="row-cols-1">
                                             <div class="mb-3">
-                                                <input type="hidden" name="subjectId" th:value="${subjectId}" id="subjectId">
+                                                <input type="hidden" name="lessonId" th:value="${lessonId}" id="lessonId">
                                                 <label class="form-label" for="answer1"><strong>Answer1</strong></label>
                                                 <input class="form-control" style="width: 830px" type="text" id="answer1" placeholder="Answer" name="answer1" required>
-                                                <input type="radio" value="1" name="isAnswer" th:selected>Is Answer</br>
+                                                <input type="radio" value="1" name="isAnswer" selected>Is Answer</br>
 
                                                 <label class="form-label" for="answer2"><strong>Answer2</strong></label>
                                                 <input class="form-control" style="width: 830px" type="text" id="answer2" placeholder="Answer" name="answer2" required>
@@ -145,13 +164,14 @@
 <script th:src="@{/js/main.js}"></script>
 <script>
     function submit(){
-        var answer1 = document.getElementById("answer1").value;
+        var answer1 = document.getElementById("answer1");
         var answer2 = document.getElementById("answer2");
         var answer3 = document.getElementById("answer3");
         var answer4 = document.getElementById("answer4");
         var isAnswer = document.getElementsByName("isAnswer").values();
         var question = document.getElementById("question");
         var explain = document.getElementById("explain");
+        var lessonId = document.getElementById("lessonId").value;
         $.ajax({
             url:"/question/addquestion",
             type:"post",
@@ -165,9 +185,12 @@
                 explain : explain
             },
             success: function (){
-
+                alert("Add successful!");
             }
         })
+    }
+    function returnToList(){
+        window.location.replace("/question/list");
     }
 </script>
 </body>
