@@ -33,8 +33,6 @@ public class Subject {
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Course> courses;
 
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
-    private List<Question> questions;
 
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Review> reviews;
