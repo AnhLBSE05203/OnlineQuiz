@@ -20,13 +20,13 @@ public class QuestionRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public List<Question> getQuestionsBySubjectId(int subjectId) {
+    public List<Question> getQuestionsByLessonId(int lessonId) {
         try {
             StringBuilder sb = new StringBuilder();
-            sb.append("select q from Question q where q.subject.id =:id");
+            sb.append("select q from Question q where q.lesson.id =:id");
             String sql = sb.toString();
             Query query = em.createQuery(sql, Question.class);
-            query.setParameter("id", subjectId);
+            query.setParameter("id", lessonId);
             query.setMaxResults(3);
             return (List<Question>) query.getResultList();
         } catch (NoResultException e) {
