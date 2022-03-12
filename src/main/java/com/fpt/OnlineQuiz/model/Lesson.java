@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -36,6 +37,9 @@ public class Lesson {
     @ManyToOne
     @JoinColumn(name = "subjectId")
     private Subject subject;
+
+    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
+    private List<Question> questions;
 
 
     public LessonAdminDTO toLessonAdminDTO() {
