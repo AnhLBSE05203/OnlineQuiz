@@ -22,7 +22,9 @@ public class AdminBlogController {
     private BlogService blogService;
 
     @GetMapping(value = {"", "/"})
-    public String blogPage() {
+    public String blogPage(Model model) {
+        model.addAttribute("blogEditDTO", new BlogAdminDTO());
+        model.addAttribute("blogAddDTO", new BlogAdminDTO());
         return "admin_blog_page";
     }
 
