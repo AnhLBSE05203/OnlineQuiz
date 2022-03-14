@@ -78,7 +78,7 @@ public class WebSecurityConfig {
                     .logoutSuccessUrl(Constants.LINK_HOME)
                     .and()
                     .rememberMe().tokenRepository(persistentTokenRepository()) //
-                    .tokenValiditySeconds(24 * 60 * 60); // 24h
+                    .tokenValiditySeconds(24 * 60 * 60).key(Constants.REMEMBER_ME_KEY); // 24h
         }
     }
 
@@ -114,7 +114,7 @@ public class WebSecurityConfig {
                     .logoutSuccessUrl(Constants.LINK_ADMIN_LOGIN)
                     .and()
                     .rememberMe().tokenRepository(persistentTokenRepository()) //
-                    .tokenValiditySeconds(24 * 60 * 60); // 24h
+                    .tokenValiditySeconds(24 * 60 * 60).key(Constants.REMEMBER_ME_KEY); // 24h
         }
 
     }
