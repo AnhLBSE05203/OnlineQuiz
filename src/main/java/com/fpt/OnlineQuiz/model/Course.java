@@ -78,8 +78,12 @@ public class Course {
         return courseAdminDTO;
     }
 
-    public void setFromSubjectAdminDTO(CourseAdminDTO courseAdminDTO) {
-        Utils.copyNonNullProperties(courseAdminDTO, this);
+    public void setFromCourseAdminDTO(CourseAdminDTO courseAdminDTO) {
+        name = courseAdminDTO.getName();
+        description = courseAdminDTO.getDescription();
+        lessonTotal = courseAdminDTO.getLessonTotal();
+        price = courseAdminDTO.getPrice();
+        status = courseAdminDTO.getStatus();
         // this doesn't handle Subject fields
     }
 }
