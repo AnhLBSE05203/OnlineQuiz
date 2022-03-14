@@ -164,4 +164,13 @@ public class BlogRepository {
         }
         return null;
     }
+
+    public void updateBlog(Blog blog) {
+        em.merge(blog);
+        em.flush();
+    }
+
+    public void addBlog (Blog blog) {
+        em.persist(blog);
+    }
 }

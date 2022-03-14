@@ -34,7 +34,7 @@ public class BlogServiceImpl implements BlogService {
         for (Blog blog : listBlog) {
             BlogAdminDTO blogAdminDto = new BlogAdminDTO();
             Utils.copyNonNullProperties(blog, blogAdminDto);
-            blogAdminDto.setContent(blogAdminDto.getContent().substring(0, 100));
+            blogAdminDto.setContent(blogAdminDto.getContent().substring(0, 100) + "...");
             blogAdminDto.setStatusStr(Constants.blogStatusConversion.get(blogAdminDto.getStatus()));
             listBlogAdminDTO.add(blogAdminDto);
         }
@@ -49,6 +49,16 @@ public class BlogServiceImpl implements BlogService {
     public Blog getDetailBlog(Integer blogId) {
         Blog blog = blogRepository.getDetailBlog(blogId);
         return blog;
+    }
+
+    @Override
+    public void updateBlog(Blog blog) {
+        blogRepository.updateBlog(blog);
+    }
+
+    @Override
+    public void addBlog(Blog blog) {
+        blogRepository.addBlog(blog);
     }
 
     @Override
