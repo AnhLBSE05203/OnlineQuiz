@@ -37,9 +37,9 @@ public class AdminBlogController {
     }
 
     @PostMapping(value = "/add")
-    public String addBlog(@ModelAttribute("blogAddDTO") SubjectAdminDTO subjectAdminDTO) {
+    public String addBlog(@ModelAttribute("blogAddDTO") BlogAdminDTO blogAdminDTO) {
         Blog blog = new Blog();
-        Utils.copyNonNullProperties(subjectAdminDTO, blog);
+        Utils.copyNonNullProperties(blogAdminDTO, blog);
         blogService.addBlog(blog);
         return Constants.LINK_REDIRECT + "/admin/blog";
     }
