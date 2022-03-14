@@ -34,7 +34,7 @@ public class BlogServiceImpl implements BlogService {
         for (Blog blog : listBlog) {
             BlogAdminDTO blogAdminDto = new BlogAdminDTO();
             Utils.copyNonNullProperties(blog, blogAdminDto);
-            blogAdminDto.setContent(blogAdminDto.getContent().substring(0, 100));
+            blogAdminDto.setContent(blogAdminDto.getContent().substring(0, 100) + "...");
             blogAdminDto.setStatusStr(Constants.blogStatusConversion.get(blogAdminDto.getStatus()));
             listBlogAdminDTO.add(blogAdminDto);
         }
