@@ -51,10 +51,21 @@ public class AdminBlogController {
         return listBlog;
     }
 
-    @GetMapping("/{id}")
-    public Blog detailBlogPage(@PathVariable Integer id) {
+    @GetMapping(value = "/view/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public BlogAdminDTO detailBlogPage(@PathVariable Integer id) {
         Blog blog = blogService.getDetailBlog(id);
-        return blog;
+        BlogAdminDTO blogAdminDTO = new BlogAdminDTO();
+        Utils.copyNonNullProperties(blog, blogAdminDTO);
+        return blogAdminDTO;
+    }
+
+    @GetMapping(value = "/delete/{id}")
+    public String deleteBlog(@PathVariable Integer id) {
+        Blog blog = blogService.getDetailBlog(id);
+        blog.setStatus(Constants.STATUS_DELETED);
+        blogService.updateBlog(blog);
+        return Constants.LINK_REDIRECT + "/admin/blog";
     }
 
 }
