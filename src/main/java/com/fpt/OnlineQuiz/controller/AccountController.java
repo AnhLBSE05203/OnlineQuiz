@@ -13,7 +13,6 @@ import com.fpt.OnlineQuiz.utils.Utils;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -116,7 +115,7 @@ public class AccountController {
      * @return Reset Password Page html
      */
     @GetMapping(Constants.LINK_RESET_PASSWORD)
-    public String showResetPasswordPage(@Param(value = "token") String tokenString, Model model) {
+    public String showResetPasswordPage(@RequestParam(value = "token") String tokenString, Model model) {
         Account account = accountService.findByToken(tokenString, Constants.TOKEN_TYPE_RESET_PASSWORD);
         model.addAttribute("token", tokenString);
 

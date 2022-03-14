@@ -3,7 +3,6 @@ package com.fpt.OnlineQuiz.model;
 import com.fpt.OnlineQuiz.dto.CourseAdminDTO;
 import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import com.fpt.OnlineQuiz.utils.Constants;
-import com.fpt.OnlineQuiz.utils.Utils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -70,7 +69,12 @@ public class Course {
 
     public CourseAdminDTO toCourseAdminDTO() {
         CourseAdminDTO courseAdminDTO = new CourseAdminDTO();
-        Utils.copyNonNullProperties(this, courseAdminDTO);
+        courseAdminDTO.setId(this.getId());
+        courseAdminDTO.setName(this.getName());
+        courseAdminDTO.setSubjectName(this.getSubject().getName());
+        courseAdminDTO.setDescription(this.getDescription());
+        courseAdminDTO.setPrice(this.getPrice());
+        courseAdminDTO.setLessonTotal(this.getLessonTotal());
         courseAdminDTO.setSubjectName(this.getSubject().getName());
         courseAdminDTO.setSubjectId(this.getSubject().getId());
         String statusStr = Constants.courseStatusConversion.get(this.getStatus());
@@ -78,8 +82,12 @@ public class Course {
         return courseAdminDTO;
     }
 
-    public void setFromSubjectAdminDTO(CourseAdminDTO courseAdminDTO) {
-        Utils.copyNonNullProperties(courseAdminDTO, this);
+    public void setFromCourseAdminDTO(CourseAdminDTO courseAdminDTO) {
+        name = courseAdminDTO.getName();
+        description = courseAdminDTO.getDescription();
+        lessonTotal = courseAdminDTO.getLessonTotal();
+        price = courseAdminDTO.getPrice();
+        status = courseAdminDTO.getStatus();
         // this doesn't handle Subject fields
     }
 }

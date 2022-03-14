@@ -37,10 +37,30 @@ $(document).ready(function() {
 		});
 })
 
-function showBlogEditModal(id) {
+function showBlogAddModal() {
+	$('#blogAddModal').modal('show');
+}
 
+function showBlogEditModal(id) {
+	var link = "/admin/blog/view/" + id;
+	var blog = "";
+	$.ajax({
+		url: link,
+		type:"get",
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		success: function (data){
+			blog = data;
+			if(blog != ""){
+				$("#editBlogId").val(blog.id);
+				$("#editBlogTitle").val(blog.title);
+				$("#editBlogContent").val(blog.content);
+			}
+		}
+	});
+	$('#blogEditModal').modal('show');
 }
 
 function deleteBlog(id){
-	window.location.replace("/admin/subject/delete/" + id);
+	window.location.replace("/admin/blog/delete/" + id);
 }

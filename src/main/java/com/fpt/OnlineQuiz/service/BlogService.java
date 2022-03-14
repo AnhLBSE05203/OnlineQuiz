@@ -23,4 +23,8 @@ public interface BlogService {
     Long countBlog();
 
     Blog getDetailBlog(Integer blogId);
+
+    void updateBlog(Blog blog);
+
+    void addBlog(Blog blog);
 }
