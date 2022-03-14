@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
+@RequestMapping("/image")
 public class UploadImageController {
 
     @Autowired
@@ -43,16 +46,17 @@ public class UploadImageController {
      * Upload file (image) to AWS & update image source into DB after processing add/edit on other controller
      * Then redirect User to provided return link after uploading file
      *
-     * @param file       file chosen to be uploaded
-     * @param returnLink link to be redirected to after uploading, provided on previous controller
-     * @param imgId      Image object's ID to process saving imgSrc to DB, provided on previous controller
+     * @param file file chosen to be uploaded
      * @return
      * @throws IOException
      */
     @PostMapping("/uploadImage")
-    public String uploadMultipartFile(@RequestParam("file") MultipartFile[] file, @RequestParam("returnLink") String returnLink, @RequestParam("imgId") int imgId) throws IOException {
+    public String uploadMultipartFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
+
+        String returnLink = (String) request.getAttribute("returnLink");
+        int imgId = (int) request.getAttribute("imgId");
         List<String> listImage = new ArrayList<>();
-        if (file != null && file.length != 0) {
+        if (file != null && !file.isEmpty()) {
             // upload image
             listImage = this.uploadImageService.saveFileToS3(file);
             // update img src

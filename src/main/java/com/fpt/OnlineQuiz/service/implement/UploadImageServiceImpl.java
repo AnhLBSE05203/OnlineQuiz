@@ -57,4 +57,34 @@ public class UploadImageServiceImpl implements UploadImageService {
         }
         return listImage;
     }
+
+    @Override
+    public List<String> saveFileToS3(MultipartFile file) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        String date = simpleDateFormat.format(new Date());
+
+        List<String> listImage = new ArrayList<>();
+        if (file != null && !file.isEmpty()) {
+            try {
+                String fileName = date + file.getOriginalFilename();
+                File fileOut = new File(this.getClass().getClassLoader().getResource(".").getFile() + fileName);
+                FileOutputStream fos = new FileOutputStream(fileOut);
+                fos.write(file.getBytes());
+                fos.close();
+                this.s3client.putObject(new PutObjectRequest("auctionimage", "image/" + fileName, fileOut)
+                        .withCannedAcl(CannedAccessControlList.PublicRead));
+                fileOut.deleteOnExit();
+                listImage.add("https://auctionimage.s3.ap-southeast-1.amazonaws.com/image/" + fileName);
+            } catch (AmazonServiceException e) {
+                logger.error(e.getMessage(), e);
+                listImage.add("");
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+                listImage.add("");
+            }
+        } else {
+            listImage.add("");
+        }
+        return listImage;
+    }
 }
