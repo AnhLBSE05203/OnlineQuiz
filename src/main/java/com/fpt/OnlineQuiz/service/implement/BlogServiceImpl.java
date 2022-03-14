@@ -58,6 +58,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public void addBlog(Blog blog) {
+        blog.setStatus(Constants.STATUS_BLOG_PUBLISHED);
         blogRepository.addBlog(blog);
     }
 
