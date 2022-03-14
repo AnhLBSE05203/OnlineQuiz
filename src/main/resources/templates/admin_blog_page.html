@@ -39,8 +39,8 @@
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
                         List Blog
-                        <button id="addSubjectButton" type="button" class="btn btn-primary"
-                                onclick="showSubjectAddModal()">Add Blog
+                        <button id="addBlogButton" type="button" class="btn btn-primary"
+                                onclick="showBlogAddModal()">Add Blog
                         </button>
                     </div>
                     <div class="card-body">
@@ -52,6 +52,45 @@
         </main>
         <footer th:replace="components/header_footer.html :: admin-footer">
         </footer>
+    </div>
+</div>
+<!-- Edit Blog Modal -->
+<div class="modal fade" id="blogEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="blogEditForm" th:object="${blogEditDTO}" onsubmit="return submitEditBlog(event);"
+                  th:action="@{/admin/blog/edit}" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Blog Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="editBlogImg"><br>
+<!--                    <input type="hidden" id="editBlogImgSrc" th:name="imgSrc">-->
+<!--                    <input type="hidden" id="editBlogStatusStr" th:name="statusStr" value="">-->
+                    <table class="formTable" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td class="formField">Id:</td>
+                            <td class="formInput"><input type="text" id="editBlogId" th:name="id" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Title:</td>
+                            <td><input type="text" id="editBlogTitle" th:name="title" required></td>
+                        </tr>
+                        <tr>
+                            <td>Content:</td>
+                            <td><input type="text" id="editBlogContent" th:name="content" required></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <!-- placeholder for modal -->
