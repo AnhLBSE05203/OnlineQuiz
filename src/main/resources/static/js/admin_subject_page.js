@@ -195,7 +195,7 @@ function showCourseSection(subjectId) {
             $('#CourseDatatable').DataTable().destroy();
         }
     alert("Courses are listed below!")
-    $('#courseSection').show();
+    $('#CourseDatatable').show();
     $('#CourseDatatable').DataTable({
     		"serverSide": true,
     		pageLength : 5,
