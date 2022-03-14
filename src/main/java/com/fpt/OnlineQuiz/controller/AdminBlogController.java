@@ -28,6 +28,22 @@ public class AdminBlogController {
         return "admin_blog_page";
     }
 
+    @PostMapping(value = "/edit")
+    public String editBlog(@ModelAttribute("blogEditDTO")BlogAdminDTO blogAdminDTO) {
+        Blog blog = blogService.getDetailBlog(blogAdminDTO.getId());
+        Utils.copyNonNullProperties(blogAdminDTO, blog);
+        blogService.updateBlog(blog);
+        return Constants.LINK_REDIRECT + "/admin/blog";
+    }
+
+    @PostMapping(value = "/add")
+    public String addBlog(@ModelAttribute("blogAddDTO") SubjectAdminDTO subjectAdminDTO) {
+        Blog blog = new Blog();
+        Utils.copyNonNullProperties(subjectAdminDTO, blog);
+        blogService.addBlog(blog);
+        return Constants.LINK_REDIRECT + "/admin/blog";
+    }
+
     @PostMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Page<BlogAdminDTO> getAllBlog(@RequestBody PagingRequest pagingRequest) {
