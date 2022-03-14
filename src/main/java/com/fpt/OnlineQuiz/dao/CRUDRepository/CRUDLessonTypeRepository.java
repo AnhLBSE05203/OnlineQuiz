@@ -11,7 +11,6 @@ import java.util.List;
 @Repository
 public interface CRUDLessonTypeRepository extends CrudRepository<LessonType,String> {
 
-
     @Query("select l from LessonType l where l.name = ?1")
     LessonType findByName(String name);
 
