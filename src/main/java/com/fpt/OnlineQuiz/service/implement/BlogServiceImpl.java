@@ -52,6 +52,16 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public void updateBlog(Blog blog) {
+        blogRepository.updateBlog(blog);
+    }
+
+    @Override
+    public void addBlog(Blog blog) {
+        blogRepository.addBlog(blog);
+    }
+
+    @Override
     public ArrayList<Blog> getBlogByIndexPage(int pageIndex, int pageSize) {
         ArrayList<Blog> listBlog = blogRepository.getBlogByIndexPage(pageIndex, pageSize);
         return listBlog;
