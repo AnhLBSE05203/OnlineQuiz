@@ -136,7 +136,7 @@ $('#subjectAddModal').on('shown.bs.modal', function (e) {
  });
 
 function submitAddSubject(e) {
-    e.preventDefault();
+
     var subjectName = $("#addSubjectName").val();
     var link = "/admin/subject/getByName";
     var subject = "";
@@ -153,17 +153,16 @@ function submitAddSubject(e) {
             if(subject != ""){
                 alert('There is already a Subject with that name');
             } else{
-                $("#subjectAddForm")[0].submit();
+                $("#subjectAddForm").submit();
             }
         },
         error: function (jqXHR, exception) {
 
         }
     });
-    return false;
 }
 function submitEditSubject(e) {
-    e.preventDefault();
+
     var subjectNameOriginal = $("#editSubjectNameOriginal").val();
     var subjectName = $("#editSubjectName").val();
     var link = "/admin/subject/getByName";
@@ -182,20 +181,20 @@ function submitEditSubject(e) {
                 if(subject.name != subjectNameOriginal){
                     alert('There is already a Subject with that name');
                 } else {
-                    $("#subjectEditForm")[0].submit();
+                    $("#subjectEditForm").submit();
                 }
             }
         },
         error: function (jqXHR, exception) {
         }
     });
-    return false;
 }
 // course section
 function showCourseSection(subjectId) {
     if ($.fn.dataTable.isDataTable('#CourseDatatable')) {
             $('#CourseDatatable').DataTable().destroy();
         }
+    alert("Courses are listed below!")
     $('#courseSection').show();
     $('#CourseDatatable').DataTable({
     		"serverSide": true,

@@ -34,7 +34,6 @@ function deleteCourse(id){
 }
 
 function submitAddCourse(e) {
-    e.preventDefault();
     var courseName = $("#addCourseName").val();
     var subjectId = $("#addCourseSubject").val();
     var link = "/admin/course/isDuplicated";
@@ -51,7 +50,7 @@ function submitAddCourse(e) {
             if(data === "true"){
                 alert('There is already a Course with that name for chosen Subject');
             }else {
-                $("#courseAddForm")[0].submit();
+                $("#courseAddForm").submit();
             }
         },
         error: function (jqXHR, exception) {
@@ -60,7 +59,7 @@ function submitAddCourse(e) {
 }
 
 function submitEditCourse(e) {
-    e.preventDefault();
+
     var courseName = $("#editCourseName").val();
     var courseNameOriginal = $("#editCourseNameOriginal").val();
     var subjectId = $("#editCourseSubject").val();
@@ -78,16 +77,15 @@ function submitEditCourse(e) {
         success: function (data){
             if(data){
                 if(courseName == courseNameOriginal) {
-                        $("#courseEditForm")[0].submit();
+                        $("#courseEditForm").submit();
                 } else {
                 alert('There is already a Course with that name for chosen Subject');
                 }
             }else{
-                $("#courseEditForm")[0].submit();
+                $("#courseEditForm").submit();
             }
         },
         error: function (jqXHR, exception) {
         }
     });
-    return false;
 }
