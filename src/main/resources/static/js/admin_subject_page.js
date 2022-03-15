@@ -136,10 +136,9 @@ $('#subjectAddModal').on('shown.bs.modal', function (e) {
  });
 
 function submitAddSubject(e) {
-
+    e.preventDefault();
     var subjectName = $("#addSubjectName").val();
-    var link = "/admin/subject/getByName";
-    var subject = "";
+    var link = "/admin/subject/isDuplicated";
     $.ajax({
         url: link,
         type:"get",
@@ -149,11 +148,10 @@ function submitAddSubject(e) {
         },
         dataType: "json",
         success: function (data){
-        subject = data;
-            if(subject != ""){
+            if(data){
                 alert('There is already a Subject with that name');
-            } else{
-                $("#subjectAddForm").submit();
+            } else {
+                $("#subjectAddForm")[0].submit();
             }
         },
         error: function (jqXHR, exception) {
@@ -162,11 +160,10 @@ function submitAddSubject(e) {
     });
 }
 function submitEditSubject(e) {
-
+    e.preventDefault();
     var subjectNameOriginal = $("#editSubjectNameOriginal").val();
     var subjectName = $("#editSubjectName").val();
-    var link = "/admin/subject/getByName";
-    var subject = "";
+    var link = "/admin/subject/isDuplicated";
     $.ajax({
         url: link,
         type:"get",
@@ -176,12 +173,11 @@ function submitEditSubject(e) {
         },
         dataType: "json",
         success: function (data){
-        subject = data;
-            if(subject != ""){
+            if(data){
                 if(subject.name != subjectNameOriginal){
                     alert('There is already a Subject with that name');
                 } else {
-                    $("#subjectEditForm").submit();
+                    $("#subjectEditForm")[0].submit();
                 }
             }
         },

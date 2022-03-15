@@ -122,16 +122,16 @@ public class AdminSubjectController {
         return subjectDTO;
     }
 
-    @GetMapping(value = Constants.LINK_ADMIN_SUBJECT_GET_BY_NAME, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.LINK_ADMIN_SUBJECT_GET_DUPLICATE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public SubjectAdminDTO getByName(HttpServletRequest request) {
+    public boolean isDuplicated(HttpServletRequest request) {
+        boolean isDuplicated = false;
         String name = request.getParameter("name");
         Subject subject = subjectService.getSubjectByNameLower(name);
-        SubjectAdminDTO subjectAdminDTO = null;
         if (subject != null) {
-            subjectAdminDTO = subject.toSubjectAdminDTO();
+            isDuplicated = true;
         }
-        return subjectAdminDTO;
+        return isDuplicated;
     }
 
     @GetMapping(value = Constants.LINK_ADMIN_SUBJECT_DELETE)
