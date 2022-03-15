@@ -62,6 +62,7 @@ public class UploadImageController {
             // update img src
             Image image = imageService.getById(imgId);
             image.setSrc(listImage.get(0));
+            imageService.updateImage(image);
         } else {
             listImage.add("");
         }
@@ -77,6 +78,7 @@ public class UploadImageController {
             for (MultipartFile imageValue : file) {
                 try {
                     String fileName = date + imageValue.getOriginalFilename();
+                    //todo: clean path  in case of ' ' within path getting converted to %20
                     File fileOut = new File(
                             this.getClass().getClassLoader().getResource(".").getFile() + date + fileName);
                     FileOutputStream fos = new FileOutputStream(fileOut);

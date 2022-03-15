@@ -36,6 +36,7 @@ public class UploadImageServiceImpl implements UploadImageService {
             for (MultipartFile imageValue : file) {
                 try {
                     String fileName = date + imageValue.getOriginalFilename();
+                    //todo: clean path  in case of ' ' within path getting converted to %20
                     File fileOut = new File(this.getClass().getClassLoader().getResource(".").getFile() + fileName);
                     FileOutputStream fos = new FileOutputStream(fileOut);
                     fos.write(imageValue.getBytes());
@@ -67,7 +68,9 @@ public class UploadImageServiceImpl implements UploadImageService {
         if (file != null && !file.isEmpty()) {
             try {
                 String fileName = date + file.getOriginalFilename();
-                File fileOut = new File(this.getClass().getClassLoader().getResource(".").getFile() + fileName);
+                //File fileOut = new File(this.getClass().getClassLoader().getResource(".").getFile() + fileName);
+                //temporary
+                File fileOut = new File("C:\\" + fileName);
                 FileOutputStream fos = new FileOutputStream(fileOut);
                 fos.write(file.getBytes());
                 fos.close();
