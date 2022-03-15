@@ -109,6 +109,10 @@
                                     <input type="hidden" id="editSubjectNameOriginal">
                                 </tr>
                                 <tr>
+                                    <td>New Image:</td>
+                                    <td><input type="file" name="file" accept="image/*"/></td>
+                                </tr>
+                                <tr>
                                     <td>Status:</td>
                                     <td><select id="editSubjectStatus" th:name="status">
                                         <option th:each="status : ${subjectStatusMap}" th:value="${status.key}"

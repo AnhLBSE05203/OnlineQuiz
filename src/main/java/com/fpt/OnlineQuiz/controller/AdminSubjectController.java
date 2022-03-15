@@ -52,11 +52,24 @@ public class AdminSubjectController {
     }
 
     @PostMapping(Constants.LINK_ADMIN_SUBJECT_PROCESS_EDIT)
-    public String editSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_EDIT_DTO) SubjectAdminDTO subjectAdminDTO) {
+    public String editSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_EDIT_DTO) SubjectAdminDTO subjectAdminDTO,
+                              @RequestParam("file") MultipartFile file, HttpServletRequest request) {
         Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
         subject.setFromSubjectAdminDTO(subjectAdminDTO);
-        //todo: add image upload
-
+        if (file != null & !file.isEmpty()) {
+            Image image = new Image();
+            Date now = new Date();
+            image.setStatus(Constants.STATUS_DEFAULT);
+            image.setCreatedTime(now);
+            image.setUpdatedTime(now);
+            image.setCreatedUserId(1);
+            imageService.addImage(image);
+            subject.setImage(image);
+            subjectService.updateSubject(subject);
+            request.setAttribute("imgId", image.getId());
+            request.setAttribute("returnLink", Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER);
+            return "forward:/image/uploadImage";
+        }
         subjectService.updateSubject(subject);
         return Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER;
     }
