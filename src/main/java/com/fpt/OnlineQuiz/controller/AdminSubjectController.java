@@ -89,6 +89,7 @@ public class AdminSubjectController {
                 image.setDefaultImg();
                 imageService.addImage(image);
             }
+            subject.setImage(image);
             subjectService.addSubject(subject);
             return Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER;
         } else {

@@ -34,14 +34,6 @@ public class UploadImageController {
 
     @Autowired
     private ImageService imageService;
-    //todo:
-    // 1. process edit/add for other fields (id, name, etc.) & create proxy Image object
-    //    on other controller. e.g: admin/subject/edit or admin/subject/add
-    //    then forward to here (return forward:/imageMultipartFile)
-    // 2. provide more @param on previous controller (request.addAttribute("...","..."))
-    //       a. return link to redirect after file upload. e.g: "redirect:/admin/subject"
-    //       b. created Image Id
-    // 3. upload file here, get Image from DB through Id, add link to Image's imgSrc
 
     /**
      * Upload file (image) to AWS & update image source into DB after processing add/edit on other controller
