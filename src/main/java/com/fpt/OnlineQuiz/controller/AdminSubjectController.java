@@ -15,8 +15,10 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -50,33 +52,60 @@ public class AdminSubjectController {
     }
 
     @PostMapping(Constants.LINK_ADMIN_SUBJECT_PROCESS_EDIT)
-    public String editSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_EDIT_DTO) SubjectAdminDTO subjectAdminDTO) {
+    public String editSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_EDIT_DTO) SubjectAdminDTO subjectAdminDTO,
+                              @RequestParam("file") MultipartFile file, HttpServletRequest request) {
         Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
         subject.setFromSubjectAdminDTO(subjectAdminDTO);
-        //todo: add image upload
-
+        if (file != null & !file.isEmpty()) {
+            Image image = new Image();
+            Date now = new Date();
+            image.setStatus(Constants.STATUS_DEFAULT);
+            image.setCreatedTime(now);
+            image.setUpdatedTime(now);
+            image.setCreatedUserId(1);
+            imageService.addImage(image);
+            subject.setImage(image);
+            subjectService.updateSubject(subject);
+            request.setAttribute("imgId", image.getId());
+            request.setAttribute("returnLink", Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER);
+            return "forward:/image/uploadImage";
+        }
         subjectService.updateSubject(subject);
         return Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER;
     }
 
     @PostMapping(Constants.LINK_ADMIN_SUBJECT_ADD)
-    public String addSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_ADD_DTO) SubjectAdminDTO subjectAdminDTO) {
+    public String addSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_ADD_DTO) SubjectAdminDTO subjectAdminDTO,
+                             @RequestParam("file") MultipartFile file, HttpServletRequest request) {
         //todo - add image upload
         Subject subject = new Subject();
         subject.setFromSubjectAdminDTO(subjectAdminDTO);
-
-        //set default img - temporary
-        Image defaultImg = imageService.getById(Constants.DEFAULT_SUBJECT_IMAGE_ID);
-        if (defaultImg == null) {
-            defaultImg = new Image();
-            defaultImg.setDefaultImg();
-            imageService.addImage(defaultImg);
+        Image image;
+        if (file == null || file.isEmpty()) {
+            //set default img - temporary
+            image = imageService.getById(Constants.DEFAULT_SUBJECT_IMAGE_ID);
+            if (image == null) {
+                image = new Image();
+                image.setDefaultImg();
+                imageService.addImage(image);
+            }
+            subject.setImage(image);
+            subjectService.addSubject(subject);
+            return Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER;
+        } else {
+            image = new Image();
+            Date now = new Date();
+            image.setStatus(Constants.STATUS_DEFAULT);
+            image.setCreatedTime(now);
+            image.setUpdatedTime(now);
+            image.setCreatedUserId(1);
+            imageService.addImage(image);
         }
-        subject.setImage(defaultImg);
-        //
-
+        subject.setImage(image);
         subjectService.addSubject(subject);
-        return Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER;
+        request.setAttribute("imgId", image.getId());
+        request.setAttribute("returnLink", Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER);
+        return "forward:/image/uploadImage";
     }
 
     @PostMapping(value = Constants.LINK_ADMIN_SUBJECT_GET_BY_PAGE, produces = MediaType.APPLICATION_JSON_VALUE)

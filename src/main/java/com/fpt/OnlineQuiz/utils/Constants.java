@@ -9,6 +9,8 @@ public class Constants {
     public static final String STRING_EMPTY = "";
     public static final int NUMBER_ZERO = 0;
     public static final String REMEMBER_ME_KEY = "uniqueAndSecret";
+    public static final int BCRYPT_STRENGTH = 10;
+
     //account constants
     public static final int STATUS_ACCOUNT_CONFIRMED = 1;
     public static final int STATUS_ACCOUNT_UNCONFIRMED = 2;

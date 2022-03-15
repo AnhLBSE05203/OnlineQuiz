@@ -26,6 +26,8 @@ public interface CourseService {
 
     void updateCourse(Course course);
 
+    void addCourse(Course course);
+
     CourseAdminDTO getCourseAdminDTOById(int id);
 
     boolean isDuplicated(String name, int subjectId);

@@ -26,7 +26,7 @@ public class AdminCourseController {
     @PostMapping(Constants.LINK_ADMIN_COURSE_PROCESS_EDIT)
     public String editCourse(@ModelAttribute(Constants.ATTRIBUTE_COURSE_EDIT_DTO) CourseAdminDTO courseAdminDTO, HttpServletRequest request) {
         Course course = courseService.getById(courseAdminDTO.getId());
-        course.setFromSubjectAdminDTO(courseAdminDTO);
+        course.setFromCourseAdminDTO(courseAdminDTO);
         //get original subject id
         int originalSubjectId = Integer.parseInt(request.getParameter("originalSubjectId"));
         if (originalSubjectId != courseAdminDTO.getSubjectId()) {
@@ -47,13 +47,11 @@ public class AdminCourseController {
     @PostMapping(Constants.LINK_ADMIN_COURSE_ADD)
     public String addCourse(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_ADD_DTO) CourseAdminDTO courseAdminDTO) {
         Course course = new Course();
-        course.setFromSubjectAdminDTO(courseAdminDTO);
+        course.setFromCourseAdminDTO(courseAdminDTO);
         //add course to subject
         Subject subject = subjectService.getSubjectById(courseAdminDTO.getSubjectId());
         course.setSubject(subject);
-        subject.getCourses().add(course);
-        subjectService.updateSubject(subject);
-        courseService.updateCourse(course);
+        courseService.addCourse(course);
 
         return Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER;
     }

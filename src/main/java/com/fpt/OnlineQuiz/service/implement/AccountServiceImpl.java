@@ -1,106 +1,103 @@
 package com.fpt.OnlineQuiz.service.implement;
 
+import com.fpt.OnlineQuiz.dao.AccountRepository;
 import com.fpt.OnlineQuiz.dao.TokenRepository;
 import com.fpt.OnlineQuiz.dto.AccountAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
+import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Token;
+import com.fpt.OnlineQuiz.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.fpt.OnlineQuiz.dao.AccountRepository;
-import com.fpt.OnlineQuiz.model.Account;
-import com.fpt.OnlineQuiz.service.AccountService;
-
 import java.util.Date;
 
 @Service
 public class AccountServiceImpl implements AccountService {
 
-	@Autowired
-	private AccountRepository accountRepository;
-	@Autowired
-	private TokenRepository tokenRepository;
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Account account = accountRepository.findAccountByEmail(username);
+    @Autowired
+    private AccountRepository accountRepository;
+    @Autowired
+    private TokenRepository tokenRepository;
 
-		if (account == null) {
-			throw new UsernameNotFoundException("User " + username + " was not found in the database");
-		}
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account account = accountRepository.findAccountByEmail(username);
 
-		return account;
-	}
+        if (account == null) {
+            throw new UsernameNotFoundException("User " + username + " was not found in the database");
+        }
 
-	public void addAccount(Account account) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String encodedPassword = encoder.encode(account.getPassword());
-		account.setPassword(encodedPassword);
-		accountRepository.addAccount(account);
-	}
+        return account;
+    }
 
-	public Account findAccountByEmail(String email) {
+    public void addAccount(Account account) {
+        accountRepository.addAccount(account);
+    }
 
-		return accountRepository.findAccountByEmail(email);
-	}
+    public Account findAccountByEmail(String email) {
 
-	@Override
-	public Account findByToken(String token, String tokenType) {
-		Account account = accountRepository.findByToken(token, tokenType);
+        return accountRepository.findAccountByEmail(email);
+    }
 
-		return account;
-	}
+    @Override
+    public Account findByToken(String token, String tokenType) {
+        Account account = accountRepository.findByToken(token, tokenType);
 
-	@Override
-	public void addToken(String tokenString, String email, String tokenType) {
-		Account account = accountRepository.findAccountByEmail(email);
-		if (account != null) {
-			Token token = new Token();
-			token.setTokenString(tokenString);
-			token.setAccount(account);
-			Date date = new Date();
-			token.setCreatedDate(date);
-			token.setTokenType(tokenType);
-			tokenRepository.addToken(token);
-		}
-	}
+        return account;
+    }
 
-	@Override
-	public void resetPassword(Account account, String newPassword, Token token) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String encodedPassword = encoder.encode(newPassword);
-		account.setPassword(encodedPassword);
-		Date now = new Date();
-		account.setUpdatedTime(now);
-		account.setUpdatedUserId(1);
-		accountRepository.updateAccount(account);
-		tokenRepository.deleteToken(token);
-	}
+    @Override
+    public void addToken(String tokenString, String email, String tokenType) {
+        Account account = accountRepository.findAccountByEmail(email);
+        if (account != null) {
+            Token token = new Token();
+            token.setTokenString(tokenString);
+            token.setAccount(account);
+            Date date = new Date();
+            token.setCreatedDate(date);
+            token.setTokenType(tokenType);
+            tokenRepository.addToken(token);
+        }
+    }
 
-	@Override
-	public void updateAccount(Account account) {
-		accountRepository.updateAccount(account);
-	}
+    @Override
+    public void resetPassword(Account account, String newPassword, Token token) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(newPassword);
+        account.setPassword(encodedPassword);
+        Date now = new Date();
+        account.setUpdatedTime(now);
+        account.setUpdatedUserId(1);
+        accountRepository.updateAccount(account);
+        tokenRepository.deleteToken(token);
+    }
 
-	@Override
-	public void updatePassword(Account account, String newPassword) {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(newPassword);
-		account.setPassword(encodedPassword);
-		accountRepository.updateAccount(account);
-	}
+    @Override
+    public void updateAccount(Account account) {
+        accountRepository.updateAccount(account);
+    }
 
-	@Override
-	public Page<AccountAdminDTO> listAccountAdmin(PagingRequest pagingRequest) {
-		return null;
-	}
+    @Override
+    public void updatePassword(Account account, String newPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        account.setPassword(encodedPassword);
+        accountRepository.updateAccount(account);
+    }
 
-	@Override
-	public Account detailAccount(Integer id) {
-		return null;
-	}
+    @Override
+    public Page<AccountAdminDTO> listAccountAdmin(PagingRequest pagingRequest) {
+        return null;
+    }
+
+    @Override
+    public Account detailAccount(Integer id) {
+        return null;
+    }
 
 }

@@ -88,6 +88,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public void addCourse(Course course) {
+        courseRepository.addCourse(course);
+    }
+
+    @Override
     public CourseAdminDTO getCourseAdminDTOById(int id) {
         Course course = courseRepository.getCourseById(id);
         CourseAdminDTO courseAdminDTO = course.toCourseAdminDTO();

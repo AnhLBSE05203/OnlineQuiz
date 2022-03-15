@@ -40,4 +40,9 @@ public class ImageRepository {
     public void addImage(Image image) {
         em.persist(image);
     }
+
+    public void updateImage(Image image) {
+        em.merge(image);
+        em.flush();
+    }
 }

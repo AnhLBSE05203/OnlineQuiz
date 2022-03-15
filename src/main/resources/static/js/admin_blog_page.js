@@ -64,7 +64,3 @@ function showBlogEditModal(id) {
 function deleteBlog(id){
 	window.location.replace("/admin/blog/delete/" + id);
 }
-
-function submitEditBlog(e) {
-
-}
