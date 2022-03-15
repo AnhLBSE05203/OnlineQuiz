@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,8 +37,9 @@ public class UploadImageServiceImpl implements UploadImageService {
             for (MultipartFile imageValue : file) {
                 try {
                     String fileName = date + imageValue.getOriginalFilename();
-                    //todo: clean path  in case of ' ' within path getting converted to %20
-                    File fileOut = new File(this.getClass().getClassLoader().getResource(".").getFile() + fileName);
+                    String path = this.getClass().getClassLoader().getResource(".").getFile() + fileName;
+                    path = URLDecoder.decode(path, "UTF-8");
+                    File fileOut = new File(path);
                     FileOutputStream fos = new FileOutputStream(fileOut);
                     fos.write(imageValue.getBytes());
                     fos.close();
@@ -68,9 +70,9 @@ public class UploadImageServiceImpl implements UploadImageService {
         if (file != null && !file.isEmpty()) {
             try {
                 String fileName = date + file.getOriginalFilename();
-                //File fileOut = new File(this.getClass().getClassLoader().getResource(".").getFile() + fileName);
-                //temporary
-                File fileOut = new File("C:\\" + fileName);
+                String path = this.getClass().getClassLoader().getResource(".").getFile() + fileName;
+                path = URLDecoder.decode(path, "UTF-8");
+                File fileOut = new File(path);
                 FileOutputStream fos = new FileOutputStream(fileOut);
                 fos.write(file.getBytes());
                 fos.close();

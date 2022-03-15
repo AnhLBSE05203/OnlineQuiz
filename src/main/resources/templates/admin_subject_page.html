@@ -82,7 +82,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form id="subjectEditForm" th:object="${subjectEditDTO}" enctype="multipart/form-data"
-                          onsubmit="return submitEditSubject(event);"
+                          onsubmit="submitEditSubject(event);"
                           th:action="@{/admin/subject/edit}" method="POST">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel">Subject Detail</h5>
@@ -149,7 +149,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form id="subjectAddForm" th:object="${subjectAddDTO}" enctype="multipart/form-data"
-                          onsubmit="return submitAddSubject(event);"
+                          onsubmit="submitAddSubject(event);"
                           th:action="@{/admin/subject/add}" method="POST">
                         <div class="modal-header">
                             <h5 class="modal-title">Subject Detail</h5>

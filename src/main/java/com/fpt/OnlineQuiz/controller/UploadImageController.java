@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -78,9 +79,9 @@ public class UploadImageController {
             for (MultipartFile imageValue : file) {
                 try {
                     String fileName = date + imageValue.getOriginalFilename();
-                    //todo: clean path  in case of ' ' within path getting converted to %20
-                    File fileOut = new File(
-                            this.getClass().getClassLoader().getResource(".").getFile() + date + fileName);
+                    String path = this.getClass().getClassLoader().getResource(".").getFile() + fileName;
+                    path = URLDecoder.decode(path, "UTF-8");
+                    File fileOut = new File(path);
                     FileOutputStream fos = new FileOutputStream(fileOut);
                     fos.write(imageValue.getBytes());
                     fos.close();

@@ -27,3 +27,6 @@
 #CourseDatatable{
     display: none;
 }
+#editSubjectImg{
+    max-width:200px;
+}
