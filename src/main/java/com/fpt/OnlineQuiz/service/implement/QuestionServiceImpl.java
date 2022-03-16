@@ -29,9 +29,9 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Page<QuestionAdminDTO> getByPagingRequest(PagingRequest pagingRequest) {
-        List<Question> questions = questionRepository.getByPagingRequest(pagingRequest);
-        long count = questionRepository.getQuestionCountByPagingRequest(pagingRequest);
+    public Page<QuestionAdminDTO> getByPagingRequest(PagingRequest pagingRequest, int lessonId) {
+        List<Question> questions = questionRepository.getByPagingRequest(pagingRequest, lessonId);
+        long count = questionRepository.getQuestionCountByPagingRequest(pagingRequest, lessonId);
         List<QuestionAdminDTO> questionAdminDTOs = new ArrayList<>();
         // convert Subject to SubjectAdminDTO
         for (Question question : questions) {
