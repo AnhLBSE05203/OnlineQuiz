@@ -57,10 +57,10 @@ public class QuestionRepository {
         }
     }
 
-    public List<Question> getByPagingRequest(PagingRequest pagingRequest) {
+    public List<Question> getByPagingRequest(PagingRequest pagingRequest, int lessonId) {
         try {
             StringBuilder sb = new StringBuilder();
-            sb.append("select q from Question q where 1 = 1");
+            sb.append("select q from Question q where lesson_id=:id");
             // append filtering
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
@@ -76,6 +76,7 @@ public class QuestionRepository {
 
             String sql = sb.toString();
             Query query = em.createQuery(sql, Question.class);
+            query.setParameter("id", lessonId);
             query.setFirstResult(pagingRequest.getStart());
             query.setMaxResults(pagingRequest.getLength());
             return (List<Question>) query.getResultList();
@@ -84,10 +85,10 @@ public class QuestionRepository {
         }
     }
 
-    public long getQuestionCountByPagingRequest(PagingRequest pagingRequest) {
+    public long getQuestionCountByPagingRequest(PagingRequest pagingRequest, int lessonId) {
         try {
             StringBuilder sb = new StringBuilder();
-            sb.append("SELECT count(q) FROM Question q");
+            sb.append("SELECT count(q) FROM Question q where lesson_id=:id");
             // append filtering
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
@@ -98,6 +99,7 @@ public class QuestionRepository {
 
             String sql = sb.toString();
             Query query = em.createQuery(sql, Long.class);
+            query.setParameter("id", lessonId);
             return (long) query.getSingleResult();
         } catch (NoResultException e) {
             return 0;
