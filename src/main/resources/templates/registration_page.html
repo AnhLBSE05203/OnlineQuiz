@@ -50,6 +50,7 @@
 
             <div class="shopping-cart">
                 <div class="px-4 px-lg-0">
+                    <p th:value="${message}"></p>
                     <div class="pb-5">
                         <div class="container">
                             <div class="row">
@@ -72,15 +73,16 @@
                                             </thead>
                                             <tbody>
                                                 <!--                                    <c:forEach items="${list}" var="o">-->
-                                                <tr th:each="course: ${course}">
+                                                <tr th:each="course: ${list}">
                                                     <th scope="row">
+                                                        <input type="hidden" id="courseId" th:value="${course.getId()}"/>
                                                         <div class="p-2">
-                                                            <img src="${course.image}" alt="Image" width="70"
-                                                                 class="img-fluid rounded shadow-sm">
+<!--                                                            <img src="${course.image}" alt="Image" width="70"-->
+<!--                                                                 class="img-fluid rounded shadow-sm">-->
                                                             <div class="ml-3 d-inline-block align-middle">
                                                                 <h5 class="mb-0"><a href="#"
                                                                                     class="text-dark d-inline-block"
-                                                                                    th:text="${course.name}"></a></h5>
+                                                                                    th:text="${course.getCourseName()}"></a></h5>
                                                                 <span class="text-muted font-weight-normal font-italic"></span>
                                                             </div>
                                                         </div>
@@ -88,7 +90,7 @@
                                                     <td class="align-middle" th:text="${course.price}">
                                                         <strong>Price</strong></td>
                                                     <td class="align-middle"><a href="#" class="text-dark">
-                                                        <button type="button" class="btn btn-danger">Delete</button>
+                                                        <button type="button" class="btn btn-danger" onclick="removeCourse()">Delete</button>
                                                     </a>
                                                     </td>
                                                 </tr>
@@ -108,13 +110,11 @@
                                     <div class="p-4">
                                         <ul class="list-unstyled mb-4">
                                             <li class="d-flex justify-content-between py-3 border-bottom"><strong
-                                                    class="text-muted">Price</strong><strong>100 $</strong></li>
-                                            <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                                     class="text-muted">Total</strong>
-                                                <h5 class="font-weight-bold">110 $</h5>
+                                                <h5 class="font-weight-bold" th:value="${total}"></h5>
                                             </li>
                                         </ul>
-                                        <a href="buy" class="btn btn-dark rounded-pill py-2 btn-block">Buy</a>
+                                        <a th:href="@{/user/buyCourse}" class="btn btn-dark rounded-pill py-2 btn-block">Buy</a>
                                     </div>
                                 </div>
                             </div>
