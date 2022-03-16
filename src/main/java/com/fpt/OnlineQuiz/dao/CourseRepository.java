@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.dao;
 
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
+import com.fpt.OnlineQuiz.dto.CourseRegistrationDTO;
 import com.fpt.OnlineQuiz.dto.paging.Column;
 import com.fpt.OnlineQuiz.dto.paging.Order;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
@@ -188,5 +189,20 @@ public class CourseRepository {
             ex.printStackTrace();
         }
         return 0l;
+    }
+    public void addRegistrationCourse(List<CourseRegistrationDTO> list, int accountId){
+        for(int i = 0; i < list.size(); i++){
+            try {
+                StringBuilder sb = new StringBuilder();
+                //todo Fix sql
+                sb.append("INSERT INTO account_course values (:courseId, :accountId)");
+                Query query = em.createQuery(sb.toString());
+                query.setParameter("courseId", list.get(i).getId());
+                query.setParameter("accountId", accountId);
+                query.executeUpdate();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }
