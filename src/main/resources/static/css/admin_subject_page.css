@@ -24,6 +24,9 @@
 .formField{
     width:15%;
 }
-#courseSection{
+#CourseDatatable{
     display: none;
+}
+#editSubjectImg{
+    max-width:200px;
 }

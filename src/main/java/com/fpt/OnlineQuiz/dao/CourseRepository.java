@@ -32,6 +32,10 @@ public class CourseRepository {
         em.flush();
     }
 
+    public void addCourse(Course course) {
+        em.persist(course);
+    }
+
     public List<CourseFeaturedDTO> getFeaturedCourses(int number) {
         try {
             BufferedReader buffer = new BufferedReader(new InputStreamReader(

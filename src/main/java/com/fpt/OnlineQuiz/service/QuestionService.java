@@ -12,7 +12,7 @@ public interface QuestionService {
 
     Question getQuestionByQuestionId(int questionId);
 
-    Page<QuestionAdminDTO> getByPagingRequest(PagingRequest pagingRequest);
+    Page<QuestionAdminDTO> getByPagingRequest(PagingRequest pagingRequest, int lessonId);
 
     void addQuestion(Question question);
 

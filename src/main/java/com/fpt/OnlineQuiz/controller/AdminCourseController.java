@@ -51,9 +51,7 @@ public class AdminCourseController {
         //add course to subject
         Subject subject = subjectService.getSubjectById(courseAdminDTO.getSubjectId());
         course.setSubject(subject);
-        subject.getCourses().add(course);
-        subjectService.updateSubject(subject);
-        courseService.updateCourse(course);
+        courseService.addCourse(course);
 
         return Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER;
     }

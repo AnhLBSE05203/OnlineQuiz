@@ -89,5 +89,4 @@ function submitEditCourse(e) {
         error: function (jqXHR, exception) {
         }
     });
-    return false;
 }

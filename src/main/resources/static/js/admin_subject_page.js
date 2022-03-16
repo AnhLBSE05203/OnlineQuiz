@@ -138,8 +138,7 @@ $('#subjectAddModal').on('shown.bs.modal', function (e) {
 function submitAddSubject(e) {
     e.preventDefault();
     var subjectName = $("#addSubjectName").val();
-    var link = "/admin/subject/getByName";
-    var subject = "";
+    var link = "/admin/subject/isDuplicated";
     $.ajax({
         url: link,
         type:"get",
@@ -149,10 +148,9 @@ function submitAddSubject(e) {
         },
         dataType: "json",
         success: function (data){
-        subject = data;
-            if(subject != ""){
+            if(data){
                 alert('There is already a Subject with that name');
-            } else{
+            } else {
                 $("#subjectAddForm")[0].submit();
             }
         },
@@ -160,14 +158,12 @@ function submitAddSubject(e) {
 
         }
     });
-    return false;
 }
 function submitEditSubject(e) {
     e.preventDefault();
     var subjectNameOriginal = $("#editSubjectNameOriginal").val();
     var subjectName = $("#editSubjectName").val();
-    var link = "/admin/subject/getByName";
-    var subject = "";
+    var link = "/admin/subject/isDuplicated";
     $.ajax({
         url: link,
         type:"get",
@@ -177,8 +173,7 @@ function submitEditSubject(e) {
         },
         dataType: "json",
         success: function (data){
-        subject = data;
-            if(subject != ""){
+            if(data){
                 if(subject.name != subjectNameOriginal){
                     alert('There is already a Subject with that name');
                 } else {
@@ -189,14 +184,14 @@ function submitEditSubject(e) {
         error: function (jqXHR, exception) {
         }
     });
-    return false;
 }
 // course section
 function showCourseSection(subjectId) {
     if ($.fn.dataTable.isDataTable('#CourseDatatable')) {
             $('#CourseDatatable').DataTable().destroy();
         }
-    $('#courseSection').show();
+    alert("Courses are listed below!")
+    $('#CourseDatatable').show();
     $('#CourseDatatable').DataTable({
     		"serverSide": true,
     		pageLength : 5,

@@ -189,10 +189,14 @@ public class SubjectRepository {
             String sql = sb.toString();
             Query query = em.createQuery(sql, Subject.class);
             query.setParameter("name", name);
-            return (Subject) query.getSingleResult();
+            List<Subject> subjects = (List<Subject>) query.getResultList();
+            if (subjects.size() > 0) {
+                return subjects.get(0);
+            }
         } catch (NoResultException e) {
             return null;
         }
+        return null;
     }
 
     public void updateSubject(Subject subject) {

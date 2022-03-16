@@ -46,6 +46,8 @@ $(document).ready(function() {
                     html += '<button type="button" class="btn btn-primary" id ="delete" onclick="deleteLesson('+ row['id'] +')">'
                         + 'Delete</button>&nbsp';
                 }
+                html += '<button type="button" class="btn btn-primary" id ="showQuestionList" onclick="showQuestionList('+ row['id'] +')">'
+                    + 'ShowQuestion</button>&nbsp';
                 return html;
             }
         }
@@ -57,6 +59,9 @@ function recoverLesson(id){
 }
 function deleteLesson(id){
     window.location.replace("/admin/lesson/delete/" + id);
+}
+function showQuestionList(id){
+    window.location.replace("/question/list/" + id);
 }
 function showLessonEditModal(id) {
     var link = "/admin/lesson/" + id;

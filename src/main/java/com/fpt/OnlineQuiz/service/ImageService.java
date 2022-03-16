@@ -7,4 +7,6 @@ public interface ImageService {
     public Image getById(int id);
 
     public void addImage(Image image);
+
+    public void updateImage(Image image);
 }

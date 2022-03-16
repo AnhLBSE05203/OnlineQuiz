@@ -9,6 +9,8 @@ public class Constants {
     public static final String STRING_EMPTY = "";
     public static final int NUMBER_ZERO = 0;
     public static final String REMEMBER_ME_KEY = "uniqueAndSecret";
+    public static final int BCRYPT_STRENGTH = 10;
+
     //account constants
     public static final int STATUS_ACCOUNT_CONFIRMED = 1;
     public static final int STATUS_ACCOUNT_UNCONFIRMED = 2;
@@ -116,7 +118,7 @@ public class Constants {
     public static final String LINK_ADMIN_SUBJECT_CONTROLLER = "/admin/subject";
     public static final String LINK_ADMIN_SUBJECT_LIST = "/";
     public static final String LINK_ADMIN_SUBJECT_DETAIL = "/view/{id}";
-    public static final String LINK_ADMIN_SUBJECT_GET_BY_NAME = "/getByName";
+    public static final String LINK_ADMIN_SUBJECT_GET_DUPLICATE = "/isDuplicated";
     public static final String LINK_ADMIN_SUBJECT_ADD = "/add";
     public static final String LINK_ADMIN_SUBJECT_DELETE = "/delete/{id}";
     public static final String LINK_ADMIN_SUBJECT_RECOVER = "/recover/{id}";

@@ -81,7 +81,8 @@
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form id="subjectEditForm" th:object="${subjectEditDTO}" onsubmit="return submitEditSubject(event);"
+                    <form id="subjectEditForm" th:object="${subjectEditDTO}" enctype="multipart/form-data"
+                          onsubmit="return submitEditSubject(event);"
                           th:action="@{/admin/subject/edit}" method="POST">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel">Subject Detail</h5>
@@ -106,6 +107,10 @@
                                     <td>Name:</td>
                                     <td><input type="text" id="editSubjectName" th:name="name" required></td>
                                     <input type="hidden" id="editSubjectNameOriginal">
+                                </tr>
+                                <tr>
+                                    <td>New Image:</td>
+                                    <td><input type="file" name="file" accept="image/*"/></td>
                                 </tr>
                                 <tr>
                                     <td>Status:</td>
@@ -143,7 +148,8 @@
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form id="subjectAddForm" th:object="${subjectAddDTO}" onsubmit="return submitAddSubject(event);"
+                    <form id="subjectAddForm" th:object="${subjectAddDTO}" enctype="multipart/form-data"
+                          onsubmit="return submitAddSubject(event);"
                           th:action="@{/admin/subject/add}" method="POST">
                         <div class="modal-header">
                             <h5 class="modal-title">Subject Detail</h5>
@@ -158,6 +164,10 @@
                                 <tr>
                                     <td class="formField">Name:</td>
                                     <td><input type="text" id="addSubjectName" th:name="name" required></td>
+                                </tr>
+                                <tr>
+                                    <td>Image:</td>
+                                    <td><input type="file" name="file" accept="image/*"/></td>
                                 </tr>
                                 <tr>
                                     <td>Subject Info:</td>

@@ -20,4 +20,9 @@ public class ImageServiceImpl implements ImageService {
     public void addImage(Image image) {
         imageRepository.addImage(image);
     }
+
+    @Override
+    public void updateImage(Image image) {
+        imageRepository.updateImage(image);
+    }
 }
