@@ -1,9 +1,10 @@
 $(document).ready(function() {
+    var lessonId = document.getElementById("lessonId").value;
     $('#QuestionDatatable').DataTable({
         "serverSide": true,
         pageLength : 5,
         ajax : {
-            url : '/question/getQuestionsByPage',
+            url : '/question/getQuestionsByPage/' + lessonId,
             "type": "POST",
             "dataType": "json",
             "contentType": "application/json",
