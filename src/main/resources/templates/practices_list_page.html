@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+                <div class="row">
                 <div class="col-lg-4" th:each="qh : ${quizHistory}">
                     <div class="properties properties2 mb-30">
                         <div class="properties__card">
@@ -76,13 +76,12 @@
 
                             </div>
                             <div class="properties__caption">
-                                <h3><b th:text="${qh.name}"></b></h3>
+                                <a href="#"><h3><b th:text="${qh.name}"></b></h3></a>
                                 <p><b th:text="${qh.quizCount}+' Quizs'"></b></p>
-                                <p style="text-align: center">Created by <a href="#" id="created"
-                                                                            th:text="${qh.acountName}"></a></p>
-                                <p style="text-align: center">
-                                    <a href="#" class="border-btn">Details</a>
-                                </p>
+                                <p style="text-align: center">Created by <a href="#" id="created"th:text="${qh.accountName}"></a></p>
+<!--                                <p style="text-align: center">-->
+<!--                                    <a href="#" class="border-btn">Details</a>-->
+<!--                                </p>-->
                             </div>
                         </div>
                     </div>
@@ -122,7 +121,6 @@
                 <!--                    </div>-->
                 <!--                </div>-->
             </div>
-
         </div>
     </div>
     <!-- Courses area End -->
