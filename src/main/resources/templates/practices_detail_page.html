@@ -1,29 +1,29 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Courses | Education</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
-  <div th:replace="components/header_footer.html :: common-style"></div>
-  <link rel="stylesheet" th:href="@{/css/practice_list.css}">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Courses | Education</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" th:href="@{/css/practice_detail.css}">
+    <div th:replace="components/header_footer.html :: common-style"></div>
 
 </head>
 
 <body>
 <!-- ? Preloader Start -->
 <div id="preloader-active">
-  <div class="preloader d-flex align-items-center justify-content-center">
-    <div class="preloader-inner position-relative">
-      <div class="preloader-circle"></div>
-      <div class="preloader-img pere-text">
-        <img th:src="@{/img/logo/loder.png}" alt="">
-      </div>
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img th:src="@{/img/logo/loder.png}" alt="">
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- Preloader Start -->
 <!-- Header Start -->
@@ -31,33 +31,33 @@
 </div>
 <!-- Header End -->
 <main>
-  <!--? slider Area Start-->
-  <section class="slider-area slider-area2">
-    <div class="slider-active">
-      <!-- Single Slider -->
-      <div class="single-slider slider-height2">
-        <div class="container">
-          <div class="row">
-            <div class="col-xl-8 col-lg-11 col-md-12">
-              <div class="hero__caption hero__caption2">
-                <!--                                <h1 data-animation="bounceIn" data-delay="0.2s"-->
-                <!--                                    th:text="${subject.get().getName()}"></h1>-->
-                <!-- breadcrumb Start-->
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Services</a></li>
-                  </ol>
-                </nav>
-                <!-- breadcrumb End -->
-              </div>
+    <!--? slider Area Start-->
+    <section class="slider-area slider-area2">
+        <div class="slider-active">
+            <!-- Single Slider -->
+            <div class="single-slider slider-height2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-11 col-md-12">
+                            <div class="hero__caption hero__caption2">
+                                <!--                                <h1 data-animation="bounceIn" data-delay="0.2s"-->
+                                <!--                                    th:text="${subject.get().getName()}"></h1>-->
+                                <!-- breadcrumb Start-->
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Services</a></li>
+                                    </ol>
+                                </nav>
+                                <!-- breadcrumb End -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- Courses area start -->
+    </section>
+    <!-- Courses area start -->
     <div class="container py-5">
         <div class="row text-center text-white mb-5">
             <div class="col-lg-7 mx-auto">
@@ -67,14 +67,14 @@
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <!-- List group-->
-                <ul class="list-group shadow">
+                <ul class="list-group shadow" th:each="q : ${questions}">
                     <!-- list group item-->
                     <li class="list-group-item">
                         <!-- Custom content-->
                         <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                             <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">Apple iPhone XR (Red, 128 GB)</h5>
-                                <p class="font-italic text-muted mb-0 small">128 GB ROM | 15.49 cm (6.1 inch) Display 12MP Rear Camera | 7MP Front Camera A12 Bionic Chip Processor</p>
+                                <h3 class="mt-0 font-weight-bold mb-2" th:text="${q.question}"></h3>
+                                <h3 class="font-italic text-muted mb-0 small" th:text="${q.answer}"></h3>
                                 <div class="d-flex align-items-center justify-content-between mt-1">
                                     <h6 class="font-weight-bold my-2">₹64,999</h6>
                                     <ul class="list-inline small">
@@ -85,238 +85,180 @@
                                         <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
                                     </ul>
                                 </div>
-                            </div><img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                        </div> <!-- End -->
-                    </li> <!-- End -->
-                    <!-- list group item-->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">Apple iPhone XS (Silver, 64 GB)</h5>
-                                <p class="font-italic text-muted mb-0 small">64 GB ROM | 14.73 cm (5.8 inch) Super Retina HD Display 12MP + 12MP | 7MP Front Camera A12 Bionic Chip Processor</p>
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <h6 class="font-weight-bold my-2">₹99,900</h6>
-                                    <ul class="list-inline small">
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                    </ul>
-                                </div>
-                            </div><img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                        </div> <!-- End -->
-                    </li> <!-- End -->
-                    <!-- list group item -->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">Apple iPhone XS Max (Gold, 64 GB)</h5>
-                                <p class="font-italic text-muted mb-0 small">64 GB ROM | 16.51 cm (6.5 inch) Super Retina HD Display 12MP + 12MP | 7MP Front Camera A12 Bionic Chip Processor</p>
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <h6 class="font-weight-bold my-2">₹1,09,900</h6>
-                                    <ul class="list-inline small">
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
-                                    </ul>
-                                </div>
-                            </div><img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                        </div> <!-- End -->
-                    </li> <!-- End -->
-                    <!-- list group item -->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">OnePlus 7 Pro (Almond, 256 GB)</h5>
-                                <p class="font-italic text-muted mb-0 small">Rear Camera|48MP (Primary)+ 8MP (Tele-photo)+16MP (ultrawide)| Front Camera|16 MP POP-UP Camera|8GB RAM|Android pie</p>
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <h6 class="font-weight-bold my-2">₹ 52,999</h6>
-                                    <ul class="list-inline small">
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                    </ul>
-                                </div>
-                            </div><img src="https://i.imgur.com/6IUbEME.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                            </div>
+<!--                            <img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200"-->
+<!--                                 class="ml-lg-5 order-1 order-lg-2">-->
                         </div> <!-- End -->
                     </li> <!-- End -->
                 </ul> <!-- End -->
             </div>
         </div>
     </div>
-  <!-- Courses area End -->
-  <!--? top subjects Area Start -->
-  <div class="topic-area">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-xl-7 col-lg-8">
-          <div class="section-tittle text-center mb-55">
-            <h2>Explore top subjects</h2>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="single-topic text-center mb-30">
-            <div class="topic-img">
-              <img th:src="@{/img/gallery/topic1.png}" alt="">
-              <div class="topic-content-box">
-                <div class="topic-content">
-                  <h3><a href="#">Programing</a></h3>
+    <!-- Courses area End -->
+    <!--? top subjects Area Start -->
+    <div class="topic-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-8">
+                    <div class="section-tittle text-center mb-55">
+                        <h2>Explore top subjects</h2>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="single-topic text-center mb-30">
-            <div class="topic-img">
-              <img th:src="@{/img/gallery/topic2.png}" alt="">
-              <div class="topic-content-box">
-                <div class="topic-content">
-                  <h3><a href="#">Programing</a></h3>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic1.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="single-topic text-center mb-30">
-            <div class="topic-img">
-              <img th:src="@{/img/gallery/topic3.png}" alt="">
-              <div class="topic-content-box">
-                <div class="topic-content">
-                  <h3><a href="#">Programing</a></h3>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic2.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="single-topic text-center mb-30">
-            <div class="topic-img">
-              <img th:src="@{/img/gallery/topic4.png}" alt="">
-              <div class="topic-content-box">
-                <div class="topic-content">
-                  <h3><a href="#">Programing</a></h3>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic3.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="single-topic text-center mb-30">
-            <div class="topic-img">
-              <img th:src="@{/img/gallery/topic5.png}" alt="">
-              <div class="topic-content-box">
-                <div class="topic-content">
-                  <h3><a href="#">Programing</a></h3>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic4.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="single-topic text-center mb-30">
-            <div class="topic-img">
-              <img th:src="@{/img/gallery/topic6.png}" alt="">
-              <div class="topic-content-box">
-                <div class="topic-content">
-                  <h3><a href="#">Programing</a></h3>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic5.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="single-topic text-center mb-30">
-            <div class="topic-img">
-              <img th:src="@{/img/gallery/topic7.png}" alt="">
-              <div class="topic-content-box">
-                <div class="topic-content">
-                  <h3><a href="#">Programing</a></h3>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic6.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="single-topic text-center mb-30">
-            <div class="topic-img">
-              <img th:src="@{/img/gallery/topic8.png}" alt="">
-              <div class="topic-content-box">
-                <div class="topic-content">
-                  <h3><a href="#">Programing</a></h3>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic7.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single-topic text-center mb-30">
+                        <div class="topic-img">
+                            <img th:src="@{/img/gallery/topic8.png}" alt="">
+                            <div class="topic-content-box">
+                                <div class="topic-content">
+                                    <h3><a href="#">Programing</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-12">
+                    <div class="section-tittle text-center mt-20">
+                        <a href="listLesson_page.html" class="border-btn">View More Subjects</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-xl-12">
-          <div class="section-tittle text-center mt-20">
-            <a href="listLesson_page.html" class="border-btn">View More Subjects</a>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <!-- top subjects End -->
-  <!-- ? services-area -->
-  <div class="services-area services-area2 section-padding40">
-    <div class="container">
-      <div class="row justify-content-sm-center">
-        <div class="col-lg-4 col-md-6 col-sm-8">
-          <div class="single-services mb-30">
-            <div class="features-icon">
-              <img th:src="@{/img/icon/icon1.svg}" alt="">
+    <!-- top subjects End -->
+    <!-- ? services-area -->
+    <div class="services-area services-area2 section-padding40">
+        <div class="container">
+            <div class="row justify-content-sm-center">
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-services mb-30">
+                        <div class="features-icon">
+                            <img th:src="@{/img/icon/icon1.svg}" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <h3>60+ UX courses</h3>
+                            <p>The automated process all your website tasks.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-services mb-30">
+                        <div class="features-icon">
+                            <img th:src="@{/img/icon/icon2.svg}" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <h3>Expert instructors</h3>
+                            <p>The automated process all your website tasks.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-services mb-30">
+                        <div class="features-icon">
+                            <img th:src="@{/img/icon/icon3.svg}" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <h3>Life time access</h3>
+                            <p>The automated process all your website tasks.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="features-caption">
-              <h3>60+ UX courses</h3>
-              <p>The automated process all your website tasks.</p>
-            </div>
-          </div>
         </div>
-        <div class="col-lg-4 col-md-6 col-sm-8">
-          <div class="single-services mb-30">
-            <div class="features-icon">
-              <img th:src="@{/img/icon/icon2.svg}" alt="">
-            </div>
-            <div class="features-caption">
-              <h3>Expert instructors</h3>
-              <p>The automated process all your website tasks.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-8">
-          <div class="single-services mb-30">
-            <div class="features-icon">
-              <img th:src="@{/img/icon/icon3.svg}" alt="">
-            </div>
-            <div class="features-caption">
-              <h3>Life time access</h3>
-              <p>The automated process all your website tasks.</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 </main>
 <footer th:replace="components/header_footer.html :: user-footer">
 </footer>
 <!-- Scroll Up -->
 <div id="back-top">
-  <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
 
 <div th:replace="components/header_footer.html :: common-script"></div>

@@ -1,9 +1,12 @@
 package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.model.Question;
 import com.fpt.OnlineQuiz.model.QuizHistory;
+import com.fpt.OnlineQuiz.service.QuestionService;
 import com.fpt.OnlineQuiz.service.QuizHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,9 @@ public class PracticeController {
 
     @Autowired
     QuizHistoryService quizHistoryService;
+
+    @Autowired
+    QuestionService questionService;
 
     @GetMapping(value = "")
     public String practicelListPage(Model model) {
@@ -36,8 +42,10 @@ public class PracticeController {
 
         return "practices_list_page";
     }
-    @GetMapping(value = "/list")
-    public String practiceDetailPage(Model model) {
+    @GetMapping(value = "/detail")
+    public String practiceDetailPage(Model model, @Param("id") int id) {
+        List<Question> questions = questionService.getQuestionQHid(id);
+        model.addAttribute("questions", questions);
         return "practices_detail_page";
     }
 

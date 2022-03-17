@@ -76,7 +76,7 @@
 
                             </div>
                             <div class="properties__caption">
-                                <a href="#"><h3><b th:text="${qh.name}"></b></h3></a>
+                                <a th:href="@{/practices/detail(id=${qh.id})}"><h3><b th:text="${qh.name}"></b></h3></a>
                                 <p><b th:text="${qh.quizCount}+' Quizs'"></b></p>
                                 <p style="text-align: center">Created by <a href="#" id="created"th:text="${qh.accountName}"></a></p>
 <!--                                <p style="text-align: center">-->
