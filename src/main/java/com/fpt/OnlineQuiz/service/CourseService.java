@@ -2,6 +2,7 @@ package com.fpt.OnlineQuiz.service;
 
 import com.fpt.OnlineQuiz.dto.CourseAdminDTO;
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
+import com.fpt.OnlineQuiz.dto.CourseRegistrationDTO;
 import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
@@ -32,4 +33,5 @@ public interface CourseService {
 
     boolean isDuplicated(String name, int subjectId);
 
+    void addCourseRegistration(List<CourseRegistrationDTO> list, int accountId);
 }

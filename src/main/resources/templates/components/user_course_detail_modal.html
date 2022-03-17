@@ -12,6 +12,7 @@
                         <h5 class="modal-title">Course Detail</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <input type="hidden" id="courseId" name="courseId"/>
                     <div class="modal-body">
                         <img id="courseImg" alt="">
                         <table class="courseDetailTable" cellspacing="0" cellpadding="0">
@@ -38,6 +39,7 @@
                         </table>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="registrationCourse()">Registration</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>

@@ -9,12 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CourseUserDTO {
+public class CourseRegistrationDTO {
     private int id;
     private String courseName;
-    private String subjectName;
-    private String description;
-    private long lessonTotal;
     private double price;
-    private String imgSrc;
 }

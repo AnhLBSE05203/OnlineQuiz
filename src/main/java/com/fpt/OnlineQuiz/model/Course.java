@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.model;
 
 import com.fpt.OnlineQuiz.dto.CourseAdminDTO;
+import com.fpt.OnlineQuiz.dto.CourseRegistrationDTO;
 import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import com.fpt.OnlineQuiz.utils.Constants;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class Course {
     @Column(name = "description")
     private String description;
     @Column(name = "lessonTotal")
-    private int lessonTotal;
+    private long lessonTotal;
     @Column(name = "price")
     private double price;
     @Column(name = "status")
@@ -89,5 +90,13 @@ public class Course {
         price = courseAdminDTO.getPrice();
         status = courseAdminDTO.getStatus();
         // this doesn't handle Subject fields
+    }
+
+    public CourseRegistrationDTO registrationDTO() {
+        CourseRegistrationDTO courseRegistrationDTO = new CourseRegistrationDTO();
+        courseRegistrationDTO.setId(this.getId());
+        courseRegistrationDTO.setCourseName(this.getName());
+        courseRegistrationDTO.setPrice(this.getPrice());
+        return courseRegistrationDTO;
     }
 }

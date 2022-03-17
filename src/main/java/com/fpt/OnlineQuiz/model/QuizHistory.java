@@ -36,7 +36,7 @@ public class QuizHistory {
     private Long quizCount;
 
     @Formula("(SELECT a.full_name FROM account a WHERE a.account_id = account_id)")
-    private String acountName;
+    private String accountName;
 
     @OneToMany(mappedBy = "quizHistory", cascade = CascadeType.ALL)
     private List<QuizHistoryQuestion> quizHistoryQuestions;

@@ -66,11 +66,10 @@ public class Constants {
     //regex
     public static final String REGEX_EMAIL = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
     public static final String REGEX_PASSWORD = "^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[#?!@$%^&*\\-_]).{8,}$";
+
     //common links
-
-
-    //links
     public static final String LINK_REDIRECT = "redirect:";
+    public static final String LINK_FORWARD = "forward:";
     public static final String LINK_ACCOUNT_CONTROLLER = "/account";
     public static final String LINK_LOGIN = "/login";
     public static final String LINK_ACCOUNT_LOGIN_PROCESS = "/account/login";
@@ -124,6 +123,8 @@ public class Constants {
     public static final String LINK_ADMIN_SUBJECT_RECOVER = "/recover/{id}";
     public static final String LINK_ADMIN_SUBJECT_PROCESS_EDIT = "/edit";
     public static final String LINK_ADMIN_SUBJECT_GET_BY_PAGE = "/getSubjectsByPage";
+    //admin subject controller request param
+    public static final String REQUEST_PARAM_SUBJECT_NAME = "subjectName";
 
     //links admin course
     public static final String LINK_ADMIN_COURSE_CONTROLLER = "/admin/course";
@@ -134,9 +135,22 @@ public class Constants {
     public static final String LINK_ADMIN_COURSE_DELETE = "/delete/{id}";
     public static final String LINK_ADMIN_COURSE_RECOVER = "/recover/{id}";
     public static final String LINK_ADMIN_COURSE_PROCESS_EDIT = "/edit";
+    //admin course controller request param
+    public static final String REQUEST_PARAM_COURSE_NAME = "courseName";
+    public static final String REQUEST_PARAM_SUBJECT_ID = "subjectId";
+    public static final String REQUEST_PARAM_ORIGINAL_SUBJECT_ID = "originalSubjectId";
     //links user subject
     public static final String LINK_USER_SUBJECT_DETAIL = "/detail/{id}";
-
+    //links upload image
+    public static final String LINK_IMAGE_CONTROLLER = "/image";
+    public static final String LINK_IMAGE_CONTROLLER_UPLOAD_IMAGE = "/uploadImage";
+    public static final String LINK_IMAGE_CONTROLLER_UPLOAD_MULTIPART_FILE = "/imageMultipartFile";
+    public static final String LINK_IMAGE_CONTROLLER_UPLOAD_MULTIPART_FILES = "/imageMultipartFiles";
+    //image controller's related request attributes
+    public static final String REQUEST_ATTRIBUTE_RETURN_LINK = "returnLink";
+    public static final String REQUEST_ATTRIBUTE_IMG_ID = "imgId";
+    //image controller's related request param
+    public static final String REQUEST_PARAM_FILE = "file";
     //admin subject page attributes
     public static final String ATTRIBUTE_SUBJECT_ADD_DTO = "subjectAddDTO";
     public static final String ATTRIBUTE_SUBJECT_EDIT_DTO = "subjectEditDTO";
@@ -171,6 +185,8 @@ public class Constants {
     public static final String SQL_PATH_GET_FEATURED_EXPERTS = "/static/sql/getFeaturedExperts.sql";
     public static final String SQL_PATH_FIND_SUBJECT_BY_ID = "/static/sql/findSubjectById.sql";
     public static final String SQL_PATH_GET_IMAGE_BY_ID = "/static/sql/getImageById.sql";
+    public static final String SQL_PATH_GET_ALL_ACCOUNT = "/static/sql/findAllAccount.sql";
+    public static final String SQL_PATH_GET_ALL_ACCOUNT_COUNT = "/static/sql/findAllAccountCount.sql";
     //sql strings
     public static final String SQL_GET_COURSES_BY_ACCOUNT = "select a.courses from Account a where a.id =:id";
     public static final String SQL_GET_ALL_COURSES = "select c from Course c where 1 = 1";

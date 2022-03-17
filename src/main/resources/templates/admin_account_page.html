@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Management</title>
+    <title>Account Management</title>
     <!-- Admin common css -->
     <div th:replace="components/header_footer.html :: admin-common-style">
     </div>
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/admin_account_page.css}" rel="stylesheet"/>
 </head>
 <body class="sb-nav-fixed">
 <!-- Admin header -->
@@ -34,18 +36,12 @@
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
                         List Account
+                        <button id="addBlogButton" type="button" class="btn btn-primary"
+                                onclick="showAccountAddModal()">Add Account
+                        </button>
                     </div>
                     <div class="card-body">
-                        <table id="datatablesSimple">
-                            <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Title</th>
-                                <th>Content</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
+                        <table id="AccountDatatable" style="width:100%;">
                         </table>
                     </div>
                 </div>
@@ -58,6 +54,9 @@
 <!-- Admin common js -->
 <th:block th:insert="components/header_footer.html :: admin-common-script">
 </th:block>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script th:src="@{/js/admin_account_page.js}"></script>
 <!-- -->
 </body>
 </html>

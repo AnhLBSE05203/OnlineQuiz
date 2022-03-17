@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,6 +31,10 @@ public class Subject {
     private String subjectInfo;
     @Column(name = "learnAfter")
     private String learnAfter;
+
+    @Formula("(SELECT COUNT(*) FROM course c WHERE c.subject_id = subject_id)")
+    private Long totalCourse;
+
     @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Course> courses;
 
@@ -58,9 +63,10 @@ public class Subject {
             subjectAdminDTO.setImgSrc(this.getImage().getSrc());
         }
         subjectAdminDTO.setName(this.getName());
-        if (this.getCourses() != null) {
+        /*if (this.getCourses() != null) {
             subjectAdminDTO.setTotalCourse(this.getCourses().size());
-        }
+        }*/
+        subjectAdminDTO.setTotalCourse(this.getTotalCourse());
         String statusStr = Constants.subjectStatusConversion.get(this.getStatus());
         subjectAdminDTO.setStatusStr(statusStr);
         subjectAdminDTO.setStatus(this.getStatus());
