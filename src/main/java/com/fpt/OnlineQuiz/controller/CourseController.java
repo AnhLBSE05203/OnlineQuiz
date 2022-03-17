@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dto.CourseRegistrationDTO;
 import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Course;
@@ -13,9 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,13 +41,64 @@ public class CourseController {
     }
 
     @GetMapping(path = "/registration")
-    public String showRegistrationPage(ModelMap modelMap) {
+    public String registrationCourse(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws IOException {
         //todo?
-//        List<Course> courseList = courseService.getTop3Courses(3);
-//        modelMap.addAttribute("my_course_list", courseList);
+        int courseId = Integer.parseInt(request.getParameter("courseId"));
+        HttpSession session = request.getSession();
+        if (session.getAttribute("cart") == null) {
+            List<CourseRegistrationDTO> cart = new ArrayList<>();
+            CourseRegistrationDTO c = courseService.getById(courseId).registrationDTO();
+            cart.add(c);
+            session.setAttribute("cart", cart);
+            modelMap.addAttribute("list", cart);
+        } else {
+            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>)session.getAttribute("cart");
+            for(int i = 0; i < cart.size(); i++){
+                if(cart.get(i).getId() == courseId){
+                    modelMap.addAttribute("message", "This course is existed!");
+                    break;
+                }else{
+                    CourseRegistrationDTO c = courseService.getById(courseId).registrationDTO();
+                    cart.add(c);
+                }
+            }
+            session.setAttribute("cart", cart);
+            modelMap.addAttribute("list", cart);
+        }
         return "registration_page";
     }
-
+    @GetMapping(path = "/showRegistration")
+    public String showRegistrationPage(ModelMap modelMap, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        if (session.getAttribute("cart") == null) {
+            modelMap.addAttribute("message", "Empty");
+        } else {
+            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>)session.getAttribute("cart");
+//            session.setAttribute("cart", cart);
+            modelMap.addAttribute("list", cart);
+        }
+        return "registration_page";
+    }
+    @GetMapping(path = "/buyCourse")
+    public String buyCourse(ModelMap modelMap, HttpServletRequest request){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Account account = null;
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            account = (Account) authentication.getPrincipal();
+        } else {
+            return "redirect:/home";
+        }
+        HttpSession session = request.getSession();
+        if (session.getAttribute("cart") == null) {
+            modelMap.addAttribute("message", "Empty");
+        } else {
+            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>)session.getAttribute("cart");
+            courseService.addCourseRegistration(cart, account.getId());
+            session.removeAttribute("cart");
+        }
+        modelMap.addAttribute("message", "Buy Successful");
+        return "registration_page";
+    }
 
     @GetMapping(path = "/loadMoreCourse")
     public @ResponseBody
@@ -55,8 +108,12 @@ public class CourseController {
         int start = Integer.parseInt(startStr);
         //todo - fix hardcode accountId
         //Account account = ...
-        int accountId = 3; //...
-        List<Course> courses = courseService.getNext3Courses(accountId, start);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Account account = null;
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            account = (Account) authentication.getPrincipal();
+        }
+        List<Course> courses = courseService.getNext3Courses(account.getId(), start);
         if (courses.size() != 0) {
             for (Course c : courses) {
                 out.println("<div class=\"col-lg-4 course\">\n" +

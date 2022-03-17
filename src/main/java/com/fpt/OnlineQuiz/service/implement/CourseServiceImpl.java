@@ -3,6 +3,7 @@ package com.fpt.OnlineQuiz.service.implement;
 import com.fpt.OnlineQuiz.dao.CourseRepository;
 import com.fpt.OnlineQuiz.dto.CourseAdminDTO;
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
+import com.fpt.OnlineQuiz.dto.CourseRegistrationDTO;
 import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
@@ -105,4 +106,8 @@ public class CourseServiceImpl implements CourseService {
         return count > 0 ? true : false;
     }
 
+    @Override
+    public void addCourseRegistration(List<CourseRegistrationDTO> list, int accountId) {
+        courseRepository.addRegistrationCourse(list, accountId);
+    }
 }

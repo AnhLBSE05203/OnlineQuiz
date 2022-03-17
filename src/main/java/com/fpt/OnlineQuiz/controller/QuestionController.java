@@ -94,6 +94,7 @@ public class QuestionController {
         questionService.addQuestion(q);
         answerService.addAnswers(answers);
         modelMap.addAttribute("message", "Add successful!");
+        modelMap.addAttribute("lessonId", lessonId);
         return "create_question_page";
     }
 
@@ -156,21 +157,22 @@ public class QuestionController {
         modelMap.addAttribute("message", "Edit successful!");
         List<Question> questionList = questionService.getQuestionByLessonId(lesson.getId());
         modelMap.addAttribute("question_list", questionList);
+        modelMap.addAttribute("lessonId", lessonId);
         return "admin_list_question_page";
     }
 
-    @GetMapping(path = "/list")
-    String showQuestionListPage(ModelMap model) {
+    @GetMapping(path = "/list/{id}")
+    String showQuestionListPage(ModelMap model, @PathVariable String id) {
         //todo - fix hardcode subjectId
-        List<Question> questionList = questionService.getQuestionByLessonId(1);
+        List<Question> questionList = questionService.getQuestionByLessonId(Integer.parseInt(id));
         model.addAttribute("question_list", questionList);
         return "admin_list_question_page";
     }
 
-    @PostMapping(value = "/getQuestionsByPage", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/getQuestionsByPage/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Page<QuestionAdminDTO> getQuestionsByPage(@RequestBody PagingRequest pagingRequest) {
-        Page<QuestionAdminDTO> listQuestionDTO = questionService.getByPagingRequest(pagingRequest);
+    public Page<QuestionAdminDTO> getQuestionsByPage(@RequestBody PagingRequest pagingRequest, @PathVariable String id) {
+        Page<QuestionAdminDTO> listQuestionDTO = questionService.getByPagingRequest(pagingRequest, Integer.parseInt(id));
         return listQuestionDTO;
     }
 

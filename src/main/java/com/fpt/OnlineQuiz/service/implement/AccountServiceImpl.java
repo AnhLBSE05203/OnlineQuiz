@@ -8,13 +8,16 @@ import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Token;
 import com.fpt.OnlineQuiz.service.AccountService;
+import com.fpt.OnlineQuiz.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -92,7 +95,19 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Page<AccountAdminDTO> listAccountAdmin(PagingRequest pagingRequest) {
-        return null;
+        List<Account> listAccount = accountRepository.getAllAccountAdmin(pagingRequest);
+        long count = accountRepository.getAllAccountAdminCountTotalRecord(pagingRequest);
+        List<AccountAdminDTO> listAccountAdminDTO = new ArrayList<>();
+        for(Account account: listAccount) {
+            AccountAdminDTO accountAdminDTO = new AccountAdminDTO();
+            Utils.copyNonNullProperties(account, accountAdminDTO);
+            listAccountAdminDTO.add(accountAdminDTO);
+        }
+        Page<AccountAdminDTO> page = new Page<>(listAccountAdminDTO);
+        page.setRecordsFiltered((int) count);
+        page.setRecordsTotal((int) count);
+        page.setDraw(pagingRequest.getDraw());
+        return page;
     }
 
     @Override

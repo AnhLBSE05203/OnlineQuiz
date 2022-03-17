@@ -171,6 +171,8 @@ public class Constants {
     public static final String SQL_PATH_GET_FEATURED_EXPERTS = "/static/sql/getFeaturedExperts.sql";
     public static final String SQL_PATH_FIND_SUBJECT_BY_ID = "/static/sql/findSubjectById.sql";
     public static final String SQL_PATH_GET_IMAGE_BY_ID = "/static/sql/getImageById.sql";
+    public static final String SQL_PATH_GET_ALL_ACCOUNT = "/static/sql/findAllAccount.sql";
+    public static final String SQL_PATH_GET_ALL_ACCOUNT_COUNT = "/static/sql/findAllAccountCount.sql";
     //sql strings
     public static final String SQL_GET_COURSES_BY_ACCOUNT = "select a.courses from Account a where a.id =:id";
     public static final String SQL_GET_ALL_COURSES = "select c from Course c where 1 = 1";

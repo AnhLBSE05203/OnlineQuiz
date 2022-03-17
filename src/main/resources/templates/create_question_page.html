@@ -190,7 +190,8 @@
         })
     }
     function returnToList(){
-        window.location.replace("/question/list");
+        let lessonId = document.getElementById('lessonId').value;
+        window.location.replace("/question/list/" + lessonId);
     }
 </script>
 </body>
