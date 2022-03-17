@@ -20,11 +20,10 @@ $(document).ready(function() {
         			}, {
         				title : 'Total Courses',
         				data : 'totalCourse',
-        				orderable: false
         			}, {
                         title : 'Subject Info',
                         data : 'subjectInfo',
-                        width: "20%",
+                        width: "30%",
                         render: function(data, type, row, meta) {
                                     var html = "";
                                     if(data != "" && data != null){
@@ -36,7 +35,7 @@ $(document).ready(function() {
                     }, {
                         title : 'Learn After',
                         data : 'learnAfter',
-                        width: "20%",
+                        width: "30%",
                         render: function(data, type, row, meta) {
                                     var html = "";
                                     if(data != "" && data != null){

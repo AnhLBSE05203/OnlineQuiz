@@ -29,7 +29,7 @@ public class Course {
     @Column(name = "description")
     private String description;
     @Column(name = "lessonTotal")
-    private int lessonTotal;
+    private long lessonTotal;
     @Column(name = "price")
     private double price;
     @Column(name = "status")
@@ -91,7 +91,8 @@ public class Course {
         status = courseAdminDTO.getStatus();
         // this doesn't handle Subject fields
     }
-    public CourseRegistrationDTO registrationDTO(){
+
+    public CourseRegistrationDTO registrationDTO() {
         CourseRegistrationDTO courseRegistrationDTO = new CourseRegistrationDTO();
         courseRegistrationDTO.setId(this.getId());
         courseRegistrationDTO.setCourseName(this.getName());

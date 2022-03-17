@@ -14,7 +14,7 @@ public class CourseUserDTO {
     private String courseName;
     private String subjectName;
     private String description;
-    private int lessonTotal;
+    private long lessonTotal;
     private double price;
     private String imgSrc;
 }

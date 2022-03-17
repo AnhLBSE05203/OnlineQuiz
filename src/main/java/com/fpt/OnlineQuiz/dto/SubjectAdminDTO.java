@@ -13,7 +13,7 @@ public class SubjectAdminDTO {
     private int id;
     private String imgSrc;
     private String name;
-    private int totalCourse;
+    private long totalCourse;
     private String statusStr;
     private int status;
     private String subjectInfo;
