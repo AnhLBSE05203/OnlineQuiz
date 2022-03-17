@@ -212,7 +212,6 @@ function showCourseSection(subjectId) {
             			}, {
             				title : 'Total Lessons',
             				data : 'lessonTotal',
-            				orderable: false
             			}, {
                             title : 'Description',
                             data : 'description',
