@@ -21,7 +21,7 @@ public class PracticeController {
     QuizHistoryService quizHistoryService;
 
     @GetMapping(value = "")
-    public String subjectPage(Model model) {
+    public String practicelListPage(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Account account = (Account) authentication.getPrincipal();
        /*Get all QuizHistory(1 quizHistory contain multiple questions) existed in user account.
@@ -35,6 +35,10 @@ public class PracticeController {
 //        model.addAttribute("account", account);
 
         return "practices_list_page";
+    }
+    @GetMapping(value = "/list")
+    public String practiceDetailPage(Model model) {
+        return "practices_detail_page";
     }
 
 }

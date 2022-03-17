@@ -58,71 +58,100 @@
     </div>
   </section>
   <!-- Courses area start -->
-  <div class="courses-area section-padding40 fix">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-xl-7 col-lg-8">
-          <div class="section-tittle text-center mb-55">
-            <h2>Practice List</h2>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4" th:each="qh : ${quizHistory}">
-          <div class="properties properties2 mb-30">
-            <div class="properties__card">
-              <div class="date22">
-                <p><i th:text="${qh.createdTime.toLocaleString()}"></i></p>
-
-              </div>
-              <div class="properties__caption">
-                <a href="#"><h3><b th:text="${qh.name}"></b></h3></a>
-                <p><b th:text="${qh.quizCount}+' Quizs'"></b></p>
-                <p style="text-align: center">Created by <a href="#" id="created"th:text="${qh.accountName}"></a></p>
-                <!--                                <p style="text-align: center">-->
-                <!--                                    <a href="#" class="border-btn">Details</a>-->
-                <!--                                </p>-->
-              </div>
+    <div class="container py-5">
+        <div class="row text-center text-white mb-5">
+            <div class="col-lg-7 mx-auto">
+                <h1 class="display-4">Product List</h1>
             </div>
-          </div>
         </div>
-
-        <!-- list lesson -->
-        <!--                <div class="col-lg-4">-->
-        <!--                    <div class="properties properties2 mb-30">-->
-        <!--                        <div class="properties__card">-->
-        <!--                            <div class="properties__img overlay1">-->
-        <!--                                <a href="#"><img th:src="@{/img/gallery/featured1.png}" alt=""></a>-->
-        <!--                            </div>-->
-        <!--                            <div class="properties__caption">-->
-        <!--                                <p>User Experience</p>-->
-        <!--                                &lt;!&ndash;                                <h3><a href="#" th:text="${subject.get.name}"></a></h3>&ndash;&gt;-->
-        <!--                                <p>The automated process all your website tasks. Discover tools and techniques to engage-->
-        <!--                                    effectively with vulnerable children and young people.-->
-        <!--                                </p>-->
-        <!--                                <div class="properties__footer d-flex justify-content-between align-items-center">-->
-        <!--                                    <div class="restaurant-name">-->
-        <!--                                        <div class="rating">-->
-        <!--                                            <i class="fas fa-star"></i>-->
-        <!--                                            <i class="fas fa-star"></i>-->
-        <!--                                            <i class="fas fa-star"></i>-->
-        <!--                                            <i class="fas fa-star"></i>-->
-        <!--                                            <i class="fas fa-star-half"></i>-->
-        <!--                                        </div>-->
-        <!--                                        <p><span>(4.5)</span> based on 120</p>-->
-        <!--                                    </div>-->
-        <!--                                    <div class="price">-->
-        <!--                                        <span>$135</span>-->
-        <!--                                    </div>-->
-        <!--                                </div>-->
-        <!--                                <a href="#" class="border-btn border-btn2">Find out more</a>-->
-        <!--                            </div>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-      </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- List group-->
+                <ul class="list-group shadow">
+                    <!-- list group item-->
+                    <li class="list-group-item">
+                        <!-- Custom content-->
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <h5 class="mt-0 font-weight-bold mb-2">Apple iPhone XR (Red, 128 GB)</h5>
+                                <p class="font-italic text-muted mb-0 small">128 GB ROM | 15.49 cm (6.1 inch) Display 12MP Rear Camera | 7MP Front Camera A12 Bionic Chip Processor</p>
+                                <div class="d-flex align-items-center justify-content-between mt-1">
+                                    <h6 class="font-weight-bold my-2">₹64,999</h6>
+                                    <ul class="list-inline small">
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
+                                    </ul>
+                                </div>
+                            </div><img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                        </div> <!-- End -->
+                    </li> <!-- End -->
+                    <!-- list group item-->
+                    <li class="list-group-item">
+                        <!-- Custom content-->
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <h5 class="mt-0 font-weight-bold mb-2">Apple iPhone XS (Silver, 64 GB)</h5>
+                                <p class="font-italic text-muted mb-0 small">64 GB ROM | 14.73 cm (5.8 inch) Super Retina HD Display 12MP + 12MP | 7MP Front Camera A12 Bionic Chip Processor</p>
+                                <div class="d-flex align-items-center justify-content-between mt-1">
+                                    <h6 class="font-weight-bold my-2">₹99,900</h6>
+                                    <ul class="list-inline small">
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                    </ul>
+                                </div>
+                            </div><img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                        </div> <!-- End -->
+                    </li> <!-- End -->
+                    <!-- list group item -->
+                    <li class="list-group-item">
+                        <!-- Custom content-->
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <h5 class="mt-0 font-weight-bold mb-2">Apple iPhone XS Max (Gold, 64 GB)</h5>
+                                <p class="font-italic text-muted mb-0 small">64 GB ROM | 16.51 cm (6.5 inch) Super Retina HD Display 12MP + 12MP | 7MP Front Camera A12 Bionic Chip Processor</p>
+                                <div class="d-flex align-items-center justify-content-between mt-1">
+                                    <h6 class="font-weight-bold my-2">₹1,09,900</h6>
+                                    <ul class="list-inline small">
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
+                                    </ul>
+                                </div>
+                            </div><img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                        </div> <!-- End -->
+                    </li> <!-- End -->
+                    <!-- list group item -->
+                    <li class="list-group-item">
+                        <!-- Custom content-->
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <h5 class="mt-0 font-weight-bold mb-2">OnePlus 7 Pro (Almond, 256 GB)</h5>
+                                <p class="font-italic text-muted mb-0 small">Rear Camera|48MP (Primary)+ 8MP (Tele-photo)+16MP (ultrawide)| Front Camera|16 MP POP-UP Camera|8GB RAM|Android pie</p>
+                                <div class="d-flex align-items-center justify-content-between mt-1">
+                                    <h6 class="font-weight-bold my-2">₹ 52,999</h6>
+                                    <ul class="list-inline small">
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                    </ul>
+                                </div>
+                            </div><img src="https://i.imgur.com/6IUbEME.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                        </div> <!-- End -->
+                    </li> <!-- End -->
+                </ul> <!-- End -->
+            </div>
+        </div>
     </div>
-  </div>
   <!-- Courses area End -->
   <!--? top subjects Area Start -->
   <div class="topic-area">
