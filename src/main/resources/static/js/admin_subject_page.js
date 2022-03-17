@@ -18,11 +18,6 @@ $(document).ready(function() {
         				title : 'Name',
         				data : 'name'
         			}, {
-        				title : 'ImgSrc',
-        				data : 'imgSrc',
-        				width: "10%",
-        				orderable: false
-        			}, {
         				title : 'Total Courses',
         				data : 'totalCourse',
         				orderable: false
@@ -53,7 +48,7 @@ $(document).ready(function() {
                     }, {
         				title : 'Status',
         				data : 'statusStr',
-        				orderable: false
+        				orderable: false,
         			}, {
         				title : 'Img',
         				data : 'imgSrc',
@@ -144,7 +139,7 @@ function submitAddSubject(e) {
         type:"get",
         contentType: "application/json; charset=utf-8",
         data:{
-            name : subjectName
+            "subjectName" : subjectName
         },
         dataType: "json",
         success: function (data){
@@ -169,7 +164,7 @@ function submitEditSubject(e) {
         type:"get",
         contentType: "application/json; charset=utf-8",
         data:{
-            name : subjectName
+            "subjectName" : subjectName
         },
         dataType: "json",
         success: function (data){

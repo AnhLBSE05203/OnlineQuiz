@@ -6,6 +6,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.fpt.OnlineQuiz.model.Image;
 import com.fpt.OnlineQuiz.service.ImageService;
 import com.fpt.OnlineQuiz.service.UploadImageService;
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
-@RequestMapping("/image")
+@RequestMapping(Constants.LINK_IMAGE_CONTROLLER)
 public class UploadImageController {
 
     @Autowired
@@ -38,16 +39,18 @@ public class UploadImageController {
     /**
      * Upload file (image) to AWS & update image source into DB after processing add/edit on other controller
      * Then redirect User to provided return link after uploading file
+     * request attributes needed 'returnLink' & 'imgId'
      *
-     * @param file file chosen to be uploaded
+     * @param file    file chosen to be uploaded
+     * @param request HttpServletRequest
      * @return
      * @throws IOException
      */
-    @PostMapping("/uploadImage")
-    public String uploadMultipartFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
+    @PostMapping(Constants.LINK_IMAGE_CONTROLLER_UPLOAD_IMAGE)
+    public String uploadMultipartFile(@RequestParam(Constants.REQUEST_PARAM_FILE) MultipartFile file, HttpServletRequest request) throws IOException {
 
-        String returnLink = (String) request.getAttribute("returnLink");
-        int imgId = (int) request.getAttribute("imgId");
+        String returnLink = (String) request.getAttribute(Constants.REQUEST_ATTRIBUTE_RETURN_LINK);
+        int imgId = (int) request.getAttribute(Constants.REQUEST_ATTRIBUTE_IMG_ID);
         List<String> listImage = new ArrayList<>();
         if (file != null && !file.isEmpty()) {
             // upload image
@@ -62,8 +65,8 @@ public class UploadImageController {
         return returnLink;
     }
 
-    @PostMapping("/imageMultipartFile")
-    public Map<String, String> uploadMultipartFile(@RequestParam("file") MultipartFile[] file) throws IOException {
+    @PostMapping(Constants.LINK_IMAGE_CONTROLLER_UPLOAD_MULTIPART_FILE)
+    public Map<String, String> uploadMultipartFile(@RequestParam(Constants.REQUEST_PARAM_FILE) MultipartFile[] file) throws IOException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         Map<String, String> values = new HashMap<String, String>();
         String date = simpleDateFormat.format(new Date());
@@ -91,8 +94,8 @@ public class UploadImageController {
         return values;
     }
 
-    @PostMapping("/imageMultipartFiles")
-    public ResponseEntity<?> uploadMultipartFiles(@RequestParam("file") MultipartFile[] file) throws IOException {
+    @PostMapping(Constants.LINK_IMAGE_CONTROLLER_UPLOAD_MULTIPART_FILES)
+    public ResponseEntity<?> uploadMultipartFiles(@RequestParam(Constants.REQUEST_PARAM_FILE) MultipartFile[] file) throws IOException {
         List<String> listImage = new ArrayList<>();
         if (file != null && file.length != 0) {
             listImage = this.uploadImageService.saveFileToS3(file);

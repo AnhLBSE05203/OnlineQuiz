@@ -43,8 +43,8 @@ function submitAddCourse(e) {
         type:"get",
         contentType: "application/json; charset=utf-8",
         data:{
-            name : courseName,
-            subjectId : subjectId,
+            "courseName" : courseName,
+            "subjectId" : subjectId,
         },
         dataType: "json",
         success: function (data){
@@ -71,8 +71,8 @@ function submitEditCourse(e) {
         type:"get",
         contentType: "application/json; charset=utf-8",
         data:{
-            name : courseName,
-            subjectId : subjectId,
+            "courseName" : courseName,
+            "subjectId" : subjectId,
         },
         dataType: "json",
         success: function (data){

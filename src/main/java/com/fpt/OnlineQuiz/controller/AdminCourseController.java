@@ -28,7 +28,7 @@ public class AdminCourseController {
         Course course = courseService.getById(courseAdminDTO.getId());
         course.setFromCourseAdminDTO(courseAdminDTO);
         //get original subject id
-        int originalSubjectId = Integer.parseInt(request.getParameter("originalSubjectId"));
+        int originalSubjectId = Integer.parseInt(request.getParameter(Constants.REQUEST_PARAM_ORIGINAL_SUBJECT_ID));
         if (originalSubjectId != courseAdminDTO.getSubjectId()) {
             //get original subject
             Subject subjectOld = subjectService.getSubjectById(originalSubjectId);
@@ -90,8 +90,8 @@ public class AdminCourseController {
     @GetMapping(value = Constants.LINK_ADMIN_COURSE_GET_DUPLICATE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public boolean isDuplicated(HttpServletRequest request) {
-        String name = request.getParameter("name");
-        int subjectId = Integer.parseInt(request.getParameter("subjectId"));
+        String name = request.getParameter(Constants.REQUEST_PARAM_COURSE_NAME);
+        int subjectId = Integer.parseInt(request.getParameter(Constants.REQUEST_PARAM_SUBJECT_ID));
         boolean isDuplicated = courseService.isDuplicated(name, subjectId);
         System.out.println(isDuplicated);
         return isDuplicated;

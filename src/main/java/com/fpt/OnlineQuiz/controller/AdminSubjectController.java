@@ -53,7 +53,7 @@ public class AdminSubjectController {
 
     @PostMapping(Constants.LINK_ADMIN_SUBJECT_PROCESS_EDIT)
     public String editSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_EDIT_DTO) SubjectAdminDTO subjectAdminDTO,
-                              @RequestParam("file") MultipartFile file, HttpServletRequest request) {
+                              @RequestParam(Constants.REQUEST_PARAM_FILE) MultipartFile file, HttpServletRequest request) {
         Subject subject = subjectService.getSubjectById(subjectAdminDTO.getId());
         subject.setFromSubjectAdminDTO(subjectAdminDTO);
         if (file != null & !file.isEmpty()) {
@@ -66,9 +66,9 @@ public class AdminSubjectController {
             imageService.addImage(image);
             subject.setImage(image);
             subjectService.updateSubject(subject);
-            request.setAttribute("imgId", image.getId());
-            request.setAttribute("returnLink", Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER);
-            return "forward:/image/uploadImage";
+            request.setAttribute(Constants.REQUEST_ATTRIBUTE_IMG_ID, image.getId());
+            request.setAttribute(Constants.REQUEST_ATTRIBUTE_RETURN_LINK, Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER);
+            return Constants.LINK_FORWARD + Constants.LINK_IMAGE_CONTROLLER + Constants.LINK_IMAGE_CONTROLLER_UPLOAD_IMAGE;
         }
         subjectService.updateSubject(subject);
         return Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER;
@@ -76,7 +76,7 @@ public class AdminSubjectController {
 
     @PostMapping(Constants.LINK_ADMIN_SUBJECT_ADD)
     public String addSubject(@ModelAttribute(Constants.ATTRIBUTE_SUBJECT_ADD_DTO) SubjectAdminDTO subjectAdminDTO,
-                             @RequestParam("file") MultipartFile file, HttpServletRequest request) {
+                             @RequestParam(Constants.REQUEST_PARAM_FILE) MultipartFile file, HttpServletRequest request) {
         //todo - add image upload
         Subject subject = new Subject();
         subject.setFromSubjectAdminDTO(subjectAdminDTO);
@@ -103,9 +103,9 @@ public class AdminSubjectController {
         }
         subject.setImage(image);
         subjectService.addSubject(subject);
-        request.setAttribute("imgId", image.getId());
-        request.setAttribute("returnLink", Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER);
-        return "forward:/image/uploadImage";
+        request.setAttribute(Constants.REQUEST_ATTRIBUTE_IMG_ID, image.getId());
+        request.setAttribute(Constants.REQUEST_ATTRIBUTE_RETURN_LINK, Constants.LINK_REDIRECT + Constants.LINK_ADMIN_SUBJECT_CONTROLLER);
+        return Constants.LINK_FORWARD + Constants.LINK_IMAGE_CONTROLLER + Constants.LINK_IMAGE_CONTROLLER_UPLOAD_IMAGE;
     }
 
     @PostMapping(value = Constants.LINK_ADMIN_SUBJECT_GET_BY_PAGE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -126,7 +126,7 @@ public class AdminSubjectController {
     @ResponseBody
     public boolean isDuplicated(HttpServletRequest request) {
         boolean isDuplicated = false;
-        String name = request.getParameter("name");
+        String name = request.getParameter(Constants.REQUEST_PARAM_SUBJECT_NAME);
         Subject subject = subjectService.getSubjectByNameLower(name);
         if (subject != null) {
             isDuplicated = true;
