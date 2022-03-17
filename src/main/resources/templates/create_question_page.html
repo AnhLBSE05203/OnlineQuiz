@@ -71,7 +71,7 @@
                                                 <input type="hidden" name="lessonId" th:value="${lessonId}" id="lessonId">
                                                 <label class="form-label" for="answer1"><strong>Answer1</strong></label>
                                                 <input class="form-control" style="width: 830px" type="text" id="answer1" placeholder="Answer" name="answer1" required>
-                                                <input type="radio" value="1" name="isAnswer" selected>Is Answer</br>
+                                                <input type="radio" value="1" name="isAnswer" th:checked="true">Is Answer</br>
 
                                                 <label class="form-label" for="answer2"><strong>Answer2</strong></label>
                                                 <input class="form-control" style="width: 830px" type="text" id="answer2" placeholder="Answer" name="answer2" required>
