@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Courses | Education</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+  <div th:replace="components/header_footer.html :: common-style"></div>
+  <link rel="stylesheet" th:href="@{/css/practice_list.css}">
+  <link rel="stylesheet" th:href="@{/css/practice_detail.css}">
+  <link rel="stylesheet" th:href="@{/css/user_course_detail_modal.css}">
+  <link rel="stylesheet" th:href="@{/css/home_page.css}">
+  <link rel="stylesheet" th:href="@{/css/quizHistory_page.css}">
+
+
+</head>
+
+<body>
+<!-- ? Preloader Start -->
+<div id="preloader-active">
+  <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="preloader-inner position-relative">
+      <div class="preloader-circle"></div>
+      <div class="preloader-img pere-text">
+        <img th:src="@{/img/logo/loder.png}" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Preloader Start -->
+<!-- Header Start -->
+<div class="header-area header-transparent" th:replace="components/header_footer.html :: user-header">
+</div>
+<!-- Header End -->
+<main>
+  <!--? slider Area Start-->
+  <section class="slider-area slider-area2">
+    <div class="slider-active">
+      <!-- Single Slider -->
+      <div class="single-slider slider-height2">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-8 col-lg-11 col-md-12">
+              <div class="hero__caption hero__caption2">
+                <!--                                <h1 data-animation="bounceIn" data-delay="0.2s"-->
+                <!--                                    th:text="${subject.get().getName()}"></h1>-->
+                <!-- breadcrumb Start-->
+                <nav class="header-area header-transparent"
+                     th:replace="components/header_footer.html :: nav-page">
+                </nav>
+                <!-- breadcrumb End -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+  <div class="container">
+    <div class="mt-5">
+      <div class="d-style btn btn-brc-tp border-2 bgc-white btn-outline-purple btn-h-outline-purple btn-a-outline-purple w-100 my-2 py-3 shadow-sm">
+        <!-- Premium Plan -->
+        <div class="row align-items-center">
+          <div class="col-12 col-md-4">
+            <h4 class="pt-3 text-170 text-600 text-purple-d1 letter-spacing">
+              New Quiz Package
+            </h4>
+          </div>
+
+          <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+            <li>
+              <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+              <span>
+                <span class="text-110">Create Package that contain quiz</span>
+              </span>
+            </li>
+          </ul>
+
+          <div class="col-12 col-md-4 text-center">
+            <a href="#" class="f-n-hover btn btn-warning btn-raised px-4 py-25 w-75 text-600">Create
+            </a>
+          </div>
+        </div>
+
+      </div>
+      <div class="d-style bgc-white btn btn-brc-tp btn-outline-green btn-h-outline-green btn-a-outline-green w-100 my-2 py-3 shadow-sm border-2">
+        <!-- Pro Plan -->
+        <div class="row align-items-center">
+          <div class="col-12 col-md-4">
+            <h4 class="pt-3 text-170 text-600 text-green-d1 letter-spacing">
+              Quiz History
+            </h4>
+          </div>
+
+          <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+            <li>
+              <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+              <span>
+                <span class="text-110">See all your practices history here</span>
+              </span>
+            </li>
+
+            <li class="mt-25">
+              <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+              <span class="text-110">
+                Display all the history
+            </span>
+            </li>
+
+          </ul>
+
+          <div class="col-12 col-md-4 text-center">
+            <a href="#" class="f-n-hover btn btn-success btn-raised px-4 py-25 w-75 text-600">History</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <!-- Courses area start -->
+  <div class="courses-area section-padding40 fix">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-8">
+          <div class="section-tittle text-center mb-55">
+            <h2>Practice List</h2>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid"> <a class="navbar-brand" href="#">JobLabs</a> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav topnav ms-auto">
+                <li class="nav-item"> <a class="nav-link active" href="#">All<span>categoryegories</span></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="#">Creative</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="#">Programming</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="#">Corporate</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="#">Finance</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="#">Medical</a> </li>
+                <li class="nav-item"> <a class="nav-link" href="#">Marketing</a> </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="category mb-30">
+              <div class="job"> <span class="colors1 mb-4">Creative &amp; Art</span>
+                <h5><a href="#">User Experience Designer Employee</a></h5>
+                <ul class="place">
+                  <li>
+                    <p><i class="fas fa-map-marker-alt pe-2"></i> New York, USA</p>
+                  </li>
+                  <li>
+                    <p class="ps-5"><i class="fas fa-map-marker-alt pe-2"></i>Full Time</p>
+                  </li>
+                </ul>
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="left">
+                    <p>Globe Solution Ltd.</p>
+                  </div> <span class="time">2h ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="category mb-30">
+              <div class="job"> <span class="colors2 mb-4">Finance &amp; Accounting</span>
+                <h5><a href="#">Foreign Language Research Analyst</a></h5>
+                <ul class="place">
+                  <li>
+                    <p><i class="fas fa-map-marker-alt pe-2"></i> New York, USA</p>
+                  </li>
+                  <li>
+                    <p class="ps-5"><i class="fas fa-map-marker-alt pe-2"></i>Full Time</p>
+                  </li>
+                </ul>
+                <div class="pricing d-flex justify-content-between align-items-center">
+                  <div class="left">
+                    <p>Globe Solution Ltd.</p>
+                  </div> <span class="time">2h ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="category mb-30">
+              <div class="job"> <span class="colors3 mb-4">Medical</span>
+                <h5><a href="#">Medical Assistant, East Valley Primary Care</a></h5>
+                <ul class="place">
+                  <li>
+                    <p><i class="fas fa-map-marker-alt pe-2"></i> New York, USA</p>
+                  </li>
+                  <li>
+                    <p class="ps-5"><i class="fas fa-map-marker-alt pe-2"></i>Full Time</p>
+                  </li>
+                </ul>
+                <div class="pricing d-flex justify-content-between align-items-center">
+                  <div class="left">
+                    <p>Globe Solution Ltd.</p>
+                  </div> <span class="time">2h ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="category mb-30">
+              <div class="job"> <span class="colors4 mb-4">Corporate</span>
+                <h5><a href="#">Foreign Language Research Analyst</a></h5>
+                <ul class="place">
+                  <li>
+                    <p><i class="fas fa-map-marker-alt pe-2"></i> New York, USA</p>
+                  </li>
+                  <li>
+                    <p class="ps-5"><i class="fas fa-map-marker-alt pe-2"></i>Full Time</p>
+                  </li>
+                </ul>
+                <div class="pricing d-flex justify-content-between align-items-center">
+                  <div class="left">
+                    <p>Globe Solution Ltd.</p>
+                  </div> <span class="time">2h ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="category mb-30">
+              <div class="job"> <span class="colors5 mb-4">Marketing</span>
+                <h5><a href="#">User Experience Designer Employee</a></h5>
+                <ul class="place">
+                  <li>
+                    <p><i class="fas fa-map-marker-alt pe-2"></i> New York, USA</p>
+                  </li>
+                  <li>
+                    <p class="ps-5"><i class="fas fa-map-marker-alt pe-2"></i>Full Time</p>
+                  </li>
+                </ul>
+                <div class="pricing d-flex justify-content-between align-items-center">
+                  <div class="left">
+                    <p>Globe Solution Ltd.</p>
+                  </div> <span class="time">2h ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="category mb-30">
+              <div class="job"> <span class="colors2 mb-4">Programming &amp; IT</span>
+                <h5><a href="#">Medical Assistant, East Valley Primary Care</a></h5>
+                <ul class="place">
+                  <li>
+                    <p><i class="fas fa-map-marker-alt pe-2"></i> New York, USA</p>
+                  </li>
+                  <li>
+                    <p class="ps-5"><i class="fas fa-map-marker-alt pe-2"></i>Full Time</p>
+                  </li>
+                </ul>
+                <div class="pricing d-flex justify-content-between align-items-center">
+                  <div class="left">
+                    <p>Globe Solution Ltd.</p>
+                  </div> <span class="time">2h ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 d-flex align-items-center justify-content-center">
+            <div class="btn btn-primary mb-30"> <span>Find More</span> <span class="fas fa-arrow-right"></span> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Courses area End -->
+  <!-- Courses area start -->
+  <div th:replace="components/header_footer.html :: featured-page">
+  </div>
+  <div th:replace="components/user_course_detail_modal.html :: courseUserModal">
+  </div>
+  <!-- Courses area End -->
+  <!-- ? services-area -->
+  <div class="services-area services-area2 section-padding40">
+    <div class="container">
+      <div class="row justify-content-sm-center">
+        <div class="col-lg-4 col-md-6 col-sm-8">
+          <div class="single-services mb-30">
+            <div class="features-icon">
+              <img th:src="@{/img/icon/icon1.svg}" alt="">
+            </div>
+            <div class="features-caption">
+              <h3>60+ UX courses</h3>
+              <p>The automated process all your website tasks.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-8">
+          <div class="single-services mb-30">
+            <div class="features-icon">
+              <img th:src="@{/img/icon/icon2.svg}" alt="">
+            </div>
+            <div class="features-caption">
+              <h3>Expert instructors</h3>
+              <p>The automated process all your website tasks.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-8">
+          <div class="single-services mb-30">
+            <div class="features-icon">
+              <img th:src="@{/img/icon/icon3.svg}" alt="">
+            </div>
+            <div class="features-caption">
+              <h3>Life time access</h3>
+              <p>The automated process all your website tasks.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer th:replace="components/header_footer.html :: user-footer">
+</footer>
+<!-- Scroll Up -->
+<div th:insert="components/header_footer.html :: scroll-up">
+</div>
+
+<!-- JS here -->
+<th:block th:insert="components/header_footer.html :: common-script">
+</th:block>
+<!-- page-specific js -->
+<script th:src="@{/js/home_page.js}"></script>
+<script th:src="@{/js/user_course_detail.js}"></script>
+<div th:replace="components/header_footer.html :: common-script"></div>
+</body>
+</html>

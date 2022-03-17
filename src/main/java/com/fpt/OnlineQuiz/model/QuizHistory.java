@@ -27,10 +27,15 @@ public class QuizHistory {
 
     @Column(name = "createdTime")
     private Date createdTime;
+    @Column(name = "historyTime")
+    private Date historyTime;
     @ManyToOne
     @JoinColumn(name = "accountId")
     private Account account;
 
+    @ManyToOne
+    @JoinColumn(name = "historyAccountId")
+    private Account accountHistory;
     //() at the first and the end query is important
     @Formula("(SELECT COUNT(*) FROM question q WHERE q.quiz_history_id = quiz_history_id)")
     private Long quizCount;
