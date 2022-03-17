@@ -72,7 +72,7 @@ $(document).ready(function() {
                         render: function(data, type, row, meta) {
                             // edit modal button
                             var html = '<button type="button" class="btn btn-primary subject-action-button" onclick="showSubjectEditModal('+ row['id'] + ')">'
-                            + 'Edit</button>';
+                            + 'View/Edit</button>';
                             // show courses datatable by subject
                                 html += '<button type="button" class="btn btn-primary subject-action-button" onclick="showCourseSection('+ row['id'] + ')">'
                                                                     + 'View Courses</button>';
@@ -245,7 +245,7 @@ function showCourseSection(subjectId) {
                             render: function(data, type, row, meta) {
                                 // edit modal button
                                 var html = '<button type="button" class="btn btn-primary subject-action-button" onclick="showCourseEditModal('+ row['id'] + ')">'
-                                + 'Edit</button>';
+                                + 'View/Edit</button>';
                                 if (data == 0) {
                                     html += '<button type="button" class="btn btn-primary subject-action-button" onclick="recoverCourse('+ row['id'] +')">'
                                     + 'Recover</button>';
