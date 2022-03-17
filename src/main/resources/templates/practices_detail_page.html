@@ -9,6 +9,8 @@
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
     <link rel="stylesheet" th:href="@{/css/practice_detail.css}">
+    <link rel="stylesheet" th:href="@{/css/user_course_detail_modal.css}">
+    <link rel="stylesheet" th:href="@{/css/home_page.css}">
     <div th:replace="components/header_footer.html :: common-style"></div>
 
 </head>
@@ -43,11 +45,8 @@
                                 <!--                                <h1 data-animation="bounceIn" data-delay="0.2s"-->
                                 <!--                                    th:text="${subject.get().getName()}"></h1>-->
                                 <!-- breadcrumb Start-->
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Services</a></li>
-                                    </ol>
+                                <nav class="header-area header-transparent"
+                                     th:replace="components/header_footer.html :: nav-page">
                                 </nav>
                                 <!-- breadcrumb End -->
                             </div>
@@ -57,6 +56,153 @@
             </div>
         </div>
     </section>
+    <!-- LitsAction-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <div class="container">
+        <div class="mt-5">
+            <div class="d-style btn btn-brc-tp border-2 bgc-white btn-outline-blue btn-h-outline-blue btn-a-outline-blue w-100 my-2 py-3 shadow-sm">
+                <!-- Basic Plan -->
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-4">
+                        <h4 class="pt-3 text-170 text-600 text-primary-d1 letter-spacing">
+                            Practice Quiz/New Practice
+                        </h4>
+<!--                        <div class="text-secondary-d1 text-120">-->
+<!--                            <span class="ml-n15 align-text-bottom">$</span><span class="text-180">10</span> / month-->
+<!--                        </div>-->
+                    </div>
+
+                    <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+                        <li>
+                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                            <span>
+                <span class="text-110">Donec id elit.</span>
+              Fusce dapibus...
+              </span>
+                        </li>
+
+                        <li class="mt-25">
+                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                            <span class="text-110">
+                Placerat duis
+            </span>
+                        </li>
+
+                        <li class="mt-25">
+                            <i class="fa fa-times text-danger-m3 text-110 mr-25 mt-1"></i>
+                            <span class="text-110">
+                Tortor mauris
+            </span>
+                        </li>
+                    </ul>
+
+                    <div class="col-12 col-md-4 text-center">
+                        <a href="#" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600">Get Started</a>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="d-style bgc-white btn btn-brc-tp btn-outline-green btn-h-outline-green btn-a-outline-green w-100 my-2 py-3 shadow-sm border-2">
+                <!-- Pro Plan -->
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-4">
+                        <h4 class="pt-3 text-170 text-600 text-green-d1 letter-spacing">
+                            Pro Plan
+                        </h4>
+
+                        <div class="text-secondary-d2 text-120">
+                            <div class="text-danger-m3 text-90 mr-1 ml-n4 pos-rel d-inline-block">
+                                $<span class="text-150 deleted-text">30</span>
+                                <span>
+                    <span class="d-block rotate-45 position-l mt-n475 ml-35 fa-2x text-400 border-l-2 h-5 brc-dark-m1"></span>
+                </span>
+                            </div>
+                            <span class="align-text-bottom">$</span><span class="text-180">20</span> / month
+                        </div>
+                    </div>
+
+                    <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+                        <li>
+                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                            <span>
+                <span class="text-110">Everything in Basic...</span>
+              </span>
+                        </li>
+
+                        <li class="mt-25">
+                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                            <span class="text-110">
+                Non diam phasellus
+            </span>
+                        </li>
+
+                        <li class="mt-25">
+                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                            <span class="text-110">
+                Tortor mauris
+            </span>
+                        </li>
+                    </ul>
+
+                    <div class="col-12 col-md-4 text-center">
+                        <a href="#" class="f-n-hover btn btn-success btn-raised px-4 py-25 w-75 text-600">Get
+                            Started</a>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="d-style btn btn-brc-tp border-2 bgc-white btn-outline-purple btn-h-outline-purple btn-a-outline-purple w-100 my-2 py-3 shadow-sm">
+                <!-- Premium Plan -->
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-4">
+                        <h4 class="pt-3 text-170 text-600 text-purple-d1 letter-spacing">
+                            Premium Plan
+                        </h4>
+
+                        <div class="text-secondary-d1 text-120">
+                            <span class="ml-n15 align-text-bottom">$</span><span class="text-180">50</span> / month
+                        </div>
+                    </div>
+
+                    <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+                        <li>
+                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                            <span>
+                <span class="text-110">Everything in Pro...</span>
+              </span>
+                        </li>
+
+                        <li class="mt-25">
+                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                            <span class="text-110">
+                Placerat duis
+            </span>
+                        </li>
+
+                        <li class="mt-25">
+                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                            <span class="text-110">
+                Molestie nunc non
+            </span>
+                        </li>
+                    </ul>
+
+                    <div class="col-12 col-md-4 text-center">
+                        <a href="#" class="f-n-hover btn btn-warning btn-raised px-4 py-25 w-75 text-600">Get
+                            Started</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- List action end -->
+
     <!-- Courses area start -->
     <div class="container py-5">
         <div class="row text-center text-white mb-5">
@@ -75,16 +221,16 @@
                             <div class="media-body order-2 order-lg-1">
                                 <h3 class="font-weight-bold text-muted mb-0" th:text="${q.question}"></h3><br>
                                 <h3 class="mt-0 font-weight-bold mb-2" th:text="${q.answer}"></h3>
-<!--                                <div class="d-flex align-items-center justify-content-between mt-1">-->
-<!--                                    <h6 class="font-weight-bold my-2">₹64,999</h6>-->
-<!--                                    <ul class="list-inline small">-->
-<!--                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>-->
-<!--                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>-->
-<!--                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>-->
-<!--                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>-->
-<!--                                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>-->
-<!--                                    </ul>-->
-<!--                                </div>-->
+                                <!--                                <div class="d-flex align-items-center justify-content-between mt-1">-->
+                                <!--                                    <h6 class="font-weight-bold my-2">₹64,999</h6>-->
+                                <!--                                    <ul class="list-inline small">-->
+                                <!--                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>-->
+                                <!--                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>-->
+                                <!--                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>-->
+                                <!--                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>-->
+                                <!--                                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>-->
+                                <!--                                    </ul>-->
+                                <!--                                </div>-->
                             </div>
                             <!--                            <img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200"-->
                             <!--                                 class="ml-lg-5 order-1 order-lg-2">-->
@@ -94,126 +240,12 @@
             </div>
         </div>
     </div>
-
-    <!-- Courses area End -->
-    <!--? top subjects Area Start -->
-    <div class="topic-area">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-7 col-lg-8">
-                    <div class="section-tittle text-center mb-55">
-                        <h2>Explore top subjects</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic1.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic2.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic3.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic4.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic5.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic6.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic7.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic8.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-12">
-                    <div class="section-tittle text-center mt-20">
-                        <a href="listLesson_page.html" class="border-btn">View More Subjects</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Courses area start -->
+    <div th:replace="components/header_footer.html :: featured-page">
     </div>
-    <!-- top subjects End -->
+    <div th:replace="components/user_course_detail_modal.html :: courseUserModal">
+    </div>
+    <!-- Courses area End -->
     <!-- ? services-area -->
     <div class="services-area services-area2 section-padding40">
         <div class="container">
@@ -258,10 +290,16 @@
 <footer th:replace="components/header_footer.html :: user-footer">
 </footer>
 <!-- Scroll Up -->
-<div id="back-top">
-    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+<div th:insert="components/header_footer.html :: scroll-up">
 </div>
 
+<!-- JS here -->
+<th:block th:insert="components/header_footer.html :: common-script">
+</th:block>
+<!-- page-specific js -->
 <div th:replace="components/header_footer.html :: common-script"></div>
+<script th:src="@{/js/home_page.js}"></script>
+<script th:src="@{/js/user_course_detail.js}"></script>
+</body>
 </body>
 </html>

@@ -1,10 +1,13 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
+import com.fpt.OnlineQuiz.dto.ExpertFeaturedDTO;
 import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Question;
 import com.fpt.OnlineQuiz.model.QuizHistory;
-import com.fpt.OnlineQuiz.service.QuestionService;
-import com.fpt.OnlineQuiz.service.QuizHistoryService;
+import com.fpt.OnlineQuiz.model.Subject;
+import com.fpt.OnlineQuiz.service.*;
+import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
@@ -26,8 +29,23 @@ public class PracticeController {
     @Autowired
     QuestionService questionService;
 
+    @Autowired
+    private CourseService courseService;
+    @Autowired
+    private ExpertService expertService;
+    @Autowired
+    private SubjectService subjectService;
+
     @GetMapping(value = "")
+
     public String practicelListPage(Model model) {
+        List<CourseFeaturedDTO> courseFeatured = courseService.getFeaturedCourses(Constants.HOME_PAGE_COURSE_NUMBER);
+        model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_COURSE_FEATURED, courseFeatured);
+        List<ExpertFeaturedDTO> expertFeatured = expertService.getFeaturedExperts(Constants.HOME_PAGE_EXPERT_NUMBER);
+        model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_EXPERT_FEATURED, expertFeatured);
+        List<Subject> subjectFeatured = subjectService.getFeaturedSubjects(Constants.HOME_PAGE_SUBJECT_NUMBER);
+        model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Account account = (Account) authentication.getPrincipal();
        /*Get all QuizHistory(1 quizHistory contain multiple questions) existed in user account.
@@ -42,10 +60,17 @@ public class PracticeController {
 
         return "practices_list_page";
     }
+
     @GetMapping(value = "/detail")
     public String practiceDetailPage(Model model, @Param("id") int id) {
         List<Question> questions = questionService.getQuestionQHid(id);
         model.addAttribute("questions", questions);
+        List<CourseFeaturedDTO> courseFeatured = courseService.getFeaturedCourses(Constants.HOME_PAGE_COURSE_NUMBER);
+        model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_COURSE_FEATURED, courseFeatured);
+        List<ExpertFeaturedDTO> expertFeatured = expertService.getFeaturedExperts(Constants.HOME_PAGE_EXPERT_NUMBER);
+        model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_EXPERT_FEATURED, expertFeatured);
+        List<Subject> subjectFeatured = subjectService.getFeaturedSubjects(Constants.HOME_PAGE_SUBJECT_NUMBER);
+        model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
         return "practices_detail_page";
     }
 
