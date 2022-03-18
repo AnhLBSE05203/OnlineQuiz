@@ -45,9 +45,27 @@ function showAccountAddModal() {
 }
 
 function showAccountEditModal(id) {
-
+    var link = "/admin/account/view/" + id;
+    var account = "";
+    $.ajax({
+        url: link,
+        type: "get",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            account = data;
+            if (account != "") {
+                $("#editAccountId").val(account.id);
+                $("#editAccountFullname").val(account.fullName);
+                $("#editAccountGender").val(account.gender);
+                $("#editAccountEmail").val(account.email);
+                $("#editAccountPhone").val(account.phone);
+            }
+        }
+    });
+    $('#accountEditModal').modal('show');
 }
 
 function deleteAccount(id) {
-
+    window.location.replace("/admin/account/delete/" + id);
 }

@@ -24,8 +24,8 @@ public class AdminAccountController {
 
     @GetMapping(value = {"", "/"})
     public String accountPage(Model model) {
-        model.addAttribute("adminEditDTO", new AccountAdminDTO());
-        model.addAttribute("adminAddDTO", new AccountAdminDTO());
+        model.addAttribute("accountEditDTO", new AccountAdminDTO());
+        model.addAttribute("accountAddDTO", new AccountAdminDTO());
         return "admin_account_page";
     }
 
