@@ -51,6 +51,53 @@
         </footer>
     </div>
 </div>
+<!-- Edit Account Modal -->
+<div class="modal fade" id="accountEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="accountEditForm" th:object="${accountEditDTO}"
+                  th:action="@{/admin/account/edit}" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Account Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="editAccountImg"><br>
+                    <!--                    <input type="hidden" id="editBlogImgSrc" th:name="imgSrc">-->
+                    <!--                    <input type="hidden" id="editBlogStatusStr" th:name="statusStr" value="">-->
+                    <table class="formTable" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td class="formField">Id:</td>
+                            <td class="formInput"><input type="text" id="editAccountId" th:name="id" value="0" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Fullname:</td>
+                            <td><input type="text" id="editAccountFullname" th:name="fullName" required></td>
+                        </tr>
+                        <tr>
+                            <td>Gender:</td>
+                            <td><input type="text" id="editAccountGender" th:name="gender" required></td>
+                        </tr>
+                        <tr>
+                            <td>Gender:</td>
+                            <td><input type="text" id="editAccountEmail" th:name="email" required></td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td><input type="text" id="editAccountPhone" th:name="phone" required></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- Admin common js -->
 <th:block th:insert="components/header_footer.html :: admin-common-script">
 </th:block>
