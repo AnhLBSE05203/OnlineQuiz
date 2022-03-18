@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.service.implement;
 
 import com.fpt.OnlineQuiz.dao.AccountRepository;
+import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDAccountRepository;
 import com.fpt.OnlineQuiz.dao.TokenRepository;
 import com.fpt.OnlineQuiz.dto.AccountAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
@@ -26,6 +27,8 @@ public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
     @Autowired
     private TokenRepository tokenRepository;
+    @Autowired
+    private CRUDAccountRepository accountCRUDRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -112,7 +115,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account detailAccount(Integer id) {
-        return null;
+        return accountCRUDRepository.getAccountById(id);
     }
 
 }
