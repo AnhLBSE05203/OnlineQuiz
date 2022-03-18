@@ -42,7 +42,6 @@ public class CourseController {
 
     @GetMapping(path = "/registration")
     public String registrationCourse(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //todo?
         int courseId = Integer.parseInt(request.getParameter("courseId"));
         HttpSession session = request.getSession();
         if (session.getAttribute("cart") == null) {
@@ -50,9 +49,12 @@ public class CourseController {
             CourseRegistrationDTO c = courseService.getById(courseId).registrationDTO();
             cart.add(c);
             session.setAttribute("cart", cart);
+            session.setAttribute("total", c.getPrice());
             modelMap.addAttribute("list", cart);
+            modelMap.addAttribute("total", c.getPrice());
         } else {
             List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>)session.getAttribute("cart");
+            float total = Float.parseFloat(session.getAttribute("total").toString());
             for(int i = 0; i < cart.size(); i++){
                 if(cart.get(i).getId() == courseId){
                     modelMap.addAttribute("message", "This course is existed!");
@@ -60,10 +62,14 @@ public class CourseController {
                 }else{
                     CourseRegistrationDTO c = courseService.getById(courseId).registrationDTO();
                     cart.add(c);
+                    total += c.getPrice();
                 }
             }
             session.setAttribute("cart", cart);
+            session.setAttribute("total", total);
+//            System.out.println("total = "+ total);
             modelMap.addAttribute("list", cart);
+            modelMap.addAttribute("total", total);
         }
         return "registration_page";
     }
