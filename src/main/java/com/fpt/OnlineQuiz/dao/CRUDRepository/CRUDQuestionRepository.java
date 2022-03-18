@@ -12,4 +12,7 @@ public interface CRUDQuestionRepository extends CrudRepository<Question, Integer
 
     @Query("select q from Question q where q.lesson.id = ?1")
     List<Question> findBySubId(int subId);
+
+    @Query("select q from Question q where q.quizHistory.id = ?1")
+    List<Question> findByQuizHistoryId(int id);
 }

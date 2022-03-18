@@ -18,18 +18,12 @@ $(document).ready(function() {
         				title : 'Name',
         				data : 'name'
         			}, {
-        				title : 'ImgSrc',
-        				data : 'imgSrc',
-        				width: "10%",
-        				orderable: false
-        			}, {
         				title : 'Total Courses',
         				data : 'totalCourse',
-        				orderable: false
         			}, {
                         title : 'Subject Info',
                         data : 'subjectInfo',
-                        width: "20%",
+                        width: "30%",
                         render: function(data, type, row, meta) {
                                     var html = "";
                                     if(data != "" && data != null){
@@ -41,7 +35,7 @@ $(document).ready(function() {
                     }, {
                         title : 'Learn After',
                         data : 'learnAfter',
-                        width: "20%",
+                        width: "30%",
                         render: function(data, type, row, meta) {
                                     var html = "";
                                     if(data != "" && data != null){
@@ -53,7 +47,7 @@ $(document).ready(function() {
                     }, {
         				title : 'Status',
         				data : 'statusStr',
-        				orderable: false
+        				orderable: false,
         			}, {
         				title : 'Img',
         				data : 'imgSrc',
@@ -144,7 +138,7 @@ function submitAddSubject(e) {
         type:"get",
         contentType: "application/json; charset=utf-8",
         data:{
-            name : subjectName
+            "subjectName" : subjectName
         },
         dataType: "json",
         success: function (data){
@@ -169,7 +163,7 @@ function submitEditSubject(e) {
         type:"get",
         contentType: "application/json; charset=utf-8",
         data:{
-            name : subjectName
+            "subjectName" : subjectName
         },
         dataType: "json",
         success: function (data){
@@ -218,7 +212,6 @@ function showCourseSection(subjectId) {
             			}, {
             				title : 'Total Lessons',
             				data : 'lessonTotal',
-            				orderable: false
             			}, {
                             title : 'Description',
                             data : 'description',

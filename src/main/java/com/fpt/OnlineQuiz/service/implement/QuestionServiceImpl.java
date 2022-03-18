@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.service.implement;
 
+import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDQuestionRepository;
 import com.fpt.OnlineQuiz.dao.QuestionRepository;
 import com.fpt.OnlineQuiz.dto.QuestionAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
@@ -17,6 +18,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private CRUDQuestionRepository crudQuestionRepository;
 
     @Override
     public List<Question> getQuestionByLessonId(int lessonId) {
@@ -67,5 +71,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void deleteQuestion(int questionId) {
         questionRepository.deleteQuestion(questionId);
+    }
+
+    @Override
+    public List<Question> getQuestionQHid(int id) {
+        return crudQuestionRepository.findByQuizHistoryId(id);
     }
 }

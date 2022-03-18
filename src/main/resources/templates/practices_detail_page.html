@@ -8,11 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
-    <div th:replace="components/header_footer.html :: common-style"></div>
-    <link rel="stylesheet" th:href="@{/css/practice_list.css}">
     <link rel="stylesheet" th:href="@{/css/practice_detail.css}">
     <link rel="stylesheet" th:href="@{/css/user_course_detail_modal.css}">
     <link rel="stylesheet" th:href="@{/css/home_page.css}">
+    <div th:replace="components/header_footer.html :: common-style"></div>
 
 </head>
 
@@ -57,138 +56,133 @@
             </div>
         </div>
     </section>
+    <!-- LitsAction-->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
     <div class="container">
         <div class="mt-5">
-            <div class="d-style btn btn-brc-tp border-2 bgc-white btn-outline-purple btn-h-outline-purple btn-a-outline-purple w-100 my-2 py-3 shadow-sm">
-                <!-- Premium Plan -->
+            <div class="d-style btn btn-brc-tp border-2 bgc-white btn-outline-blue btn-h-outline-blue btn-a-outline-blue w-100 my-2 py-3 shadow-sm">
+                <!-- Basic Plan -->
                 <div class="row align-items-center">
                     <div class="col-12 col-md-4">
-                        <h4 class="pt-3 text-170 text-600 text-purple-d1 letter-spacing">
-                            New Quiz Package
+                        <h4 class="pt-3 text-170 text-600 text-primary-d1 letter-spacing">
+                            Practice Quiz/New Practice
                         </h4>
+                        <!--                        <div class="text-secondary-d1 text-120">-->
+                        <!--                            <span class="ml-n15 align-text-bottom">$</span><span class="text-180">10</span> / month-->
+                        <!--                        </div>-->
                     </div>
 
                     <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
                         <li>
                             <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
                             <span>
-                <span class="text-110">Create Package that contain quiz</span>
-              </span>
-                        </li>
-                    </ul>
-
-                    <div class="col-12 col-md-4 text-center">
-                        <a href="#" class="f-n-hover btn btn-warning btn-raised px-4 py-25 w-75 text-600">Create
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="d-style bgc-white btn btn-brc-tp btn-outline-green btn-h-outline-green btn-a-outline-green w-100 my-2 py-3 shadow-sm border-2">
-                <!-- Pro Plan -->
-                <div class="row align-items-center">
-                    <div class="col-12 col-md-4">
-                        <h4 class="pt-3 text-170 text-600 text-green-d1 letter-spacing">
-                            Quiz History
-                        </h4>
-                    </div>
-
-                    <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
-                        <li>
-                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
-                            <span>
-                <span class="text-110">See all your practices history here</span>
+                <span class="text-110">Learn By Practices</span>
               </span>
                         </li>
 
                         <li class="mt-25">
                             <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
                             <span class="text-110">
-                Display all the history
+                Remember Faster
             </span>
                         </li>
 
+                        <li class="mt-25">
+                            <i class="fa fa-times text-danger-m3 text-110 mr-25 mt-1"></i>
+                            <span class="text-110">Learn with tutor
+            </span>
+                        </li>
                     </ul>
 
                     <div class="col-12 col-md-4 text-center">
-                        <a href="#" class="f-n-hover btn btn-success btn-raised px-4 py-25 w-75 text-600">History</a>
+                        <a href="#" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600">Get Started</a>
                     </div>
                 </div>
 
             </div>
 
+
+            <div class="d-style bgc-white btn btn-brc-tp btn-outline-green btn-h-outline-green btn-a-outline-green w-100 my-2 py-3 shadow-sm border-2">
+                <!-- Pro Plan -->
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-4">
+                        <h4 class="pt-3 text-170 text-600 text-green-d1 letter-spacing">
+                            Exam Check
+                        </h4>
+                    </div>
+
+                    <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+                        <li>
+                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                            <span>
+                <span class="text-110">Check your knowledge</span>
+              </span>
+                        </li>
+
+                        <li class="mt-25">
+                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                            <span class="text-110">
+                Check by quetion/quiz
+            </span>
+                        </li>
+
+                        <li class="mt-25">
+                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
+                            <span class="text-110">
+                In hand practices
+            </span>
+                        </li>
+                    </ul>
+
+                    <div class="col-12 col-md-4 text-center">
+                        <a href="#" class="f-n-hover btn btn-success btn-raised px-4 py-25 w-75 text-600">Get
+                            Started</a>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
+    <!-- List action end -->
+
     <!-- Courses area start -->
-    <div class="courses-area section-padding40 fix">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-7 col-lg-8">
-                    <div class="section-tittle text-center mb-55">
-                        <h2>Practice List</h2>
-                    </div>
-                </div>
+    <div class="container py-5">
+        <div class="row text-center text-white mb-5">
+            <div class="col-lg-7 mx-auto">
+                <h1 class="display-4">Practices Details</h1>
             </div>
-            <div class="row">
-                <div class="col-lg-4" th:each="qh : ${quizHistory}">
-                    <div class="properties properties2 mb-30">
-                        <div class="properties__card">
-                            <div class="date22">
-                                <p><i th:text="${qh.createdTime.toLocaleString()}"></i></p>
-
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- List group-->
+                <ul class="list-group shadow" th:each="q : ${questions}">
+                    <!-- list group item-->
+                    <li class="list-group-item">
+                        <!-- Custom content-->
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <h3 class="font-weight-bold text-muted mb-0" th:text="${q.question}"></h3><br>
+                                <h3 class="mt-0 font-weight-bold mb-2" th:text="${q.answer}"></h3>
+                                <!--                                <div class="d-flex align-items-center justify-content-between mt-1">-->
+                                <!--                                    <h6 class="font-weight-bold my-2">₹64,999</h6>-->
+                                <!--                                    <ul class="list-inline small">-->
+                                <!--                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>-->
+                                <!--                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>-->
+                                <!--                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>-->
+                                <!--                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>-->
+                                <!--                                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>-->
+                                <!--                                    </ul>-->
+                                <!--                                </div>-->
                             </div>
-                            <div class="properties__caption">
-                                <a th:href="@{/practices/detail(id=${qh.id})}"><h3><b th:text="${qh.name}"></b></h3></a>
-                                <p><b th:text="${qh.quizCount}+' Quizs'"></b></p>
-                                <p style="text-align: center">Created by <a href="#" id="created"
-                                                                            th:text="${qh.accountName}"></a></p>
-                                <!--                                <p style="text-align: center">-->
-                                <!--                                    <a href="#" class="border-btn">Details</a>-->
-                                <!--                                </p>-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- list lesson -->
-                <!--                <div class="col-lg-4">-->
-                <!--                    <div class="properties properties2 mb-30">-->
-                <!--                        <div class="properties__card">-->
-                <!--                            <div class="properties__img overlay1">-->
-                <!--                                <a href="#"><img th:src="@{/img/gallery/featured1.png}" alt=""></a>-->
-                <!--                            </div>-->
-                <!--                            <div class="properties__caption">-->
-                <!--                                <p>User Experience</p>-->
-                <!--                                &lt;!&ndash;                                <h3><a href="#" th:text="${subject.get.name}"></a></h3>&ndash;&gt;-->
-                <!--                                <p>The automated process all your website tasks. Discover tools and techniques to engage-->
-                <!--                                    effectively with vulnerable children and young people.-->
-                <!--                                </p>-->
-                <!--                                <div class="properties__footer d-flex justify-content-between align-items-center">-->
-                <!--                                    <div class="restaurant-name">-->
-                <!--                                        <div class="rating">-->
-                <!--                                            <i class="fas fa-star"></i>-->
-                <!--                                            <i class="fas fa-star"></i>-->
-                <!--                                            <i class="fas fa-star"></i>-->
-                <!--                                            <i class="fas fa-star"></i>-->
-                <!--                                            <i class="fas fa-star-half"></i>-->
-                <!--                                        </div>-->
-                <!--                                        <p><span>(4.5)</span> based on 120</p>-->
-                <!--                                    </div>-->
-                <!--                                    <div class="price">-->
-                <!--                                        <span>$135</span>-->
-                <!--                                    </div>-->
-                <!--                                </div>-->
-                <!--                                <a href="#" class="border-btn border-btn2">Find out more</a>-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
+                            <!--                            <img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200"-->
+                            <!--                                 class="ml-lg-5 order-1 order-lg-2">-->
+                        </div> <!-- End -->
+                    </li> <!-- End -->
+                </ul> <!-- End -->
             </div>
         </div>
     </div>
-    <!-- Courses area End -->
     <!-- Courses area start -->
     <div th:replace="components/header_footer.html :: featured-page">
     </div>
@@ -246,8 +240,9 @@
 <th:block th:insert="components/header_footer.html :: common-script">
 </th:block>
 <!-- page-specific js -->
+<div th:replace="components/header_footer.html :: common-script"></div>
 <script th:src="@{/js/home_page.js}"></script>
 <script th:src="@{/js/user_course_detail.js}"></script>
-<div th:replace="components/header_footer.html :: common-script"></div>
+</body>
 </body>
 </html>

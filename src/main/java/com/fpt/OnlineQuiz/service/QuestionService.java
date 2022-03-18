@@ -21,4 +21,7 @@ public interface QuestionService {
     QuestionAdminDTO getQuestionDTOById(int id);
 
     void deleteQuestion(int questionId);
+
+    List<Question> getQuestionQHid(int id);
+
 }
