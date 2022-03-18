@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,8 +41,37 @@ public class CourseController {
         return "my_courses_page";
     }
 
+    @GetMapping(path = "/delete")
+    public String deleteRegistrationCourse(ModelMap modelMap, HttpServletRequest request) {
+        int courseId = Integer.parseInt(request.getParameter("id"));
+        HttpSession session = request.getSession();
+        List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>) session.getAttribute("cart");
+        double total = Double.parseDouble(session.getAttribute("total").toString());
+        for (int i = 0; i < cart.size(); i++) {
+            if (cart.get(i).getId() == courseId) {
+                total -= cart.get(i).getPrice();
+                cart.remove(i);
+                break;
+            }
+            if (cart.size() == 0) {
+                total = 0;
+            }
+        }
+        session.setAttribute("cart", cart);
+        session.setAttribute("total", total);
+        return "registration_page";
+    }
+
     @GetMapping(path = "/registration")
-    public String registrationCourse(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String registrationCourse(ModelMap modelMap, HttpServletRequest request) {
+        //check login account
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Account account = null;
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            account = (Account) authentication.getPrincipal();
+        } else {
+            return "redirect:/account/login";
+        }
         int courseId = Integer.parseInt(request.getParameter("courseId"));
         HttpSession session = request.getSession();
         if (session.getAttribute("cart") == null) {
@@ -50,59 +80,65 @@ public class CourseController {
             cart.add(c);
             session.setAttribute("cart", cart);
             session.setAttribute("total", c.getPrice());
-            modelMap.addAttribute("list", cart);
-            modelMap.addAttribute("total", c.getPrice());
         } else {
-            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>)session.getAttribute("cart");
-            float total = Float.parseFloat(session.getAttribute("total").toString());
-            for(int i = 0; i < cart.size(); i++){
-                if(cart.get(i).getId() == courseId){
+            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>) session.getAttribute("cart");
+            double total = Double.parseDouble(session.getAttribute("total").toString());
+            for (int i = 0; i < cart.size(); i++) {
+                if (cart.get(i).getId() == courseId) {
                     modelMap.addAttribute("message", "This course is existed!");
                     break;
-                }else{
+                } else {
+                    //TODO: Check course is registed in db before add to course list
+
+
+
+
                     CourseRegistrationDTO c = courseService.getById(courseId).registrationDTO();
                     cart.add(c);
                     total += c.getPrice();
                 }
+
             }
             session.setAttribute("cart", cart);
             session.setAttribute("total", total);
-//            System.out.println("total = "+ total);
-            modelMap.addAttribute("list", cart);
-            modelMap.addAttribute("total", total);
         }
         return "registration_page";
     }
+
     @GetMapping(path = "/showRegistration")
-    public String showRegistrationPage(ModelMap modelMap, HttpServletRequest request){
+    public String showRegistrationPage(ModelMap modelMap, HttpServletRequest request) {
         HttpSession session = request.getSession();
         if (session.getAttribute("cart") == null) {
             modelMap.addAttribute("message", "Empty");
         } else {
-            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>)session.getAttribute("cart");
+            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>) session.getAttribute("cart");
 //            session.setAttribute("cart", cart);
             modelMap.addAttribute("list", cart);
         }
         return "registration_page";
     }
+
     @GetMapping(path = "/buyCourse")
-    public String buyCourse(ModelMap modelMap, HttpServletRequest request){
+    public String buyCourse(ModelMap modelMap, HttpServletRequest request) {
+        //check login account
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Account account = null;
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             account = (Account) authentication.getPrincipal();
         } else {
-            return "redirect:/home";
+            return "redirect:/account/login";
         }
+        //TODO: check course list in session is null or not
         HttpSession session = request.getSession();
         if (session.getAttribute("cart") == null) {
             modelMap.addAttribute("message", "Empty");
         } else {
-            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>)session.getAttribute("cart");
+            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>) session.getAttribute("cart");
             courseService.addCourseRegistration(cart, account.getId());
             session.removeAttribute("cart");
+            modelMap.addAttribute("message", "Buy Successful");
         }
-        modelMap.addAttribute("message", "Buy Successful");
+
         return "registration_page";
     }
 

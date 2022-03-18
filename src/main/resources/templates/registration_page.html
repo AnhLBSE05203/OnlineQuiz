@@ -50,7 +50,7 @@
 
             <div class="shopping-cart">
                 <div class="px-4 px-lg-0">
-                    <p th:value="${message}"></p>
+                    <p th:text="${message}"></p>
                     <div class="pb-5">
                         <div class="container">
                             <div class="row">
@@ -71,9 +71,9 @@
                                                     </th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody th:if="${session.cart.size() != 0}">
                                                 <!--                                    <c:forEach items="${list}" var="o">-->
-                                                <tr th:each="course: ${list}">
+                                                <tr th:each="course: ${session.cart}">
                                                     <th scope="row">
                                                         <input type="hidden" id="courseId" th:value="${course.getId()}"/>
                                                         <div class="p-2">
@@ -90,7 +90,7 @@
                                                     <td class="align-middle" th:text="${course.price}">
                                                         <strong>Price</strong></td>
                                                     <td class="align-middle"><a href="#" class="text-dark">
-                                                        <button type="button" class="btn btn-danger" onclick="removeCourse()">Delete</button>
+                                                        <button type="button" class="btn btn-danger" th:onclick="|removeCourse('${course.getId()}')|">Delete</button>
                                                     </a>
                                                     </td>
                                                 </tr>
@@ -107,13 +107,15 @@
                                     <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">
                                         Payment
                                     </div>
-                                    <div class="p-4">
+
+                                    <div class="p-4" >
                                         <ul class="list-unstyled mb-4">
                                             <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                                     class="text-muted">Total</strong>
-                                                <h5 class="font-weight-bold" th:text="${total}"></h5>
+                                                <h5 class="font-weight-bold" th:text="${session.total}"></h5>
                                             </li>
                                         </ul>
+
                                         <a th:href="@{/user/buyCourse}" class="btn btn-dark rounded-pill py-2 btn-block">Buy</a>
                                     </div>
                                 </div>
@@ -174,28 +176,9 @@
         <th:block th:insert="components/header_footer.html :: common-script">
         </th:block>
         <script>
-    function load(){
-        var start = document.getElementsByClassName("course").length;
-        $.ajax({
-            url:"/user/loadMoreCourse",
-            type:"get",
-            data:{
-                start: start
-            },
-            success: function (data){
-                if(data != ""){
-                    var row = document.getElementById("listcourse");
-                    row.innerHTML += data;
-                }
-            }
-        })
+    function removeCourse(id){
+        window.location.replace("/user/delete?id=" + id);
     }
-
-
-
-
-
-
         </script>
     </body>
 </html>
