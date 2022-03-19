@@ -16,6 +16,7 @@ function detailSubjectModal(id){
             if (subject != null) {
                 console.log("success");
                 console.log(subject.subjectInfo);
+                $("#subId").text(id);
                 $("#subjectInfo").text(subject.subjectInfo);
                 $("#subjectLearn").text(subject.learnAfter);
             }else{
@@ -24,6 +25,10 @@ function detailSubjectModal(id){
         }
     });
     $('#myModal').modal('show');
+}
+function showCourse(){
+    var subjectId = document.getElementById("subId").textContent;
+    window.location.replace("/user/courselist?subId=" + subjectId);
 }
 
 // var link = "/subject/detail/" + id;
