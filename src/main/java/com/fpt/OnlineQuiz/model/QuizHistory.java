@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,6 +26,17 @@ public class QuizHistory {
 
     @Column(name = "quizHistoryName")
     private String name;
+
+    @Autowired
+    public QuizHistory(String name,Date date,int all,int trueNum){
+        this.name = name;
+        this.historyTime = date;
+        this.all = all;
+        this.trueNum = trueNum;
+
+    }
+    private int all;
+    private int trueNum;
 
     @Column(name = "createdTime")
     private Date createdTime;

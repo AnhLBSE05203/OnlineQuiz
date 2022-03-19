@@ -16,11 +16,10 @@ public interface CRUDQuizHistory extends CrudRepository<QuizHistory, Integer> {
             "WHERE qhaa.account.id = ?1")
     List<QuizHistory> listQuizByAccountAdd(int accountId);
 
-    @Query("SELECT qh.name, qh.historyTime, qh.number,COUNT(a2.isCorrect)\n" +
-            "as correct\n" +
+    @Query("SELECT qh.name, qh.historyTime, qh.number,COUNT(a2.isCorrect) as correct\n" +
             "FROM QuizHistory as qh INNER JOIN QuizHistoryQuestion q on qh.id = q.quizHistory.id\n" +
             "INNER JOIN Answer a2 on a2.id = q.userAnswer.id\n" +
             "WHERE qh.accountHistory.id = ?1\n" +
             "GROUP BY qh.id")
-    List<Object[]> listHistoryQuiz(int historyAccountId);
+    List<QuizHistory> listHistoryQuiz(int historyAccountId);
 }

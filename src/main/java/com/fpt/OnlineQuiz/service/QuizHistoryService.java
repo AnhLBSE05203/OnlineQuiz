@@ -8,5 +8,5 @@ import java.util.List;
 @Service
 public interface QuizHistoryService {
       List<QuizHistory> getQuizByAccountAdd(int id);
-      List<Object[]> listQuizHistory(int historyAccountId);
+      List<QuizHistory> listQuizHistory(int historyAccountId);
 }

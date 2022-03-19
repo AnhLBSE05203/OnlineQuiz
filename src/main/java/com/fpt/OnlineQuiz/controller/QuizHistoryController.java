@@ -3,6 +3,7 @@ package com.fpt.OnlineQuiz.controller;
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
 import com.fpt.OnlineQuiz.dto.ExpertFeaturedDTO;
 import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.model.QuizHistory;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.*;
 import com.fpt.OnlineQuiz.utils.Constants;
@@ -45,7 +46,7 @@ public class QuizHistoryController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Account account = (Account) authentication.getPrincipal();
 
-        List<Object[]> history = quizHistoryService.listQuizHistory(account.getId());
+        List<QuizHistory> history = quizHistoryService.listQuizHistory(account.getId());
         model.addAttribute("history", history);
         return "quizHistory_page";
     }

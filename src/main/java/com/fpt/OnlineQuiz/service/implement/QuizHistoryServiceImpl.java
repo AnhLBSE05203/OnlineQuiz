@@ -20,7 +20,7 @@ public class QuizHistoryServiceImpl implements QuizHistoryService {
     }
 
     @Override
-    public List<Object[]> listQuizHistory(int historyAccountId) {
+    public List<QuizHistory> listQuizHistory(int historyAccountId) {
         return quizHistory.listHistoryQuiz(historyAccountId);
     }
 }
