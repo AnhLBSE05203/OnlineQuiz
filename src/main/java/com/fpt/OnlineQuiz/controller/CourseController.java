@@ -25,6 +25,40 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    @GetMapping(path = "/courselist")
+    public String showCoursesList(ModelMap modelMap, HttpServletRequest request){
+        int subjectId = Integer.parseInt(request.getParameter("subId"));
+        List<Course> courses = courseService.getCoursesTop3BySubjectId(subjectId);
+        modelMap.addAttribute("list", courses);
+        return "course_list_page";
+    }
+    @GetMapping(path = "/loadMore")
+    public @ResponseBody
+    void loadMoreCourse(@RequestParam("subjectId") String subjectId,
+            @RequestParam("start") String startStr, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        int start = Integer.parseInt(startStr);
+        int subId = Integer.parseInt(subjectId);
+        List<Course> courses = courseService.getNext3Courses(subId, start);
+        if (courses.size() != 0) {
+            for (Course c : courses) {
+                out.println("<div class=\"col-lg-4 course\">\n" +
+                        "                    <div class=\"properties properties2 mb-30\">\n" +
+                        "                        <div class=\"properties__card\">\n" +
+                        "                            <div class=\"properties__img overlay1\">\n" +
+                        "                                <a href=\"#\"><img src=\"/img/gallery/featured2.png\" alt=\"\"></a>\n" +
+                        "                            </div>\n" +
+                        "                            <div class=\"properties__caption\">\n" +
+                        "                                <h3><a>" + c.getName() + "</a></h3>\n" +
+                        "                                <p>" + c.getDescription() + "</p>\n" +
+                        "                                <a href=\"#\" class=\"border-btn border-btn2\">Go to Course</a>\n" +
+                        "                            </div>\n" +
+                        "                        </div>\n" +
+                        "                    </div>\n" +
+                        "                </div>");
+            }
+        }
+    }
     @GetMapping(path = "/mycourses")
     public String showCoursePage(ModelMap modelMap) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
