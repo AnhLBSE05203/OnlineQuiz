@@ -109,4 +109,13 @@ public class CourseServiceImpl implements CourseService {
     public void addCourseRegistration(List<Course> list, int accountId) {
         courseRepository.addRegistrationCourse(list, accountId);
     }
+
+    @Override
+    public List<Course> getCoursesTop3BySubjectId(int subjectId) {
+        return courseRepository.getTop3CoursesBySubjectId(subjectId);
+    }
+    @Override
+    public List<Course> getCoursesNext3BySubjectId(int subjectId, int start) {
+        return courseRepository.getNext3CoursesBySubjectId(subjectId, start);
+    }
 }
