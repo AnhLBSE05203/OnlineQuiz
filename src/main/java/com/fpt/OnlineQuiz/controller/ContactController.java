@@ -51,7 +51,6 @@ public class ContactController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
         return "contact_page";
     }
 }
