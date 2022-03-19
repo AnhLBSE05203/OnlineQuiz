@@ -204,4 +204,35 @@ public class CourseRepository {
             }
         }
     }
+    public List<Course> getTop3CoursesBySubjectId(int subjectId) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select c from Course c where c.subject.id =:id");
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Course.class);
+            query.setParameter("id", subjectId);
+            query.setMaxResults(3);
+            return (List<Course>) query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Course> getNext3CoursesBySubjectId(int subjectId, int start) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select c from Course c where c.subject.id =:id");
+            String sql = sb.toString();
+            int size = 3;
+            Query query = em.createQuery(sql, Course.class);
+            query.setParameter("id", subjectId);
+            query.setFirstResult(start);
+            query.setMaxResults(size);
+            return (List<Course>) query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }
