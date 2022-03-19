@@ -1,6 +1,5 @@
 package com.fpt.OnlineQuiz.controller;
 
-import com.fpt.OnlineQuiz.dto.CourseRegistrationDTO;
 import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Course;
@@ -11,7 +10,6 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,11 +43,12 @@ public class CourseController {
     public String deleteRegistrationCourse(ModelMap modelMap, HttpServletRequest request) {
         int courseId = Integer.parseInt(request.getParameter("id"));
         HttpSession session = request.getSession();
-        List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>) session.getAttribute("cart");
+        List<Course> cart = (List<Course>) session.getAttribute("cart");
         double total = Double.parseDouble(session.getAttribute("total").toString());
         for (int i = 0; i < cart.size(); i++) {
             if (cart.get(i).getId() == courseId) {
                 total -= cart.get(i).getPrice();
+                System.out.println("Total = " + total);
                 cart.remove(i);
                 break;
             }
@@ -58,7 +57,7 @@ public class CourseController {
             }
         }
         session.setAttribute("cart", cart);
-        session.setAttribute("total", total);
+        session.setAttribute("total", String.format("%.02f", total));
         return "registration_page";
     }
 
@@ -75,32 +74,35 @@ public class CourseController {
         int courseId = Integer.parseInt(request.getParameter("courseId"));
         HttpSession session = request.getSession();
         if (session.getAttribute("cart") == null) {
-            List<CourseRegistrationDTO> cart = new ArrayList<>();
-            CourseRegistrationDTO c = courseService.getById(courseId).registrationDTO();
+            List<Course> cart = new ArrayList<>();
+            Course c = courseService.getById(courseId);
             cart.add(c);
             session.setAttribute("cart", cart);
-            session.setAttribute("total", c.getPrice());
+            session.setAttribute("total", String.format("%.02f", c.getPrice()));
         } else {
-            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>) session.getAttribute("cart");
+            List<Course> cart = (List<Course>) session.getAttribute("cart");
             double total = Double.parseDouble(session.getAttribute("total").toString());
             for (int i = 0; i < cart.size(); i++) {
                 if (cart.get(i).getId() == courseId) {
                     modelMap.addAttribute("message", "This course is existed!");
-                    break;
-                } else {
-                    //TODO: Check course is registed in db before add to course list
-
-
-
-
-                    CourseRegistrationDTO c = courseService.getById(courseId).registrationDTO();
-                    cart.add(c);
-                    total += c.getPrice();
+                    return "registration_page";
                 }
-
             }
+            //Check course is registed in db before add to course list
+            List<Course> courses = courseService.getCoursesRegistration(account.getId());
+            boolean isExisted = false;
+            for (int j = 0; j < courses.size(); j++) {
+                if (courses.get(j).getId() == courseId) {
+                    modelMap.addAttribute("message", "You have already registed this course!");
+                    return "registration_page";
+                }
+            }
+            Course c = courseService.getById(courseId);
+            cart.add(c);
+            total += c.getPrice();
+
             session.setAttribute("cart", cart);
-            session.setAttribute("total", total);
+            session.setAttribute("total", String.format("%.02f", total));
         }
         return "registration_page";
     }
@@ -110,11 +112,12 @@ public class CourseController {
         HttpSession session = request.getSession();
         if (session.getAttribute("cart") == null) {
             modelMap.addAttribute("message", "Empty");
-        } else {
-            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>) session.getAttribute("cart");
-//            session.setAttribute("cart", cart);
-            modelMap.addAttribute("list", cart);
         }
+//        else {
+//            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>) session.getAttribute("cart");
+////            session.setAttribute("cart", cart);
+//            modelMap.addAttribute("list", cart);
+//        }
         return "registration_page";
     }
 
@@ -128,12 +131,13 @@ public class CourseController {
         } else {
             return "redirect:/account/login";
         }
-        //TODO: check course list in session is null or not
+        //check course list in session is null or not
         HttpSession session = request.getSession();
         if (session.getAttribute("cart") == null) {
             modelMap.addAttribute("message", "Empty");
         } else {
-            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>) session.getAttribute("cart");
+            // todo: Add course to Account_Course table
+            List<Course> cart = (List<Course>) session.getAttribute("cart");
             courseService.addCourseRegistration(cart, account.getId());
             session.removeAttribute("cart");
             modelMap.addAttribute("message", "Buy Successful");
