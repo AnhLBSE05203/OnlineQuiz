@@ -3,13 +3,10 @@ package com.fpt.OnlineQuiz.controller;
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
 import com.fpt.OnlineQuiz.dto.ExpertFeaturedDTO;
 import com.fpt.OnlineQuiz.model.Account;
-import com.fpt.OnlineQuiz.model.Question;
-import com.fpt.OnlineQuiz.model.QuizHistory;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.*;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -48,7 +45,7 @@ public class QuizHistoryController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Account account = (Account) authentication.getPrincipal();
 
-        List<QuizHistory> history = quizHistoryService.listQuizHistory(account.getId());
+        List<Object[]> history = quizHistoryService.listQuizHistory(account.getId());
         model.addAttribute("history", history);
         return "quizHistory_page";
     }
