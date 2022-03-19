@@ -250,8 +250,11 @@ public class Constants {
                 + "<p>Ignore this email if it was not you </p>";
         return content;
     }
-    public static String getContactMailTempplate(String contactContent){
+    public static String getContactMailTempplate(String name,String email, String topic, String contactContent){
         String content = "<p>Hello, This is a contact mail</p>"
+                + "<p>Name: " + name +" </p>"
+                + "<p>Email: " + email +" </p>"
+                + "<p>Topic: " + topic +" </p>"
                 + "<p>Content: " + contactContent +" </p>"
                 + "<br>";
         return content;
