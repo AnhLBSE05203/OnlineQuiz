@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,16 +28,25 @@ public class QuizHistory {
     @Column(name = "quizHistoryName")
     private String name;
 
+
     @Autowired
-    public QuizHistory(String name,Date date,int all,int trueNum){
+    public QuizHistory(String name,Date date,int id,long count,String accountName){
         this.name = name;
-        this.historyTime = date;
-        this.all = all;
-        this.trueNum = trueNum;
+        this.createdTime = date;
+        this.id = id;
+        this.quizCount = count;
+        this.accountName = accountName;
 
     }
-    private int all;
-    private int trueNum;
+
+    @Autowired
+    public QuizHistory(String name,Date date,int number,long trueNum){
+        this.name = name;
+        this.historyTime = date;
+        this.number = number;
+        this.trueNum = trueNum;
+    }
+    private long trueNum;
 
     @Column(name = "createdTime")
     private Date createdTime;
