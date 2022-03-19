@@ -15,4 +15,6 @@ public interface CRUDQuizHistory extends CrudRepository<QuizHistory, Integer> {
             "on qh.id = qhaa.quizHistory.id\n" +
             "WHERE qhaa.account.id = ?1")
     List<QuizHistory> listQuizByAccountAdd(int accountId);
+
+
 }

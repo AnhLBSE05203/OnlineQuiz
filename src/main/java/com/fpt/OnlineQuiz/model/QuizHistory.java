@@ -29,6 +29,8 @@ public class QuizHistory {
     private Date createdTime;
     @Column(name = "historyTime")
     private Date historyTime;
+    @Column(name = "numOfQuestion")
+    private int number;
     @ManyToOne
     @JoinColumn(name = "accountId")
     private Account account;
