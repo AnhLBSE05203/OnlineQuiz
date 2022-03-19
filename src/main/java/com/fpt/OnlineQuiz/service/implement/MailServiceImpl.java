@@ -32,8 +32,8 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public void sendContactEmail(String recipientEmail, String content) throws MessagingException, UnsupportedEncodingException {
-        sendEmail(recipientEmail, "Here is the content of contact mail!", Constants.getContactMailTempplate(content), true);
+    public void sendContactEmail(String recipientEmail, String name, String email, String topic, String content) throws MessagingException, UnsupportedEncodingException {
+        sendEmail(recipientEmail, "Here is the content of contact mail!", Constants.getContactMailTempplate(name, email, topic, content), true);
     }
 
     public void sendEmail(String toEmail, String title, String content, boolean isHtml) throws ServiceException {
