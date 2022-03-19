@@ -19,4 +19,9 @@ public class QuizHistoryServiceImpl implements QuizHistoryService {
     public List<QuizHistory> getQuizByAccountAdd(int id) {
         return quizHistory.listQuizByAccountAdd(id);
     }
+
+    @Override
+    public List<QuizHistory> listQuizHistory(int historyAccountId) {
+        return quizHistory.listHistoryQuiz(historyAccountId);
+    }
 }

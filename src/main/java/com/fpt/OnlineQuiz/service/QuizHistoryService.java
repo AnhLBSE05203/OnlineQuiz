@@ -9,4 +9,6 @@ import java.util.List;
 @Service
 public interface QuizHistoryService {
       List<QuizHistory> getQuizByAccountAdd(int id);
+
+      List<QuizHistory> listQuizHistory(int historyAccountId);
 }

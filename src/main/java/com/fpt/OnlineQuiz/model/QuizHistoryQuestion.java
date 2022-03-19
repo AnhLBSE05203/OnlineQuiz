@@ -30,7 +30,6 @@ public class QuizHistoryQuestion {
     @JoinColumn(name = "userAnswer")
     private Answer userAnswer;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "accountId")
     private Account id;
