@@ -33,4 +33,8 @@ public interface CourseService {
     boolean isDuplicated(String name, int subjectId);
 
     void addCourseRegistration(List<Course> list, int accountId);
+
+    List<Course> getCoursesTop3BySubjectId(int subjectId);
+
+    List<Course> getCoursesNext3BySubjectId(int subjectId, int start);
 }
