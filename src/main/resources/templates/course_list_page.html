@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+
+    <!-- CSS here -->
+    <div th:replace="components/header_footer.html :: common-style"></div>
+    <!-- page-specific css -->
+</head>
+<body>
+<!-- ? Preloader Start -->
+<div th:replace="components/header_footer.html :: user-preload"></div>
+<!-- Preloader Start -->
+<!-- Header Start -->
+<div th:replace="components/header_footer.html :: user-header"></div>
+<!-- Header End -->
+<main>
+    <!--? slider Area Start-->
+    <section class="slider-area slider-area2">
+        <div class="slider-active">
+            <!-- Single Slider -->
+            <div class="single-slider slider-height2">
+                <div class="container">
+                    <div class="row" id="content">
+                        <div class="col-xl-8 col-lg-11 col-md-12">
+                            <div class="hero__caption hero__caption2">
+                                <h1 data-animation="bounceIn" data-delay="0.2s">Courses List</h1>
+                                <!-- breadcrumb Start-->
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Courses</a></li>
+                                    </ol>
+                                </nav>
+                                <!-- breadcrumb End -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Courses area start -->
+    <div class="courses-area section-padding40 fix">
+        <div class="container">
+            <div class="row" id="listcourse">
+
+                <div class="col-lg-4 course" th:each="course : ${list}">
+                    <input type="hidden" id="subjectId" th:value="${course.getSubject().getId()}">
+                    <div class="properties properties2 mb-30">
+                        <div class="properties__card">
+                            <div class="properties__img overlay1">
+                                <a href="#"><img th:src="@{/img/gallery/featured2.png}" alt=""></a>
+                            </div>
+                            <div class="properties__caption">
+                                <!--                                <p th:text="${course.name}"></p>-->
+                                <h3><a href="#" th:text="${course.name}"></a></h3>
+                                <p th:text="${course.description}"></p>
+                                <a href="#" class="border-btn border-btn2">Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-8">
+                    <div class="section-tittle text-center mt-40">
+                        <a class="border-btn" onclick="load()">Load More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ? services-area -->
+    <div class="services-area services-area2 section-padding40">
+        <div class="container">
+            <div class="row justify-content-sm-center">
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-services mb-30">
+                        <div class="features-icon">
+                            <img th:src="@{/img/icon/icon1.svg}" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <h3>60+ UX courses</h3>
+                            <p>The automated process all your website tasks.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-services mb-30">
+                        <div class="features-icon">
+                            <img th:src="@{/img/icon/icon2.svg}" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <h3>Expert instructors</h3>
+                            <p>The automated process all your website tasks.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-services mb-30">
+                        <div class="features-icon">
+                            <img th:src="@{/img/icon/icon3.svg}" alt="">
+                        </div>
+                        <div class="features-caption">
+                            <h3>Life time access</h3>
+                            <p>The automated process all your website tasks.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="components/header_footer.html :: user-footer">
+</footer>
+<!-- Scroll Up -->
+<div th:insert="components/header_footer.html :: scroll-up">
+</div>
+
+<!-- JS here -->
+<th:block th:replace="components/header_footer.html :: common-script">
+</th:block>
+<!-- page-specific js -->
+<script>
+
+    function load(){
+        var start = document.getElementsByClassName("course").length;
+        var subjectId = document.getElementById("subjectId").value;
+        $.ajax({
+            url:"/user/loadMore",
+            type:"get",
+            data:{
+                start: start,
+                subjectId : subjectId
+            },
+            success: function (data){
+                if(data != ""){
+                    var row = document.getElementById("listcourse");
+                    row.innerHTML += data;
+                }
+            }
+        })
+    }
+
+
+
+
+
+
+</script>
+</body>
+</html>
