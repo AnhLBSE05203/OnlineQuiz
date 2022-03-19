@@ -40,7 +40,7 @@ public class ContactController {
         String message = request.getParameter("message");
 
         try {
-            mailService.sendContactEmail("lebatuyen562@gmail.com", message);
+            mailService.sendContactEmail("lebatuyen562@gmail.com", name, email, topic, message);
 //            mailService.sendContactEmail();
             modelMap.addAttribute("msg", "Send email Successful!");
         }catch (MailException exception){
