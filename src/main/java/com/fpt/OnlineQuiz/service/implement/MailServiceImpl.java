@@ -31,6 +31,11 @@ public class MailServiceImpl implements MailService {
         sendEmail(recipientEmail, Constants.MAIL_SUBJECT_CONFIRM_REGISTRATION, Constants.getConfirmRegistrationMailTemplate(link), true);
     }
 
+    @Override
+    public void sendContactEmail(String recipientEmail, String content) throws MessagingException, UnsupportedEncodingException {
+        sendEmail(recipientEmail, "Here is the content of contact mail!", Constants.getContactMailTempplate(content), true);
+    }
+
     public void sendEmail(String toEmail, String title, String content, boolean isHtml) throws ServiceException {
         try {
             MimeMessage message = this.getMessageSetting(title, content, isHtml);

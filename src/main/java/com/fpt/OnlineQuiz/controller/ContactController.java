@@ -13,17 +13,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.logging.Logger;
 
 @Controller
 @RequestMapping(path = "/contact")
 public class ContactController {
 
-    private JavaMailSender emailSender;
+//    private JavaMailSender emailSender;
 
-//    @Autowired
-//    private MailService mailService;
+    @Autowired
+    private MailService mailService;
 
     @GetMapping(path = "/create")
     public String showContactPage(ModelMap modelMap){
@@ -38,18 +40,16 @@ public class ContactController {
         String message = request.getParameter("message");
 
         try {
-            SimpleMailMessage mail = new SimpleMailMessage();
-            mail.setTo(email);
-            mail.setFrom("lebatuyen562@gmail.com");
-            mail.setSubject(topic);
-            mail.setText(message);
-            System.out.println("name: " + name + " email: " + email + " topic: " + topic);
-            //TODO : fix nullpointerException
-            emailSender.send(mail);
+            mailService.sendContactEmail("lebatuyen562@gmail.com", message);
+//            mailService.sendContactEmail();
             modelMap.addAttribute("msg", "Send email Successful!");
         }catch (MailException exception){
             modelMap.addAttribute("msg", "Send email fail");
             System.out.println("Error sand email: "+exception.getMessage());
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
         return "contact_page";

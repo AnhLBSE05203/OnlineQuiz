@@ -22,4 +22,6 @@ public interface MailService {
      * @throws UnsupportedEncodingException
      */
     void sendConfirmRegistrationEmail(String recipientEmail, String link) throws MessagingException, UnsupportedEncodingException;
+
+    void sendContactEmail(String recipientEmail, String content) throws MessagingException, UnsupportedEncodingException;
 }
