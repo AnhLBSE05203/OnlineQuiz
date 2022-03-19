@@ -26,6 +26,7 @@ $(document).ready(function() {
             data : 'explain',
         }, {
             title : 'Action',
+            orderable: false,
             // data : 'status',
             render: function(data, type, row, meta) {
                 var html = '<button type="button" class="btn btn-primary" onclick="showDetailQuestionModal('+ row['id'] + ')">'
