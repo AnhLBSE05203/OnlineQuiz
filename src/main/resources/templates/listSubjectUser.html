@@ -221,6 +221,7 @@
                     <!-- Modal content-->
                     <div class="modal-content" style="width: 900px">
                         <div class="modal-header">
+                            <input type="hidden" id="subId">
                             <h4 class="modal-title">PRN</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
@@ -236,7 +237,11 @@
                             <span> <i class="bi bi-bookmark"></i> Bạn sẽ học được gì?</span>
                             <p id="subjectLearn"></p>
                             <button type="button" class="btn btn-default" data-dismiss="modal"
-                                    style="bottom: 4px;right: -716px;">
+                                    style="bottom: 4px;right: -516px;" th:onclick="showCourse()">
+                                Go to course
+                            </button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"
+                                    style="bottom: 4px;right: -556px;">
                                 Close
                             </button>
                         </div>
