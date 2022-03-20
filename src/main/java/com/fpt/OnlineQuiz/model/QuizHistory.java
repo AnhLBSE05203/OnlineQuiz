@@ -1,13 +1,10 @@
 package com.fpt.OnlineQuiz.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -29,30 +26,31 @@ public class QuizHistory {
     private String name;
 
 
-    @Autowired
-    public QuizHistory(String name,Date date,int id,long count,String accountName){
-        this.name = name;
-        this.createdTime = date;
-        this.id = id;
-        this.quizCount = count;
-        this.accountName = accountName;
-
-    }
-
-    @Autowired
-    public QuizHistory(String name,Date date,int number,long trueNum){
-        this.name = name;
-        this.historyTime = date;
-        this.number = number;
-        this.trueNum = trueNum;
-    }
-    private long trueNum;
+//    @Autowired
+//    public QuizHistory(String name,Date date,int id,long count,String accountName){
+//        this.name = name;
+//        this.createdTime = date;
+//        this.id = id;
+//        this.quizCount = count;
+//        this.accountName = accountName;
+//
+//    }
+//
+//    @Autowired
+//    public QuizHistory(String name,Date date,int number,long trueNum){
+//        this.name = name;
+//        this.historyTime = date;
+//        this.number = number;
+//        this.trueNum = trueNum;
+//    }
+//    @Column
+//    private long trueNum;
 
     @Column(name = "createdTime")
     private Date createdTime;
     @Column(name = "historyTime")
     private Date historyTime;
-    @Column(name = "numOfQuestion")
+    @Column(name = "numOfQuestion",nullable = true)
     private Integer number;
     @ManyToOne
     @JoinColumn(name = "accountId")
@@ -68,8 +66,12 @@ public class QuizHistory {
     @Formula("(SELECT a.full_name FROM account a WHERE a.account_id = account_id)")
     private String accountName;
 
-    @Formula("(10)")
-    private Long ahihi;
+    @Formula("(SELECT COUNT(a.is_correct) FROM quiz_history qh INNER JOIN quiz_history_question qhq\n" +
+            "    on qh.quiz_history_id = qhq.quiz_history_id\n" +
+            "INNER JOIN answer a on a.answer_id = qhq.user_answer\n" +
+            "WHERE qh.history_account_id = history_account_id AND qh.quiz_history_id = quiz_history_id AND a.is_correct = true\n" +
+            "GROUP BY qh.quiz_history_id)")
+    private Long trueNum;
 
 
     @OneToMany(mappedBy = "quizHistory", cascade = CascadeType.ALL)
