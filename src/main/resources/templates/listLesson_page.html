@@ -69,7 +69,8 @@
                             <div class="properties__caption">
                                 <p>User Experience</p>
                                 <h3><a href="#" th:text="${subject.get.name}"></a></h3>
-                                <p th:text="${subject.get.getSubjectInfo()}">The automated process all your website tasks. Discover tools and techniques to engage
+                                <p th:text="${subject.get.getSubjectInfo()}">The automated process all your website
+                                    tasks. Discover tools and techniques to engage
                                     effectively with vulnerable children and young people.
                                 </p>
                                 <div class="properties__footer d-flex justify-content-between align-items-center">
@@ -87,17 +88,19 @@
                                         <span></span>
                                     </div>
                                 </div>
-                                <a href="#" class="border-btn border-btn2">Find out more</a>
+                                <!--                                <a href="#" class="border-btn border-btn2">Find out more</a>-->
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- list lesson-->
                 <div id="course-content" class="col-md-8">
-                    <div class="course-description"><small>Course Status: <span></span> </small> <small>Course
-                        Price: <span> <span
-                                class="ld-currency">$</span>61                        </span> </small>
-                        <h3 class="course-title" th:text="${subject.get.name}"></h3> There are many
+                    <div class="course-description">
+<!--                        <small>Course Status: <span></span> </small> <small>Course-->
+<!--                        Price: <span> <span-->
+<!--                                class="ld-currency">$</span>61                        </span> </small>-->
+                        <h3 class="course-title" th:text="${subject.get.name}"></h3>
+                        <p th:text="${subject.get.learnAfter}">There are many
                         variations of passages of Lorem Ipsum available, but the majority have suffered
                         alteration in some form, by injected humour, or randomised words which don't
                         look even slightly believable. If you are going to use a passage of Lorem Ipsum,
@@ -108,6 +111,7 @@
                         sentence structures, to generate Lorem Ipsum which looks reasonable. The
                         generated Lorem Ipsum is therefore always free from repetition, injected humour,
                         or non-characteristic words etc.
+                        </p>
                     </div><!-- end desc -->
                     <table class="table">
                         <thead>
