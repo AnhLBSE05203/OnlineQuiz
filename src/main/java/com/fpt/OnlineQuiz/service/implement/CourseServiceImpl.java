@@ -106,11 +106,6 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void addCourseRegistration(List<Course> list, int accountId) {
-        courseRepository.addRegistrationCourse(list, accountId);
-    }
-
-    @Override
     public List<Course> getCoursesTop3BySubjectId(int subjectId) {
         return courseRepository.getTop3CoursesBySubjectId(subjectId);
     }
