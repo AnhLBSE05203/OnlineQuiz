@@ -25,6 +25,8 @@ public class QuizHistory {
     @Column(name = "quizHistoryName")
     private String name;
 
+    @Column(name = "description")
+    private String des;
 
 //    @Autowired
 //    public QuizHistory(String name,Date date,int id,long count,String accountName){
