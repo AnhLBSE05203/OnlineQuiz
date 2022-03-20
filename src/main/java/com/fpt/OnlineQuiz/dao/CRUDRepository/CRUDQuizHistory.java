@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface CRUDQuizHistory extends CrudRepository<QuizHistory, Integer> {
 
-    @Query("SELECT new QuizHistory (qh.name,qh.createdTime,qh.id,qh.quizCount,qh.accountName) FROM QuizHistory qh JOIN QuizHistoryAccountAdd qhaa " +
+    @Query("SELECT qh FROM QuizHistory qh JOIN QuizHistoryAccountAdd qhaa " +
             "on qh.id = qhaa.quizHistory.id\n" +
             "WHERE qhaa.account.id = ?1")
     List<QuizHistory> listQuizByAccountAdd(int accountId);

@@ -53,7 +53,7 @@ public class QuizHistory {
     @Column(name = "historyTime")
     private Date historyTime;
     @Column(name = "numOfQuestion")
-    private int number;
+    private Integer number;
     @ManyToOne
     @JoinColumn(name = "accountId")
     private Account account;
@@ -67,6 +67,10 @@ public class QuizHistory {
 
     @Formula("(SELECT a.full_name FROM account a WHERE a.account_id = account_id)")
     private String accountName;
+
+    @Formula("(10)")
+    private Long ahihi;
+
 
     @OneToMany(mappedBy = "quizHistory", cascade = CascadeType.ALL)
     private List<QuizHistoryQuestion> quizHistoryQuestions;
