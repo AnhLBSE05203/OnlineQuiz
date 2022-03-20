@@ -12,6 +12,7 @@
     <link rel="stylesheet" th:href="@{/css/user_course_detail_modal.css}">
     <link rel="stylesheet" th:href="@{/css/home_page.css}">
     <div th:replace="components/header_footer.html :: common-style"></div>
+    <link rel="stylesheet" th:href="@{/css/create-quiz-package.css}">
 
 </head>
 
@@ -180,6 +181,28 @@
                         </div> <!-- End -->
                     </li> <!-- End -->
                 </ul> <!-- End -->
+                <div class="container mt-5 px-5">
+                    <div class="mb-4">
+                        <h2>Add Terms(Qestion)</h2> <span>add terms(questions) and definition(answer)</span>
+                    </div>
+                    <form class="row" th:action="@{/practices/add}" method="POST">
+                        <div class="col-md-8">
+                            <div class="card p-3">
+                                <h6 class="text-uppercase">Terms</h6>
+                                <div class="inputbox mt-3"><input type="text" name="terms" class="form-control"
+                                                                  required="required"> <span>terms here</span></div>
+                                <div class="mt-4 mb-4">
+                                    <h6 class="text-uppercase">Definition</h6>
+                                    <div class="inputbox mt-3"><input type="text" name="def" class="form-control"
+                                                                      required="required"> <span>define here</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-4 mb-4 d-flex justify-content-between">
+                                <button class="btn btn-success px-3" type="submit">Add</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

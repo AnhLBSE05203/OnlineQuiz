@@ -22,4 +22,7 @@ public interface CRUDQuizHistory extends CrudRepository<QuizHistory, Integer> {
             "WHERE qh.accountHistory.id = ?1\n" +
             "GROUP BY qh.id")
     List<QuizHistory> listHistoryQuiz(int historyAccountId);
+
+    @Query("SELECT qh FROM QuizHistory qh WHERE qh.id = ?1")
+    QuizHistory findForAdd(int id);
 }
