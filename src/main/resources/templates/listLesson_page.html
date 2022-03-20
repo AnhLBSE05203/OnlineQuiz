@@ -12,13 +12,23 @@
     <!-- CSS here -->
     <div th:replace="components/header_footer.html :: common-style"></div>
     <link rel="stylesheet" th:href="@{/css/list-lesson.css}">
+    <link rel="stylesheet" th:href="@{/css/user_course_detail_modal.css}">
+    <link rel="stylesheet" th:href="@{/css/home_page.css}">
 
 </head>
 
 <body>
 <!-- ? Preloader Start -->
-<div th:replace="components/header_footer.html :: user-preload"></div>
-<!-- Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img th:src="@{/img/logo/loder.png}" alt="">
+            </div>
+        </div>
+    </div>
+</div><!-- Preloader Start -->
 <!-- Header Start -->
 <div th:replace="components/header_footer.html :: user-header"></div>
 <!-- Header End -->
@@ -35,11 +45,8 @@
                                 <h1 data-animation="bounceIn" data-delay="0.2s"
                                     th:text="${subject.get().getName()}"></h1>
                                 <!-- breadcrumb Start-->
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Services</a></li>
-                                    </ol>
+                                <nav class="header-area header-transparent"
+                                     th:replace="components/header_footer.html :: nav-page">
                                 </nav>
                                 <!-- breadcrumb End -->
                             </div>
@@ -100,17 +107,7 @@
 <!--                        Price: <span> <span-->
 <!--                                class="ld-currency">$</span>61                        </span> </small>-->
                         <h3 class="course-title" th:text="${subject.get.name}"></h3>
-                        <p th:text="${subject.get.learnAfter}">There are many
-                        variations of passages of Lorem Ipsum available, but the majority have suffered
-                        alteration in some form, by injected humour, or randomised words which don't
-                        look even slightly believable. If you are going to use a passage of Lorem Ipsum,
-                        you need to be sure there isn't anything embarrassing hidden in the middle of
-                        text. All the Lorem Ipsum generators on the Internet tend to repeat predefined
-                        chunks as necessary, making this the first true generator on the Internet. It
-                        uses a dictionary of over 200 Latin words, combined with a handful of model
-                        sentence structures, to generate Lorem Ipsum which looks reasonable. The
-                        generated Lorem Ipsum is therefore always free from repetition, injected humour,
-                        or non-characteristic words etc.
+                        <p th:text="${subject.get.learnAfter}">
                         </p>
                     </div><!-- end desc -->
                     <table class="table">
@@ -165,121 +162,9 @@
     </div>
     <!-- Courses area End -->
     <!--? top subjects Area Start -->
-    <div class="topic-area">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-7 col-lg-8">
-                    <div class="section-tittle text-center mb-55">
-                        <h2>Explore top subjects</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic1.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic2.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic3.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic4.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic5.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic6.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic7.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="single-topic text-center mb-30">
-                        <div class="topic-img">
-                            <img th:src="@{/img/gallery/topic8.png}" alt="">
-                            <div class="topic-content-box">
-                                <div class="topic-content">
-                                    <h3><a href="#">Programing</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-12">
-                    <div class="section-tittle text-center mt-20">
-                        <a href="listLesson_page.html" class="border-btn">View More Subjects</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div th:replace="components/header_footer.html :: featured-page">
+    </div>
+    <div th:replace="components/user_course_detail_modal.html :: courseUserModal">
     </div>
     <!-- top subjects End -->
     <!-- ? services-area -->
@@ -331,5 +216,9 @@
 
 <th:block th:insert="components/header_footer.html :: common-script">
 </th:block>
+<!-- page-specific js -->
+<script th:src="@{/js/home_page.js}"></script>
+<script th:src="@{/js/user_course_detail.js}"></script>
+<div th:replace="components/header_footer.html :: common-script"></div>
 </body>
 </html>
