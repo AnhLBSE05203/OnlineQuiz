@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{https://kit.fontawesome.com/a33530bb41.js}" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/quiz_handle.css}">
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
+</head>
+<body>
+<!-- start Quiz  button -->
+<div class="start_button">
+    <button>Start Quiz</button>
+</div>
+
+<!-- InfoBox -->
+<div class="info_box">
+    <div class="info_title">
+        <span>Some rule of quiz</span>
+    </div>
+    <div class="info_list">
+        <div class="info">1.You will have <span>15 seconds</span> per each question</div>
+        <div class="info">2.Once you select your answer,you can't reselect</div>
+        <div class="info">3.You can't select any option once time goes off</div>
+        <div class="info">4.You can't exit from quiz while you are playing</div>
+        <div class="info">5.you'll get points on the correct answer</div>
+    </div>
+    <div class="buttons">
+        <button class="quit">Exit Quiz</button>
+        <button class="restart">Continue</button>
+    </div>
+</div>
+<!-- quiz box -->
+<div class="quiz_box">
+    <header>
+        <div class="title">Quiz application</div>
+        <div class="timer">
+            <div class="time_text">Time left</div>
+            <div class="timer_sec">15</div>
+        </div>
+        <div class="time_line"></div>
+    </header>
+    <section>
+        <div class="que_text">
+            <span th:text="${question.getQuestion()}" th:value="${question.getId()}"  th:id="question" ></span>
+        </div>
+        <!-- list -->
+        <div class="option_list">
+            <div class="option" th:value="${listanswer.get(0).getId()}"  onclick="getQandA()">
+                <span th:text="${listanswer.get(0).getAnswer()}"></span>
+            </div>
+            <div class="option" th:value="${listanswer.get(1).getId()}"  onclick="getQandA()">
+                <span th:text="${listanswer.get(1).getAnswer()}"></span>
+            </div>
+            <div class="option" th:value="${listanswer.get(2).getId()}"  onclick="getQandA()">
+                <span th:text="${listanswer.get(2).getAnswer()}"></span>
+            </div>
+            <div class="option" th:value="${listanswer.get(3).getId()}"  onclick="getQandA()">
+                <span th:text="${listanswer.get(3).getAnswer()}" ></span>
+            </div>
+        </div>
+        <input id="hidden" type="hidden" th:value="${count}">
+    </section>
+    <!--                <div class="icon cross"><i class="fas fa-times"></i></div>-->
+    <!--                <div class="icon tick"><i class="fas fa-check"></i></div>-->
+    <!-- quiz box footer -->
+    <footer>
+        <div class="total_que">
+            <!-- <span><p>2</p>of<p>5</p>Questions</span> -->
+        </div>
+        <button class="next_btn">Next Question</button>
+    </footer>
+</div>
+<!-- Result box -->
+<div class="result_box">
+    <div class="icon">
+        <i class="fas fa-crown"></i>
+    </div>
+    <div class="complete_text">You've completed quiz</div>
+    <div class="score_text">
+        <!-- <span>and sorry, You got only<p>2</p>out of <p>5</p></span> -->
+    </div>
+    <div class="buttons">
+        <button class="restart">Replay Quiz</button>
+        <button class="quit">Quit Quiz</button>
+    </div>
+</div>
+<script th:src="@{/js/quiz_handle.js}"></script>
+<script th:src="@{/js/quiz_handle_1.js}"></script>
+
+<!--<script src="Question.js"></script>-->
+</body>
+</html>
