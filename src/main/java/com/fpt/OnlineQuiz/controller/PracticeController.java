@@ -7,6 +7,7 @@ import com.fpt.OnlineQuiz.model.*;
 import com.fpt.OnlineQuiz.service.*;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,9 +50,14 @@ public class PracticeController {
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_EXPERT_FEATURED, expertFeatured);
         List<Subject> subjectFeatured = subjectService.getFeaturedSubjects(Constants.HOME_PAGE_SUBJECT_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
+        Account account = new Account();
+        try {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Account account = (Account) authentication.getPrincipal();
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            account = (Account) authentication.getPrincipal();
+        } catch (Exception e) {
+            return "redirect:/account/login";
+        }
        /*Get all QuizHistory(1 quizHistory contain multiple questions) existed in user account.
        Same like quizlet,user add học phần (quizHistory) in their practices list,it wll display
        in here (practices list)
@@ -80,13 +86,24 @@ public class PracticeController {
 
     @GetMapping(value = "/create")
     public String showCreateNewPackagePage(Model model) {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            Account account = (Account) authentication.getPrincipal();
+        } catch (Exception e) {
+            return "redirect:/account/login";
+        }
         return "create-quiz-package";
     }
+
     @PostMapping(value = "/create")
     public String createNewPackagePage(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Account account = (Account) authentication.getPrincipal();
-
+        Account account = new Account();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            account = (Account) authentication.getPrincipal();
+        } catch (Exception e) {
+            return "redirect:/account/login";
+        }
         QuizHistory quizHistory = new QuizHistory();
         LocalDate localDate = LocalDate.now();
         Date date = new Date(String.valueOf(localDate));
@@ -100,6 +117,6 @@ public class PracticeController {
         quizHistoryAccountAdd.setAccount(account);
         quizHistoryAccountAdd.setQuizHistory(quizHistory);
         accountAddServices.addOwnerOrAdd(quizHistoryAccountAdd);
-        return "practices_list_page";
+        return "redirect:/practices";
     }
 }
