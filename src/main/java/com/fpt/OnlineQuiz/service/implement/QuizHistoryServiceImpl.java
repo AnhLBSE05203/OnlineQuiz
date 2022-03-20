@@ -29,5 +29,10 @@ public class QuizHistoryServiceImpl implements QuizHistoryService {
         return quizHistory.save(quiz);
     }
 
+    @Override
+    public QuizHistory findId(int id) {
+        return quizHistory.findForAdd(id);
+    }
+
 
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.List;
 @RequestMapping("/practices")
 public class PracticeController {
 
+    private int idForAdd;
     @Autowired
     QuizHistoryService quizHistoryService;
     @Autowired
@@ -73,6 +75,15 @@ public class PracticeController {
 
     @GetMapping(value = "/detail")
     public String practiceDetailPage(Model model, @Param("id") int id) {
+        idForAdd = id;
+        Account account = new Account();
+        try {
+
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            account = (Account) authentication.getPrincipal();
+        } catch (Exception e) {
+            return "redirect:/account/login";
+        }
         List<Question> questions = questionService.getQuestionQHid(id);
         model.addAttribute("questions", questions);
         List<CourseFeaturedDTO> courseFeatured = courseService.getFeaturedCourses(Constants.HOME_PAGE_COURSE_NUMBER);
@@ -81,6 +92,8 @@ public class PracticeController {
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_EXPERT_FEATURED, expertFeatured);
         List<Subject> subjectFeatured = subjectService.getFeaturedSubjects(Constants.HOME_PAGE_SUBJECT_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
+        List<QuizHistory> quizHistories = quizHistoryService.getQuizByAccountAdd(account.getId());
+        model.addAttribute("quizHistory", quizHistories);
         return "practices_detail_page";
     }
 
@@ -105,11 +118,11 @@ public class PracticeController {
             return "redirect:/account/login";
         }
         QuizHistory quizHistory = new QuizHistory();
-        LocalDate localDate = LocalDate.now();
-        Date date = new Date(String.valueOf(localDate));
-        quizHistory.setName(request.getParameter("name"));
-        quizHistory.setDes(request.getParameter("des"));
-        quizHistory.setCreatedTime(date);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        quizHistory.setName(request.getParameter("packageN"));
+        quizHistory.setDes(request.getParameter("desQ"));
+        quizHistory.setCreatedTime(new Date(formatter.format(date)));
         quizHistory.setAccount(account);
         quizHistoryService.addQuizPackage(quizHistory);
 
@@ -118,5 +131,23 @@ public class PracticeController {
         quizHistoryAccountAdd.setQuizHistory(quizHistory);
         accountAddServices.addOwnerOrAdd(quizHistoryAccountAdd);
         return "redirect:/practices";
+    }
+
+    @PostMapping(value = "/add")
+    public String addQuiz(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        Account account = new Account();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            account = (Account) authentication.getPrincipal();
+        } catch (Exception e) {
+            return "redirect:/account/login";
+        }
+        QuizHistory quizHistory = quizHistoryService.findId(idForAdd);
+        Question question = new Question();
+        question.setQuestion(request.getParameter("terms"));
+        question.setAnswer(request.getParameter("def"));
+        question.setQuizHistory(quizHistory);
+        questionService.addQuestion(question);
+        return "redirect:/practices/detail?id=" + idForAdd;
     }
 }
