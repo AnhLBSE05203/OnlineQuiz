@@ -147,11 +147,6 @@ public class CourseController {
         if (session.getAttribute("cart") == null) {
             modelMap.addAttribute("message", "Empty");
         }
-//        else {
-//            List<CourseRegistrationDTO> cart = (List<CourseRegistrationDTO>) session.getAttribute("cart");
-////            session.setAttribute("cart", cart);
-//            modelMap.addAttribute("list", cart);
-//        }
         return "registration_page";
     }
 
@@ -167,7 +162,7 @@ public class CourseController {
         }
         //check course list in session is null or not
         HttpSession session = request.getSession();
-        if (session.getAttribute("cart") == null) {
+        if (session == null) {
             modelMap.addAttribute("message", "Empty");
         } else {
             // todo: Add course to Account_Course table

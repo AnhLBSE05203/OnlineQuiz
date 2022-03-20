@@ -72,7 +72,7 @@
                                                     </th>
                                                 </tr>
                                             </thead>
-                                            <tbody th:if="${session.cart.size() != 0}">
+                                            <tbody th:if="${session != null}">
                                                 <!--                                    <c:forEach items="${list}" var="o">-->
                                                 <tr th:each="course: ${session.cart}">
                                                     <th scope="row">
@@ -109,7 +109,7 @@
                                         Payment
                                     </div>
 
-                                    <div class="p-4" >
+                                    <div class="p-4" th:if="${session != null}">
                                         <ul class="list-unstyled mb-4">
                                             <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                                     class="text-muted">Total</strong>

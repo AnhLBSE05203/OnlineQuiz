@@ -63,7 +63,8 @@
                                 <!--                                <p th:text="${course.name}"></p>-->
                                 <h3><a href="#" th:text="${course.name}"></a></h3>
                                 <p th:text="${course.description}"></p>
-                                <a href="#" class="border-btn border-btn2">Detail</a>
+                                <a th:attr="onclick=|showUserCourseDetailModal('${course.id}')|"
+                                class="border-btn border-btn2">Detail</a>
                             </div>
                         </div>
                     </div>
@@ -78,7 +79,7 @@
             </div>
         </div>
     </div>
-
+    <div th:replace="components/user_course_detail_modal.html :: courseUserModal"></div>
     <!-- ? services-area -->
     <div class="services-area services-area2 section-padding40">
         <div class="container">
@@ -157,5 +158,6 @@
 
 
 </script>
+<script th:src="@{/js/user_course_detail.js}"></script>
 </body>
 </html>
