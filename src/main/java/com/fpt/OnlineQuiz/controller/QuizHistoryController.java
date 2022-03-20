@@ -42,12 +42,17 @@ public class QuizHistoryController {
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_EXPERT_FEATURED, expertFeatured);
         List<Subject> subjectFeatured = subjectService.getFeaturedSubjects(Constants.HOME_PAGE_SUBJECT_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
+        Account account = new Account();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            account = (Account) authentication.getPrincipal();
+        }catch (Exception e){
+            return "redirect:/account/login";
+        }
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Account account = (Account) authentication.getPrincipal();
 
         List<QuizHistory> history = quizHistoryService.listQuizHistory(account.getId());
         model.addAttribute("history", history);
-        return "quizHistory_page";
+        return "quiz-history-page";
     }
 }

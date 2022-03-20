@@ -51,7 +51,6 @@
                     <div class="profile-info col-md-9">
                         <div class="panel">
                             <div class="bio-graph-heading" th:text="${account.introduce}">
-
                             </div>
                             <div class="panel-body bio-graph-info">
                                 <h1>Bio Graph</h1>
@@ -110,13 +109,11 @@
         <th:block th:insert="components/header_footer.html :: common-script">
         </th:block>
         <script>
-         if (document.getElementById("gender").innerText = 1) {
-              document.getElementById("gender").innerText = "Female";
-         }else {
+         if (document.getElementById("gender").innerText = true) {
               document.getElementById("gender").innerText = "Male";
+         }else {
+              document.getElementById("gender").innerText = "Female";
          }
-
-
         </script>
     </body>
 </html>

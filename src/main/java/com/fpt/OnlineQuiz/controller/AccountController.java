@@ -340,6 +340,7 @@ public class AccountController {
             sb.append(Constants.LINK_HOME);
             return sb.toString();
         }
+        model.addAttribute("account", account);
         model.addAttribute("email", email);
         model.addAttribute("registerDTO", new RegisterDTO());
         model.addAttribute("name", account.getFullName());
@@ -357,8 +358,18 @@ public class AccountController {
      */
     @PostMapping(Constants.LINK_EDIT_PROFILE)
     public String processEditProfilePage(@ModelAttribute RegisterDTO registerDTO, Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        String email = request.getParameter("mail");
-        Account account = accountService.findAccountByEmail(email);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Account account = null;
+        String email = "";
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            account = (Account) authentication.getPrincipal();
+            email = account.getEmail();
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_HOME);
+            return sb.toString();
+        }
         if (!isEmailValid(request.getParameter("emailI"))) {
             redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_EMAIL_INVALID);
             StringBuilder sb = new StringBuilder();
