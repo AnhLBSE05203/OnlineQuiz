@@ -23,4 +23,11 @@ public class QuizHistoryServiceImpl implements QuizHistoryService {
     public List<QuizHistory> listQuizHistory(int historyAccountId) {
         return quizHistory.listHistoryQuiz(historyAccountId);
     }
+
+    @Override
+    public QuizHistory addQuizPackage(QuizHistory quiz) {
+        return quizHistory.save(quiz);
+    }
+
+
 }

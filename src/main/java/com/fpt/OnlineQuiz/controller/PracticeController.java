@@ -1,11 +1,9 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDQuizHistoryAccountAddRepository;
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
 import com.fpt.OnlineQuiz.dto.ExpertFeaturedDTO;
-import com.fpt.OnlineQuiz.model.Account;
-import com.fpt.OnlineQuiz.model.Question;
-import com.fpt.OnlineQuiz.model.QuizHistory;
-import com.fpt.OnlineQuiz.model.Subject;
+import com.fpt.OnlineQuiz.model.*;
 import com.fpt.OnlineQuiz.service.*;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,7 +28,8 @@ public class PracticeController {
 
     @Autowired
     QuizHistoryService quizHistoryService;
-
+    @Autowired
+    QuizHistoryAccountAddServices accountAddServices;
     @Autowired
     QuestionService questionService;
 
@@ -78,5 +81,25 @@ public class PracticeController {
     @GetMapping(value = "/create")
     public String showCreateNewPackagePage(Model model) {
         return "create-quiz-package";
+    }
+    @PostMapping(value = "/create")
+    public String createNewPackagePage(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Account account = (Account) authentication.getPrincipal();
+
+        QuizHistory quizHistory = new QuizHistory();
+        LocalDate localDate = LocalDate.now();
+        Date date = new Date(String.valueOf(localDate));
+        quizHistory.setName(request.getParameter("name"));
+        quizHistory.setDes(request.getParameter("des"));
+        quizHistory.setCreatedTime(date);
+        quizHistory.setAccount(account);
+        quizHistoryService.addQuizPackage(quizHistory);
+
+        QuizHistoryAccountAdd quizHistoryAccountAdd = new QuizHistoryAccountAdd();
+        quizHistoryAccountAdd.setAccount(account);
+        quizHistoryAccountAdd.setQuizHistory(quizHistory);
+        accountAddServices.addOwnerOrAdd(quizHistoryAccountAdd);
+        return "practices_list_page";
     }
 }

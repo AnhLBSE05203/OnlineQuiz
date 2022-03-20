@@ -66,43 +66,30 @@
         <div class="mb-4">
             <h2>Create new quiz package</h2> <span>package name with descriptions,multiple quiz(questions)</span>
         </div>
-        <div class="row">
+        <form class="row" th:action="@{/practices/created}" method="POST">
             <div class="col-md-4">
                 <div class="card card-blue p-3 text-white mb-3"><span>Quiz Package Name</span>
                     <h4 class="mb-0 yellow">
-                        <div class="inputbox mt-3"><input type="text" name="name" class="form-control" required="required">
+                        <div class="inputbox mt-3"><input type="text" name="name" class="form-control"
+                                                          required="required">
                             <span>Name, example:CSI101,PRN292,..</span></div>
                     </h4>
                     <span>Description</span>
                     <h4 class="mb-0 yellow">
-                        <div class="inputbox mt-3"><input type="text" name="name" class="form-control" required="required">
+                        <div class="inputbox mt-3"><input type="text" name="des" class="form-control"
+                                                          required="required">
                             <span>Describe about quiz package</span></div>
                     </h4>
-                    <div class="hightlight"><span>100% Guaranteed support and update for the next 5 years.</span></div>
+                    <div class="hightlight">
+                        <span>if you want create Terms(questions) go to Practices Detail Page</span></div>
                 </div>
             </div>
-            <div class="col-md-8" id="contain2">
-                                    <h6 class="text-uppercase">Number of terms</h6>
-                <div class="inputbox mt-3"><input type="text" name="number" id="number" class="form-control" required="required">
-                    <span>number</span></div>
-                                <div class="card p-3">
-                                    <h6 class="text-uppercase">Terms(questions)</h6>
-                                    <h5>1</h5>
-                                    <div class="inputbox mt-3"><input type="text" name="name" class="form-control" required="required">
-                                        <span>name</span></div>
-                                    <div class="mt-4 mb-4">
-                                        <h6 class="text-uppercase">Definition(answer)</h6>
-                                        <div class="inputbox mt-3"><input type="text" name="name" class="form-control" required="required">
-                                            <span>name</span></div>
-                                    </div>
-                                </div>
-                <div class="mt-4 mb-4 d-flex justify-content-between"><span><button class="btn px-2" onclick="addFields()">Add begin</button></span>
-                    <button class="btn btn-success px-3">Pay $840</button>
+            <div class="col-md-8" id="contain">
+                <div class="mt-4 mb-4 d-flex justify-content-between">
+                    <button class="btn btn-success px-3" type="submit"><a>Create Package</a></button>
                 </div>
             </div>
-            <div id="contain"/>
-
-        </div>
+        </form>
     </div>
     <!-- Courses area End -->
     <!-- Courses area start -->
