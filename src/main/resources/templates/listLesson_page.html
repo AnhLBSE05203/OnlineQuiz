@@ -69,7 +69,7 @@
                             <div class="properties__caption">
                                 <p>User Experience</p>
                                 <h3><a href="#" th:text="${subject.get.name}"></a></h3>
-                                <p>The automated process all your website tasks. Discover tools and techniques to engage
+                                <p th:text="${subject.get.getSubjectInfo()}">The automated process all your website tasks. Discover tools and techniques to engage
                                     effectively with vulnerable children and young people.
                                 </p>
                                 <div class="properties__footer d-flex justify-content-between align-items-center">
@@ -84,7 +84,7 @@
                                         <p><span>(4.5)</span> based on 120</p>
                                     </div>
                                     <div class="price">
-                                        <span>$135</span>
+                                        <span></span>
                                     </div>
                                 </div>
                                 <a href="#" class="border-btn border-btn2">Find out more</a>
