@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.amazonaws.services.xray.model.Http;
 import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDQuizHistoryAccountAddRepository;
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
 import com.fpt.OnlineQuiz.dto.ExpertFeaturedDTO;
@@ -16,11 +17,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -104,6 +107,13 @@ public class PracticeController {
         model.addAttribute("lessonList", lessonList);
         model.addAttribute("subject", s);
         return "practices_detail_page";
+    }
+    @ResponseBody
+    @GetMapping(value = "/count")
+    int getCount(HttpServletRequest request){
+        int lessonId = Integer.parseInt(request.getParameter("lessonId"));
+        List<Question> questionList = questionService.getQuestionByLessonId(lessonId);
+        return questionList.size();
     }
 
     @GetMapping(value = "/create")

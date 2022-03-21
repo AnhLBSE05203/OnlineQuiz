@@ -129,6 +129,7 @@ public class WebSecurityConfig {
                 "/img/**", "/sql/**").permitAll();
         http.authorizeRequests().antMatchers("/admin/forget_pass").permitAll();
         http.authorizeRequests().antMatchers("/admin/forget_pass_action").permitAll();
+        http.authorizeRequests().antMatchers("/admin/resetPassword").permitAll();
     }
 
     public void configureForRole(RoleService roleService, String roleName, HttpSecurity http) throws Exception {
