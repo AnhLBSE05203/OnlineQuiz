@@ -189,21 +189,7 @@ public class CourseRepository {
         }
         return 0l;
     }
-    public void addRegistrationCourse(List<Course> list, int accountId){
-        for(int i = 0; i < list.size(); i++){
-            try {
-                StringBuilder sb = new StringBuilder();
-                //todo Fix sql
-                sb.append("INSERT INTO account_course(course_id, account_id) values (3, 571)");
-                Query query = em.createQuery(sb.toString());
-//                query.setParameter("courseId", list.get(i).getId());
-//                query.setParameter("accountId", accountId);
-                query.executeUpdate();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-    }
+
     public List<Course> getTop3CoursesBySubjectId(int subjectId) {
         try {
             StringBuilder sb = new StringBuilder();

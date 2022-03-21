@@ -3,6 +3,7 @@ package com.fpt.OnlineQuiz.controller;
 import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Course;
+import com.fpt.OnlineQuiz.service.AccountService;
 import com.fpt.OnlineQuiz.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -25,6 +26,9 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private AccountService accountService;
+
     @GetMapping(path = "/courselist")
     public String showCoursesList(ModelMap modelMap, HttpServletRequest request){
         int subjectId = Integer.parseInt(request.getParameter("subId"));
@@ -39,7 +43,7 @@ public class CourseController {
         PrintWriter out = response.getWriter();
         int start = Integer.parseInt(startStr);
         int subId = Integer.parseInt(subjectId);
-        List<Course> courses = courseService.getNext3Courses(subId, start);
+        List<Course> courses = courseService.getCoursesNext3BySubjectId(subId, start);
         if (courses.size() != 0) {
             for (Course c : courses) {
                 out.println("<div class=\"col-lg-4 course\">\n" +
@@ -167,7 +171,13 @@ public class CourseController {
         } else {
             // todo: Add course to Account_Course table
             List<Course> cart = (List<Course>) session.getAttribute("cart");
-            courseService.addCourseRegistration(cart, account.getId());
+            Account a = accountService.detailAccount(account.getId());
+            for(int i = 0; i < cart.size(); i++)
+            {
+                Course c = courseService.getById(cart.get(i).getId());
+                a.addCourse(c);
+            }
+            accountService.updateAccount(a);
             session.removeAttribute("cart");
             modelMap.addAttribute("message", "Buy Successful");
         }
