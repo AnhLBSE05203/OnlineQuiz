@@ -26,4 +26,5 @@ public interface QuestionService {
     List<Question> getQuestionQHid(int id);
 
     List<QuestionDTO> getQuestionByLessonIdDTO(int lessonId);
+    int countQuestionByLessonId(int lessonId);
 }

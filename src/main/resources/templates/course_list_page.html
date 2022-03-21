@@ -51,7 +51,6 @@
     <div class="courses-area section-padding40 fix">
         <div class="container">
             <div class="row" id="listcourse">
-
                 <div class="col-lg-4 course" th:each="course : ${list}">
                     <input type="hidden" id="subjectId" th:value="${course.getSubject().getId()}">
                     <div class="properties properties2 mb-30">

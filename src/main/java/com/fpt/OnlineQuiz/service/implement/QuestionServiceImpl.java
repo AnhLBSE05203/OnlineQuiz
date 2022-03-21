@@ -93,4 +93,9 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> getQuestionQHid(int id) {
         return crudQuestionRepository.findByQuizHistoryId(id);
     }
+
+    @Override
+    public int countQuestionByLessonId(int lessonId) {
+        return questionRepository.countQuestionByLessonId(lessonId);
+    }
 }

@@ -59,7 +59,7 @@ public class LessonController {
     public String showLessonDetailPage(@Param(value = "lesId") int lesId, @Param(value = "subId") int subId, Model model, HttpServletRequest request) {
         Optional<Lesson> lesson = lessonService.getLessonById(lesId);
         Optional<Subject> subject = subjectService.getSubject(subId);
-
+//
         model.addAttribute("subject", subject);
         model.addAttribute("lesson", lesson);
         return "lessonDetail_page";

@@ -144,4 +144,16 @@ public class QuestionRepository {
             e.printStackTrace();
         }
     }
+    public int countQuestionByLessonId(int lessonId){
+        try{
+            StringBuilder sb = new StringBuilder();
+            sb.append("select count(q) from Question q where q.lesson.id =:id");
+            Query query = em.createQuery(sb.toString());
+            query.setParameter("id", lessonId);
+            return Integer.parseInt(query.getSingleResult().toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return -1;
+    }
 }
