@@ -90,8 +90,8 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star-half"></i>
                                         </div>
-                                        <p><span>(4.5)</span> based on 120</p>
-                                        <p th:text="${course.get.getPrice()}"></p>
+                                        <p><span>(4.5)</span> based on 120</p><br>
+                                        <p th:text="'Price: '+${course.get.getPrice()}+' USD'"></p>
                                     </div>
                                     <div class="price">
                                         <span></span>

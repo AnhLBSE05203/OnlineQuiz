@@ -76,6 +76,7 @@ public class QuizHistory {
     private Long trueNum;
 
 
+
     @OneToMany(mappedBy = "quizHistory", cascade = CascadeType.ALL)
     private List<QuizHistoryQuestion> quizHistoryQuestions;
 }
