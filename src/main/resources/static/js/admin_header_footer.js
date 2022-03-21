@@ -9,7 +9,31 @@ $(document).ready(function(){
                 principal = data;
                     if(principal != ""){
                         $("#current-user").html(principal.email);
+                        updateMenuAfterLogin(principal);
                     }
                 }
             });
 });
+function updateMenuAfterLogin(principal){
+    for(let i = 0; i < principal.roles.length; i++){
+        var role = principal.roles[i].name;
+        alert(role);
+        switch(role){
+            case("ROLE_ADMIN") :
+                $('#accountMenu').show();
+                $('#blogMenu').show();
+                $('#subjectMenu').show();
+                $('#lessonMenu').show();
+                break;
+
+            case("ROLE_SALES"):
+                $('#blogMenu').show();
+                break;
+            case("ROLE_EXPERT"):
+                $('#subjectMenu').show();
+                $('#lessonMenu').show();
+                break;
+
+        }
+    }
+}

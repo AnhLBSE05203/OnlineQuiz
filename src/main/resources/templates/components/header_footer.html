@@ -43,7 +43,7 @@
             <link rel="stylesheet" th:href="@{/css/style.css}">
 
             <!--modal -->
-            
+
             <!-- header footer -->
             <link rel="stylesheet" th:href="@{/css/user_header_footer.css}">
 
@@ -55,6 +55,7 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
                   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
                   crossorigin="anonymous">
+            <link th:href="@{/css/admin_header_footer.css}" rel="stylesheet"/>
         </div>
     </head>
     <body>
@@ -263,7 +264,8 @@
                         Dashboard
                     </a>
                     <div class="sb-sidenav-menu-heading">Management</div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAccount"
+                    <a class="nav-link collapsed" id="accountMenu" href="#" data-bs-toggle="collapse"
+                       data-bs-target="#collapseAccount"
                        aria-expanded="false" aria-controls="collapseAccount">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Account
@@ -275,7 +277,8 @@
                             <a class="nav-link" th:href="@{/admin/account}">List Account</a>
                         </nav>
                     </div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBlog"
+                    <a class="nav-link collapsed" href="#" id="blogMenu" data-bs-toggle="collapse"
+                       data-bs-target="#collapseBlog"
                        aria-expanded="false" aria-controls="collapseBlog">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Blog
@@ -287,7 +290,8 @@
                             <a class="nav-link" th:href="@{/admin/blog}">List Blog</a>
                         </nav>
                     </div>
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSubjects"
+                    <a class="nav-link collapsed" href="#" id="subjectMenu" data-bs-toggle="collapse"
+                       data-bs-target="#collapseSubjects"
                        aria-expanded="false" aria-controls="collapseSubjects">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Subject
@@ -300,7 +304,8 @@
                         </nav>
                     </div>
                     <!--lesson-->
-                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLesson"
+                    <a class="nav-link collapsed" href="#" id="lessonMenu" data-bs-toggle="collapse"
+                       data-bs-target="#collapseLesson"
                        aria-expanded="false" aria-controls="collapseLesson">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                         Lesson
@@ -334,7 +339,7 @@
         </footer>
         <!-- Nav in page -->
 
-        <nav aria-label="breadcrumb"  th:fragment="nav-page">
+        <nav aria-label="breadcrumb" th:fragment="nav-page">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
                 <li class="breadcrumb-item"><a th:href="@{/subject}">Subjects</a></li>
@@ -395,8 +400,8 @@
 
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-<!--                    <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span-->
-<!--                            class="label label-warning pull-right r-activity">9</span></a></li>-->
+                    <!--                    <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span-->
+                    <!--                            class="label label-warning pull-right r-activity">9</span></a></li>-->
                     <li><a th:href="@{/account/changePassword}"> <i class="fa fa-key"></i> Change
                         Password</a></li>
                     <li><a th:href="@{/account/edit-profile}"> <i class="fa fa-edit"></i> Edit
