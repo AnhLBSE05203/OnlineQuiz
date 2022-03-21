@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.service.implement;
 
+import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDCourseRepository;
 import com.fpt.OnlineQuiz.dao.CourseRepository;
 import com.fpt.OnlineQuiz.dto.CourseAdminDTO;
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
@@ -14,11 +15,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CourseServiceImpl implements CourseService {
     @Autowired
     private CourseRepository courseRepository;
+
+    @Autowired
+    private CRUDCourseRepository crudCourseRepository;
 
     @Override
     public List<CourseFeaturedDTO> getFeaturedCourses(int number) {
@@ -112,5 +117,10 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<Course> getCoursesNext3BySubjectId(int subjectId, int start) {
         return courseRepository.getNext3CoursesBySubjectId(subjectId, start);
+    }
+
+    @Override
+    public Optional<Course> getCourse(int id) {
+        return crudCourseRepository.findById(id);
     }
 }

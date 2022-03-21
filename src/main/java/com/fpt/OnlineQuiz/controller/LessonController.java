@@ -2,6 +2,7 @@ package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
 import com.fpt.OnlineQuiz.dto.ExpertFeaturedDTO;
+import com.fpt.OnlineQuiz.model.Course;
 import com.fpt.OnlineQuiz.model.Lesson;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.*;
@@ -47,9 +48,9 @@ public class LessonController {
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
 
         List<Lesson> list = lessonService.getLessonByCourseId(courseId);
-        Optional<Subject> subject = subjectService.getSubject(courseId);
+        Optional<Course> course = courseService.getCourse(courseId);
 
-        model.addAttribute("subject", subject);
+        model.addAttribute("course", course);
         model.addAttribute("lessons", list);
         model.addAttribute("courseId", courseId);
         return "listLesson_page";

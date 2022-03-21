@@ -44,7 +44,7 @@
                         <div class="col-xl-8 col-lg-11 col-md-12">
                             <div class="hero__caption hero__caption2">
                                 <h1 data-animation="bounceIn" data-delay="0.2s"
-                                    th:text="${subject.get().getName()}"></h1>
+                                    th:text="${course.get().getName()}"></h1>
                                 <!-- breadcrumb Start-->
                                 <nav class="header-area header-transparent"
                                      th:replace="components/header_footer.html :: nav-page">
@@ -76,8 +76,8 @@
                             </div>
                             <div class="properties__caption">
                                 <p>User Experience</p>
-                                <h3><a href="#" th:text="${subject.get.name}"></a></h3>
-                                <p th:text="${subject.get.getSubjectInfo()}">The automated process all your website
+                                <h3><a href="#" th:text="${course.get.name}"></a></h3>
+                                <p th:text="${course.get.get()}">The automated process all your website
                                     tasks. Discover tools and techniques to engage
                                     effectively with vulnerable children and young people.
                                 </p>
