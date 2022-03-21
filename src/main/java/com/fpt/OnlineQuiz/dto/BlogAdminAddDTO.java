@@ -9,16 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountAdminDTO {
-    private int id;
-
-    private String fullName;
-
-    private int gender;
-
-    private String genderStr;
-
-    private String email;
-
-    private String phone;
+public class BlogAdminAddDTO {
+    private Integer id;
+    private String title;
+    private String content2;
+    private String statusStr;
+    private Integer status;
 }
