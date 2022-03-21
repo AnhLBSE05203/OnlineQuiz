@@ -23,4 +23,6 @@ public interface QuestionService {
     void deleteQuestion(int questionId);
 
     List<Question> getQuestionQHid(int id);
+
+
 }
