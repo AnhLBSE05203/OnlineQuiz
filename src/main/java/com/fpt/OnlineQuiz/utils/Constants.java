@@ -103,8 +103,8 @@ public class Constants {
     public static final String ATTRIBUTE_MESSAGE = "message";
     //token constants
     public static final int TOKEN_LENGTH = 30;
-
-
+    //links common
+    public static final String LINK_COMMON_CONTROLLER = "/";
     //links admin
     public static final String LINK_ADMIN_CONTROLLER = "/admin";
     public static final String LINK_ADMIN_LOGIN = "/admin/login";
@@ -250,12 +250,13 @@ public class Constants {
                 + "<p>Ignore this email if it was not you </p>";
         return content;
     }
-    public static String getContactMailTempplate(String name,String email, String topic, String contactContent){
+
+    public static String getContactMailTempplate(String name, String email, String topic, String contactContent) {
         String content = "<p>Hello, This is a contact mail</p>"
-                + "<p>Name: " + name +" </p>"
-                + "<p>Email: " + email +" </p>"
-                + "<p>Topic: " + topic +" </p>"
-                + "<p>Content: " + contactContent +" </p>"
+                + "<p>Name: " + name + " </p>"
+                + "<p>Email: " + email + " </p>"
+                + "<p>Topic: " + topic + " </p>"
+                + "<p>Content: " + contactContent + " </p>"
                 + "<br>";
         return content;
     }

@@ -110,15 +110,18 @@ public class AccountController {
     /**
      * Display Reset Password Page
      *
-     * @param tokenString user's reset password token
-     * @param model       spring's model class
+     * @param model spring's model class
      * @return Reset Password Page html
      */
     @GetMapping(Constants.LINK_RESET_PASSWORD)
-    public String showResetPasswordPage(@RequestParam(value = "token") String tokenString, Model model) {
-        Account account = accountService.findByToken(tokenString, Constants.TOKEN_TYPE_RESET_PASSWORD);
-        model.addAttribute("token", tokenString);
+    public String showResetPasswordPage(HttpServletRequest request, Model model) {
+        String tokenString = request.getParameter("token");
+        Account account = null;
 
+        if (tokenString != null) {
+            account = accountService.findByToken(tokenString, Constants.TOKEN_TYPE_RESET_PASSWORD);
+            model.addAttribute("token", tokenString);
+        }
         if (account == null) {
             model.addAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_INVALID_TOKEN);
             return Constants.PAGE_FORGOT_PASSWORD;
@@ -499,7 +502,7 @@ public class AccountController {
         StringBuilder sb = new StringBuilder();
         sb.append(Constants.LINK_REDIRECT);
         sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-        sb.append(Constants.LINK_RESET_PASSWORD);
+        sb.append(Constants.LINK_FORGOT_PASSWORD);
         return sb.toString();
     }
 
