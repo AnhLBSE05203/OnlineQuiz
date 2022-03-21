@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.dao;
 
+import com.fpt.OnlineQuiz.dto.QuestionDTO;
 import com.fpt.OnlineQuiz.dto.paging.Column;
 import com.fpt.OnlineQuiz.dto.paging.Order;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
@@ -33,6 +34,19 @@ public class QuestionRepository {
             return null;
         }
     }
+    public List<QuestionDTO> getQuestionsByLessonIdDTO(int lessonId) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select q from Question q where q.lesson.id =:id");
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Question.class);
+            query.setParameter("id", lessonId);
+            query.setMaxResults(3);
+            return (List<QuestionDTO>) query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 
     public void addQuestion(Question question) {
         em.persist(question);
@@ -52,6 +66,19 @@ public class QuestionRepository {
             query.setParameter("id", questionId);
 //            query.setMaxResults(3);
             return (Question) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    public QuestionDTO getQuestionByQuestionIdDto(int questionId) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select q from Question q where question_id =:id");
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Question.class);
+            query.setParameter("id", questionId);
+//            query.setMaxResults(3);
+            return (QuestionDTO) query.getSingleResult();
         } catch (NoResultException e) {
             return null;
         }

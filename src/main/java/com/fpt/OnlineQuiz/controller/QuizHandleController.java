@@ -1,14 +1,21 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dto.AnswerDTO;
+import com.fpt.OnlineQuiz.dto.LessonAdminDTO;
+import com.fpt.OnlineQuiz.dto.QuestionDTO;
+import com.fpt.OnlineQuiz.dto.QuizHandleDTO;
 import com.fpt.OnlineQuiz.model.Answer;
 import com.fpt.OnlineQuiz.model.Question;
 import com.fpt.OnlineQuiz.service.AnswerService;
+import com.fpt.OnlineQuiz.service.LessonService;
 import com.fpt.OnlineQuiz.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,40 +27,41 @@ public class QuizHandleController {
     AnswerService answerService;
     @Autowired
     QuestionService questionService;
+    @Autowired
+    LessonService lessonService;
     @RequestMapping(value = "/quiz",method = RequestMethod.GET)
     String test(ModelMap modelMap, HttpServletRequest request) {
-        List<Question> questionList = questionService.getQuestionByLessonId(1);
-        int question = questionList.get(0).getId();
-        Question questionName = questionList.get(0);
-        List<Answer> answerList = answerService.getAnswers(question);
+        String lessionid = request.getParameter("lessionid");
+        if(lessionid == null){
+            lessionid = "1";
+        }
+        int lessonid1 = Integer.parseInt(lessionid);
+        List<QuestionDTO> questionList = questionService.getQuestionByLessonIdDTO(lessonid1);
+        LessonAdminDTO lession = lessonService.getLessonAdminDTOById(lessonid1);
+        List<AnswerDTO> answerList = answerService.getAllAnswerDTO();
+        modelMap.addAttribute("listquestion",questionList);
         modelMap.addAttribute("listanswer",answerList);
-        modelMap.addAttribute("question",questionName);
-        modelMap.addAttribute("count",0);
-        return "quiz_handle";
+        modelMap.addAttribute("lession",lession);
+        return "quiz_handle_test";
     }
 
     @RequestMapping(value = "/quizpost",method = RequestMethod.POST)
-    String getValue(ModelMap modelMap, HttpServletRequest request) {
-        try {
-            int qid = Integer.parseInt(request.getParameter("qid"));
-            List<Question> questionList = questionService.getQuestionByLessonId(qid);
-            int count = Integer.parseInt(request.getParameter("count"));
-            count+=1;
-            int question = questionList.get(count).getId();
-            Question questionName = questionList.get(count);
-            List<Answer> answerList = answerService.getAnswers(question);
-            int answerid = Integer.parseInt(request.getParameter("answer"));
-            modelMap.addAttribute("listanswer",answerList);
-            modelMap.addAttribute("question",questionName);
-            modelMap.addAttribute("count",count);
-            System.out.println(qid+"\t"+answerid);
-            if(count == questionList.size()-1){
-                return null;
+    String getValue(HttpServletRequest request,ModelMap modelMap) {
+        int score = 0;
+        int lessionid = Integer.parseInt(request.getParameter("lessionid")) ;
+       List<QuestionDTO>questionList = questionService.getQuestionByLessonIdDTO(lessionid);
+        for (QuestionDTO questionID :questionList) {
+            System.out.println(questionID.getId());
+            String id = questionID.getId()+"";
+            int answerIdCorrect = questionService.findAnswerIcCorrect(questionID.getId());
+            if(answerIdCorrect == Integer.parseInt(request.getParameter(""+id))){
+                score++;
             }
-        }catch (Exception e){
-            e.printStackTrace();
         }
-
-        return "quiz_handle";
+        System.out.println(score);
+        modelMap.addAttribute("score",score);
+        modelMap.addAttribute("size",questionList.size());
+        modelMap.addAttribute("lessionid",lessionid);
+        return "Result";
     }
 }

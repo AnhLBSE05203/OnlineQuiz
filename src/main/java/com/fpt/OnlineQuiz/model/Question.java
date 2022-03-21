@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.model;
 
 import com.fpt.OnlineQuiz.dto.QuestionAdminDTO;
+import com.fpt.OnlineQuiz.dto.QuestionDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,5 +46,13 @@ public class Question {
         questionAdminDTO.setAnswer(this.getAnswer());
         questionAdminDTO.setExplain(this.getExplain());
         return questionAdminDTO;
+    }
+    public QuestionDTO toQuestionDTO() {
+        QuestionDTO questionDTO = new QuestionDTO();
+        questionDTO.setId(this.getId());
+        questionDTO.setQuestion(this.getQuestion());
+        questionDTO.setAnswer(this.getAnswer());
+        questionDTO.setExplain(this.getExplain());
+        return questionDTO;
     }
 }
