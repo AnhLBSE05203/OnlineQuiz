@@ -6,8 +6,10 @@ import com.fpt.OnlineQuiz.dto.CourseUserDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Course;
+import com.fpt.OnlineQuiz.model.Subject;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CourseService {
     public List<CourseFeaturedDTO> getFeaturedCourses(int number);
@@ -36,4 +38,7 @@ public interface CourseService {
     List<Course> getCoursesTop3BySubjectId(int subjectId);
 
     List<Course> getCoursesNext3BySubjectId(int subjectId, int start);
+
+    Optional<Course> getCourse(int id);
+
 }

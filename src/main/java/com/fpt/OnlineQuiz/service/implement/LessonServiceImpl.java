@@ -59,6 +59,11 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
+    public List<Lesson> getLessonByCourseId(int courseId) {
+        return CRUDLessonRepository.findByCourseId(courseId);
+    }
+
+    @Override
     public void addLesson(Lesson lesson) {
         lessonRepository.addLesson(lesson);
     }

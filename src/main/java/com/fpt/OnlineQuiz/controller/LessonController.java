@@ -38,7 +38,7 @@ public class LessonController {
     private ExpertService expertService;
 
     @GetMapping("/list")
-    public String showLessonListPage(@Param(value = "subId") int subId, Model model, HttpServletRequest request) {
+    public String showLessonListPage(@Param(value = "courseId") int courseId, Model model, HttpServletRequest request) {
         List<CourseFeaturedDTO> courseFeatured = courseService.getFeaturedCourses(Constants.HOME_PAGE_COURSE_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_COURSE_FEATURED, courseFeatured);
         List<ExpertFeaturedDTO> expertFeatured = expertService.getFeaturedExperts(Constants.HOME_PAGE_EXPERT_NUMBER);
@@ -46,12 +46,12 @@ public class LessonController {
         List<Subject> subjectFeatured = subjectService.getFeaturedSubjects(Constants.HOME_PAGE_SUBJECT_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
 
-        List<Lesson> list = lessonService.getAllLesson(subId);
-        Optional<Subject> subject = subjectService.getSubject(subId);
+        List<Lesson> list = lessonService.getLessonByCourseId(courseId);
+        Optional<Subject> subject = subjectService.getSubject(courseId);
 
         model.addAttribute("subject", subject);
         model.addAttribute("lessons", list);
-        model.addAttribute("subId", subId);
+        model.addAttribute("courseId", courseId);
         return "listLesson_page";
     }
 

@@ -38,6 +38,9 @@ public class Lesson {
     @JoinColumn(name = "subjectId")
     private Subject subject;
 
+    @ManyToOne
+    @JoinColumn(name = "courseID")
+    private Course course;
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
     private List<Question> questions;
 
