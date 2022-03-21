@@ -3,9 +3,12 @@ package com.fpt.OnlineQuiz.service.implement;
 import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDQuestionRepository;
 import com.fpt.OnlineQuiz.dao.QuestionRepository;
 import com.fpt.OnlineQuiz.dto.QuestionAdminDTO;
+import com.fpt.OnlineQuiz.dto.QuestionDTO;
+import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Question;
+import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,9 +29,22 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> getQuestionByLessonId(int lessonId) {
         return questionRepository.getQuestionsByLessonId(lessonId);
     }
+    public List<QuestionDTO> getQuestionByLessonIdDTO(int lessonId) {
+        List<Question> questionList = questionRepository.getQuestionsByLessonId(lessonId);
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+        for (Question questionL:questionList) {
+            QuestionDTO questionDTO = questionL.toQuestionDTO();
+            questionDTOList.add(questionDTO);
+        }
+        return questionDTOList;
+    }
 
     @Override
     public Question getQuestionByQuestionId(int questionId) {
+        return questionRepository.getQuestionByQuestionId(questionId);
+    }
+    public Question getQuestionByQuestionIdDTO(int questionId) {
+        questionRepository.getQuestionByQuestionId(questionId);
         return questionRepository.getQuestionByQuestionId(questionId);
     }
 

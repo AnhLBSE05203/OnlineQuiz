@@ -1,5 +1,6 @@
 package com.fpt.OnlineQuiz.dao;
 
+import com.fpt.OnlineQuiz.dto.AnswerDTO;
 import com.fpt.OnlineQuiz.model.Answer;
 import org.springframework.stereotype.Repository;
 
@@ -51,6 +52,17 @@ public class AnswerRepository {
             query.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public List<Answer> getAllAnswer(){
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Select a from Answer a");
+            Query query = em.createQuery(sb.toString(), Answer.class);
+            return (List<Answer>) query.getResultList();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
     }
 }

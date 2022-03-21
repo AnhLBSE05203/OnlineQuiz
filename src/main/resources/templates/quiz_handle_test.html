@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="quiz">
+    <h1 style="text-align: center;font-weight: bold" th:text="${lession.name}"></h1>
+    <form>
+        <div class="question" th:each="question : ${listquestion}">
+            <h1 th:text="${question.question}"></h1>
+            <div th:each="answer : ${listanswer}">
+            <div th:if="${question.id == answer.question.id}">
+                <input type="radio" th:name="${question.id}" value="" th:text="${answer.answer}"><br>
+            </div>
+            </div>
+        </div>
+        <button type="submit">SUBMIT</button>
+    </form>
+</div>
+</body>
+</html>

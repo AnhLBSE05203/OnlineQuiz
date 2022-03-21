@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.service;
 
 import com.fpt.OnlineQuiz.dto.QuestionAdminDTO;
+import com.fpt.OnlineQuiz.dto.QuestionDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Question;
@@ -23,4 +24,6 @@ public interface QuestionService {
     void deleteQuestion(int questionId);
 
     List<Question> getQuestionQHid(int id);
+
+    List<QuestionDTO> getQuestionByLessonIdDTO(int lessonId);
 }
