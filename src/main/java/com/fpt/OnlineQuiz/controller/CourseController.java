@@ -213,7 +213,7 @@ public class CourseController {
                         "                            <div class=\"properties__caption\">\n" +
                         "                                <h3><a>" + c.getName() + "</a></h3>\n" +
                         "                                <p>" + c.getDescription() + "</p>\n" +
-                        "                                <a href=\"#\" class=\"border-btn border-btn2\">Go to Course</a>\n" +
+                        "                                <a href=\"#\" class=\"border-btn border-btn2\" th:attr=\"onclick=|detailCourse('"+c.getId()+"')|\">Go to Course</a>\n" +
                         "                            </div>\n" +
                         "                        </div>\n" +
                         "                    </div>\n" +
@@ -227,5 +227,13 @@ public class CourseController {
     public CourseUserDTO getCourseUserDTO(@PathVariable Integer id) {
         CourseUserDTO courseUserDTO = courseService.getCourseUserDTO(id);
         return courseUserDTO;
+    }
+    @GetMapping(value = "/courseDetail")
+    public String showDetialCourse(ModelMap modelMap, HttpServletRequest request){
+        int courseId = Integer.parseInt(request.getParameter("courseId"));
+        Course c = courseService.getById(courseId);
+        System.out.println(c.toString());
+        modelMap.addAttribute("course", c);
+        return "detail_course_page";
     }
 }
