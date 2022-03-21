@@ -97,8 +97,8 @@ public class WebSecurityConfig {
 
             sharedConfigure(http);
             configureForRole(roleService, Constants.ROLE_ADMIN, http);
-            configureForRole(roleService, Constants.ROLE_EXPERT, http);
-            configureForRole(roleService, Constants.ROLE_SALES, http);
+//            configureForRole(roleService, Constants.ROLE_EXPERT, http);
+//            configureForRole(roleService, Constants.ROLE_SALES, http);
 
             http.formLogin().permitAll()
                     .loginProcessingUrl(Constants.LINK_ADMIN_LOGIN)
@@ -130,6 +130,7 @@ public class WebSecurityConfig {
         http.authorizeRequests().antMatchers("/admin/forget_pass").permitAll();
         http.authorizeRequests().antMatchers("/admin/forget_pass_action").permitAll();
         http.authorizeRequests().antMatchers("/admin/resetPassword").permitAll();
+        http.sessionManagement().maximumSessions(1);
     }
 
     public void configureForRole(RoleService roleService, String roleName, HttpSecurity http) throws Exception {
