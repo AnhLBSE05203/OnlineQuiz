@@ -1,6 +1,8 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dto.BlogAdminAddDTO;
 import com.fpt.OnlineQuiz.dto.BlogAdminDTO;
+import com.fpt.OnlineQuiz.dto.BlogAdminEditDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Blog;
@@ -22,23 +24,26 @@ public class AdminBlogController {
 
     @GetMapping(value = {"", "/"})
     public String blogPage(Model model) {
-        model.addAttribute("blogEditDTO", new BlogAdminDTO());
-        model.addAttribute("blogAddDTO", new BlogAdminDTO());
+        model.addAttribute("blogEditDTO", new BlogAdminEditDTO());
+        model.addAttribute("blogAddDTO", new BlogAdminAddDTO());
         return "admin_blog_page";
     }
 
     @PostMapping(value = "/edit")
-    public String editBlog(@ModelAttribute("blogEditDTO")BlogAdminDTO blogAdminDTO) {
+    public String editBlog(@ModelAttribute("blogEditDTO")BlogAdminEditDTO blogAdminDTO) {
         Blog blog = blogService.getDetailBlog(blogAdminDTO.getId());
         Utils.copyNonNullProperties(blogAdminDTO, blog);
+        blog.setContent(blogAdminDTO.getContent1());
         blogService.updateBlog(blog);
         return Constants.LINK_REDIRECT + "/admin/blog";
     }
 
     @PostMapping(value = "/add")
-    public String addBlog(@ModelAttribute("blogAddDTO") BlogAdminDTO blogAdminDTO) {
+    public String addBlog(@ModelAttribute("blogAddDTO") BlogAdminAddDTO blogAdminDTO) {
         Blog blog = new Blog();
         Utils.copyNonNullProperties(blogAdminDTO, blog);
+        blog.setContent(blogAdminDTO.getContent2());
+        blog.setId(0);
         blogService.addBlog(blog);
         return Constants.LINK_REDIRECT + "/admin/blog";
     }

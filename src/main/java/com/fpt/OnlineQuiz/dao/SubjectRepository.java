@@ -6,6 +6,7 @@ import com.fpt.OnlineQuiz.dto.paging.Order;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.utils.Constants;
+import com.fpt.OnlineQuiz.utils.Utils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -117,10 +118,13 @@ public class SubjectRepository {
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
-                sb.append(" AND lower(s.image.src) LIKE " + key);
-                sb.append(" OR lower(s.name) LIKE " + key);
+                sb.append(" AND lower(s.name) LIKE " + key);
                 sb.append(" OR lower(s.subjectInfo) LIKE " + key);
                 sb.append(" OR lower(s.learnAfter) LIKE " + key);
+                if (Utils.isInteger(pagingRequest.getSearch().getValue(), 10)) {
+                    sb.append(" OR s.totalCourse = " + pagingRequest.getSearch().getValue());
+                    sb.append(" OR s.id = " + pagingRequest.getSearch().getValue());
+                }
             }
             // append sorting
             Order order = pagingRequest.getOrder().get(0);
@@ -151,10 +155,14 @@ public class SubjectRepository {
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
-                sb.append(" AND lower(s.image.src) LIKE " + key);
-                sb.append(" OR lower(s.name) LIKE " + key);
+                sb.append(" AND lower(s.name) LIKE " + key);
                 sb.append(" OR lower(s.subjectInfo) LIKE " + key);
                 sb.append(" OR lower(s.learnAfter) LIKE " + key);
+                if (Utils.isInteger(pagingRequest.getSearch().getValue(), 10)) {
+                    sb.append(" OR s.totalCourse = " + pagingRequest.getSearch().getValue());
+                    sb.append(" OR s.id = " + pagingRequest.getSearch().getValue());
+                }
+
             }
 
             String sql = sb.toString();

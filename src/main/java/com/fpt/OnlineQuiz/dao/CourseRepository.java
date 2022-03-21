@@ -121,6 +121,7 @@ public class CourseRepository {
                     sb.append(" OR c.price = " + value);
                     if (Utils.isInteger(value, 10)) {
                         sb.append(" OR c.lessonTotal = " + value);
+                        sb.append(" OR c.id = " + value);
                     }
                 }
             }
@@ -156,6 +157,7 @@ public class CourseRepository {
                     sb.append(" OR c.price = " + value);
                     if (Utils.isInteger(value, 10)) {
                         sb.append(" OR c.lessonTotal = " + value);
+                        sb.append(" OR c.id = " + value);
                     }
                 }
             }
