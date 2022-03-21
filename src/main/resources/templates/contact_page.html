@@ -37,58 +37,7 @@
 <!-- Preloader Start -->
 <!-- Header Start -->
 <!-- User header -->
-<div class="header-area header-transparent" th:fragment="user-header">
-    <div class="main-header ">
-        <div class="header-bottom  header-sticky" style="background: linear-gradient(to bottom, #c054ff 0%, #5274ff 100%)">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <!-- Logo -->
-                    <div class="col-xl-2 col-lg-2">
-                        <div class="logo">
-                            <a href="/"><img th:src="@{/static/img/logo/logo.png}" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-10 col-lg-10">
-                        <div class="menu-wrapper d-flex align-items-center justify-content-end">
-                            <!-- Main-menu -->
-                            <div class="main-menu d-none d-lg-block">
-                                <nav>
-                                    <ul id="navigation">
-                                        <li class="active"><a href="/">Home</a></li>
-                                        <li class="active" id="profile-button-contain"><a
-                                                href="/account/profile" id="profile-button">My
-                                            Profile</a></li>
-                                        <li><a href="/subject">Subjects</a></li>
-                                        <li><a href="">About</a></li>
-                                        <li><a href="/blogcontroller">Blog</a>
-                                            <!-- placeholder -->
-                                            <!-- <ul class="submenu">
-                                                <li><a href="">Blog</a></li>
-                                            </ul> -->
-                                            <!-- placeholder -->
-                                        </li>
-                                        <li><a href="/contact/create">Contact</a></li>
-                                        <!-- Button -->
-                                        <li class="button-header margin-left "><a href="/account/register"
-                                                                                  class="btn"
-                                                                                  id="register-button">Join</a>
-                                        </li>
-                                        <li class="button-header"><a href="/account/login" class="btn btn3"
-                                                                     id="login-button">Log in</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Mobile Menu -->
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-lg-none"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<div th:replace="components/header_footer.html :: user-header"></div>
 <!-- Header End -->
 <section class="ftco-section">
     <div class="container">
