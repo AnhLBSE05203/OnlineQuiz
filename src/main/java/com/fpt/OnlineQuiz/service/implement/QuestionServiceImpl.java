@@ -1,7 +1,9 @@
 package com.fpt.OnlineQuiz.service.implement;
 
+import com.fpt.OnlineQuiz.dao.AnswerRepository;
 import com.fpt.OnlineQuiz.dao.CRUDRepository.CRUDQuestionRepository;
 import com.fpt.OnlineQuiz.dao.QuestionRepository;
+import com.fpt.OnlineQuiz.dto.AnswerDTO;
 import com.fpt.OnlineQuiz.dto.QuestionAdminDTO;
 import com.fpt.OnlineQuiz.dto.QuestionDTO;
 import com.fpt.OnlineQuiz.dto.SubjectAdminDTO;
@@ -9,6 +11,7 @@ import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Question;
 import com.fpt.OnlineQuiz.model.Subject;
+import com.fpt.OnlineQuiz.service.AnswerService;
 import com.fpt.OnlineQuiz.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,11 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
+    @Autowired
+    private AnswerRepository answerRepository;
+
+    @Autowired
+    private AnswerService answerService;
     @Autowired
     private CRUDQuestionRepository crudQuestionRepository;
 
@@ -37,6 +45,18 @@ public class QuestionServiceImpl implements QuestionService {
             questionDTOList.add(questionDTO);
         }
         return questionDTOList;
+    }
+
+    @Override
+    public int findAnswerIcCorrect(int questionId) {
+       // QuestionDTO questionDTO = questionRepository.getQuestionByQuestionIdDto(questionId);
+        List<AnswerDTO> answerDTOList = answerService.getAnswersDTO(questionId);
+        for (AnswerDTO answerDTO: answerDTOList) {
+            if(answerDTO.isCorrect()){
+                return answerDTO.getId();
+            }
+        }
+        return -1;
     }
 
     @Override

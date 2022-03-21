@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #007bff;
+        }
+        .result_box
+        {
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            z-index: 999;
+        }
+        .result_box {
+            background: #fff;
+            width: 450px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+            padding: 25px 30px;
+            text-align: center;
+        }
+
+        .result_box .icon {
+            font-size: 100px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .result_box .complete_text {
+            font-size: 20px;
+            font-weight: 1000;
+        }
+
+        .result_box .score_text span {
+            display: flex;
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .score_text span p {
+            font-weight: 400;
+            padding: 0 4px;
+        }
+
+        .result_box .buttons button {
+            margin: 0 10px;
+            height: 40px;
+            padding: 0 20px;
+            border:none;
+            outline: none;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 5px;
+            border: 1px solid #007bff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    </style>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
+    <script th:src="@{https://kit.fontawesome.com/a33530bb41.js}" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="result_box">
+        <div class="icon">
+            <i class="fas fa-crown"></i>
+        </div>
+        <div class="complete_text">You've completed quiz</div>
+        <div class="score_text">
+            <div th:if="${score} < ${size}">
+             <span>and sorry, You got only<p th:text="${score}"></p>out of <p th:text="${size}"></p></span>
+            </div>
+            <div th:if="${score} == ${size}">
+                <span>and Congrats, You got <p th:text="${score}"></p>out of <p th:text="${size}"></p></span>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="restart" ><a th:href="@{/quizhandelecontroller/quiz(lessionid=${lessionid})}" style="text-decoration: none">Replay Quiz</a></button>
+            <button class="quit" ><a th:href="@{/subject/listSubject}" style="text-decoration: none">Quit Quiz</a></button>
+        </div>
+    </div>
+</body>
+</html>

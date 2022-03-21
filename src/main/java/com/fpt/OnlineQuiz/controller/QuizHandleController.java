@@ -31,9 +31,13 @@ public class QuizHandleController {
     LessonService lessonService;
     @RequestMapping(value = "/quiz",method = RequestMethod.GET)
     String test(ModelMap modelMap, HttpServletRequest request) {
-        int lessid = 1;
-        List<QuestionDTO> questionList = questionService.getQuestionByLessonIdDTO(lessid);
-        LessonAdminDTO lession = lessonService.getLessonAdminDTOById(lessid);
+        String lessionid = request.getParameter("lessionid");
+        if(lessionid == null){
+            lessionid = "1";
+        }
+        int lessonid1 = Integer.parseInt(lessionid);
+        List<QuestionDTO> questionList = questionService.getQuestionByLessonIdDTO(lessonid1);
+        LessonAdminDTO lession = lessonService.getLessonAdminDTOById(lessonid1);
         List<AnswerDTO> answerList = answerService.getAllAnswerDTO();
         modelMap.addAttribute("listquestion",questionList);
         modelMap.addAttribute("listanswer",answerList);
@@ -41,42 +45,23 @@ public class QuizHandleController {
         return "quiz_handle_test";
     }
 
-    @RequestMapping(value = "/quizpost",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    QuizHandleDTO getValue(HttpServletRequest request) {
-//            int qid = Integer.parseInt(request.getParameter("qid"));
-//            System.out.println("qid:"+qid);
-//            int aid = Integer.parseInt(request.getParameter("answer"));
-//            System.out.println("aid"+aid);
-            String lessid = request.getParameter("lessid");
-            if(lessid == null){
-                lessid = "1";
+    @RequestMapping(value = "/quizpost",method = RequestMethod.POST)
+    String getValue(HttpServletRequest request,ModelMap modelMap) {
+        int score = 0;
+        int lessionid = Integer.parseInt(request.getParameter("lessionid")) ;
+       List<QuestionDTO>questionList = questionService.getQuestionByLessonIdDTO(lessionid);
+        for (QuestionDTO questionID :questionList) {
+            System.out.println(questionID.getId());
+            String id = questionID.getId()+"";
+            int answerIdCorrect = questionService.findAnswerIcCorrect(questionID.getId());
+            if(answerIdCorrect == Integer.parseInt(request.getParameter(""+id))){
+                score++;
             }
-            int lessionID = Integer.parseInt(lessid);
-            System.out.println("lessid:"+lessid);
-            List<QuestionDTO> questionList = questionService.getQuestionByLessonIdDTO(lessionID);
-            System.out.println("qsize"+questionList.size());
-            String count = request.getParameter("count");
-            if (count == null) {
-                count = "0";
-            }
-            int countNum = Integer.parseInt(count);
-            System.out.println("count:"+count);
-            countNum+=1;
-            System.out.println("count:"+count);
-            int question = questionList.get(countNum).getId();
-            System.out.println("questionId:"+question);
-            QuestionDTO questionName = questionList.get(countNum);
-            List<AnswerDTO> answerList = answerService.getAnswersDTO(question);
-            System.out.println("aListSize:"+answerList.size());
-            QuizHandleDTO quizHandleDTO = new QuizHandleDTO(answerList,lessionID,countNum,questionName);
-//            modelMap.addAttribute("listanswer",answerList);
-//            modelMap.addAttribute("question",questionName);
-//            modelMap.addAttribute("count",count);
-//            modelMap.addAttribute("lessid",lessid);
-//            if(count == questionList.size()-1){
-//                return "result_box";
-//            }
-        return quizHandleDTO;
+        }
+        System.out.println(score);
+        modelMap.addAttribute("score",score);
+        modelMap.addAttribute("size",questionList.size());
+        modelMap.addAttribute("lessionid",lessionid);
+        return "Result";
     }
 }

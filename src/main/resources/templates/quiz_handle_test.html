@@ -8,15 +8,17 @@
 <body>
 <div class="quiz">
     <h1 style="text-align: center;font-weight: bold" th:text="${lession.name}"></h1>
-    <form>
+    <form method="post" th:action="@{/quizhandelecontroller/quizpost}">
         <div class="question" th:each="question : ${listquestion}">
+            <input type="hidden" th:value="${question.id}" th:name="questionID">
             <h1 th:text="${question.question}"></h1>
             <div th:each="answer : ${listanswer}">
             <div th:if="${question.id == answer.question.id}">
-                <input type="radio" th:name="${question.id}" value="" th:text="${answer.answer}"><br>
+                <input type="radio" th:name="${question.id}" th:value="${answer.id}" th:text="${answer.answer}"><br>
             </div>
             </div>
         </div>
+        <input type="hidden" th:value="${lession.id}" th:name="lessionid">
         <button type="submit">SUBMIT</button>
     </form>
 </div>
