@@ -1,156 +1,157 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-    <title>Blog Management</title>
-    <!-- Admin common css -->
-    <div th:replace="components/header_footer.html :: admin-common-style">
-    </div>
-    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"/>
-    <link th:href="@{/css/admin_blog_page.css}" rel="stylesheet"/>
-</head>
-<body class="sb-nav-fixed">
-<!-- Admin header -->
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"
-     th:replace="components/header_footer.html :: admin-header">
-</nav>
-<!-- -->
-<div id="layoutSidenav">
-    <div id="layoutSidenav_nav">
-        <!-- Admin side nav -->
-        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion"
-             th:replace="components/header_footer.html :: admin-side-nav">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>Blog Management</title>
+        <!-- Admin common css -->
+        <div th:replace="components/header_footer.html :: admin-common-style">
+        </div>
+        <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"/>
+        <link th:href="@{/css/admin_blog_page.css}" rel="stylesheet"/>
+    </head>
+    <body class="sb-nav-fixed">
+        <!-- Admin header -->
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"
+             th:replace="components/header_footer.html :: admin-header">
         </nav>
         <!-- -->
-    </div>
-    <div id="layoutSidenav_content">
-        <main>
-            <div class="container-fluid px-4">
-                <h1 class="mt-4">Blog</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Blog Management
-                    </li>
-                </ol>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
-                        List Blog
-                        <button id="addBlogButton" type="button" class="btn btn-primary"
-                                onclick="showBlogAddModal()">Add Blog
-                        </button>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <!-- Admin side nav -->
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion"
+                     th:replace="components/header_footer.html :: admin-side-nav">
+                </nav>
+                <!-- -->
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Blog</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Blog Management
+                            </li>
+                        </ol>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                List Blog
+                                <button id="addBlogButton" type="button" class="btn btn-primary"
+                                        onclick="showBlogAddModal()">Add Blog
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <table id="BlogDatatable" style="width:100%;">
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <table id="BlogDatatable" style="width:100%;">
-                        </table>
-                    </div>
+                </main>
+                <footer th:replace="components/header_footer.html :: admin-footer">
+                </footer>
+            </div>
+        </div>
+        <!-- Edit Blog Modal -->
+        <div class="modal fade" id="blogEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="blogEditForm" th:object="${blogEditDTO}"
+                          th:action="@{/admin/blog/edit}" method="POST">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Blog Detail</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img id="editBlogImg"><br>
+                            <!--                    <input type="hidden" id="editBlogImgSrc" th:name="imgSrc">-->
+                            <!--                    <input type="hidden" id="editBlogStatusStr" th:name="statusStr" value="">-->
+                            <table class="formTable" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="formField">Id:</td>
+                                    <td class="formInput"><input type="text" id="editBlogId" th:name="id" value="0"
+                                                                 readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Title:</td>
+                                    <td><input type="text" id="editBlogTitle" th:name="title" required></td>
+                                </tr>
+                                <tr>
+                                    <td>Content:</td>
+                                    <td>
+                                        <textarea name="content1"></textarea>
+                                    </td>
+                                    <!--                            <td><input type="text" id="editBlogContent" th:name="content" required></td>-->
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Save">
+                        </div>
+                    </form>
                 </div>
             </div>
-        </main>
-        <footer th:replace="components/header_footer.html :: admin-footer">
-        </footer>
-    </div>
-</div>
-<!-- Edit Blog Modal -->
-<div class="modal fade" id="blogEditModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="blogEditForm" th:object="${blogEditDTO}"
-                  th:action="@{/admin/blog/edit}" method="POST">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Blog Detail</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <img id="editBlogImg"><br>
-                    <!--                    <input type="hidden" id="editBlogImgSrc" th:name="imgSrc">-->
-                    <!--                    <input type="hidden" id="editBlogStatusStr" th:name="statusStr" value="">-->
-                    <table class="formTable" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td class="formField">Id:</td>
-                            <td class="formInput"><input type="text" id="editBlogId" th:name="id" value="0" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Title:</td>
-                            <td><input type="text" id="editBlogTitle" th:name="title" required></td>
-                        </tr>
-                        <tr>
-                            <td>Content:</td>
-                            <td>
-                                <textarea name="content1"></textarea>
-                            </td>
-                            <!--                            <td><input type="text" id="editBlogContent" th:name="content" required></td>-->
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Save">
-                </div>
-            </form>
         </div>
-    </div>
-</div>
-<!-- Add Blog Modal -->
-<div class="modal fade" id="blogAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="blogAddForm" th:object="${blogAddDTO}"
-                  th:action="@{/admin/blog/add}" method="POST">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Blog</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!--                    <img id="editBlogImg"><br>-->
-                    <!--                    <input type="hidden" id="editBlogImgSrc" th:name="imgSrc">-->
-                    <!--                    <input type="hidden" id="editBlogStatusStr" th:name="statusStr" value="">-->
-                    <table class="formTable" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td>Title:</td>
-                            <td><input type="text" id="addBlogTitle" th:name="title" required></td>
-                        </tr>
-                        <tr>
-                            <td>Content:</td>
-                            <td>
-                                <label>
-                                    <textarea name="content2" id="editAddContent"></textarea>
-                                </label>
-                            </td>
-                            <!--                            <td><input type="text" id="addBlogContent" th:name="content" required></td>-->
-                        </tr>
+        <!-- Add Blog Modal -->
+        <div class="modal fade" id="blogAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="blogAddForm" th:object="${blogAddDTO}"
+                          th:action="@{/admin/blog/add}" method="POST">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add Blog</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!--                    <img id="editBlogImg"><br>-->
+                            <!--                    <input type="hidden" id="editBlogImgSrc" th:name="imgSrc">-->
+                            <!--                    <input type="hidden" id="editBlogStatusStr" th:name="statusStr" value="">-->
+                            <table class="formTable" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td>Title:</td>
+                                    <td><input type="text" id="addBlogTitle" th:name="title" required></td>
+                                </tr>
+                                <tr>
+                                    <td>Content:</td>
+                                    <td>
+                                        <label>
+                                            <textarea name="content2" id="editAddContent"></textarea>
+                                        </label>
+                                    </td>
+                                    <!--                            <td><input type="text" id="addBlogContent" th:name="content" required></td>-->
+                                </tr>
 
 
-                    </table>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Save">
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Save">
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
-<!-- placeholder for modal -->
-<!-- Admin common js -->
-<th:block th:insert="components/header_footer.html :: admin-common-script">
-</th:block>
+        <!-- placeholder for modal -->
+        <!-- Admin common js -->
+        <th:block th:insert="components/header_footer.html :: admin-common-script">
+        </th:block>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
-<script>
+        <script>
     const ckEditor = CKEDITOR
     ckEditor.replace('content1');
     ckEditor.replace('content2');
-</script>
-<script th:src="@{/js/admin_blog_page.js}"></script>
-<!-- -->
-</body>
+
+
+
+        </script>
+        <script th:src="@{/js/admin_blog_page.js}"></script>
+        <!-- -->
+    </body>
 </html>
