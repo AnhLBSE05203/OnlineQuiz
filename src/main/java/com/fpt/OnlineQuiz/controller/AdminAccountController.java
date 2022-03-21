@@ -1,31 +1,41 @@
 package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dto.AccountAdminDTO;
+import com.fpt.OnlineQuiz.dto.RegisterDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.model.Role;
 import com.fpt.OnlineQuiz.service.AccountService;
+import com.fpt.OnlineQuiz.service.RoleService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import com.fpt.OnlineQuiz.utils.Utils;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/account")
 public class AdminAccountController {
 
     private final AccountService accountService;
+    private final RoleService roleService;
 
-    public AdminAccountController(AccountService accountService) {
+    public AdminAccountController(AccountService accountService, RoleService roleService) {
         this.accountService = accountService;
+        this.roleService = roleService;
     }
 
     @GetMapping(value = {"", "/"})
     public String accountPage(Model model) {
         model.addAttribute("accountEditDTO", new AccountAdminDTO());
-        model.addAttribute("accountAddDTO", new AccountAdminDTO());
+        model.addAttribute("accountAddDTO", new RegisterDTO());
         return "admin_account_page";
     }
 
@@ -38,9 +48,27 @@ public class AdminAccountController {
     }
 
     @PostMapping(value = "/add")
-    public String addAccount(@ModelAttribute("adminAddDTO") AccountAdminDTO accountAdminDTO) {
+    public String addAccount(@ModelAttribute("adminAddDTO") RegisterDTO accountAdminDTO) {
         Account account = new Account();
         Utils.copyNonNullProperties(accountAdminDTO, account);
+        account = new Account();
+        account.setEmail(accountAdminDTO.getEmail().toLowerCase());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(accountAdminDTO.getPassword());
+        account.setPassword(encodedPassword);
+        Date now = new Date();
+        account.setCreatedTime(now);
+        account.setUpdatedTime(now);
+        account.setCreatedUserId(Constants.DEFAULT_CREATED_USER_ID);
+        account.setUpdatedUserId(Constants.DEFAULT_UPDATED_USER_ID);
+        account.setGender(accountAdminDTO.getGender());
+        account.setPhone(accountAdminDTO.getPhone());
+        account.setFullName(accountAdminDTO.getFullName());
+        account.setStatus(Constants.STATUS_ACCOUNT_CONFIRMED);
+        Role role = roleService.findRoleByName(Constants.ROLE_ADMIN);
+        List<Role> roles = new ArrayList<>();
+        roles.add(role);
+        account.setRoles(roles);
         accountService.addAccount(account);
         return Constants.LINK_REDIRECT + "/admin/account";
     }

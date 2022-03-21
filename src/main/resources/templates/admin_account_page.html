@@ -98,6 +98,63 @@
         </div>
     </div>
 </div>
+<!-- Add Account Modal -->
+<div class="modal fade" id="accountAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="accountAddForm" th:object="${accountAddDTO}"
+                  th:action="@{/admin/account/add}" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title">Account Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<!--                    <img id="editAccountImg"><br>-->
+                    <!--                    <input type="hidden" id="editBlogImgSrc" th:name="imgSrc">-->
+                    <!--                    <input type="hidden" id="editBlogStatusStr" th:name="statusStr" value="">-->
+                    <table class="formTable" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td>Full name:</td>
+                            <td><input  type="text" th:field="*{fullName}" placeholder="Full name" required></td>
+                        </tr>
+                        <tr>
+                            <td>Email Address:</td>
+                            <td><input type="email" th:field="*{email}" placeholder="Email Address" required oninput="checkEmailValid(this);"></td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td><input type="tel" th:field="*{phone}" placeholder="888888888" maxlength="9" required pattern="[0-9]{9}"></td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td><input type="password" th:field="*{password}" placeholder="Password" id="password" name="password" required oninput="checkPasswordValid(this);"></td>
+                        </tr>
+                        <tr>
+                            <td>Confirm Password:</td>
+                            <td><input type="password" name="passwordConfirm" placeholder="Confirm Password" required oninput="checkPasswordMatch(this);"></td>
+                        </tr>
+                        <tr>
+                            <td>Gender:</td>
+                            <td>
+                                <label>Male</label>
+                                <input type="radio" th:field="*{gender}" value="0" >
+                            </td>
+                            <td>
+                                <label>Female </label>
+                                <input type="radio" th:field="*{gender}" value="1">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- Admin common js -->
 <th:block th:insert="components/header_footer.html :: admin-common-script">
 </th:block>
