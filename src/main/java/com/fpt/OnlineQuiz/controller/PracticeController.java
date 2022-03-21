@@ -112,8 +112,8 @@ public class PracticeController {
     @GetMapping(value = "/count")
     int getCount(HttpServletRequest request){
         int lessonId = Integer.parseInt(request.getParameter("lessonId"));
-        List<Question> questionList = questionService.getQuestionByLessonId(lessonId);
-        return questionList.size();
+        int size = questionService.countQuestionByLessonId(lessonId);
+        return size;
     }
 
     @GetMapping(value = "/create")

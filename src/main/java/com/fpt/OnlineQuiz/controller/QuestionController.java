@@ -178,7 +178,7 @@ public class QuestionController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public QuestionAdminDTO getSubjectDetails(@PathVariable Integer id) {
+    public QuestionAdminDTO getQuestionDetails(@PathVariable Integer id) {
         QuestionAdminDTO questionDTO = questionService.getQuestionDTOById(id);
         return questionDTO;
     }
