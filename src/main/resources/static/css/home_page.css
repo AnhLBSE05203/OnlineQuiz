@@ -13,5 +13,5 @@ overflow: hidden;
 text-overflow: ellipsis;
 }
 .courseDescription{
-min-height:100px;
+min-height:150px;
 }
