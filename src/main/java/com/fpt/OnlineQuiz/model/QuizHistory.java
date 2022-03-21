@@ -25,10 +25,35 @@ public class QuizHistory {
     @Column(name = "quizHistoryName")
     private String name;
 
+    @Column(name = "description")
+    private String des;
+
+//    @Autowired
+//    public QuizHistory(String name,Date date,int id,long count,String accountName){
+//        this.name = name;
+//        this.createdTime = date;
+//        this.id = id;
+//        this.quizCount = count;
+//        this.accountName = accountName;
+//
+//    }
+//
+//    @Autowired
+//    public QuizHistory(String name,Date date,int number,long trueNum){
+//        this.name = name;
+//        this.historyTime = date;
+//        this.number = number;
+//        this.trueNum = trueNum;
+//    }
+//    @Column
+//    private long trueNum;
+
     @Column(name = "createdTime")
     private Date createdTime;
     @Column(name = "historyTime")
     private Date historyTime;
+    @Column(name = "numOfQuestion",nullable = true)
+    private Integer number;
     @ManyToOne
     @JoinColumn(name = "accountId")
     private Account account;
@@ -42,6 +67,14 @@ public class QuizHistory {
 
     @Formula("(SELECT a.full_name FROM account a WHERE a.account_id = account_id)")
     private String accountName;
+
+    @Formula("(SELECT COUNT(a.is_correct) FROM quiz_history qh INNER JOIN quiz_history_question qhq\n" +
+            "    on qh.quiz_history_id = qhq.quiz_history_id\n" +
+            "INNER JOIN answer a on a.answer_id = qhq.user_answer\n" +
+            "WHERE qh.history_account_id = history_account_id AND qh.quiz_history_id = quiz_history_id AND a.is_correct = true\n" +
+            "GROUP BY qh.quiz_history_id)")
+    private Long trueNum;
+
 
     @OneToMany(mappedBy = "quizHistory", cascade = CascadeType.ALL)
     private List<QuizHistoryQuestion> quizHistoryQuestions;

@@ -23,7 +23,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping(Constants.STRING_EMPTY)
+@RequestMapping(Constants.LINK_COMMON_CONTROLLER)
 public class CommonController {
     @Autowired
     private CourseService courseService;
@@ -34,7 +34,7 @@ public class CommonController {
 
     @GetMapping(value = "/getPrincipal", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Account getPrincipal(){
+    public Account getPrincipal() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Account account = null;
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
@@ -46,6 +46,7 @@ public class CommonController {
 
     /**
      * Display Home Page
+     *
      * @param model spring's model class
      * @return Home Page html
      */
@@ -63,7 +64,8 @@ public class CommonController {
 
     /**
      * Display Access Denied Page when User's not authorized
-     * @param model spring's model class
+     *
+     * @param model     spring's model class
      * @param principal User's authenticate/authorization principal
      * @return Access Denied Page html
      */
