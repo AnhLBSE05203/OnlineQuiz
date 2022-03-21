@@ -42,19 +42,19 @@ function showBlogAddModal() {
 }
 
 function showBlogEditModal(id) {
-    var link = "/admin/blog/view/" + id;
-    var blog = "";
-    $.ajax({
-        url: link,
-        type: "get",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            blog = data;
-            if (blog != "") {
-                $("#editBlogId").val(blog.id);
-                $("#editBlogTitle").val(blog.title);
-                $("#editBlogContent").val(blog.content);
+                    var link = "/admin/blog/view/" + id;
+                    var blog = "";
+                    $.ajax({
+                        url: link,
+                        type: "get",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            blog = data;
+                            if (blog != "") {
+                                $("#editBlogId").val(blog.id);
+                                $("#editBlogTitle").val(blog.title);
+                                ckEditor.instances.content1.setData(blog.content);
             }
         }
     });

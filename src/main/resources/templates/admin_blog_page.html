@@ -67,8 +67,8 @@
                 </div>
                 <div class="modal-body">
                     <img id="editBlogImg"><br>
-<!--                    <input type="hidden" id="editBlogImgSrc" th:name="imgSrc">-->
-<!--                    <input type="hidden" id="editBlogStatusStr" th:name="statusStr" value="">-->
+                    <!--                    <input type="hidden" id="editBlogImgSrc" th:name="imgSrc">-->
+                    <!--                    <input type="hidden" id="editBlogStatusStr" th:name="statusStr" value="">-->
                     <table class="formTable" cellspacing="0" cellpadding="0">
                         <tr>
                             <td class="formField">Id:</td>
@@ -81,7 +81,10 @@
                         </tr>
                         <tr>
                             <td>Content:</td>
-                            <td><input type="text" id="editBlogContent" th:name="content" required></td>
+                            <td>
+                                <textarea name="content1"></textarea>
+                            </td>
+                            <!--                            <td><input type="text" id="editBlogContent" th:name="content" required></td>-->
                         </tr>
                     </table>
                 </div>
@@ -105,23 +108,25 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-<!--                    <img id="editBlogImg"><br>-->
+                    <!--                    <img id="editBlogImg"><br>-->
                     <!--                    <input type="hidden" id="editBlogImgSrc" th:name="imgSrc">-->
                     <!--                    <input type="hidden" id="editBlogStatusStr" th:name="statusStr" value="">-->
                     <table class="formTable" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td class="formField">Id:</td>
-                            <td class="formInput"><input type="text" id="addBlogId" th:name="id" readonly>
-                            </td>
-                        </tr>
                         <tr>
                             <td>Title:</td>
                             <td><input type="text" id="addBlogTitle" th:name="title" required></td>
                         </tr>
                         <tr>
                             <td>Content:</td>
-                            <td><input type="text" id="addBlogContent" th:name="content" required></td>
+                            <td>
+                                <label>
+                                    <textarea name="content2" id="editAddContent"></textarea>
+                                </label>
+                            </td>
+                            <!--                            <td><input type="text" id="addBlogContent" th:name="content" required></td>-->
                         </tr>
+
+
                     </table>
                 </div>
                 <div class="modal-footer">
@@ -136,8 +141,15 @@
 <!-- Admin common js -->
 <th:block th:insert="components/header_footer.html :: admin-common-script">
 </th:block>
+
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+<script>
+    const ckEditor = CKEDITOR
+    ckEditor.replace('content1');
+    ckEditor.replace('content2');
+</script>
 <script th:src="@{/js/admin_blog_page.js}"></script>
 <!-- -->
 </body>
