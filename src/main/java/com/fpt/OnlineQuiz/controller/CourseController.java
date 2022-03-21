@@ -46,20 +46,23 @@ public class CourseController {
         List<Course> courses = courseService.getCoursesNext3BySubjectId(subId, start);
         if (courses.size() != 0) {
             for (Course c : courses) {
-                out.println("<div class=\"col-lg-4 course\">\n" +
+                out.println("<div class=\"col-lg-4 course\""+
+                        "                    <input type=\"hidden\" id=\"subjectId\" value=" +c.getSubject().getId()+"" +
                         "                    <div class=\"properties properties2 mb-30\">\n" +
                         "                        <div class=\"properties__card\">\n" +
                         "                            <div class=\"properties__img overlay1\">\n" +
-                        "                                <a href=\"#\"><img src=\"/img/gallery/featured2.png\" alt=\"\"></a>\n" +
+                        "                                <a href=\"#\"><img th:src=\"@{/img/gallery/featured2.png}\" alt=\"\"></a>\n" +
                         "                            </div>\n" +
                         "                            <div class=\"properties__caption\">\n" +
-                        "                                <h3><a>" + c.getName() + "</a></h3>\n" +
-                        "                                <p>" + c.getDescription() + "</p>\n" +
-                        "                                <a href=\"#\" class=\"border-btn border-btn2\">Go to Course</a>\n" +
+                        "                                <h3><a href=\"#\"></a>"+c.getName()+"</h3>\n" +
+                        "                                <p>"+c.getDescription()+"</p>\n" +
+                        "                                <a th:attr=\"onclick=|showUserCourseDetailModal('"+c.getId()+"')|\"\n" +
+                        "                                class=\"border-btn border-btn2\">Detail</a>\n" +
                         "                            </div>\n" +
                         "                        </div>\n" +
                         "                    </div>\n" +
                         "                </div>");
+
             }
         }
     }
