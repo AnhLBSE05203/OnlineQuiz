@@ -114,7 +114,7 @@ public class AccountController {
      * @return Reset Password Page html
      */
     @GetMapping(Constants.LINK_RESET_PASSWORD)
-    public String showResetPasswordPage(HttpServletRequest request, Model model) {
+    public String showResetPasswordPage(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
         String tokenString = request.getParameter("token");
         Account account = null;
 
@@ -123,8 +123,12 @@ public class AccountController {
             model.addAttribute("token", tokenString);
         }
         if (account == null) {
-            model.addAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_INVALID_TOKEN);
-            return Constants.PAGE_FORGOT_PASSWORD;
+            redirectAttributes.addFlashAttribute(Constants.ATTRIBUTE_MESSAGE, Constants.MESSAGE_INVALID_TOKEN);
+            StringBuilder sb = new StringBuilder();
+            sb.append(Constants.LINK_REDIRECT);
+            sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
+            sb.append(Constants.LINK_FORGOT_PASSWORD);
+            return sb.toString();
         }
 
         return Constants.PAGE_RESET_PASSWORD;
@@ -470,7 +474,7 @@ public class AccountController {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_RESET_PASSWORD);
+            sb.append(Constants.LINK_FORGOT_PASSWORD);
             return sb.toString();
         }
         if (!isPasswordValid(password)) {
@@ -478,7 +482,7 @@ public class AccountController {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_RESET_PASSWORD);
+            sb.append(Constants.LINK_FORGOT_PASSWORD);
             return sb.toString();
         }
         Token token = tokenService.findByTokenString(tokenString);
@@ -487,7 +491,7 @@ public class AccountController {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_RESET_PASSWORD);
+            sb.append(Constants.LINK_FORGOT_PASSWORD);
             return sb.toString();
         }
 
@@ -505,7 +509,7 @@ public class AccountController {
             StringBuilder sb = new StringBuilder();
             sb.append(Constants.LINK_REDIRECT);
             sb.append(Constants.LINK_ACCOUNT_CONTROLLER);
-            sb.append(Constants.LINK_RESET_PASSWORD);
+            sb.append(Constants.LINK_FORGOT_PASSWORD);
             return sb.toString();
         }
         accountService.resetPassword(account, password, token);
