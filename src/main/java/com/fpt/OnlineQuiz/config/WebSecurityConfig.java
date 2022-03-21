@@ -18,7 +18,6 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
@@ -62,9 +61,7 @@ public class WebSecurityConfig {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             sharedConfigure(http);
-            ArrayList<String> roleNames = new ArrayList<>();
-            roleNames.add(Constants.ROLE_USER);
-            configureForRole(roleService, roleNames, http);
+            configureForRole(roleService, Constants.ROLE_USER, http);
 
             http.formLogin().permitAll()
                     .loginProcessingUrl(Constants.LINK_ACCOUNT_LOGIN_PROCESS)
@@ -99,11 +96,9 @@ public class WebSecurityConfig {
         protected void configure(HttpSecurity http) throws Exception {
 
             sharedConfigure(http);
-            ArrayList<String> roleNames = new ArrayList<>();
-            roleNames.add(Constants.ROLE_ADMIN);
-            roleNames.add(Constants.ROLE_EXPERT);
-            roleNames.add(Constants.ROLE_SALES);
-            configureForRole(roleService, roleNames, http);
+            configureForRole(roleService, Constants.ROLE_ADMIN, http);
+            configureForRole(roleService, Constants.ROLE_EXPERT, http);
+            configureForRole(roleService, Constants.ROLE_SALES, http);
 
             http.formLogin().permitAll()
                     .loginProcessingUrl(Constants.LINK_ADMIN_LOGIN)
@@ -136,15 +131,15 @@ public class WebSecurityConfig {
         http.authorizeRequests().antMatchers("/admin/forget_pass_action").permitAll();
     }
 
-    public void configureForRole(RoleService roleService, List<String> roleNames, HttpSecurity http) throws Exception {
-        for (String roleName : roleNames) {
-            Role role = roleService.findRoleByName(roleName);
-            List<Screen> screens = role.getScreens();
-            for (Screen screen : screens) {
-                String link = screen.getLink();
-                http.authorizeRequests().antMatchers(link).hasAuthority(roleName);
-            }
+    public void configureForRole(RoleService roleService, String roleName, HttpSecurity http) throws Exception {
+        Role role = roleService.findRoleByName(roleName);
+
+        List<Screen> screens = role.getScreens();
+        for (Screen screen : screens) {
+            String link = screen.getLink();
+            //http.authorizeRequests().antMatchers(link).hasAuthority(roleName);
+            http.antMatcher(link).authorizeRequests().anyRequest().hasAuthority(roleName);
+            //http.authorizeRequests().anyRequest().authenticated();
         }
-        //http.authorizeRequests().anyRequest().authenticated();
     }
 }
