@@ -137,9 +137,12 @@ public class WebSecurityConfig {
         List<Screen> screens = role.getScreens();
         for (Screen screen : screens) {
             String link = screen.getLink();
-            //http.authorizeRequests().antMatchers(link).hasAuthority(roleName);
+            //http.authorizeRequests().antMatchers(link).hasAuthority(roleName); -> doesn't work
+
+            //warning: call anyRequest() only once, todo: fix bug in case screen_role has multiple records
+            //note: [antMatcher().authorizeRequests.anyRequest.hasAuthority] syntax needed for multiple login entries
             http.antMatcher(link).authorizeRequests().anyRequest().hasAuthority(roleName);
-            //http.authorizeRequests().anyRequest().authenticated();
+
         }
     }
 }
