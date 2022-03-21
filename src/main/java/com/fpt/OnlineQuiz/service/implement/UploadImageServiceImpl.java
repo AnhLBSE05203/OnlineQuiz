@@ -37,7 +37,7 @@ public class UploadImageServiceImpl implements UploadImageService {
             for (MultipartFile imageValue : file) {
                 try {
                     String fileName = date + imageValue.getOriginalFilename();
-                    String path = this.getClass().getClassLoader().getResource(".").getFile() + fileName;
+                    String path = System.getProperty("user.dir") + fileName;
                     path = URLDecoder.decode(path, "UTF-8");
                     File fileOut = new File(path);
                     FileOutputStream fos = new FileOutputStream(fileOut);
@@ -70,7 +70,7 @@ public class UploadImageServiceImpl implements UploadImageService {
         if (file != null && !file.isEmpty()) {
             try {
                 String fileName = date + file.getOriginalFilename();
-                String path = this.getClass().getClassLoader().getResource(".").getFile() + fileName;
+                String path = System.getProperty("user.dir") + fileName;
                 path = URLDecoder.decode(path, "UTF-8");
                 File fileOut = new File(path);
                 FileOutputStream fos = new FileOutputStream(fileOut);
