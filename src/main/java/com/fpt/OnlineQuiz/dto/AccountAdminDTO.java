@@ -16,6 +16,8 @@ public class AccountAdminDTO {
 
     private int gender;
 
+    private String genderStr;
+
     private String email;
 
     private String phone;
