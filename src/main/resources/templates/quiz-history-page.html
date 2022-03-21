@@ -167,9 +167,9 @@
                                 </ul>
                                 <div class="pricing d-flex justify-content-between align-items-center">
                                     <div class="left">
-                                        <p th:text="${h.number}+' Questions in total'">Globe Solution Ltd.</p>
+                                        <p th:text="${h.totalQues}+' Questions in total'">Globe Solution Ltd.</p>
                                     </div>
-                                    <span class="time" th:text="${h.trueNum} / ${h.number} * 100 + '% Correct'"></span>
+                                    <span class="time" th:text="${h.trueNum} / ${h.totalQues} * 100 + '% Correct'"></span>
                                 </div>
                                 <br>
                                 <h5><a href="#">Details</a></h5>

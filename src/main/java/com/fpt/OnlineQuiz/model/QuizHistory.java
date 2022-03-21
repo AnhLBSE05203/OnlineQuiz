@@ -74,8 +74,9 @@ public class QuizHistory {
             "WHERE qh.history_account_id = history_account_id AND qh.quiz_history_id = quiz_history_id AND a.is_correct = true\n" +
             "GROUP BY qh.quiz_history_id)")
     private Long trueNum;
-
-
+    @Formula("(SELECT COUNT(*) FROM quiz_history_question qhq INNER JOIN quiz_history qh on qh.quiz_history_id = qhq.quiz_history_id\n" +
+            "WHERE qh.quiz_history_id = quiz_history_id)")
+    private Long totalQues;
 
     @OneToMany(mappedBy = "quizHistory", cascade = CascadeType.ALL)
     private List<QuizHistoryQuestion> quizHistoryQuestions;
