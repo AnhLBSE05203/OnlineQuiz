@@ -14,3 +14,23 @@ function start(){
         alert("Number of question must be less than 2147483647");
     }
 }
+function showNumber(){
+    var lessonId = document.getElementById("lessonId").value;
+
+    $.ajax({
+        url : "/practices/count",
+        type: "get",
+        data: {
+            lessonId : lessonId
+        },
+        success: function (data){
+            // alert(data);
+            var num = data;
+            if(num != ""){
+                $('#number').text(num);
+            }else{
+                $('#number').text(0);
+            }
+        }
+    })
+}
