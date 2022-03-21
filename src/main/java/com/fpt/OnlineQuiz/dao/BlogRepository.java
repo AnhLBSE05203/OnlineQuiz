@@ -58,9 +58,8 @@ public class BlogRepository {
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
-                sb.append(" AND lower(b.thumbnail.src) LIKE " + key);
-                sb.append(" OR lower(b.content) LIKE " + key);
-                sb.append(" OR lower(b.title) LIKE " + key);
+                sb.append(" AND (lower(b.content) LIKE " + key);
+                sb.append(" OR lower(b.title) LIKE " + key +" )");
             }
             // append sorting
             Order order = pagingRequest.getOrder().get(0);
@@ -93,9 +92,8 @@ public class BlogRepository {
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
-                sb.append(" AND lower(b.thumbnail.src) LIKE " + key);
-                sb.append(" OR lower(b.content) LIKE " + key);
-                sb.append(" OR lower(b.title) LIKE " + key);
+                sb.append(" AND (lower(b.content) LIKE " + key);
+                sb.append(" OR lower(b.title) LIKE " + key +" )");
             }
 
             String sql = sb.toString();
