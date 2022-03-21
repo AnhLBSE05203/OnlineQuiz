@@ -58,6 +58,11 @@ public class AdminAccountController {
         Account account = accountService.detailAccount(id);
         AccountAdminDTO accountAdminDTO = new AccountAdminDTO();
         Utils.copyNonNullProperties(account, accountAdminDTO);
+        if (account.getGender() == 1) {
+            accountAdminDTO.setGenderStr("Female");
+        } else {
+            accountAdminDTO.setGenderStr("Male");
+        }
         return accountAdminDTO;
     }
 
