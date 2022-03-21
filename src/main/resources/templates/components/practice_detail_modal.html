@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- Modal -->
+<div class="modal fade" id="practiceDetailModal" role="dialog" th:fragment="practiceDetailModal">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1>Practice Detail</h1>
+                <button type="button" class="close" data-dismiss="modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                        <span>
+                            <h3 class="modal-title">Subject</h3>
+                        </span>
+                <input type="text" id="subjectId" th:value="${subjectId}" readonly>
+
+            </div>
+            <div class="modal-body">
+                        <span>
+                            <h3>Lesson</h3>
+                        </span>
+                <select name="lessonId" style="width: 67%;">
+                    <option th:each="lesson : ${lessonList}" th:value="${lesson.getId()}" th:text="${lesson.getName()}"></option>
+                </select>
+            </div>
+
+            <div class="modal-body">
+                        <span>
+                            <h3>Number of question</h3>
+                        </span>
+                <input type="number" id="number">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="start()">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+</html>
