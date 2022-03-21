@@ -1,5 +1,4 @@
 function showModal(){
-    alert("aaa");
     $('#practiceDetailModal').modal('show');
 }
 function closeModal(){

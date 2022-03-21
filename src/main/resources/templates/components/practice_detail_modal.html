@@ -13,7 +13,7 @@
                         <span>
                             <h3 class="modal-title">Subject</h3>
                         </span>
-                <input type="text" id="subjectId" th:value="${subjectId}" readonly>
+                <span type="text" id="subjectId" th:value="${subject.getId()}" th:text="${subject.getName()}" readonly></span>
 
             </div>
             <div class="modal-body">
@@ -21,7 +21,8 @@
                             <h3>Lesson</h3>
                         </span>
                 <select name="lessonId" style="width: 67%;">
-                    <option th:each="lesson : ${lessonList}" th:value="${lesson.getId()}" th:text="${lesson.getName()}"></option>
+                    <option th:each="lesson : ${lessonList}" th:value="${lesson.getId()}" th:text="${lesson.getName()}">
+                    </option>
                 </select>
             </div>
 

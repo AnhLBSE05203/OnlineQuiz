@@ -42,6 +42,9 @@ public class PracticeController {
     private ExpertService expertService;
     @Autowired
     private SubjectService subjectService;
+    @Autowired
+    private LessonService lessonService;
+
 
     @GetMapping(value = "")
 
@@ -93,7 +96,13 @@ public class PracticeController {
         List<Subject> subjectFeatured = subjectService.getFeaturedSubjects(Constants.HOME_PAGE_SUBJECT_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
         List<QuizHistory> quizHistories = quizHistoryService.getQuizByAccountAdd(account.getId());
+        //todo fix subject id
+        int subjectId = 2;
+        Subject s = subjectService.getSubjectById(2);
+        List<Lesson> lessonList = lessonService.getAllLesson(subjectId);
         model.addAttribute("quizHistory", quizHistories);
+        model.addAttribute("lessonList", lessonList);
+        model.addAttribute("subject", s);
         return "practices_detail_page";
     }
 

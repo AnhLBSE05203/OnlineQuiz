@@ -94,6 +94,8 @@ public class WebSecurityConfig {
          */
         @Override
         protected void configure(HttpSecurity http) throws Exception {
+            http.authorizeRequests().antMatchers("/admin/forget_pass").permitAll();
+            http.authorizeRequests().antMatchers("/admin/forget_pass_action").permitAll();
             sharedConfigure(http);
             configureForRole(roleService, Constants.ROLE_ADMIN, http);
             configureForRole(roleService, Constants.ROLE_EXPERT, http);

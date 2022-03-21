@@ -97,7 +97,9 @@
                     </ul>
 
                     <div class="col-12 col-md-4 text-center">
-                        <a href="#" class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600">Get Started</a>
+                        <button class="f-n-hover btn btn-info btn-raised px-4 py-25 w-75 text-600"
+                                onclick="showModal()">Get Started
+                        </button>
                     </div>
                 </div>
 
@@ -135,19 +137,25 @@
             </span>
                         </li>
                     </ul>
-
+                    <!--                    <input type="hidden" id="subjectId" th:text="${subjectId}">-->
                     <div class="col-12 col-md-4 text-center">
                         <a href="#" class="f-n-hover btn btn-success btn-raised px-4 py-25 w-75 text-600">Get
                             Started</a>
                     </div>
-                </div>
 
+
+                </div>
             </div>
+
         </div>
     </div>
+    </div>
     <!-- List action end -->
+    <div th:replace="components/practice_detail_modal.html :: practiceDetailModal">
+    </div>
 
-    <!-- Courses area start -->
+
+        <!-- Courses area start -->
     <div class="container py-5">
         <div class="row text-center text-white mb-5">
             <div class="col-lg-7 mx-auto">
@@ -252,6 +260,7 @@
             </div>
         </div>
     </div>
+    </div>
 </main>
 <footer th:replace="components/header_footer.html :: user-footer">
 </footer>
@@ -264,8 +273,12 @@
 </th:block>
 <!-- page-specific js -->
 <div th:replace="components/header_footer.html :: common-script"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script th:src="@{/js/home_page.js}"></script>
 <script th:src="@{/js/user_course_detail.js}"></script>
+<script th:src="@{/js/user_practice_detail.js}"></script>
+
 </body>
 </body>
 </html>
