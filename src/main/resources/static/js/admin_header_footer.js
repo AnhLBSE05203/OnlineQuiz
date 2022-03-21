@@ -17,7 +17,6 @@ $(document).ready(function(){
 function updateMenuAfterLogin(principal){
     for(let i = 0; i < principal.roles.length; i++){
         var role = principal.roles[i].name;
-        alert(role);
         switch(role){
             case("ROLE_ADMIN") :
                 $('#accountMenu').show();

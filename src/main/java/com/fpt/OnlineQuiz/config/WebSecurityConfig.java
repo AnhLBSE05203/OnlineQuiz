@@ -145,6 +145,6 @@ public class WebSecurityConfig {
                 http.authorizeRequests().antMatchers(link).hasAuthority(roleName);
             }
         }
-        http.authorizeRequests().anyRequest().authenticated();
+        //http.authorizeRequests().anyRequest().authenticated();
     }
 }
