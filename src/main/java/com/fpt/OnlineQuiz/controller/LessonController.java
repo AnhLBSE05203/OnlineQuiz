@@ -56,11 +56,11 @@ public class LessonController {
     }
 
     @GetMapping("/detail")
-    public String showLessonDetailPage(@Param(value = "lesId") int lesId, Model model, HttpServletRequest request) {
+    public String showLessonDetailPage(@Param(value = "lesId") int lesId, @Param(value = "subId") int subId, Model model, HttpServletRequest request) {
         Optional<Lesson> lesson = lessonService.getLessonById(lesId);
-//        Optional<Subject> subject = subjectService.getSubject(subId);
+        Optional<Subject> subject = subjectService.getSubject(subId);
 //
-//        model.addAttribute("subject", subject);
+        model.addAttribute("subject", subject);
         model.addAttribute("lesson", lesson);
         return "lessonDetail_page";
     }
