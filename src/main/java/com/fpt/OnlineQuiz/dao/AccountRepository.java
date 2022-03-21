@@ -100,9 +100,9 @@ public class AccountRepository {
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
-//                sb.append(" AND lower(b.thumbnail.src) LIKE " + key);
-//                sb.append(" OR lower(b.content) LIKE " + key);
-//                sb.append(" OR lower(b.title) LIKE " + key);
+                sb.append(" AND (lower(a.fullName) LIKE " + key);
+                sb.append(" OR lower(a.email) LIKE " + key);
+                sb.append(" OR lower(a.phone) LIKE " + key +")");
             }
             // append sorting
             Order order = pagingRequest.getOrder().get(0);
@@ -111,7 +111,6 @@ public class AccountRepository {
             sb.append(" ORDER BY " + "a." + column.getData() + " " + order.getDir());
 
             String sql = sb.toString();
-            //String sql = "SELECT a FROM Account a";
             Query query = em.createQuery(sql, Account.class);
             query.setFirstResult(pagingRequest.getStart());
             query.setMaxResults(pagingRequest.getLength());
@@ -135,13 +134,12 @@ public class AccountRepository {
             if (pagingRequest.getSearch() != null
                     && StringUtils.hasLength(pagingRequest.getSearch().getValue())) {
                 String key = "'%" + pagingRequest.getSearch().getValue().toLowerCase() + "%'";
-//                sb.append(" AND lower(b.thumbnail.src) LIKE " + key);
-//                sb.append(" OR lower(b.content) LIKE " + key);
-//                sb.append(" OR lower(b.title) LIKE " + key);
+                sb.append(" AND (lower(a.fullName) LIKE " + key);
+                sb.append(" OR lower(a.email) LIKE " + key);
+                sb.append(" OR lower(a.phone) LIKE " + key +")");
             }
 
             String sql = sb.toString();
-            //String sql = "SELECT count(a) FROM Account b";
             Query query = em.createQuery(sql, Long.class);
             return (long) query.getSingleResult();
         } catch (NoResultException | IOException e) {
