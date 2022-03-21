@@ -5,7 +5,7 @@ function closeModal(){
     $('#practiceDetailModal').modal('hide');
 }
 function start(){
-    var number = document.getElementById('number').textContent;
+    var number = document.getElementById('numberInput').value;
     var lessonId = document.getElementById("lessonId").value;
     alert(number + " " + lessonId);
     if(isNaN(number)){
