@@ -29,4 +29,6 @@ public interface QuestionService {
 
     int findAnswerIcCorrect(int questionId);
     int countQuestionByLessonId(int lessonId);
+
+    List<Question> getNumberOfQuestionByLessonId(int lessonId, int number);
 }

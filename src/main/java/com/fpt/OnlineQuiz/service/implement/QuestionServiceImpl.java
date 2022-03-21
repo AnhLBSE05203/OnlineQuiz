@@ -118,4 +118,9 @@ public class QuestionServiceImpl implements QuestionService {
     public int countQuestionByLessonId(int lessonId) {
         return questionRepository.countQuestionByLessonId(lessonId);
     }
+
+    @Override
+    public List<Question> getNumberOfQuestionByLessonId(int lessonId, int number) {
+        return  questionRepository.getNumberOfQuestionByLessonId(lessonId, number);
+    }
 }

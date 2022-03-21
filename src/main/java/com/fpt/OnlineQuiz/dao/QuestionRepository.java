@@ -156,4 +156,17 @@ public class QuestionRepository {
         }
         return -1;
     }
+    public List<Question> getNumberOfQuestionByLessonId(int lessonId, int num) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select q from Question q where q.lesson.id =:id");
+            String sql = sb.toString();
+            Query query = em.createQuery(sql, Question.class);
+            query.setParameter("id", lessonId);
+            query.setMaxResults(num);
+            return (List<Question>) query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }
