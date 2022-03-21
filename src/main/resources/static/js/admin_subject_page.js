@@ -158,26 +158,29 @@ function submitEditSubject(e) {
     var subjectNameOriginal = $("#editSubjectNameOriginal").val();
     var subjectName = $("#editSubjectName").val();
     var link = "/admin/subject/isDuplicated";
-    $.ajax({
-        url: link,
-        type:"get",
-        contentType: "application/json; charset=utf-8",
-        data:{
-            "subjectName" : subjectName
-        },
-        dataType: "json",
-        success: function (data){
-            if(data){
-                if(subject.name != subjectNameOriginal){
-                    alert('There is already a Subject with that name');
+    if(subjectNameOriginal == subjectName) {
+        $("#subjectEditForm")[0].submit();
+
+    } else{
+        $.ajax({
+            url: link,
+            type:"get",
+            contentType: "application/json; charset=utf-8",
+            data:{
+                "subjectName" : subjectName
+            },
+            dataType: "json",
+            success: function (data){
+                if(data){
+                   alert('There is already a Subject with that name');
                 } else {
-                    $("#subjectEditForm")[0].submit();
-                }
+                     $("#subjectEditForm")[0].submit();
+                 }
+            },
+            error: function (jqXHR, exception) {
             }
-        },
-        error: function (jqXHR, exception) {
-        }
-    });
+        });
+    }
 }
 // course section
 function showCourseSection(subjectId) {
