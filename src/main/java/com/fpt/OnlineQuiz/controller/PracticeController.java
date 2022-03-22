@@ -99,10 +99,12 @@ public class PracticeController {
         List<Subject> subjectFeatured = subjectService.getFeaturedSubjects(Constants.HOME_PAGE_SUBJECT_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
         List<QuizHistory> quizHistories = quizHistoryService.getQuizByAccountAdd(account.getId());
+        QuizHistory checkExistHistory = quizHistoryService.checkExist(id,account.getId());
         //todo fix subject id
         int subjectId = 2;
         Subject s = subjectService.getSubjectById(2);
         List<Lesson> lessonList = lessonService.getAllLesson(subjectId);
+        model.addAttribute("checkExist", checkExistHistory);
         model.addAttribute("quizHistory", quizHistories);
         model.addAttribute("lessonList", lessonList);
         model.addAttribute("subject", s);
@@ -170,7 +172,7 @@ public class PracticeController {
         return "redirect:/practices/detail?id=" + idForAdd;
     }
     @GetMapping(value = "/search")
-    public String practiceSearchPage(Model model) {
+    public String practiceSearchPage(Model model, HttpServletRequest request) {
         List<CourseFeaturedDTO> courseFeatured = courseService.getFeaturedCourses(Constants.HOME_PAGE_COURSE_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_COURSE_FEATURED, courseFeatured);
         List<ExpertFeaturedDTO> expertFeatured = expertService.getFeaturedExperts(Constants.HOME_PAGE_EXPERT_NUMBER);
@@ -178,7 +180,7 @@ public class PracticeController {
         List<Subject> subjectFeatured = subjectService.getFeaturedSubjects(Constants.HOME_PAGE_SUBJECT_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
 
-        List<QuizHistory> quizHistories = quizHistoryService.finAllAccountId(name);
+        List<QuizHistory> quizHistories = quizHistoryService.finAllAccountId(request.getParameter("packName"));
         model.addAttribute("quizHistory", quizHistories);
         return "practices-search-page";
     }

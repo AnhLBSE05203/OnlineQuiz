@@ -12,4 +12,5 @@ public interface QuizHistoryService {
       QuizHistory addQuizPackage(QuizHistory quiz);
       QuizHistory findId(int id);
       List<QuizHistory> finAllAccountId(String name);
+      QuizHistory checkExist(int historyId,int accountId);
 }

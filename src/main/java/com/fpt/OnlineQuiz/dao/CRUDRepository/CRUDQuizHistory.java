@@ -4,6 +4,7 @@ import com.fpt.OnlineQuiz.model.Lesson;
 import com.fpt.OnlineQuiz.model.QuizHistory;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,6 +27,11 @@ public interface CRUDQuizHistory extends CrudRepository<QuizHistory, Integer> {
     @Query("SELECT qh FROM QuizHistory qh WHERE qh.id = ?1")
     QuizHistory findForAdd(int id);
 
-    @Query("SELECT qh FROM QuizHistory qh WHERE qh.id IS not NULL AND qh.name LIKE '%?1%'")
-    List<QuizHistory> allIfAccountNotNull(String name);
+    @Query("SELECT qh FROM QuizHistory qh WHERE qh.account.id IS not NULL AND qh.name LIKE %:packName%")
+    List<QuizHistory> allIfAccountNotNull(@Param("packName") String name);
+
+    @Query("SELECT qh FROM QuizHistory qh INNER JOIN QuizHistoryAccountAdd qhaa " +
+            "on qh.id = qhaa.quizHistory.id " +
+            "WHERE qh.id = ?1 AND qhaa.account.id = ?2")
+    QuizHistory checkExist(int historyId,int accountId);
 }

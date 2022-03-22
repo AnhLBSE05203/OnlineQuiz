@@ -68,7 +68,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-7 col-lg-8">
                     <div class="section-tittle text-center mb-55">
-                        <h2>Practice List</h2>
+                        <h2>Searching match</h2>
                     </div>
                 </div>
             </div>
@@ -78,54 +78,17 @@
                         <div class="properties__card">
                             <div class="date22">
                                 <p><i th:text="${qh.createdTime.toLocaleString()}"></i></p>
-
                             </div>
                             <div class="properties__caption">
                                 <a th:href="@{/practices/detail(id=${qh.id})}"><h3><b th:text="${qh.name}"></b></h3></a>
                                 <p><b th:text="${qh.quizCount}+' Quizs'"></b></p>
                                 <p style="text-align: center">Created by <a href="#" id="created"
                                                                             th:text="${qh.accountName}"></a></p>
-                                <!--                                <p style="text-align: center">-->
-                                <!--                                    <a href="#" class="border-btn">Details</a>-->
-                                <!--                                </p>-->
+
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- list lesson -->
-                <!--                <div class="col-lg-4">-->
-                <!--                    <div class="properties properties2 mb-30">-->
-                <!--                        <div class="properties__card">-->
-                <!--                            <div class="properties__img overlay1">-->
-                <!--                                <a href="#"><img th:src="@{/img/gallery/featured1.png}" alt=""></a>-->
-                <!--                            </div>-->
-                <!--                            <div class="properties__caption">-->
-                <!--                                <p>User Experience</p>-->
-                <!--                                &lt;!&ndash;                                <h3><a href="#" th:text="${subject.get.name}"></a></h3>&ndash;&gt;-->
-                <!--                                <p>The automated process all your website tasks. Discover tools and techniques to engage-->
-                <!--                                    effectively with vulnerable children and young people.-->
-                <!--                                </p>-->
-                <!--                                <div class="properties__footer d-flex justify-content-between align-items-center">-->
-                <!--                                    <div class="restaurant-name">-->
-                <!--                                        <div class="rating">-->
-                <!--                                            <i class="fas fa-star"></i>-->
-                <!--                                            <i class="fas fa-star"></i>-->
-                <!--                                            <i class="fas fa-star"></i>-->
-                <!--                                            <i class="fas fa-star"></i>-->
-                <!--                                            <i class="fas fa-star-half"></i>-->
-                <!--                                        </div>-->
-                <!--                                        <p><span>(4.5)</span> based on 120</p>-->
-                <!--                                    </div>-->
-                <!--                                    <div class="price">-->
-                <!--                                        <span>$135</span>-->
-                <!--                                    </div>-->
-                <!--                                </div>-->
-                <!--                                <a href="#" class="border-btn border-btn2">Find out more</a>-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
             </div>
         </div>
     </div>

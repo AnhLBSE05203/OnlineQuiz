@@ -117,7 +117,7 @@ admin-footer -> footer th:replace
                     <!-- SearchBar -->
                     <div class="col-md-8 ftco-animate fadeInUp ftco-animated">
                         <form th:action="@{/practices/search}" class="domain-form" method="get">
-                            <div class="form-group d-md-flex"><input type="text" class="form-control px-4"
+                            <div class="form-group d-md-flex"><input type="text" class="form-control px-4" name="packName"
                                                                      placeholder="Enter your QuizPackage..."> <input
                                     type="submit" class="search-domain btn btn-primary px-5" value="Search">
                             </div>
