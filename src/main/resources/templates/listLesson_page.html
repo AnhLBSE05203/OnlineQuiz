@@ -125,8 +125,9 @@
                         <tr th:each="l : ${lessons}">
                             <td><i class="fa fa-play-circle"></i></td>
                             <td>
+                                <input type="hidden" name="lessonid" th:value="${l.id}">
                                 <a class="le-titile"
-                                   th:href="@{/lesson/detail(lesId=${l.id},courseId=${courseId})}"
+                                   th:href="@{/quizhandelecontroller/quizpost}"
                                    th:text="${l.name}"></a></td>
                             <td th:text="${l.time}"></td>
                             <td th:text="${l.status}"><i class="fa fa-close"></i></td>
