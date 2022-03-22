@@ -193,6 +193,7 @@ public class CourseController {
             }
             accountService.updateAccount(a);
             session.removeAttribute("cart");
+            session.setAttribute("total", 0);
             modelMap.addAttribute("message", "Buy Successful");
         }
 
