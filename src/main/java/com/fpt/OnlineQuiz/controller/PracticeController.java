@@ -178,6 +178,8 @@ public class PracticeController {
         List<Subject> subjectFeatured = subjectService.getFeaturedSubjects(Constants.HOME_PAGE_SUBJECT_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
 
+        List<QuizHistory> quizHistories = quizHistoryService.finAllAccountId(name);
+        model.addAttribute("quizHistory", quizHistories);
         return "practices-search-page";
     }
 }

@@ -59,68 +59,9 @@
     </section>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
-    <div class="container">
-        <div class="mt-5">
-            <div class="d-style btn btn-brc-tp border-2 bgc-white btn-outline-purple btn-h-outline-purple btn-a-outline-purple w-100 my-2 py-3 shadow-sm">
-                <!-- Premium Plan -->
-                <div class="row align-items-center">
-                    <div class="col-12 col-md-4">
-                        <h4 class="pt-3 text-170 text-600 text-purple-d1 letter-spacing">
-                            New Quiz Package
-                        </h4>
-                    </div>
-
-                    <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
-                        <li>
-                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
-                            <span>
-                <span class="text-110">Create Package that contain quiz</span>
-              </span>
-                        </li>
-                    </ul>
-
-                    <div class="col-12 col-md-4 text-center">
-                        <a th:href="@{/practices/create}" class="f-n-hover btn btn-warning btn-raised px-4 py-25 w-75 text-600">Create
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="d-style bgc-white btn btn-brc-tp btn-outline-green btn-h-outline-green btn-a-outline-green w-100 my-2 py-3 shadow-sm border-2">
-                <!-- Pro Plan -->
-                <div class="row align-items-center">
-                    <div class="col-12 col-md-4">
-                        <h4 class="pt-3 text-170 text-600 text-green-d1 letter-spacing">
-                            Quiz History
-                        </h4>
-                    </div>
-
-                    <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
-                        <li>
-                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
-                            <span>
-                <span class="text-110">See all your practices history here</span>
-              </span>
-                        </li>
-
-                        <li class="mt-25">
-                            <i class="fa fa-check text-success-m2 text-110 mr-2 mt-1"></i>
-                            <span class="text-110">
-                Display all the history
-            </span>
-                        </li>
-
-                    </ul>
-
-                    <div class="col-12 col-md-4 text-center">
-                        <a th:href="@{/quiz-history}" class="f-n-hover btn btn-success btn-raised px-4 py-25 w-75 text-600">History</a>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
+    <!-- New Package and QuizHistory -->
+    <div th:replace="components/header_footer.html :: new-package-quiz-history"></div>
+    <!-- End New Package and QuizHistory -->
     <!-- Courses area start -->
     <div class="courses-area section-padding40 fix">
         <div class="container">

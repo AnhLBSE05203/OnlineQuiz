@@ -35,8 +35,8 @@ public class QuizHistoryServiceImpl implements QuizHistoryService {
     }
 
     @Override
-    public List<QuizHistory> finAllAccountId() {
-        return quizHistory.allIfAccountNotNull();
+    public List<QuizHistory> finAllAccountId(String name) {
+        return quizHistory.allIfAccountNotNull(name);
     }
 
 
