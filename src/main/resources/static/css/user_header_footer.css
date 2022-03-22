@@ -51,3 +51,7 @@ body {
 .domain-price span small {
     color: #24bdc9
 }
+.searchBar{
+    padding-right: 50px;
+    float: right;
+}
