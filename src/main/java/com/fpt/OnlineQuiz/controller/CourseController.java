@@ -189,7 +189,6 @@ public class CourseController {
             Account a = accountService.detailAccount(account.getId());
 
             List<Course> course = a.getCourses();
-            System.out.println(course);
 
             for(int i = 0; i < cart.size(); i++)
             {
