@@ -1,336 +1,296 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html class="no-js" lang="zxx">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Courses | Education</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Courses | Education</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
-    <!-- CSS here -->
-    <div th:replace="components/header_footer.html :: common-style"></div>
-    <!-- page specific css -->
+        <!-- CSS here -->
+        <div th:replace="components/header_footer.html :: common-style"></div>
+        <!-- page specific css -->
 
-</head>
-<body>
-    <!--? Preloader Start -->
-    <div th:replace="components/header_footer.html :: user-preload"></div>
-    <!-- Preloader Start -->
-    <!-- Header Start -->
-    <div class="header-area header-transparent">
-        <div class="main-header ">
-            <div class="header-bottom  header-sticky">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <!-- Logo -->
-                        <div class="col-xl-2 col-lg-2">
-                            <div class="logo">
-                                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="col-xl-10 col-lg-10">
-                            <div class="menu-wrapper d-flex align-items-center justify-content-end">
-                                <!-- Main-menu -->
-                                <div class="main-menu d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">                                                                                          
-                                            <li class="active" ><a href="index.html">Home</a></li>
-                                            <li><a href="listLesson_page.html">Courses</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="#">Blog</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                    <li><a href="elements.html">Element</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <!-- Button -->
-                                            <li class="button-header margin-left "><a href="#" class="btn">Join</a></li>
-                                            <li class="button-header"><a href="login.html" class="btn btn3">Log in</a></li>
-                                        </ul>
-                                    </nav>
+    </head>
+    <body>
+        <!--? Preloader Start -->
+        <div th:replace="components/header_footer.html :: user-preload"></div>
+        <!-- Preloader Start -->
+        <!-- Header Start -->
+        <div th:replace="components/header_footer.html :: user-header"></div>
+        <!-- Header End -->
+        <main>
+            <!--? slider Area Start-->
+            <section class="slider-area slider-area2">
+                <div class="slider-active">
+                    <!-- Single Slider -->
+                    <div class="single-slider slider-height2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-8 col-lg-11 col-md-12">
+                                    <div class="hero__caption hero__caption2">
+                                        <h1 data-animation="bounceIn" data-delay="0.2s">Company insights</h1>
+                                        <!-- breadcrumb Start-->
+                                        <nav aria-label="breadcrumb">
+                                            <ol class="breadcrumb">
+                                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                                <li class="breadcrumb-item"><a href="#">Blog</a></li>
+                                            </ol>
+                                        </nav>
+                                        <!-- breadcrumb End -->
+                                    </div>
                                 </div>
                             </div>
-                        </div> 
-                        <!-- Mobile Menu -->
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-<!--        &lt;!&ndash; Header Start &ndash;&gt;-->
-<!--        <div th:replace="components/header_footer.html :: user-header"></div>-->
-<!--        &lt;!&ndash; Header End &ndash;&gt;-->
-<!--    &lt;!&ndash; Header End &ndash;&gt;-->
-    <main>
-        <!--? slider Area Start-->
-        <section class="slider-area slider-area2">
-            <div class="slider-active">
-                <!-- Single Slider -->
-                <div class="single-slider slider-height2">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-8 col-lg-11 col-md-12">
-                                <div class="hero__caption hero__caption2">
-                                    <h1 data-animation="bounceIn" data-delay="0.2s">Company insights</h1>
-                                    <!-- breadcrumb Start-->
-                                    <nav aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                            <li class="breadcrumb-item"><a href="#">Blog</a></li> 
-                                        </ol>
-                                    </nav>
-                                    <!-- breadcrumb End -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>          
-                </div>
-            </div>
-        </section>
-        <!--? Blog Area Start-->
-        <section class="blog_area section-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mb-5 mb-lg-0">
-                        <div class="blog_left_sidebar">
-                            <!--start foreach list blog -->
-                            <ul th:each="blog : ${listBlog}">
-                            <article class="blog_item">
-                                <div class="blog_item_img">
-                                    <img class="card-img rounded-0" src="assets/img/blog/single_blog_1.png" alt="">
-                                    <a href="#" class="blog_item_date">
-                                        <h3 th:text="${#dates.format(blog.getCreatedTime(), 'dd')}"></h3>
-                                        <p th:text="${#calendars.format(blog.getCreatedTime(), 'MMM')}"></p>
-                                    </a>
-                                </div>
-                                <div class="blog_details">
-                                    <a class="d-inline-block" th:href="@{/blogcontroller/blogdetail(blogid=${blog.id})}">
-                                        <h2 class="blog-head" style="color: #2d2d2d;" th:text="${blog.title}"></h2>
-                                    </a>
-                                    <p th:text="${#strings.abbreviate(blog.content,100)} "></p>
-                                    <ul class="blog-info-link">
-                                        <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                    </ul>
-                                </div>
-                            </article>
-                            </ul>
-                            <nav class="blog-pagination justify-content-center d-flex">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a href="#" class="page-link" aria-label="Previous">
-                                            <i class="ti-angle-left"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item" th:each="i: ${#numbers.sequence(1,totalPage)}">
-                                        <a th:href="@{/blogcontroller/listblog(page=${i})}" class="page-link">[[${i}]]</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link" aria-label="Next">
-                                            <i class="ti-angle-right"></i>
-                                        </a>
-                                    </li>
+            </section>
+            <!--? Blog Area Start-->
+            <section class="blog_area section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mb-5 mb-lg-0">
+                            <div class="blog_left_sidebar">
+                                <!--start foreach list blog -->
+                                <ul th:each="blog : ${listBlog}">
+                                    <article class="blog_item">
+                                        <div class="blog_item_img">
+                                            <img class="card-img rounded-0" src="assets/img/blog/single_blog_1.png"
+                                                 alt="">
+                                            <a href="#" class="blog_item_date">
+                                                <h3 th:text="${#dates.format(blog.getCreatedTime(), 'dd')}"></h3>
+                                                <p th:text="${#calendars.format(blog.getCreatedTime(), 'MMM')}"></p>
+                                            </a>
+                                        </div>
+                                        <div class="blog_details">
+                                            <a class="d-inline-block"
+                                               th:href="@{/blogcontroller/blogdetail(blogid=${blog.id})}">
+                                                <h2 class="blog-head" style="color: #2d2d2d;"
+                                                    th:text="${blog.title}"></h2>
+                                            </a>
+                                            <p th:text="${#strings.abbreviate(blog.content,100)} "></p>
+                                            <ul class="blog-info-link">
+                                                <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a>
+                                                </li>
+                                                <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                                            </ul>
+                                        </div>
+                                    </article>
                                 </ul>
-                            </nav>
+                                <nav class="blog-pagination justify-content-center d-flex">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a href="#" class="page-link" aria-label="Previous">
+                                                <i class="ti-angle-left"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item" th:each="i: ${#numbers.sequence(1,totalPage)}">
+                                            <a th:href="@{/blogcontroller/listblog(page=${i})}" class="page-link">[[${i}]]</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a href="#" class="page-link" aria-label="Next">
+                                                <i class="ti-angle-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog_right_sidebar">
-                            <aside class="single_sidebar_widget search_widget">
-                                <form action="#">
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder='Search Keyword'
-                                            onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Search Keyword'">
-                                            <div class="input-group-append">
-                                                <button class="btns" type="button"><i class="ti-search"></i></button>
+                        <div class="col-lg-4">
+                            <div class="blog_right_sidebar">
+                                <aside class="single_sidebar_widget search_widget">
+                                    <form action="#">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder='Search Keyword'
+                                                       onfocus="this.placeholder = ''"
+                                                       onblur="this.placeholder = 'Search Keyword'">
+                                                <div class="input-group-append">
+                                                    <button class="btns" type="button"><i class="ti-search"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
+                                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                                type="submit">Search
+                                        </button>
+                                    </form>
+                                </aside>
+                                <aside class="single_sidebar_widget post_category_widget">
+                                    <h4 class="widget_title" style="color: #2d2d2d;">Category</h4>
+                                    <ul class="list cat-list">
+                                        <li>
+                                            <a href="#" class="d-flex">
+                                                <p>Resaurant food</p>
+                                                <p>(37)</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="d-flex">
+                                                <p>Travel news</p>
+                                                <p>(10)</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="d-flex">
+                                                <p>Modern technology</p>
+                                                <p>(03)</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="d-flex">
+                                                <p>Product</p>
+                                                <p>(11)</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="d-flex">
+                                                <p>Inspiration</p>
+                                                <p>21</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="d-flex">
+                                                <p>Health Care (21)</p>
+                                                <p>09</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </aside>
+                                <aside class="single_sidebar_widget popular_post_widget">
+                                    <h3 class="widget_title" style="color: #2d2d2d;">Recent Post</h3>
+                                    <div class="media post_item">
+                                        <img src="assets/img/post/post_1.png" alt="post">
+                                        <div class="media-body">
+                                            <a href="blog_details.html">
+                                                <h3 style="color: #2d2d2d;">From life was you fish...</h3>
+                                            </a>
+                                            <p>January 12, 2019</p>
+                                        </div>
                                     </div>
-                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Search</button>
-                                </form>
-                            </aside>
-                            <aside class="single_sidebar_widget post_category_widget">
-                                <h4 class="widget_title" style="color: #2d2d2d;">Category</h4>
-                                <ul class="list cat-list">
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Resaurant food</p>
-                                            <p>(37)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Travel news</p>
-                                            <p>(10)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Modern technology</p>
-                                            <p>(03)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Product</p>
-                                            <p>(11)</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Inspiration</p>
-                                            <p>21</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="d-flex">
-                                            <p>Health Care (21)</p>
-                                            <p>09</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </aside>
-                            <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title" style="color: #2d2d2d;">Recent Post</h3>
-                                <div class="media post_item">
-                                    <img src="assets/img/post/post_1.png" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">From life was you fish...</h3>
-                                        </a>
-                                        <p>January 12, 2019</p>
+                                    <div class="media post_item">
+                                        <img src="assets/img/post/post_2.png" alt="post">
+                                        <div class="media-body">
+                                            <a href="blog_details.html">
+                                                <h3 style="color: #2d2d2d;">The Amazing Hubble</h3>
+                                            </a>
+                                            <p>02 Hours ago</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img src="assets/img/post/post_2.png" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">The Amazing Hubble</h3>
-                                        </a>
-                                        <p>02 Hours ago</p>
+                                    <div class="media post_item">
+                                        <img src="assets/img/post/post_3.png" alt="post">
+                                        <div class="media-body">
+                                            <a href="blog_details.html">
+                                                <h3 style="color: #2d2d2d;">Astronomy Or Astrology</h3>
+                                            </a>
+                                            <p>03 Hours ago</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img src="assets/img/post/post_3.png" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">Astronomy Or Astrology</h3>
-                                        </a>
-                                        <p>03 Hours ago</p>
+                                    <div class="media post_item">
+                                        <img src="assets/img/post/post_4.png" alt="post">
+                                        <div class="media-body">
+                                            <a href="blog_details.html">
+                                                <h3 style="color: #2d2d2d;">Asteroids telescope</h3>
+                                            </a>
+                                            <p>01 Hours ago</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="media post_item">
-                                    <img src="assets/img/post/post_4.png" alt="post">
-                                    <div class="media-body">
-                                        <a href="blog_details.html">
-                                            <h3 style="color: #2d2d2d;">Asteroids telescope</h3>
-                                        </a>
-                                        <p>01 Hours ago</p>
-                                    </div>
-                                </div>
-                            </aside>
-                            <aside class="single_sidebar_widget tag_cloud_widget">
-                                <h4 class="widget_title" style="color: #2d2d2d;">Tag Clouds</h4>
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">project</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">love</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">technology</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">travel</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">restaurant</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">life style</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">design</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">illustration</a>
-                                    </li>
-                                </ul>
-                            </aside>
+                                </aside>
+                                <aside class="single_sidebar_widget tag_cloud_widget">
+                                    <h4 class="widget_title" style="color: #2d2d2d;">Tag Clouds</h4>
+                                    <ul class="list">
+                                        <li>
+                                            <a href="#">project</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">love</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">technology</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">travel</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">restaurant</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">life style</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">design</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">illustration</a>
+                                        </li>
+                                    </ul>
+                                </aside>
 
-                            <aside class="single_sidebar_widget instagram_feeds">
-                                <h4 class="widget_title" style="color: #2d2d2d;">Instagram Feeds</h4>
-                                <ul class="instagram_row flex-wrap">
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_5.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_6.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_7.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_8.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_9.png" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img class="img-fluid" src="assets/img/post/post_10.png" alt="">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </aside>
-                            <aside class="single_sidebar_widget newsletter_widget">
-                                <h4 class="widget_title" style="color: #2d2d2d;">Newsletter</h4>
-                                <form action="#">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
-                                    </div>
-                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Subscribe</button>
-                                </form>
-                            </aside>
+                                <aside class="single_sidebar_widget instagram_feeds">
+                                    <h4 class="widget_title" style="color: #2d2d2d;">Instagram Feeds</h4>
+                                    <ul class="instagram_row flex-wrap">
+                                        <li>
+                                            <a href="#">
+                                                <img class="img-fluid" src="assets/img/post/post_5.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img class="img-fluid" src="assets/img/post/post_6.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img class="img-fluid" src="assets/img/post/post_7.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img class="img-fluid" src="assets/img/post/post_8.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img class="img-fluid" src="assets/img/post/post_9.png" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img class="img-fluid" src="assets/img/post/post_10.png" alt="">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </aside>
+                                <aside class="single_sidebar_widget newsletter_widget">
+                                    <h4 class="widget_title" style="color: #2d2d2d;">Newsletter</h4>
+                                    <form action="#">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                                                   onblur="this.placeholder = 'Enter email'"
+                                                   placeholder='Enter email' required>
+                                        </div>
+                                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                                type="submit">Subscribe
+                                        </button>
+                                    </form>
+                                </aside>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- Blog Area End -->
-    </main>
-    <footer th:replace="components/header_footer.html :: user-footer">
-    </footer>
-      
-      <!-- Scroll Up -->
-    <div th:insert="components/header_footer.html :: scroll-up">
-    </div>
-    <!-- JS here -->
-    <th:block th:insert="components/header_footer.html :: common-script">
-    </th:block>
-    <!-- add page-specific js here -->
-</body>
+            </section>
+            <!-- Blog Area End -->
+        </main>
+        <footer th:replace="components/header_footer.html :: user-footer">
+        </footer>
+
+        <!-- Scroll Up -->
+        <div th:insert="components/header_footer.html :: scroll-up">
+        </div>
+        <!-- JS here -->
+        <th:block th:insert="components/header_footer.html :: common-script">
+        </th:block>
+        <!-- add page-specific js here -->
+    </body>
 </html>
