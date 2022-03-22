@@ -61,8 +61,9 @@ public class WebSecurityConfig {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             sharedConfigure(http);
-            configureForRole(roleService, Constants.ROLE_USER, http);
             http.antMatcher("/**").authorizeRequests().anyRequest().permitAll();
+            //configureForRole(roleService, Constants.ROLE_USER, http);
+
             http.formLogin().permitAll()
                     .loginProcessingUrl(Constants.LINK_ACCOUNT_LOGIN_PROCESS)
                     .failureUrl(Constants.LINK_ACCOUNT_LOGIN_FAILURE)
@@ -94,11 +95,16 @@ public class WebSecurityConfig {
          */
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.antMatcher("/admin/**").authorizeRequests();
             sharedConfigure(http);
+            http.antMatcher("/admin/**").authorizeRequests().
+                    antMatchers("/admin/dashboard").hasAnyAuthority(Constants.ROLE_EXPERT, Constants.ROLE_SALES).
+                    antMatchers("/admin/subject/**", "/admin/course/**", "/admin/lesson/**").hasAnyAuthority(Constants.ROLE_EXPERT, Constants.ROLE_SALES).
+                    antMatchers("/admin/blog/**").hasAuthority(Constants.ROLE_SALES).
+                    antMatchers("/admin/**").hasAuthority(Constants.ROLE_ADMIN);
 
-            configureForRole(roleService, Constants.ROLE_ADMIN, http);
-
+            //configureForRole(roleService, Constants.ROLE_EXPERT, http);
+            //configureForRole(roleService, Constants.ROLE_SALES, http);
+            //configureForRole(roleService, Constants.ROLE_ADMIN, http);
             configureManagementRoles(http);
         }
 
@@ -125,7 +131,6 @@ public class WebSecurityConfig {
         for (Screen screen : screens) {
             String link = screen.getLink();
             http.authorizeRequests().antMatchers(link).hasAuthority(roleName);
-
             //warning: call anyRequest() only once
             //note: [antMatcher().authorizeRequests.[anyRequest.hasAuthority]] syntax needed for multiple login entries
             //http.antMatcher(link).authorizeRequests().anyRequest().hasAuthority(roleName);

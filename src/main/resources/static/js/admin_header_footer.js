@@ -27,6 +27,8 @@ function updateMenuAfterLogin(principal){
 
             case("ROLE_SALES"):
                 $('#blogMenu').show();
+                $('#subjectMenu').show();
+                $('#lessonMenu').show();
                 break;
             case("ROLE_EXPERT"):
                 $('#subjectMenu').show();
