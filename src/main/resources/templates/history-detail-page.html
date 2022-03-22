@@ -148,8 +148,8 @@
     </div>
     </div>
     <!-- List action end -->
-    <div th:replace="components/practice_detail_modal.html :: practiceDetailModal">
-    </div>
+<!--    <div th:replace="components/practice_detail_modal.html :: practiceDetailModal">-->
+<!--    </div>-->
 
 
     <!-- Courses area start -->
@@ -161,20 +161,21 @@
         </div>
         <div class="row">
             <div class="col-lg-8 mx-auto">
-<!--                &lt;!&ndash; List group&ndash;&gt;-->
-<!--                <ul class="list-group shadow" th:each="q : ${questions}">-->
-<!--                    &lt;!&ndash; list group item&ndash;&gt;-->
-<!--                    <li class="list-group-item">-->
-<!--                        &lt;!&ndash; Custom content&ndash;&gt;-->
-<!--                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">-->
-<!--                            <div class="media-body order-2 order-lg-1">-->
-<!--                                <h3 class="font-weight-bold text-muted mb-0" th:text="${q.question}"></h3><br>-->
-<!--                                <h3 class="mt-0 font-weight-bold mb-2" th:text="${q.answer}"></h3>-->
-<!--                            </div>-->
+                <!-- List group-->
+                <ul class="list-group shadow" th:each="q : ${question}">
+                    <!-- list group item-->
+                    <li class="list-group-item">
+                        <!-- Custom content-->
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <h3 class="font-weight-bold text-muted mb-0" th:text="${q.question}"></h3><br>
+                                <h3 class="mt-0 font-weight-bold mb-2" th:text="'Correct Answer: '+${q.answer}"></h3>
+                                <h3 class="mt-0 font-weight-bold mb-2" th:text="'User Answer'+${q.Ab}"></h3>
 
-<!--                        </div> -->
-<!--                    </li>-->
-<!--                </ul>-->
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
