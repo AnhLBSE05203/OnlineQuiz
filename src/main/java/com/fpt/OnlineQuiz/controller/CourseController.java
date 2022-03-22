@@ -115,6 +115,16 @@ public class CourseController {
         int courseId = Integer.parseInt(request.getParameter("courseId"));
         HttpSession session = request.getSession();
         if (session.getAttribute("cart") == null) {
+            Account a = accountService.detailAccount(account.getId());
+            //Check course is registed in db before add to course list
+            List<Course> courses = a.getCourses();
+            boolean isExisted = false;
+            for (int j = 0; j < courses.size(); j++) {
+                if (courses.get(j).getId() == courseId) {
+                    modelMap.addAttribute("message", "You have already registed this course!");
+                    return "registration_page";
+                }
+            }
             List<Course> cart = new ArrayList<>();
             Course c = courseService.getById(courseId);
             cart.add(c);
@@ -129,8 +139,9 @@ public class CourseController {
                     return "registration_page";
                 }
             }
+            Account a = accountService.detailAccount(account.getId());
             //Check course is registed in db before add to course list
-            List<Course> courses = courseService.getCoursesRegistration(account.getId());
+            List<Course> courses = a.getCourses();
             boolean isExisted = false;
             for (int j = 0; j < courses.size(); j++) {
                 if (courses.get(j).getId() == courseId) {
@@ -167,6 +178,7 @@ public class CourseController {
         } else {
             return "redirect:/account/login";
         }
+
         //check course list in session is null or not
         HttpSession session = request.getSession();
         if (session == null) {
@@ -175,6 +187,10 @@ public class CourseController {
             // todo: Add course to Account_Course table
             List<Course> cart = (List<Course>) session.getAttribute("cart");
             Account a = accountService.detailAccount(account.getId());
+
+            List<Course> course = a.getCourses();
+            System.out.println(course);
+
             for(int i = 0; i < cart.size(); i++)
             {
                 Course c = courseService.getById(cart.get(i).getId());
@@ -208,7 +224,7 @@ public class CourseController {
                         "                    <div class=\"properties properties2 mb-30\">\n" +
                         "                        <div class=\"properties__card\">\n" +
                         "                            <div class=\"properties__img overlay1\">\n" +
-                        "                                <a href=\"#\"><img src=\"/img/gallery/featured2.png\" alt=\"\"></a>\n" +
+                        "                                <a href=\"#\"><img th:src=\"@{/img/gallery/featured2.png}\" alt=\"\"></a>\n" +
                         "                            </div>\n" +
                         "                            <div class=\"properties__caption\">\n" +
                         "                                <h3><a>" + c.getName() + "</a></h3>\n" +
