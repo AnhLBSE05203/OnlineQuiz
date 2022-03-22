@@ -17,6 +17,9 @@ public interface CRUDQuestionRepository extends CrudRepository<Question, Integer
     List<Question> findByQuizHistoryId(int id);
 
     @Query("select q From Question q INNER JOIN Answer a on q.id = a.question.id " +
-            "INNER JOIN QuizHistory qh on qh.id = ?1")
+            "INNER JOIN QuizHistory qh on qh.id = q.quizHistory.id " +
+            "INNER JOIN QuizHistoryQuestion qhq where " +
+            "qhq.quizHistory.id = qh.id AND qh.id = ?1 " +
+            "GROUP BY q.id")
     List<Question> historyQuestion(int quizHisId);
 }

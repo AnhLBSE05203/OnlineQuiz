@@ -31,4 +31,7 @@ public interface QuestionService {
     int countQuestionByLessonId(int lessonId);
 
     List<Question> getNumberOfQuestionByLessonId(int lessonId, int number);
+
+    List<Question> getQuestionQuizHistoryId(int id);
+
 }

@@ -123,4 +123,9 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> getNumberOfQuestionByLessonId(int lessonId, int number) {
         return  questionRepository.getNumberOfQuestionByLessonId(lessonId, number);
     }
+
+    @Override
+    public List<Question> getQuestionQuizHistoryId(int id) {
+        return crudQuestionRepository.historyQuestion(id);
+    }
 }

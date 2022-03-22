@@ -61,7 +61,7 @@
                                         <!--                                <p th:text="${course.name}"></p>-->
                                         <h3><a href="#" th:text="${course.name}"></a></h3>
                                         <p th:text="${course.description}"></p>
-                                        <a  class="border-btn border-btn2" th:attr="onclick=|detailCourse('${course.id}')|">Go to Course</a>
+                                        <a  class="border-btn border-btn2" id="linkLesson" th:attr="onclick=|detailCourse('${course.id}')|">Go to Course</a>
                                         <!--th:href="@{/lesson/list(courseId=${course.id})}"-->
                                     </div>
                                 </div>
@@ -143,15 +143,13 @@
                 if(data != ""){
                     var row = document.getElementById("listcourse");
                     row.innerHTML += data;
-                }
+                 }
             }
         })
     }
     function detailCourse(id){
-        window.location.replace("/lesson/list?courseId=" + id);
+        window.location.replace("/user/courseDetail?courseId=" + id);
     }
-
-
         </script>
     </body>
 </html>

@@ -10,6 +10,7 @@ import com.fpt.OnlineQuiz.service.AnswerService;
 import com.fpt.OnlineQuiz.service.LessonService;
 import com.fpt.OnlineQuiz.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -46,7 +47,7 @@ public class QuizHandleController {
     }
 
     @RequestMapping(value = "/quizpost",method = RequestMethod.POST)
-    String getValue(HttpServletRequest request,ModelMap modelMap) {
+    String getValue(HttpServletRequest request, ModelMap modelMap) {
         int score = 0;
         int lessionid = Integer.parseInt(request.getParameter("lessionid")) ;
        List<QuestionDTO>questionList = questionService.getQuestionByLessonIdDTO(lessionid);
