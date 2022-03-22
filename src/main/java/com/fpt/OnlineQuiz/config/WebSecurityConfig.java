@@ -102,6 +102,7 @@ public class WebSecurityConfig {
                     antMatchers("/admin/blog/**").hasAuthority(Constants.ROLE_SALES).
                     antMatchers("/admin/**").hasAuthority(Constants.ROLE_ADMIN);
 
+            //note: more specific 1st, hasAuthority() gets overridden
             //configureForRole(roleService, Constants.ROLE_EXPERT, http);
             //configureForRole(roleService, Constants.ROLE_SALES, http);
             //configureForRole(roleService, Constants.ROLE_ADMIN, http);
