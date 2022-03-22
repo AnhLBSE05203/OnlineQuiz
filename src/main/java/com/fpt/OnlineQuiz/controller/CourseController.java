@@ -234,6 +234,6 @@ public class CourseController {
         Course c = courseService.getById(courseId);
         System.out.println(c.toString());
         modelMap.addAttribute("course", c);
-        return "detail_course_page";
+        return "Course_detail_user";
     }
 }

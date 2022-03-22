@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        text-align: center;
+    }
+
+    .container {
+        width: 500px;
+        height: 500px;
+        border: solid 1px black;
+    }
+
+    .head span {
+        font-size: 30px;
+
+    }
+
+    .body span {
+        font-size: 25px;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .body p {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .foot {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .foot button {
+        margin: 0 15px;
+    }
+</style>
+<body>
+<div class="container">
+    <div class="head">
+        <span> <i class="bi bi-bookmark"></i> Thông tin khóa học</span>
+    </div>
+    <div class="body">
+        <span> 1. Miêu tả</span>
+        <p th:text="${course.description}">abc</p>
+        <span> 2.Số lượng Lesson:</span>
+        <p>-Số lượng quiz là:<p th:text="${course.lessonTotal}"></p></p>
+        <span> 3.Giá tiền</span>
+        <p>-Giá tiền là:
+        <p th:text="${course.price}"></p></p>
+        <div class="foot">
+            <button type="button" class="btn btn-default"
+                    style="bottom: 4px;right: -516px;">
+                <a style="text-decoration: none" th:href="@{/lesson/list(subId=${course.id})}">Go to Lesson</a>
+            </button>
+            <button type="button" class="btn btn-default"
+                    style="bottom: 4px;right: -556px;">
+                Back
+            </button>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
