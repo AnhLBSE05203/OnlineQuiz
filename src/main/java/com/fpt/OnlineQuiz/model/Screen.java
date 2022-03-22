@@ -23,7 +23,7 @@ public class Screen {
     @Column(name = "screenLink")
     private String link;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ScreenRole", joinColumns = @JoinColumn(name = "screenId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
     private List<Role> roles;
 

@@ -190,6 +190,7 @@ public class Constants {
     //sql strings
     public static final String SQL_GET_COURSES_BY_ACCOUNT = "select a.courses from Account a where a.id =:id";
     public static final String SQL_GET_ALL_COURSES = "select c from Course c where 1 = 1";
+    public static final String SQL_GET_ALL_SCREENS = "select sc from Screen sc where 1 = 1";
     public static final String SQL_GET_COURSE_COUNT_BY_SUBJECT_ID = "select count(c) from Course c where c.subject.id = :subjectId";
     public static final String SQL_GET_COURSE_COUNT = "select count(c) from Course c where 1 = 1";
     public static final String SQL_GET_COURSE_BY_ID = "SELECT c FROM Course c WHERE c.id = :id";
