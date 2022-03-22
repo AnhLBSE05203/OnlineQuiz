@@ -34,5 +34,15 @@ public class QuizHistoryServiceImpl implements QuizHistoryService {
         return quizHistory.findForAdd(id);
     }
 
+    @Override
+    public List<QuizHistory> finAllAccountId(String name) {
+        return quizHistory.allIfAccountNotNull(name);
+    }
+
+    @Override
+    public QuizHistory checkExist(int historyId, int accountId) {
+        return quizHistory.checkExist(historyId, accountId);
+    }
+
 
 }

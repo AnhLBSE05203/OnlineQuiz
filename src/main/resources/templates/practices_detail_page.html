@@ -11,8 +11,8 @@
     <link rel="stylesheet" th:href="@{/css/practice_detail.css}">
     <link rel="stylesheet" th:href="@{/css/user_course_detail_modal.css}">
     <link rel="stylesheet" th:href="@{/css/home_page.css}">
-    <div th:replace="components/header_footer.html :: common-style"></div>
     <link rel="stylesheet" th:href="@{/css/create-quiz-package.css}">
+    <div th:replace="components/header_footer.html :: common-style"></div>
 
 </head>
 
@@ -155,7 +155,7 @@
     </div>
 
 
-        <!-- Courses area start -->
+    <!-- Courses area start -->
     <div class="container py-5">
         <div class="row text-center text-white mb-5">
             <div class="col-lg-7 mx-auto">
@@ -189,7 +189,7 @@
                         </div> <!-- End -->
                     </li> <!-- End -->
                 </ul> <!-- End -->
-                <div class="container mt-5 px-5">
+                <div class="container mt-5 px-5" th:if="${checkExist} != null">
                     <div class="mb-4">
                         <h2>Add Terms(Qestion)</h2> <span>add terms(questions) and definition(answer)</span>
                     </div>
@@ -202,7 +202,8 @@
                                 <div class="mt-4 mb-4">
                                     <h6 class="text-uppercase">Definition</h6>
                                     <div class="inputbox mt-3"><input type="text" name="def" class="form-control"
-                                                                      required="required"> <span>define here</span></div>
+                                                                      required="required"> <span>define here</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="mt-4 mb-4 d-flex justify-content-between">
@@ -211,55 +212,58 @@
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- Courses area start -->
-    <div th:replace="components/header_footer.html :: featured-page">
-    </div>
-    <div th:replace="components/user_course_detail_modal.html :: courseUserModal">
-    </div>
-    <!-- Courses area End -->
-    <!-- ? services-area -->
-    <div class="services-area services-area2 section-padding40">
-        <div class="container">
-            <div class="row justify-content-sm-center">
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img th:src="@{/img/icon/icon1.svg}" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>60+ UX courses</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img th:src="@{/img/icon/icon2.svg}" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>Expert instructors</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="single-services mb-30">
-                        <div class="features-icon">
-                            <img th:src="@{/img/icon/icon3.svg}" alt="">
-                        </div>
-                        <div class="features-caption">
-                            <h3>Life time access</h3>
-                            <p>The automated process all your website tasks.</p>
-                        </div>
-                    </div>
+                <div class="container mt-5 px-5" th:if="${checkExist} == null">
+                    You cannot edit this practices detail following you not add this practices package to your practices
+                    list yet
                 </div>
             </div>
         </div>
-    </div>
+        <!-- Courses area start -->
+        <div th:replace="components/header_footer.html :: featured-page">
+        </div>
+        <div th:replace="components/user_course_detail_modal.html :: courseUserModal">
+        </div>
+        <!-- Courses area End -->
+        <!-- ? services-area -->
+        <div class="services-area services-area2 section-padding40">
+            <div class="container">
+                <div class="row justify-content-sm-center">
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <div class="single-services mb-30">
+                            <div class="features-icon">
+                                <img th:src="@{/img/icon/icon1.svg}" alt="">
+                            </div>
+                            <div class="features-caption">
+                                <h3>60+ UX courses</h3>
+                                <p>The automated process all your website tasks.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <div class="single-services mb-30">
+                            <div class="features-icon">
+                                <img th:src="@{/img/icon/icon2.svg}" alt="">
+                            </div>
+                            <div class="features-caption">
+                                <h3>Expert instructors</h3>
+                                <p>The automated process all your website tasks.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <div class="single-services mb-30">
+                            <div class="features-icon">
+                                <img th:src="@{/img/icon/icon3.svg}" alt="">
+                            </div>
+                            <div class="features-caption">
+                                <h3>Life time access</h3>
+                                <p>The automated process all your website tasks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 <footer th:replace="components/header_footer.html :: user-footer">
