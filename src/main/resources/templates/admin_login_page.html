@@ -34,12 +34,6 @@
                                                 <label for="inputPassword">Password</label>
                                             </div>
                                             <span style="font-size: 15px; color:red" th:if="${param.error}">Wrong email or password!</span>
-                                            <div class="form-check mb-3">
-                                                <input class="form-check-input" id="inputRememberPassword"
-                                                       name="remember-me" type="checkbox" value=""/>
-                                                <label class="form-check-label" for="inputRememberPassword">Remember
-                                                    Password</label>
-                                            </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" th:href="@{/admin/forget_pass}">Forgot Password?</a>
                                                 <input class="btn btn-primary" type="submit" name="submit"
