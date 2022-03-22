@@ -14,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -30,33 +32,34 @@ public class CourseController {
     private AccountService accountService;
 
     @GetMapping(path = "/courselist")
-    public String showCoursesList(ModelMap modelMap, HttpServletRequest request){
+    public String showCoursesList(ModelMap modelMap, HttpServletRequest request) {
         int subjectId = Integer.parseInt(request.getParameter("subId"));
         List<Course> courses = courseService.getCoursesTop3BySubjectId(subjectId);
         modelMap.addAttribute("list", courses);
         return "course_list_page";
     }
+
     @GetMapping(path = "/loadMore")
     public @ResponseBody
     void loadMoreCourse(@RequestParam("subjectId") String subjectId,
-            @RequestParam("start") String startStr, HttpServletResponse response) throws IOException {
+                        @RequestParam("start") String startStr, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
         int start = Integer.parseInt(startStr);
         int subId = Integer.parseInt(subjectId);
         List<Course> courses = courseService.getCoursesNext3BySubjectId(subId, start);
         if (courses.size() != 0) {
             for (Course c : courses) {
-                out.println("<div class=\"col-lg-4 course\""+
-                        "                    <input type=\"hidden\" id=\"subjectId\" value=" +c.getSubject().getId()+"" +
+                out.println("<div class=\"col-lg-4 course\"" +
+                        "                    <input type=\"hidden\" id=\"subjectId\" value=" + c.getSubject().getId() + "" +
                         "                    <div class=\"properties properties2 mb-30\">\n" +
                         "                        <div class=\"properties__card\">\n" +
                         "                            <div class=\"properties__img overlay1\">\n" +
                         "                                <a href=\"#\"><img th:src=\"@{/img/gallery/featured2.png}\" alt=\"\"></a>\n" +
                         "                            </div>\n" +
                         "                            <div class=\"properties__caption\">\n" +
-                        "                                <h3><a href=\"#\"></a>"+c.getName()+"</h3>\n" +
-                        "                                <p>"+c.getDescription()+"</p>\n" +
-                        "                                <a th:attr=\"onclick=|showUserCourseDetailModal('"+c.getId()+"')|\"\n" +
+                        "                                <h3><a href=\"#\"></a>" + c.getName() + "</h3>\n" +
+                        "                                <p>" + c.getDescription() + "</p>\n" +
+                        "                                <a th:attr=\"onclick=|showUserCourseDetailModal('" + c.getId() + "')|\"\n" +
                         "                                class=\"border-btn border-btn2\">Detail</a>\n" +
                         "                            </div>\n" +
                         "                        </div>\n" +
@@ -66,6 +69,7 @@ public class CourseController {
             }
         }
     }
+
     @GetMapping(path = "/mycourses")
     public String showCoursePage(ModelMap modelMap) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -175,8 +179,7 @@ public class CourseController {
             // todo: Add course to Account_Course table
             List<Course> cart = (List<Course>) session.getAttribute("cart");
             Account a = accountService.detailAccount(account.getId());
-            for(int i = 0; i < cart.size(); i++)
-            {
+            for (int i = 0; i < cart.size(); i++) {
                 Course c = courseService.getById(cart.get(i).getId());
                 a.addCourse(c);
             }
@@ -213,7 +216,7 @@ public class CourseController {
                         "                            <div class=\"properties__caption\">\n" +
                         "                                <h3><a>" + c.getName() + "</a></h3>\n" +
                         "                                <p>" + c.getDescription() + "</p>\n" +
-                        "                                <a href=\"#\" class=\"border-btn border-btn2\" th:attr=\"onclick=|detailCourse('"+c.getId()+"')|\">Go to Course</a>\n" +
+                        "                                <a class=\"border-btn border-btn2\" onclick=\"detailCourse('" + c.getId() + "')\">Go to Course</a>\n" +
                         "                            </div>\n" +
                         "                        </div>\n" +
                         "                    </div>\n" +
@@ -228,8 +231,9 @@ public class CourseController {
         CourseUserDTO courseUserDTO = courseService.getCourseUserDTO(id);
         return courseUserDTO;
     }
+
     @GetMapping(value = "/courseDetail")
-    public String showDetialCourse(ModelMap modelMap, HttpServletRequest request){
+    public String showDetialCourse(ModelMap modelMap, HttpServletRequest request) {
         int courseId = Integer.parseInt(request.getParameter("courseId"));
         Course c = courseService.getById(courseId);
         System.out.println(c.toString());
