@@ -25,4 +25,7 @@ public interface CRUDQuizHistory extends CrudRepository<QuizHistory, Integer> {
 
     @Query("SELECT qh FROM QuizHistory qh WHERE qh.id = ?1")
     QuizHistory findForAdd(int id);
+
+    @Query("SELECT qh FROM QuizHistory qh WHERE qh.id IS not NULL")
+    List<QuizHistory> allIfAccountNotNull();
 }

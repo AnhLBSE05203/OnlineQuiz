@@ -11,4 +11,5 @@ public interface QuizHistoryService {
       List<QuizHistory> listQuizHistory(int historyAccountId);
       QuizHistory addQuizPackage(QuizHistory quiz);
       QuizHistory findId(int id);
+      List<QuizHistory> finAllAccountId();
 }
