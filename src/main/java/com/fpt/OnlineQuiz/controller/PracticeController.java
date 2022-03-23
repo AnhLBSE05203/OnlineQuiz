@@ -204,6 +204,36 @@ public class PracticeController {
         questionService.addQuestion(question);
         return "redirect:/practices/detail?id=" + idForAdd;
     }
+    @GetMapping(value = "/edit")
+    public String getEditQuiz(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes,@Param("id") int id) {
+        Account account = new Account();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            account = (Account) authentication.getPrincipal();
+        } catch (Exception e) {
+            return "redirect:/account/login";
+        }
+        Question question = questionService.getQuestionByQuestionId(id);
+        model.addAttribute("question", question);
+        return "practice-edit-page";
+    }
+    @PostMapping(value = "/edit")
+    public String editQuiz(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes,@Param("id") int id) {
+        Account account = new Account();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            account = (Account) authentication.getPrincipal();
+        } catch (Exception e) {
+            return "redirect:/account/login";
+        }
+//        QuizHistory quizHistory = quizHistoryService.findId(idForAdd);
+        Question question = questionService.getQuestionByQuestionId(id);
+        question.setQuestion(request.getParameter("term"));
+        question.setAnswer(request.getParameter("ans"));
+        questionService.updateQuestion(question);
+        return "redirect:/practices/detail?id=" + idForAdd;
+    }
+
     @GetMapping(value = "/search")
     public String practiceSearchPage(Model model, HttpServletRequest request) {
         List<CourseFeaturedDTO> courseFeatured = courseService.getFeaturedCourses(Constants.HOME_PAGE_COURSE_NUMBER);
