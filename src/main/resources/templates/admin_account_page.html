@@ -31,12 +31,12 @@
                 <h1 class="mt-4">Account</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Account management</li>
-                </ol>
+                </ol>addAccountButton
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
                         List Account
-                        <button id="addBlogButton" type="button" class="btn btn-primary"
+                        <button id="addAccountButton" type="button" class="btn btn-primary"
                                 onclick="showAccountAddModal()">Add Account
                         </button>
                     </div>
@@ -138,11 +138,20 @@
                             <td>Gender:</td>
                             <td>
                                 <label>Male</label>
-                                <input type="radio" th:field="*{gender}" value="0" >
-                            </td>
-                            <td>
+                                <input type="radio" th:field="*{gender}" value="0" >&nbsp
                                 <label>Female </label>
                                 <input type="radio" th:field="*{gender}" value="1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Role:</td>
+                            <td>
+                                <label>Admin</label>
+                                <input type="radio" th:field="*{role}" value="ROLE_ADMIN" >&nbsp
+                                <label>Expert</label>
+                                <input type="radio" th:field="*{role}" value="ROLE_EXPERT">&nbsp
+                                <label>Sale</label>
+                                <input type="radio" th:field="*{role}" value="ROLE_SALES">
                             </td>
                         </tr>
                     </table>
