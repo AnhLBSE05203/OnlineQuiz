@@ -84,6 +84,7 @@ public class Course {
         courseAdminDTO.setEnrollTotal(this.getEnrollTotal());
         String statusStr = Constants.courseStatusConversion.get(this.getStatus());
         courseAdminDTO.setStatusStr(statusStr);
+        courseAdminDTO.setStatus(this.getStatus());
         return courseAdminDTO;
     }
 
