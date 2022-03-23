@@ -42,6 +42,7 @@ public class SubjectRepository {
             while ((line = buffer.readLine()) != null) {
                 sb.append(" ").append(line);
             }
+            sb.append(Constants.SQL_CONDITION_STATUS_DEFAULT);
             String sql = sb.toString();
             Query query = em.createQuery(sql, Subject.class);
             query.setMaxResults(number);
