@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuizHistoryServiceImpl implements QuizHistoryService {
@@ -42,6 +43,11 @@ public class QuizHistoryServiceImpl implements QuizHistoryService {
     @Override
     public QuizHistory checkExist(int historyId, int accountId) {
         return quizHistory.checkExist(historyId, accountId);
+    }
+
+    @Override
+    public Optional<QuizHistory> getByQHId(int historyId) {
+        return quizHistory.findById(historyId);
     }
 
 

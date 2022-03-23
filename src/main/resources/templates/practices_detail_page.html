@@ -73,8 +73,14 @@
                 <h1 class="display-4">Practices Details</h1>
             </div>
         </div>
-        <div class="row">
+
+            <div class="row">
             <div class="col-lg-8 mx-auto">
+                <form method="post" th:action="@{/practices}">
+                    <div class="mt-4 mb-4 d-flex justify-content-between">
+                        <button class="btn btn-success px-3" type="submit">Add this package to your practices list</button>
+                    </div>
+                </form>
                 <!-- List group-->
                 <ul class="list-group shadow" th:each="q : ${questions}">
                     <!-- list group item-->
