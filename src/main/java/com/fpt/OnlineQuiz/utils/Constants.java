@@ -195,6 +195,9 @@ public class Constants {
     public static final String SQL_GET_COURSE_COUNT = "select count(c) from Course c where 1 = 1";
     public static final String SQL_GET_COURSE_BY_ID = "SELECT c FROM Course c WHERE c.id = :id";
     public static final String SQL_GET_COURSE_BY_SUBJECT_ID = "SELECT c FROM Course c WHERE c.subject.id = :subjectId";
+    //sql additional where clauses
+    public static final String SQL_CONDITION_STATUS_DEFAULT = " AND status = 1";
+
     //home page constants
     public static final int HOME_PAGE_COURSE_NUMBER = 4;
     public static final int HOME_PAGE_EXPERT_NUMBER = 3;
