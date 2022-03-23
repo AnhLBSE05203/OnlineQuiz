@@ -7,7 +7,7 @@ $(document).ready(function(){
                 dataType: "json",
                 success: function (data){
                 principal = data;
-                    if(principal != ""){
+                    if(principal != null){
                         $("#current-user").html(principal.email);
                         updateMenuAfterLogin(principal);
                     }

@@ -1,8 +1,11 @@
 package com.fpt.OnlineQuiz.controller;
 
+import com.fpt.OnlineQuiz.dto.AccountDTO;
 import com.fpt.OnlineQuiz.dto.CourseFeaturedDTO;
 import com.fpt.OnlineQuiz.dto.ExpertFeaturedDTO;
+import com.fpt.OnlineQuiz.dto.RoleDTO;
 import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.model.Role;
 import com.fpt.OnlineQuiz.model.Subject;
 import com.fpt.OnlineQuiz.service.CourseService;
 import com.fpt.OnlineQuiz.service.ExpertService;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,14 +38,26 @@ public class CommonController {
 
     @GetMapping(value = "/getPrincipal", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Account getPrincipal() {
+    public AccountDTO getPrincipal() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Account account = null;
+        AccountDTO accountDTO = null;
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             account = (Account) authentication.getPrincipal();
             System.out.println(account.getEmail());
+            accountDTO = new AccountDTO();
+            accountDTO.setId(account.getId());
+            accountDTO.setEmail(account.getEmail());
+            List<RoleDTO> roleDTOList = new ArrayList<>();
+            for (Role role : account.getRoles()) {
+                RoleDTO roleDTO = new RoleDTO();
+                roleDTO.setId(role.getId());
+                roleDTO.setName(role.getName());
+                roleDTOList.add(roleDTO);
+            }
+            accountDTO.setRoles(roleDTOList);
         }
-        return account;
+        return accountDTO;
     }
 
     /**
