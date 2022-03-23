@@ -7,6 +7,7 @@ import com.fpt.OnlineQuiz.dto.AccountAdminDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
 import com.fpt.OnlineQuiz.model.Account;
+import com.fpt.OnlineQuiz.model.Role;
 import com.fpt.OnlineQuiz.model.Token;
 import com.fpt.OnlineQuiz.service.AccountService;
 import com.fpt.OnlineQuiz.utils.Utils;
@@ -104,6 +105,32 @@ public class AccountServiceImpl implements AccountService {
         for(Account account: listAccount) {
             AccountAdminDTO accountAdminDTO = new AccountAdminDTO();
             Utils.copyNonNullProperties(account, accountAdminDTO);
+            StringBuilder tempRole = new StringBuilder();
+            int i = 0;
+            for (Role role: account.getRoles()) {
+                i++;
+                switch (role.getId()) {
+                    case 1:
+                        tempRole.append("Admin");
+                        break;
+                    case 2:
+                        tempRole.append("User");
+                        break;
+                    case 3:
+                        tempRole.append("Sales");
+                        break;
+                    case 4:
+                        tempRole.append("Expert");
+                        break;
+                    default:
+                        tempRole.append("Unknown");
+                        break;
+                }
+                if (i != account.getRoles().size()) {
+                    tempRole.append(", ");
+                }
+            }
+            accountAdminDTO.setRoleStr(tempRole.toString());
             listAccountAdminDTO.add(accountAdminDTO);
         }
         Page<AccountAdminDTO> page = new Page<>(listAccountAdminDTO);
