@@ -74,25 +74,24 @@
                         </tr>
                         <tr>
                             <td>Fullname:</td>
-                            <td><input type="text" id="editAccountFullname" th:name="fullName" required></td>
+                            <td><input type="text" id="editAccountFullname" th:name="fullName" readonly></td>
                         </tr>
                         <tr>
                             <td>Gender:</td>
-                            <td><input type="text" id="editAccountGender" th:name="gender" required></td>
+                            <td><input type="text" id="editAccountGender" th:name="gender" readonly></td>
                         </tr>
                         <tr>
                             <td>Gender:</td>
-                            <td><input type="text" id="editAccountEmail" th:name="email" required></td>
+                            <td><input type="text" id="editAccountEmail" th:name="email" readonly></td>
                         </tr>
                         <tr>
                             <td>Phone:</td>
-                            <td><input type="text" id="editAccountPhone" th:name="phone" required></td>
+                            <td><input type="text" id="editAccountPhone" th:name="phone" readonly></td>
                         </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Save">
                 </div>
             </form>
         </div>
@@ -138,7 +137,7 @@
                             <td>Gender:</td>
                             <td>
                                 <label>Male</label>
-                                <input type="radio" th:field="*{gender}" value="0" >&nbsp
+                                <input type="radio" th:field="*{gender}" value="0" checked>&nbsp
                                 <label>Female </label>
                                 <input type="radio" th:field="*{gender}" value="1">
                             </td>
@@ -147,7 +146,7 @@
                             <td>Role:</td>
                             <td>
                                 <label>Admin</label>
-                                <input type="radio" th:field="*{role}" value="ROLE_ADMIN" >&nbsp
+                                <input type="radio" th:field="*{role}" value="ROLE_ADMIN" checked>&nbsp
                                 <label>Expert</label>
                                 <input type="radio" th:field="*{role}" value="ROLE_EXPERT">&nbsp
                                 <label>Sale</label>
