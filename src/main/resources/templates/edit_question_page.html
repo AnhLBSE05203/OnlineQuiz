@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-lg-12 card-body" style="width: 70%">
 <!--                        <div style = "color: red" th:text = "${message}"></div>-->
-                        <form th:action="@{/question/editquestion}" method="post">
+                        <form th:action="@{/question/editquestion}" onsubmit="return submit(event)" method="post">
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3 w-100">
@@ -86,7 +86,7 @@
                             <div class="row">
                                 <div class="row-cols-1">
                                     <div class="mb-3 w-100">
-                                        <button class="btn btn-primary btn-sm" onclick="submit()" type="submit">Save change</button>
+                                        <input class="btn btn-primary btn-sm" type="submit" value="Save Change">
                                     </div>
                                 </div>
                             </div>
@@ -150,14 +150,15 @@
 <script th:src="@{/js/plugins.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script>
-    function submit() {
+    function submit(event) {
+        event.preventDefault();
         var answer1 = document.getElementById("answer1").value;
-        var answer2 = document.getElementById("answer2");
-        var answer3 = document.getElementById("answer3");
-        var answer4 = document.getElementById("answer4");
+        var answer2 = document.getElementById("answer2").value;
+        var answer3 = document.getElementById("answer3").value;
+        var answer4 = document.getElementById("answer4").value;
         var isAnswer = document.getElementsByName("isAnswer").values();
-        var question = document.getElementById("question");
-        var explain = document.getElementById("explain");
+        var question = document.getElementById("question").value;
+        var explain = document.getElementById("explain").value;
         var questionId = document.getElementById("questionId").value;
         var lessonId = document.getElementById("lessonId").value;
         var answer1Id = document.getElementById("answer1Id");
@@ -181,9 +182,6 @@
                 answer2Id: answer2Id,
                 answer3Id:answer3Id,
                 answer4Id:answer4Id
-            },
-            success: function () {
-                alert("Edit successful!");
             }
         })
     }

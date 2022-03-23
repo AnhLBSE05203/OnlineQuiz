@@ -9,20 +9,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountAdminDTO {
-    private int id;
-
+public class CreateAccountAdminDTO {
     private String fullName;
-
-    private int gender;
-
-    private String genderStr;
-
-    private String email;
-
     private String phone;
-
-    private int role;
-
-    private String roleStr;
+    private String email;
+    private String password;
+    private int gender;
+    private String role;
 }

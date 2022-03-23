@@ -87,7 +87,7 @@ public class AccountRepository {
         }
     }
 
-    public List<Account> getAllAccountAdmin(PagingRequest pagingRequest) {
+    public List<Account> getAllAccountAdmin(PagingRequest pagingRequest, String currentPrincipalName) {
         try {
             BufferedReader buffer = new BufferedReader(new InputStreamReader(
                     this.getClass().getResourceAsStream(Constants.SQL_PATH_GET_ALL_ACCOUNT)));
@@ -104,6 +104,7 @@ public class AccountRepository {
                 sb.append(" OR lower(a.email) LIKE " + key);
                 sb.append(" OR lower(a.phone) LIKE " + key +")");
             }
+            sb.append(" AND a.email != "+"'"+currentPrincipalName+"'");
             // append sorting
             Order order = pagingRequest.getOrder().get(0);
             int columnIndex = order.getColumn();
