@@ -76,9 +76,15 @@
 
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <form method="post" th:action="@{/practices}">
-                    <div class="mt-4 mb-4 d-flex justify-content-between">
+                <form method="post" th:action="@{/practices}" th:if="${checkExist} == null">
+                    <div class="mt-4 mb-4 d-flex justify-content-between" >
                         <button class="btn btn-success px-3" type="submit">Add this package to your practices list
+                        </button>
+                    </div>
+                </form>
+                <form method="get" th:action="@{/practices/remove}" th:if="${checkExist} != null">
+                    <div class="mt-4 mb-4 d-flex justify-content-between" >
+                        <button class="btn btn-success px-3" type="submit">Remove this package to your practices list
                         </button>
                     </div>
                 </form>
@@ -91,9 +97,19 @@
                             <div class="media-body order-2 order-lg-1">
                                 <h3 class="font-weight-bold text-muted mb-0" th:text="${q.question}"></h3><br>
                                 <h3 class="mt-0 font-weight-bold mb-2" th:text="${q.answer}"></h3>
-                                <div class="mt-4 mb-4 d-flex justify-content-between">
-                                    <button class="btn btn-success px-3" type="submit" th:if="${checkExist} != null">
-                                        <a th:href="@{/practices/edit(id=${q.id})}">Edit</a></button>
+                                <div class="mt-4 mb-4 d-flex justify-content-between" th:if="${checkExist} != null">
+                                    <a th:href="@{/practices/edit(id=${q.id})}">
+                                        <button class="btn btn-success px-3" type="submit"
+                                                >
+                                            Edit
+                                        </button>
+                                    </a>
+                                    <a th:href="@{/practices/delete(id=${q.id})}">
+                                        <button class="btn btn-success px-3" type="submit"
+                                        >
+                                            Delete
+                                        </button>
+                                    </a>
                                 </div>
                                 <!--                                <div class="d-flex align-items-center justify-content-between mt-1">-->
                                 <!--                                    <h6 class="font-weight-bold my-2">₹64,999</h6>-->
