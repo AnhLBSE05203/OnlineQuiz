@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,7 +28,7 @@ public class Course {
     private String name;
     @Column(name = "description")
     private String description;
-    @Column(name = "lessonTotal")
+    @Formula("(SELECT COUNT(*) FROM lesson l WHERE l.courseid = course_id)")
     private long lessonTotal;
     @Column(name = "price")
     private double price;
@@ -36,10 +37,13 @@ public class Course {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subjectId")
     private Subject subject;
-
+    @OneToMany(mappedBy = "course")
+    List<Lesson> lessons;
     @ManyToMany
     @JoinTable(name = "AccountCourse", joinColumns = @JoinColumn(name = "courseId"), inverseJoinColumns = @JoinColumn(name = "accountId"))
     private List<Account> accounts;
+    @Formula("(SELECT COUNT(*) FROM account_course ac WHERE ac.course_id = course_id)")
+    private long enrollTotal;
     @OneToMany(mappedBy = "course")
     private List<PurchaseHistory> purchaseHistories;
 
@@ -77,15 +81,16 @@ public class Course {
         courseAdminDTO.setLessonTotal(this.getLessonTotal());
         courseAdminDTO.setSubjectName(this.getSubject().getName());
         courseAdminDTO.setSubjectId(this.getSubject().getId());
+        courseAdminDTO.setEnrollTotal(this.getEnrollTotal());
         String statusStr = Constants.courseStatusConversion.get(this.getStatus());
         courseAdminDTO.setStatusStr(statusStr);
+        courseAdminDTO.setStatus(this.getStatus());
         return courseAdminDTO;
     }
 
     public void setFromCourseAdminDTO(CourseAdminDTO courseAdminDTO) {
         name = courseAdminDTO.getName();
         description = courseAdminDTO.getDescription();
-        lessonTotal = courseAdminDTO.getLessonTotal();
         price = courseAdminDTO.getPrice();
         status = courseAdminDTO.getStatus();
         // this doesn't handle Subject fields

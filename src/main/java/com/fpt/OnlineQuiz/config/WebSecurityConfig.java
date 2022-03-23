@@ -4,6 +4,7 @@ import com.fpt.OnlineQuiz.model.Role;
 import com.fpt.OnlineQuiz.model.Screen;
 import com.fpt.OnlineQuiz.service.AccountService;
 import com.fpt.OnlineQuiz.service.RoleService;
+import com.fpt.OnlineQuiz.service.ScreenService;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,10 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
@@ -29,6 +33,8 @@ public class WebSecurityConfig {
     private RoleService roleService;
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private ScreenService screenService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -61,15 +67,15 @@ public class WebSecurityConfig {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             sharedConfigure(http);
-            configureForRole(roleService, Constants.ROLE_USER, http);
             http.antMatcher("/**").authorizeRequests().anyRequest().permitAll();
+
             http.formLogin().permitAll()
                     .loginProcessingUrl(Constants.LINK_ACCOUNT_LOGIN_PROCESS)
                     .failureUrl(Constants.LINK_ACCOUNT_LOGIN_FAILURE)
                     .defaultSuccessUrl(Constants.LINK_HOME)
                     .loginPage(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN)
                     .and()
-                    .exceptionHandling().accessDeniedPage(Constants.LINK_ACCOUNT_CONTROLLER + Constants.LINK_LOGIN)
+                    .exceptionHandling().accessDeniedPage(Constants.LINK_ACCESS_DENIED)
                     .and()
                     .logout().logoutRequestMatcher(new AntPathRequestMatcher(Constants.LINK_ACCOUNT_LOGOUT))
                     .deleteCookies("remember-me", "JSESSIONID")
@@ -94,16 +100,37 @@ public class WebSecurityConfig {
          */
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.antMatcher("/admin/**").authorizeRequests();
             sharedConfigure(http);
 
-            configureForRole(roleService, Constants.ROLE_ADMIN, http);
-
+            //get all screens
+            List<Screen> screens = screenService.findAll();
+            Map<String, ArrayList<String>> map = new HashMap<>();
+            for (Screen screen : screens) {
+                //add role array of the screen
+                map.put(screen.getLink(), new ArrayList<>());
+                ArrayList<String> roleNames = map.get(screen.getLink());
+                for (Role role : screen.getRoles()) {
+                    roleNames = map.get(screen.getLink());
+                    roleNames.add(role.getName());
+                }
+                String[] roleArray = roleNames.toArray(new String[0]);
+                for (int i = 0; i < roleArray.length; i++) {
+                    System.out.print(roleArray[i] + " ");
+                }
+                System.out.println(screen.getLink());
+                if (roleArray.length > 0) {
+                    http.antMatcher("/admin/**").authorizeRequests().antMatchers(screen.getLink()).hasAnyAuthority(roleArray);
+                }
+            }
+            http.antMatcher("/admin/**").authorizeRequests().antMatchers("/admin/**").hasAnyAuthority(Constants.ROLE_ADMIN);
+            //note: more specific 1st, hasAuthority() gets overridden
             configureManagementRoles(http);
+
+            //warning: call anyRequest() only once
+            //note: [http.antMatcher()] needed to configure http for multiple login
         }
 
     }
-
 
     protected void sharedConfigure(HttpSecurity http) throws Exception {
         http.csrf().disable();
@@ -118,21 +145,6 @@ public class WebSecurityConfig {
         http.sessionManagement().maximumSessions(1);
     }
 
-    public void configureForRole(RoleService roleService, String roleName, HttpSecurity http) throws Exception {
-        Role role = roleService.findRoleByName(roleName);
-
-        List<Screen> screens = role.getScreens();
-        for (Screen screen : screens) {
-            String link = screen.getLink();
-            http.authorizeRequests().antMatchers(link).hasAuthority(roleName);
-
-            //warning: call anyRequest() only once
-            //note: [antMatcher().authorizeRequests.[anyRequest.hasAuthority]] syntax needed for multiple login entries
-            //http.antMatcher(link).authorizeRequests().anyRequest().hasAuthority(roleName);
-
-        }
-    }
-
     public void configureManagementRoles(HttpSecurity http) throws Exception {
         http.formLogin().permitAll()
                 .loginProcessingUrl(Constants.LINK_ADMIN_LOGIN)
@@ -140,7 +152,7 @@ public class WebSecurityConfig {
                 .defaultSuccessUrl(Constants.LINK_ADMIN_DASHBOARD)
                 .loginPage(Constants.LINK_ADMIN_LOGIN)
                 .and()
-                .exceptionHandling().accessDeniedPage(Constants.LINK_ADMIN_LOGIN)
+                .exceptionHandling().accessDeniedPage(Constants.LINK_ACCESS_DENIED)
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher(Constants.LINK_ADMIN_LOGOUT))
                 .deleteCookies("remember-me", "JSESSIONID")

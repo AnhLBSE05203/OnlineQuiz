@@ -42,7 +42,7 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles")
     private List<Account> accounts;
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "roles")
     private List<Screen> screens;
 
     public void addAccount(Account account) {

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        text-align: center;
+    }
+
+    .contain {
+        width: 900px;
+        height: 625px;
+        border: solid 1px black;
+        margin: auto;
+
+    }
+
+    .head span {
+        font-size: 30px;
+
+    }
+    .body {
+        padding-left: 10px;
+    }
+    .body span {
+        font-size: 25px;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .body p {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .foot {
+        width: 100%;
+        justify-content: center;
+        height: 100px;
+    }
+
+    .foot button {
+        margin: 50px 15px;
+        bottom: 0;
+    }
+
+    .repeating-linear {
+        color: black;
+        border: 10px solid pink;
+        border-image: repeating-linear-gradient(45deg, pink, pink 1%, purple 1%, purple 8%) 10;
+    }
+
+    .repeating-linear:hover {
+        border-image: repeating-linear-gradient(45deg, purple, purple 1%, pink 1%, pink 8%) 10;
+        color: purple;
+    }
+</style>
+
+<body>
+<div class="contain repeating-linear">
+    <div class="head">
+        <span> <i class="bi bi-bookmark"></i> Thông tin khóa học</span>
+    </div>
+    <div class="body">
+        <span> 1. Miêu tả</span>
+        <p th:text="${course.description}">abc</p>
+        <span> 2.Số lượng quiz:</span>
+        <p>-Số lượng quiz:
+        <p th:text="${course.lessonTotal}"></p>
+        </p>
+        <span> 3.Giá tiền</span>
+        <p>-Giá tiền:
+        <p th:text="${course.price}"></p>
+        </p>
+        <div class="foot">
+            <button type="button" class="btn btn-outline-success" style="bottom: 4px;right: -516px;">
+                <a style="text-decoration: none" th:href="@{/lesson/list(courseId=${course.id})}">Go to Lesson</a>
+            </button>
+            <button type="button" class="btn btn-outline-success" style="bottom: 4px;right: -556px;">
+                Back
+            </button>
+
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

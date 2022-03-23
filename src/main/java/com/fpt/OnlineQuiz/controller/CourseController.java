@@ -51,7 +51,7 @@ public class CourseController {
                         "                    <div class=\"properties properties2 mb-30\">\n" +
                         "                        <div class=\"properties__card\">\n" +
                         "                            <div class=\"properties__img overlay1\">\n" +
-                        "                                <a href=\"#\"><img th:src=\"@{/img/gallery/featured2.png}\" alt=\"\"></a>\n" +
+                        "                                <a href=\"#\"><img src=\"/img/gallery/featured2.png\" alt=\"\"></a>\n" +
                         "                            </div>\n" +
                         "                            <div class=\"properties__caption\">\n" +
                         "                                <h3><a href=\"#\"></a>"+c.getName()+"</h3>\n" +
@@ -122,7 +122,6 @@ public class CourseController {
             for (int j = 0; j < courses.size(); j++) {
                 if (courses.get(j).getId() == courseId) {
                     modelMap.addAttribute("message", "You have already registed this course!");
-                    return "registration_page";
                 }
             }
             List<Course> cart = new ArrayList<>();
@@ -136,7 +135,6 @@ public class CourseController {
             for (int i = 0; i < cart.size(); i++) {
                 if (cart.get(i).getId() == courseId) {
                     modelMap.addAttribute("message", "This course is existed!");
-                    return "registration_page";
                 }
             }
             Account a = accountService.detailAccount(account.getId());
@@ -146,7 +144,6 @@ public class CourseController {
             for (int j = 0; j < courses.size(); j++) {
                 if (courses.get(j).getId() == courseId) {
                     modelMap.addAttribute("message", "You have already registed this course!");
-                    return "registration_page";
                 }
             }
             Course c = courseService.getById(courseId);
@@ -180,7 +177,7 @@ public class CourseController {
         }
         //check course list in session is null or not
         HttpSession session = request.getSession();
-        if (session == null) {
+        if (session.getAttribute("cart") == null) {
             modelMap.addAttribute("message", "Empty");
         } else {
             // todo: Add course to Account_Course table
@@ -220,7 +217,7 @@ public class CourseController {
                         "                    <div class=\"properties properties2 mb-30\">\n" +
                         "                        <div class=\"properties__card\">\n" +
                         "                            <div class=\"properties__img overlay1\">\n" +
-                        "                                <a href=\"#\"><img th:src=\"@{/img/gallery/featured2.png}\" alt=\"\"></a>\n" +
+                        "                                <a href=\"#\"><img src=\"/img/gallery/featured2.png\" alt=\"\"></a>\n" +
                         "                            </div>\n" +
                         "                            <div class=\"properties__caption\">\n" +
                         "                                <h3><a>" + c.getName() + "</a></h3>\n" +
@@ -246,6 +243,6 @@ public class CourseController {
         Course c = courseService.getById(courseId);
         System.out.println(c.toString());
         modelMap.addAttribute("course", c);
-        return "Course_detail_user";
+        return "course_detail";
     }
 }

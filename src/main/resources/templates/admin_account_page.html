@@ -31,12 +31,12 @@
                 <h1 class="mt-4">Account</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Account management</li>
-                </ol>
+                </ol>addAccountButton
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
                         List Account
-                        <button id="addBlogButton" type="button" class="btn btn-primary"
+                        <button id="addAccountButton" type="button" class="btn btn-primary"
                                 onclick="showAccountAddModal()">Add Account
                         </button>
                     </div>
@@ -74,25 +74,24 @@
                         </tr>
                         <tr>
                             <td>Fullname:</td>
-                            <td><input type="text" id="editAccountFullname" th:name="fullName" required></td>
+                            <td><input type="text" id="editAccountFullname" th:name="fullName" readonly></td>
                         </tr>
                         <tr>
                             <td>Gender:</td>
-                            <td><input type="text" id="editAccountGender" th:name="gender" required></td>
+                            <td><input type="text" id="editAccountGender" th:name="gender" readonly></td>
                         </tr>
                         <tr>
-                            <td>Gender:</td>
-                            <td><input type="text" id="editAccountEmail" th:name="email" required></td>
+                            <td>Email:</td>
+                            <td><input type="text" id="editAccountEmail" th:name="email" readonly></td>
                         </tr>
                         <tr>
                             <td>Phone:</td>
-                            <td><input type="text" id="editAccountPhone" th:name="phone" required></td>
+                            <td><input type="text" id="editAccountPhone" th:name="phone" readonly></td>
                         </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Save">
                 </div>
             </form>
         </div>
@@ -138,11 +137,20 @@
                             <td>Gender:</td>
                             <td>
                                 <label>Male</label>
-                                <input type="radio" th:field="*{gender}" value="0" >
-                            </td>
-                            <td>
+                                <input type="radio" th:field="*{gender}" value="0" checked>&nbsp
                                 <label>Female </label>
                                 <input type="radio" th:field="*{gender}" value="1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Role:</td>
+                            <td>
+                                <label>Admin</label>
+                                <input type="radio" th:field="*{role}" value="ROLE_ADMIN" checked>&nbsp
+                                <label>Expert</label>
+                                <input type="radio" th:field="*{role}" value="ROLE_EXPERT">&nbsp
+                                <label>Sale</label>
+                                <input type="radio" th:field="*{role}" value="ROLE_SALES">
                             </td>
                         </tr>
                     </table>

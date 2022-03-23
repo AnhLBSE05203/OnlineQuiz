@@ -7,7 +7,7 @@ $(document).ready(function(){
                 dataType: "json",
                 success: function (data){
                     principal = data;
-                    if(principal != ""){
+                    if(principal != null){
                         updateMenuAfterLogin();
                     };
                     updateMobileMenu();
@@ -32,4 +32,5 @@ function updateMenuAfterLogin(){
     $("#login-button").html("Logout");
     $("#register-button").parent().css('visibility','hidden');
     $("#profile-button").parent().css('display', 'inline-block');
+    $("#manage-button").parent().css('display', 'inline-block');
 }

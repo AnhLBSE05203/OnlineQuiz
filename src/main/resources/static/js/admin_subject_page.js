@@ -1,6 +1,7 @@
 $(document).ready(function() {
 		$('#SubjectDatatable').DataTable({
 		"serverSide": true,
+		"scrollX": true,
 		pageLength : 5,
         			ajax : {
         				url : '/admin/subject/getSubjectsByPage',
@@ -191,6 +192,7 @@ function showCourseSection(subjectId) {
     $('#CourseDatatable').show();
     $('#CourseDatatable').DataTable({
     		"serverSide": true,
+    		"scrollX": true,
     		pageLength : 5,
             			ajax : {
             				url : '/admin/course/coursesBySubject',
@@ -201,7 +203,12 @@ function showCourseSection(subjectId) {
                                 d.prefilter = subjectId;
                                 return JSON.stringify(d);
                             },
-            			},
+            			},columnDefs: [
+                              {
+                                  targets: 6,
+                                  className: 'dt-body-right'
+                              }
+                        ],
             			columns : [ {
             				title : 'Id',
             				data : 'id'
@@ -216,6 +223,9 @@ function showCourseSection(subjectId) {
             				title : 'Total Lessons',
             				data : 'lessonTotal',
             			}, {
+                            title : 'Total No. of Enroll',
+                            data : 'enrollTotal',
+                        }, {
                             title : 'Description',
                             data : 'description',
                             width: "20%",
@@ -230,6 +240,9 @@ function showCourseSection(subjectId) {
                         },{
                             title : 'Price',
                             data : 'price',
+                            render: function(data,type,row,meta) {
+                                return addCommas(data);
+                            }
                         }, {
             				title : 'Status',
             				data : 'statusStr',
@@ -253,4 +266,20 @@ function showCourseSection(subjectId) {
                             }
             			} ]
     		});
+}
+function addCommas(nStr)
+{
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '.00';
+    x2 = x2.substring(0, 3);
+    while(x2.length < 3){
+     x2 += '0';
+    }
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
 }

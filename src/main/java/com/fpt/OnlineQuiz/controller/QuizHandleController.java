@@ -43,7 +43,7 @@ public class QuizHandleController {
         modelMap.addAttribute("listquestion",questionList);
         modelMap.addAttribute("listanswer",answerList);
         modelMap.addAttribute("lession",lession);
-        return "quiz_handle_test";
+        return "handle_quiz";
     }
 
     @RequestMapping(value = "/quizpost",method = RequestMethod.POST)

@@ -1,6 +1,7 @@
 package com.fpt.OnlineQuiz.controller;
 
 import com.fpt.OnlineQuiz.dto.AccountAdminDTO;
+import com.fpt.OnlineQuiz.dto.CreateAccountAdminDTO;
 import com.fpt.OnlineQuiz.dto.RegisterDTO;
 import com.fpt.OnlineQuiz.dto.paging.Page;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
@@ -35,12 +36,12 @@ public class AdminAccountController {
     @GetMapping(value = {"", "/"})
     public String accountPage(Model model) {
         model.addAttribute("accountEditDTO", new AccountAdminDTO());
-        model.addAttribute("accountAddDTO", new RegisterDTO());
+        model.addAttribute("accountAddDTO", new CreateAccountAdminDTO());
         return "admin_account_page";
     }
 
     @PostMapping(value = "/edit")
-    public String editAccount(@ModelAttribute("adminEditDTO") AccountAdminDTO accountAdminDTO) {
+    public String editAccount(@ModelAttribute("accountEditDTO") AccountAdminDTO accountAdminDTO) {
         Account account = accountService.detailAccount(accountAdminDTO.getId());
         Utils.copyNonNullProperties(accountAdminDTO, account);
         accountService.updateAccount(account);
@@ -48,7 +49,7 @@ public class AdminAccountController {
     }
 
     @PostMapping(value = "/add")
-    public String addAccount(@ModelAttribute("adminAddDTO") RegisterDTO accountAdminDTO) {
+    public String addAccount(@ModelAttribute("adminAddDTO") CreateAccountAdminDTO accountAdminDTO) {
         Account account = new Account();
         Utils.copyNonNullProperties(accountAdminDTO, account);
         account = new Account();
@@ -65,7 +66,7 @@ public class AdminAccountController {
         account.setPhone(accountAdminDTO.getPhone());
         account.setFullName(accountAdminDTO.getFullName());
         account.setStatus(Constants.STATUS_ACCOUNT_CONFIRMED);
-        Role role = roleService.findRoleByName(Constants.ROLE_ADMIN);
+        Role role = roleService.findRoleByName(accountAdminDTO.getRole());
         List<Role> roles = new ArrayList<>();
         roles.add(role);
         account.setRoles(roles);
