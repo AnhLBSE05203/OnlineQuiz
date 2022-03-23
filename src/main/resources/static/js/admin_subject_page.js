@@ -1,6 +1,7 @@
 $(document).ready(function() {
 		$('#SubjectDatatable').DataTable({
 		"serverSide": true,
+		"scrollX": true,
 		pageLength : 5,
         			ajax : {
         				url : '/admin/subject/getSubjectsByPage',
@@ -191,6 +192,7 @@ function showCourseSection(subjectId) {
     $('#CourseDatatable').show();
     $('#CourseDatatable').DataTable({
     		"serverSide": true,
+    		"scrollX": true,
     		pageLength : 5,
             			ajax : {
             				url : '/admin/course/coursesBySubject',
@@ -216,6 +218,9 @@ function showCourseSection(subjectId) {
             				title : 'Total Lessons',
             				data : 'lessonTotal',
             			}, {
+                            title : 'Total No. of Enroll',
+                            data : 'enrollTotal',
+                        }, {
                             title : 'Description',
                             data : 'description',
                             width: "20%",

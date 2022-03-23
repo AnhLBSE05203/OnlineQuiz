@@ -37,7 +37,7 @@ $(document).ready(function () {
             data: 'status',
             render: function (data, type, row, meta) {
                 let html = '<button type="button" class="btn btn-primary" onclick="showAccountEditModal(' + row['id'] + ')">'
-                    + 'Edit</button>&nbsp';
+                    + 'Detail</button>&nbsp';
                 html += '<button type="button" class="btn btn-primary" onclick="deleteAccount(' + row['id'] + ')">'
                     + 'Delete</button>&nbsp';
                 return html;

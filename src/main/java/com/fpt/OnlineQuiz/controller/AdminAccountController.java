@@ -41,7 +41,7 @@ public class AdminAccountController {
     }
 
     @PostMapping(value = "/edit")
-    public String editAccount(@ModelAttribute("adminEditDTO") AccountAdminDTO accountAdminDTO) {
+    public String editAccount(@ModelAttribute("accountEditDTO") AccountAdminDTO accountAdminDTO) {
         Account account = accountService.detailAccount(accountAdminDTO.getId());
         Utils.copyNonNullProperties(accountAdminDTO, account);
         accountService.updateAccount(account);

@@ -55,7 +55,7 @@
                     </div>
                         <div class="col-lg-12 card-body" style="width: 70%">
                             <div style = "color: red; margin: 10px" th:text = "${message}" id="hideMe"></div>
-                            <form th:action="@{/question/addquestion}" method="post">
+                            <form th:action="@{/question/addquestion}" onsubmit="return submit(event)" method="post">
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3 w-100">
@@ -84,6 +84,7 @@
                                                 <label class="form-label" for="answer4"><strong>Answer4</strong></label>
                                                 <input class="form-control" style="width: 830px" type="text" id="answer4" placeholder="Answer" name="answer4" required>
                                                 <input type="radio" value="4" name="isAnswer">Is Answer</br>
+                                                <h3 id="answer4Msg"></h3>
                                             </div>
                                         </div>
                                     </div>
@@ -99,7 +100,7 @@
                                 <div class="row">
                                     <div class="row-cols-1">
                                         <div class="mb-3 w-100">
-                                            <button class="btn btn-primary btn-sm" onclick="submit()" type="submit">Save</button>
+                                            <input class="btn btn-primary btn-sm" type="submit" value="Save">
                                         </div>
                                     </div>
                                 </div>
@@ -163,14 +164,15 @@
 <script th:src="@{/js/plugins.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script>
-    function submit(){
-        var answer1 = document.getElementById("answer1");
-        var answer2 = document.getElementById("answer2");
-        var answer3 = document.getElementById("answer3");
-        var answer4 = document.getElementById("answer4");
+    function submit(event){
+        event.preventDefault();
+        var answer1 = document.getElementById("answer1").value;
+        var answer2 = document.getElementById("answer2").value;
+        var answer3 = document.getElementById("answer3").value;
+        var answer4 = document.getElementById("answer4").value;
         var isAnswer = document.getElementsByName("isAnswer").values();
-        var question = document.getElementById("question");
-        var explain = document.getElementById("explain");
+        var question = document.getElementById("question").value;
+        var explain = document.getElementById("explain").value;
         var lessonId = document.getElementById("lessonId").value;
         $.ajax({
             url:"/question/addquestion",
@@ -183,9 +185,6 @@
                 answer4 : answer4,
                 isAnswer : isAnswer,
                 explain : explain
-            },
-            success: function (){
-                alert("Add successful!");
             }
         })
     }
