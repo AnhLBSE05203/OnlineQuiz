@@ -21,4 +21,6 @@ public class AccountAdminDTO {
     private String email;
 
     private String phone;
+
+    private String roleStr;
 }

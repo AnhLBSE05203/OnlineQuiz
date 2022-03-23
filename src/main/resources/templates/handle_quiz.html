@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/handle_quiz.css}">
+</head>
+
+<body>
+<form method="post" th:action="@{/quizhandelecontroller/quizpost}">
+    <h1 style="text-align: center;font-weight: bold" th:text="${lession.name}"></h1>
+    <div class="sketchy" th:each="question : ${listquestion}">
+        <input type="hidden" th:value="${question.id}" th:name="questionID">
+        <div class="question">
+            <h2 th:text="${question.question}"></h2>
+        </div>
+        <div th:each="answer : ${listanswer}">
+            <div th:if="${question.id == answer.question.id}">
+                <label class="contain">
+                    <input type="radio" th:name="${question.id}" th:value="${answer.id}" th:text="${answer.answer}">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" th:value="${lession.id}" th:name="lessionid">
+    <button class="button button1" type="submit">Submit</button>
+</form>
+</body>
+
+</html>
