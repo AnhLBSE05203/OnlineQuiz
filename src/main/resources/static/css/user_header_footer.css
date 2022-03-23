@@ -1,6 +1,9 @@
 #profile-button-contain{
     display: none;
 }
+#manage-button-contain{
+    display: none;
+}
 .padding {
     padding: 10rem !important
 }

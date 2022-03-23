@@ -1,24 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Access Denied</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+        <title>Access Denied</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+        <link rel="stylesheet" th:href="@{/css/main.css}"/>
+        <style>
+ .link {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
 
-</head>
+.link:hover, .link:active {
+  background-color: red;
+}
+body{
+    font-family: sans-serif;
+}
 
-<body>
 
-    <nav>
-        <a href="/">Home</a>
-    </nav>
-    Access Denied
 
-</body>
+        </style>
+    </head>
+
+    <body>
+
+        <div>
+            <a class="link" href="/">Home</a>
+            <a class="link" href="/admin/login">Management Login</a>
+            <a class="link" href="/admin/dashboard">Dash Board Page</a>
+        </div>
+        <div style="color: red;">Access Denied</div>
+
+    </body>
 </html>
