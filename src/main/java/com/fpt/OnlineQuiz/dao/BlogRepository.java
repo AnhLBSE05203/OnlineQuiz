@@ -3,7 +3,9 @@ package com.fpt.OnlineQuiz.dao;
 import com.fpt.OnlineQuiz.dto.paging.Column;
 import com.fpt.OnlineQuiz.dto.paging.Order;
 import com.fpt.OnlineQuiz.dto.paging.PagingRequest;
+import com.fpt.OnlineQuiz.model.Account;
 import com.fpt.OnlineQuiz.model.Blog;
+import com.fpt.OnlineQuiz.model.Comment;
 import com.fpt.OnlineQuiz.utils.Constants;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -16,7 +18,9 @@ import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -170,5 +174,14 @@ public class BlogRepository {
 
     public void addBlog (Blog blog) {
         em.persist(blog);
+    }
+
+    public void addComment (Blog blog, Account account, String content) {
+        Comment comment = new Comment();
+        comment.setBlogid(blog);
+        comment.setAccountid(account);
+        comment.setContent(content);
+        comment.setDate(Date.from(Instant.now()));
+        em.persist(comment);
     }
 }
