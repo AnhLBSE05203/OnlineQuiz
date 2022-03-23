@@ -12,6 +12,8 @@ import com.fpt.OnlineQuiz.model.Token;
 import com.fpt.OnlineQuiz.service.AccountService;
 import com.fpt.OnlineQuiz.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -99,8 +101,10 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Page<AccountAdminDTO> listAccountAdmin(PagingRequest pagingRequest) {
-        List<Account> listAccount = accountRepository.getAllAccountAdmin(pagingRequest);
-        long count = accountRepository.getAllAccountAdminCountTotalRecord(pagingRequest);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        List<Account> listAccount = accountRepository.getAllAccountAdmin(pagingRequest, currentPrincipalName);
+        long count = accountRepository.getAllAccountAdminCountTotalRecord(pagingRequest) - 1;
         List<AccountAdminDTO> listAccountAdminDTO = new ArrayList<>();
         for(Account account: listAccount) {
             AccountAdminDTO accountAdminDTO = new AccountAdminDTO();
