@@ -42,6 +42,8 @@ public class Course {
     @ManyToMany
     @JoinTable(name = "AccountCourse", joinColumns = @JoinColumn(name = "courseId"), inverseJoinColumns = @JoinColumn(name = "accountId"))
     private List<Account> accounts;
+    @Formula("(SELECT COUNT(*) FROM account_course ac WHERE ac.course_id = course_id)")
+    private long enrollTotal;
     @OneToMany(mappedBy = "course")
     private List<PurchaseHistory> purchaseHistories;
 
@@ -79,6 +81,7 @@ public class Course {
         courseAdminDTO.setLessonTotal(this.getLessonTotal());
         courseAdminDTO.setSubjectName(this.getSubject().getName());
         courseAdminDTO.setSubjectId(this.getSubject().getId());
+        courseAdminDTO.setEnrollTotal(this.getEnrollTotal());
         String statusStr = Constants.courseStatusConversion.get(this.getStatus());
         courseAdminDTO.setStatusStr(statusStr);
         return courseAdminDTO;
