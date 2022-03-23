@@ -16,6 +16,7 @@ public class CourseAdminDTO {
     private int subjectId;
     private String description;
     private long lessonTotal;
+    private long enrollTotal;
     private double price;
     private int status;
     private String statusStr;

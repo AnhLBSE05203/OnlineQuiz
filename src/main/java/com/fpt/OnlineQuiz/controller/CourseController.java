@@ -122,7 +122,6 @@ public class CourseController {
             for (int j = 0; j < courses.size(); j++) {
                 if (courses.get(j).getId() == courseId) {
                     modelMap.addAttribute("message", "You have already registed this course!");
-                    return "registration_page";
                 }
             }
             List<Course> cart = new ArrayList<>();
@@ -136,7 +135,6 @@ public class CourseController {
             for (int i = 0; i < cart.size(); i++) {
                 if (cart.get(i).getId() == courseId) {
                     modelMap.addAttribute("message", "This course is existed!");
-                    return "registration_page";
                 }
             }
             Account a = accountService.detailAccount(account.getId());
@@ -146,7 +144,6 @@ public class CourseController {
             for (int j = 0; j < courses.size(); j++) {
                 if (courses.get(j).getId() == courseId) {
                     modelMap.addAttribute("message", "You have already registed this course!");
-                    return "registration_page";
                 }
             }
             Course c = courseService.getById(courseId);
