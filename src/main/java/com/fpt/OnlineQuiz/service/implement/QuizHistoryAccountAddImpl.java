@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class QuizHistoryAccountAddImpl implements QuizHistoryAccountAddServices {
+public class QuizHistoryAccountAddImpl implements QuizHistoryAccountAddServices{
 
     @Autowired
     CRUDQuizHistoryAccountAddRepository crudQuizHistoryAccountAddRepository;
@@ -16,4 +16,16 @@ public class QuizHistoryAccountAddImpl implements QuizHistoryAccountAddServices 
     public QuizHistoryAccountAdd addOwnerOrAdd(QuizHistoryAccountAdd add) {
         return crudQuizHistoryAccountAddRepository.save(add);
     }
+
+    @Override
+    public QuizHistoryAccountAdd findByAccountAndHisId(int accountId, int hisId) {
+        return crudQuizHistoryAccountAddRepository.findByAccountAndHisId(accountId,hisId);
+    }
+
+    @Override
+    public void delete(QuizHistoryAccountAdd quizHistoryAccountAdd) {
+        crudQuizHistoryAccountAddRepository.delete(quizHistoryAccountAdd);
+    }
+
+
 }
