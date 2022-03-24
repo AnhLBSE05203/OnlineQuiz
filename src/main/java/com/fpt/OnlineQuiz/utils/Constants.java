@@ -59,7 +59,7 @@ public class Constants {
     //mail settings
     public static final String MAIL_FROM = "banhl.off@gmail.com";
     public static final String MAIL_FROM_NAME = "banhl.off";
-    public static final String MAIL_PASSWORD = "Alo123!@#";
+    public static final String MAIL_PASSWORD = "";
     public static final String MAIL_SUBJECT_RESET_PASSWORD = "Here's the link to reset your password";
     public static final String MAIL_SUBJECT_CONFIRM_REGISTRATION = "Here's the link to confirm your registration";
 
