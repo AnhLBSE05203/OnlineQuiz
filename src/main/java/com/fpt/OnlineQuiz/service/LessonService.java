@@ -22,5 +22,6 @@ public interface LessonService {
     void deleteLesson(Lesson lesson);
     Lesson getLessonByLessonId(int id);
     public List<Lesson> getLessonByCourseId(int courseId);
+    public List<Lesson> getAll();
 
 }

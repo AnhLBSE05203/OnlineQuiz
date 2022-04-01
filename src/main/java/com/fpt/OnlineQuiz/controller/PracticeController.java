@@ -32,6 +32,7 @@ import java.util.List;
 public class PracticeController {
 
     private int idForAdd;
+    private int idForQuestionAdd;
     @Autowired
     QuizHistoryService quizHistoryService;
     @Autowired
@@ -50,7 +51,6 @@ public class PracticeController {
 
 
     @GetMapping(value = "")
-
     public String practicelListPage(Model model) {
         List<CourseFeaturedDTO> courseFeatured = courseService.getFeaturedCourses(Constants.HOME_PAGE_COURSE_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_COURSE_FEATURED, courseFeatured);
@@ -70,6 +70,41 @@ public class PracticeController {
        Same like quizlet,user add học phần (quizHistory) in their practices list,it wll display
        in here (practices list)
        */
+        List<QuizHistory> quizHistories = quizHistoryService.getQuizByAccountAdd(account.getId());
+//        Iterable<QuizPackageHistory> quizList = quizPackageService.getAllQuiz();
+        model.addAttribute("quizHistory", quizHistories);
+//        model.addAttribute("quizList", quizList);
+//        model.addAttribute("account", account);
+
+        return "practices_list_page";
+    }
+
+    @PostMapping(value = "")
+    public String addPractice(Model model, HttpServletRequest request) {
+        List<CourseFeaturedDTO> courseFeatured = courseService.getFeaturedCourses(Constants.HOME_PAGE_COURSE_NUMBER);
+        model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_COURSE_FEATURED, courseFeatured);
+        List<ExpertFeaturedDTO> expertFeatured = expertService.getFeaturedExperts(Constants.HOME_PAGE_EXPERT_NUMBER);
+        model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_EXPERT_FEATURED, expertFeatured);
+        List<Subject> subjectFeatured = subjectService.getFeaturedSubjects(Constants.HOME_PAGE_SUBJECT_NUMBER);
+        model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
+        Account account = new Account();
+        try {
+
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            account = (Account) authentication.getPrincipal();
+        } catch (Exception e) {
+            return "redirect:/account/login";
+        }
+       /*Get all QuizHistory(1 quizHistory contain multiple questions) existed in user account.
+       Same like quizlet,user add học phần (quizHistory) in their practices list,it wll display
+       in here (practices list)
+       */
+        QuizHistory quizHistory = quizHistoryService.findId(idForAdd);
+        QuizHistoryAccountAdd quizHistoryAccountAdd = new QuizHistoryAccountAdd();
+        quizHistoryAccountAdd.setAccount(account);
+        quizHistoryAccountAdd.setQuizHistory(quizHistory);
+        accountAddServices.addOwnerOrAdd(quizHistoryAccountAdd);
+
         List<QuizHistory> quizHistories = quizHistoryService.getQuizByAccountAdd(account.getId());
 //        Iterable<QuizPackageHistory> quizList = quizPackageService.getAllQuiz();
         model.addAttribute("quizHistory", quizHistories);
@@ -99,7 +134,7 @@ public class PracticeController {
         List<Subject> subjectFeatured = subjectService.getFeaturedSubjects(Constants.HOME_PAGE_SUBJECT_NUMBER);
         model.addAttribute(Constants.HOME_PAGE_ATTRIBUTE_SUBJECT_FEATURED, subjectFeatured);
         List<QuizHistory> quizHistories = quizHistoryService.getQuizByAccountAdd(account.getId());
-        QuizHistory checkExistHistory = quizHistoryService.checkExist(id,account.getId());
+        QuizHistory checkExistHistory = quizHistoryService.checkExist(id, account.getId());
         //todo fix subject id
         int subjectId = 2;
         Subject s = subjectService.getSubjectById(2);
@@ -110,9 +145,10 @@ public class PracticeController {
         model.addAttribute("subject", s);
         return "practices_detail_page";
     }
+
     @ResponseBody
     @GetMapping(value = "/count")
-    int getCount(HttpServletRequest request){
+    int getCount(HttpServletRequest request) {
         int lessonId = Integer.parseInt(request.getParameter("lessonId"));
         int size = questionService.countQuestionByLessonId(lessonId);
         return size;
@@ -171,6 +207,65 @@ public class PracticeController {
         questionService.addQuestion(question);
         return "redirect:/practices/detail?id=" + idForAdd;
     }
+
+    @GetMapping(value = "/edit")
+    public String getEditQuiz(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes, @Param("id") int id) {
+        Account account = new Account();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            account = (Account) authentication.getPrincipal();
+        } catch (Exception e) {
+            return "redirect:/account/login";
+        }
+        Question question = questionService.getQuestionByQuestionId(id);
+        model.addAttribute("question", question);
+        return "practice-edit-page";
+    }
+
+    @PostMapping(value = "/edit")
+    public String editQuiz(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes, @Param("id") int id) {
+        Account account = new Account();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            account = (Account) authentication.getPrincipal();
+        } catch (Exception e) {
+            return "redirect:/account/login";
+        }
+//        QuizHistory quizHistory = quizHistoryService.findId(idForAdd);
+        Question question = questionService.getQuestionByQuestionId(id);
+        question.setQuestion(request.getParameter("term"));
+        question.setAnswer(request.getParameter("ans"));
+        questionService.updateQuestion(question);
+        return "redirect:/practices/detail?id=" + idForAdd;
+    }
+
+    @GetMapping(value = "/delete")
+    public String deleteQuiz(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes, @Param("id") int id) {
+        Account account = new Account();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            account = (Account) authentication.getPrincipal();
+        } catch (Exception e) {
+            return "redirect:/account/login";
+        }
+        questionService.deleteQuestion(id);
+        return "redirect:/practices/detail?id=" + idForAdd;
+    }
+
+    @GetMapping(value = "/remove")
+    public String removeQuizFromAdd(Model model) {
+        Account account = new Account();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            account = (Account) authentication.getPrincipal();
+        } catch (Exception e) {
+            return "redirect:/account/login";
+        }
+        QuizHistoryAccountAdd quizHistoryAccountAdd = accountAddServices.findByAccountAndHisId(account.getId(), idForAdd);
+        accountAddServices.delete(quizHistoryAccountAdd);
+        return "redirect:/practices/detail?id=" + idForAdd;
+    }
+
     @GetMapping(value = "/search")
     public String practiceSearchPage(Model model, HttpServletRequest request) {
         List<CourseFeaturedDTO> courseFeatured = courseService.getFeaturedCourses(Constants.HOME_PAGE_COURSE_NUMBER);

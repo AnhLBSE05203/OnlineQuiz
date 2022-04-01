@@ -42,7 +42,8 @@ $(document).ready(function() {
                 if (data == 0) {
                     html += '<button type="button" class="btn btn-primary" onclick="recoverLesson('+ row['id'] +')">'
                         + 'Recover</button>&nbsp';
-                } else {
+                }
+                else {
                     html += '<button type="button" class="btn btn-primary" id ="delete" onclick="deleteLesson('+ row['id'] +')">'
                         + 'Delete</button>&nbsp';
                 }

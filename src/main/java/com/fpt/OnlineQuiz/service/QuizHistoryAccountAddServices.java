@@ -6,4 +6,7 @@ import org.springframework.stereotype.Service;
 
 public interface QuizHistoryAccountAddServices {
     QuizHistoryAccountAdd addOwnerOrAdd(QuizHistoryAccountAdd add);
+    QuizHistoryAccountAdd findByAccountAndHisId(int accountId,int hisId);
+    void delete (QuizHistoryAccountAdd quizHistoryAccountAdd);
+
 }

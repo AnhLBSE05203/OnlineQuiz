@@ -48,7 +48,7 @@ function submitAddCourse(e) {
         },
         dataType: "json",
         success: function (data){
-            if(data === "true"){
+            if(data){
                 alert('There is already a Course with that name for chosen Subject');
             }else {
                 $("#courseAddForm")[0].submit();

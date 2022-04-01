@@ -59,7 +59,7 @@ public class Constants {
     //mail settings
     public static final String MAIL_FROM = "banhl.off@gmail.com";
     public static final String MAIL_FROM_NAME = "banhl.off";
-    public static final String MAIL_PASSWORD = "Alo123!@#";
+    public static final String MAIL_PASSWORD = "";
     public static final String MAIL_SUBJECT_RESET_PASSWORD = "Here's the link to reset your password";
     public static final String MAIL_SUBJECT_CONFIRM_REGISTRATION = "Here's the link to confirm your registration";
 
@@ -195,6 +195,9 @@ public class Constants {
     public static final String SQL_GET_COURSE_COUNT = "select count(c) from Course c where 1 = 1";
     public static final String SQL_GET_COURSE_BY_ID = "SELECT c FROM Course c WHERE c.id = :id";
     public static final String SQL_GET_COURSE_BY_SUBJECT_ID = "SELECT c FROM Course c WHERE c.subject.id = :subjectId";
+    //sql additional where clauses
+    public static final String SQL_CONDITION_STATUS_DEFAULT = " AND status = 1";
+
     //home page constants
     public static final int HOME_PAGE_COURSE_NUMBER = 4;
     public static final int HOME_PAGE_EXPERT_NUMBER = 3;
